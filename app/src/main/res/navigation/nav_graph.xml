@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/FirstFragment"
-        android:name="com.ixigo.design.sdk.FirstFragment"
-        android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        android:name="com.ixigo.design.sdk.ComponentsFragment"
+        android:label="@string/components_fragments"
+        tools:layout="@layout/fragment_components">
 
         <action
             android:id="@+id/action_FirstFragment_to_SecondFragment"
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="com.ixigo.design.sdk.SecondFragment"
-        android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        android:name="com.ixigo.design.sdk.ButtonsFragment"
+        android:label="@string/buttons"
+        tools:layout="@layout/fragment_buttons">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"

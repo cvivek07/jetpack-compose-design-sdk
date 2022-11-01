@@ -2,7 +2,7 @@
 buildscript {
     ext {
         kotlinVersion = "1.7.20"
-        gradleVersion = '4.2.2'
+        gradleVersion = '7.3.1'
     }
     repositories {
         google()
@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$gradleVersion"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'com.google.gms:google-services:4.3.10'
+        classpath 'com.google.gms:google-services:4.3.14'
     }
 }
 

@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="o900">#CA610A</color>
+    <color name="o800">#ED6C02</color>
+    <color name="o700">#FC790D</color>
+    <color name="o600">#FD943D</color>
+    <color name="o500">#FDA156</color>
+    <color name="o400">#FEBC86</color>
+    <color name="o300">#FEC99E</color>
+    <color name="o200">#FED7B6</color>
+    <color name="o100">#FEE4CF</color>
+    <color name="o50">#FFF2E7</color>
 </resources>
