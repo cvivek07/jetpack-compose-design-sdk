@@ -2,6 +2,7 @@ package com.ixigo.design_sdk.components.buttons
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design_sdk.components.BaseComponent
 import com.ixigo.design_sdk.components.IxiState
@@ -28,7 +29,6 @@ abstract class BaseButton @JvmOverloads constructor(
     protected val b700NormalBottomShapeRadiusOutlined = 10
 
 
-
     protected var state = mutableStateOf(IxiState())
     protected var flag: Int = o700NormalTrailingShapeRadius
 
@@ -50,6 +50,26 @@ abstract class BaseButton @JvmOverloads constructor(
 
     override fun isEnabled(): Boolean {
         return state.value.style.isEnabled
+    }
+
+    fun setStartImageDrawable(@DrawableRes imageRes: Int) {
+        val initState = state.value
+        state.value = initState.copy(style = initState.style.copy(startDrawable = imageRes))
+    }
+
+    fun setEndImageDrawable(@DrawableRes imageRes: Int) {
+        val initState = state.value
+        state.value = initState.copy(style = initState.style.copy(endDrawable = imageRes))
+    }
+
+    fun setHorizontalDrawables(@DrawableRes imageResStart: Int, @DrawableRes imageResEnd: Int) {
+        val initState = state.value
+        state.value = initState.copy(
+            style = initState.style.copy(
+                startDrawable = imageResStart,
+                endDrawable = imageResEnd
+            )
+        )
     }
 
     fun setClickListener(onClick: () -> Unit) {

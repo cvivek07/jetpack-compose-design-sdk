@@ -1,15 +1,18 @@
 package com.ixigo.design_sdk.components.buttons.shapes
 
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.IxiStyle
 import com.ixigo.design_sdk.IxiTypography.button
@@ -42,7 +45,9 @@ data class ComponentStyle(
     val shape: ButtonShapes,
     val textStyle: IxiStyle,
     val isEnabled: Boolean,
-    val isOutLined: Boolean = false
+    val isOutLined: Boolean = false,
+    @DrawableRes val startDrawable: Int = 0,
+    @DrawableRes val endDrawable: Int = 0
 )
 
 
@@ -81,34 +86,19 @@ object IxiButtonShapes {
         ButtonShapes(
             ButtonPadding.normalPadding,
             ButtonRadius.leadingShapeRadius,
-            RoundedCornerShape(
-                topStart = CornerSize(ButtonRadius.leadingShapeRadius.topStartRadius),
-                topEnd = CornerSize(ButtonRadius.leadingShapeRadius.topEndRadius),
-                bottomEnd = CornerSize(ButtonRadius.leadingShapeRadius.bottomEndRadius),
-                bottomStart = CornerSize(ButtonRadius.leadingShapeRadius.bottomStartRadius)
-            )
+            LeadingOutlineShape()
         )
     val normalTrailingShape =
         ButtonShapes(
             ButtonPadding.normalPadding,
             ButtonRadius.trailingShapeRadius,
-            RoundedCornerShape(
-                topStart = CornerSize(ButtonRadius.trailingShapeRadius.topStartRadius),
-                topEnd = CornerSize(ButtonRadius.trailingShapeRadius.topEndRadius),
-                bottomEnd = CornerSize(ButtonRadius.trailingShapeRadius.bottomEndRadius),
-                bottomStart = CornerSize(ButtonRadius.trailingShapeRadius.bottomStartRadius)
-            )
+            TrailingOutlineShape()
         )
     val normalBottomShape =
         ButtonShapes(
             ButtonPadding.normalPadding,
             ButtonRadius.bottomShapeRadius,
-            RoundedCornerShape(
-                topStart = CornerSize(ButtonRadius.bottomShapeRadius.topStartRadius),
-                topEnd = CornerSize(ButtonRadius.bottomShapeRadius.topEndRadius),
-                bottomEnd = CornerSize(ButtonRadius.bottomShapeRadius.bottomEndRadius),
-                bottomStart = CornerSize(ButtonRadius.bottomShapeRadius.bottomStartRadius)
-            )
+            BottomOutlineShape()
         )
 
 
@@ -123,31 +113,16 @@ object IxiButtonShapes {
     )
     val xLargeLeadingShape = ButtonShapes(
         ButtonPadding.xlPadding, ButtonRadius.leadingShapeRadius,
-        RoundedCornerShape(
-            topStart = CornerSize(ButtonRadius.leadingShapeRadius.topStartRadius),
-            topEnd = CornerSize(ButtonRadius.leadingShapeRadius.topEndRadius),
-            bottomEnd = CornerSize(ButtonRadius.leadingShapeRadius.bottomEndRadius),
-            bottomStart = CornerSize(ButtonRadius.leadingShapeRadius.bottomStartRadius)
-        )
+        LeadingOutlineShape()
     )
     val xLargeTrailingShape =
         ButtonShapes(
             ButtonPadding.xlPadding, ButtonRadius.trailingShapeRadius,
-            RoundedCornerShape(
-                topStart = CornerSize(ButtonRadius.trailingShapeRadius.topStartRadius),
-                topEnd = CornerSize(ButtonRadius.trailingShapeRadius.topEndRadius),
-                bottomEnd = CornerSize(ButtonRadius.trailingShapeRadius.bottomEndRadius),
-                bottomStart = CornerSize(ButtonRadius.trailingShapeRadius.bottomStartRadius)
-            )
+            TrailingOutlineShape()
         )
     val xLargeBottomShape = ButtonShapes(
         ButtonPadding.xlPadding, ButtonRadius.bottomShapeRadius,
-        RoundedCornerShape(
-            topStart = CornerSize(ButtonRadius.bottomShapeRadius.topStartRadius),
-            topEnd = CornerSize(ButtonRadius.bottomShapeRadius.topEndRadius),
-            bottomEnd = CornerSize(ButtonRadius.bottomShapeRadius.bottomEndRadius),
-            bottomStart = CornerSize(ButtonRadius.bottomShapeRadius.bottomStartRadius)
-        )
+        BottomOutlineShape()
     )
 
 
@@ -164,31 +139,16 @@ object IxiButtonShapes {
     val xxLargeLeadingShape =
         ButtonShapes(
             ButtonPadding.xxlPadding, ButtonRadius.leadingShapeRadius,
-            RoundedCornerShape(
-                topStart = CornerSize(ButtonRadius.leadingShapeRadius.topStartRadius),
-                topEnd = CornerSize(ButtonRadius.leadingShapeRadius.topEndRadius),
-                bottomEnd = CornerSize(ButtonRadius.leadingShapeRadius.bottomEndRadius),
-                bottomStart = CornerSize(ButtonRadius.leadingShapeRadius.bottomStartRadius)
-            )
+            LeadingOutlineShape()
         )
     val xxLargeTrailingShape =
         ButtonShapes(
             ButtonPadding.xxlPadding, ButtonRadius.trailingShapeRadius,
-            RoundedCornerShape(
-                topStart = CornerSize(ButtonRadius.trailingShapeRadius.topStartRadius),
-                topEnd = CornerSize(ButtonRadius.trailingShapeRadius.topEndRadius),
-                bottomEnd = CornerSize(ButtonRadius.trailingShapeRadius.bottomEndRadius),
-                bottomStart = CornerSize(ButtonRadius.trailingShapeRadius.bottomStartRadius)
-            )
+            TrailingOutlineShape()
         )
     val xxLargeBottomShape = ButtonShapes(
         ButtonPadding.xxlPadding, ButtonRadius.bottomShapeRadius,
-        RoundedCornerShape(
-            topStart = CornerSize(ButtonRadius.bottomShapeRadius.topStartRadius),
-            topEnd = CornerSize(ButtonRadius.bottomShapeRadius.topEndRadius),
-            bottomEnd = CornerSize(ButtonRadius.bottomShapeRadius.bottomEndRadius),
-            bottomStart = CornerSize(ButtonRadius.bottomShapeRadius.bottomStartRadius)
-        )
+        BottomOutlineShape()
     )
 
 
@@ -206,7 +166,7 @@ object IxiButtonShapes {
     val normalBottomOutlineShape = ButtonShapes(
         ButtonPadding.normalPadding,
         ButtonRadius.regularShapeRadius,
-        BottomOutlineShape()
+        BottomOutlineShape(ButtonRadius.regularShapeRadius.bottomEndRadius)
     )
 
 }
@@ -222,7 +182,9 @@ object ButtonStyles {
         shape = normalTrailingOutlineShape,
         textStyle = button,
         isEnabled = true,
-        isOutLined = false
+        isOutLined = false,
+        startDrawable = R.drawable.ic_call_24,
+        endDrawable = R.drawable.ic_call_24
     )
     val o700NormalLeadingShapeRadius = ComponentStyle(
         bgColor = R.color.o700,
@@ -233,7 +195,8 @@ object ButtonStyles {
         shape = normalLeadingOutlinedShape,
         textStyle = button,
         isEnabled = true,
-        isOutLined = false
+        isOutLined = false,
+        endDrawable = R.drawable.ic_call_24
     )
     val b700NormalLeadingShapeRadius = ComponentStyle(
         bgColor = R.color.b700,
@@ -412,20 +375,21 @@ class LeadingOutlineShape : Shape {
     }
 }
 
-class BottomOutlineShape(private val radius: Dp = Dp(40F)) : Shape {
+class BottomOutlineShape(private val radius: Dp = 8.dp) : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
         density: Density
     ): Outline {
-//        val radius = if (size.width > size.height) size.width / 2f else size.height / 2f
-        val shapeHeight = size.height -  radius.value
-        val shapeWidth = size.width - radius.value
+        val radiusValue = with(density) { radius.toPx() }
+        val diameter = 2 * radiusValue
+        val shapeHeight = size.height - diameter
+        val shapeWidth = size.width - diameter
 
         val bottomStartRect = Rect(
             left = 0f,
             top = shapeHeight,
-            right = radius.value,
+            right = diameter,
             bottom = size.height
         )
         val bottomEndRect = Rect(

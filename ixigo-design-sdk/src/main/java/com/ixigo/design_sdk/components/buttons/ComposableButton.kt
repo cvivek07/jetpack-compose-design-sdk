@@ -1,10 +1,10 @@
 package com.ixigo.design_sdk.components.buttons
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material.Button
@@ -18,6 +18,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ixigo.design_sdk.components.buttons.shapes.ComponentStyle
 
@@ -34,28 +35,15 @@ fun ComposableButton(
     val bgColor = if (style.isEnabled) enabledBgColor else style.disableColor
 
 
-
-    val textStyle = if (!style.isEnabled) {
-        style.textStyle.copy(textColor = style.disableTextColor)
-    } else style.textStyle
-
-    val textComposable = @Composable {
-        Text(
-            text = text,
-            modifier = Modifier
-                .wrapContentWidth()
-                .padding(
-                    style.shape.padding.startPadding,
-                    style.shape.padding.topPadding,
-                    style.shape.padding.endPadding,
-                    style.shape.padding.bottomPadding
-                ),
-            style = textStyle.toTextStyle(),
-        )
-    }
+    val paddingValues = PaddingValues(
+        style.shape.padding.startPadding,
+        style.shape.padding.topPadding,
+        style.shape.padding.endPadding,
+        style.shape.padding.bottomPadding
+    )
 
 
-    if(style.isOutLined) {
+    if (style.isOutLined) {
         OutlinedButton(
             onClick = onClick,
             modifier = Modifier,
@@ -64,12 +52,11 @@ fun ComposableButton(
                 backgroundColor = colorResource(id = bgColor),
             ),
             interactionSource = interactionSource,
-            contentPadding = PaddingValues(0.dp),
+            contentPadding = paddingValues,
             shape = style.shape.shape,
             border = BorderStroke(2.dp, colorResource(id = style.strokeColor))
-        )
-        {
-            textComposable()
+        ) {
+            DrawComponents(style, text)
         }
     } else {
 
@@ -80,13 +67,58 @@ fun ComposableButton(
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = colorResource(id = bgColor)
             ),
-            contentPadding = PaddingValues(0.dp),
+            contentPadding = paddingValues,
             interactionSource = interactionSource,
             shape = style.shape.shape,
-        )
-        {
-            textComposable()
+        ) {
+            DrawComponents(style, text)
         }
+    }
+}
+
+@Composable
+private fun DrawComponents(
+    style: ComponentStyle,
+    text: String,
+) {
+    val textStyle = if (!style.isEnabled) {
+        style.textStyle.copy(textColor = style.disableTextColor)
+    } else style.textStyle
+
+
+    val textComposable = @Composable {
+        Text(
+            text = text,
+            modifier = Modifier
+                .padding(PaddingValues())
+                .wrapContentWidth(),
+            style = textStyle.toTextStyle(),
+        )
+    }
+
+    val startDrawable = @Composable {
+        Image(
+            painter = painterResource(id = style.startDrawable),
+            contentDescription = "Image",
+            modifier = Modifier.padding(0.dp, 0.dp, 8.dp, 0.dp)
+        )
+    }
+
+
+    val endDrawable = @Composable {
+        Image(
+            painter = painterResource(id = style.endDrawable),
+            contentDescription = "Image",
+            modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp)
+        )
+    }
+
+    if (style.startDrawable != 0) {
+        startDrawable()
+    }
+    textComposable()
+    if (style.endDrawable != 0) {
+        endDrawable()
     }
 }
 

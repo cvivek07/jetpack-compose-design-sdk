@@ -104,9 +104,9 @@
 
         <com.ixigo.design_sdk.components.buttons.IxigoButton
             android:id="@+id/button_nine"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button Nine"
+            android:text="Button"
             app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
     </LinearLayout>
 </ScrollView>
