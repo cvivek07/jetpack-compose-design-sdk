@@ -59,7 +59,7 @@ data class IxiStyle(
             fontStyle = fontStyle,
             letterSpacing = letterSpacing,
             background = colorResource(id = bgColor),
-            textDecoration = textDecoration
+            textDecoration = textDecoration,
         )
     }
 }
@@ -85,6 +85,38 @@ object IxiTypography {
         bgColor = android.R.color.transparent,
         textDecoration = TextDecoration.Underline
     )
+
+    val button = IxiStyle(
+        textColor =  R.color.white,
+        fontSize = 18.sp,
+        fontFamily = IxiFamily,
+        fontWeight = FontWeight.Normal,
+        fontStyle = FontStyle.Normal,
+        letterSpacing = 1.sp,
+        bgColor = android.R.color.transparent,
+        textDecoration = TextDecoration.None
+    )
+
+    val outlinedButton = IxiStyle(
+        textColor =  R.color.white,
+        fontSize = 18.sp,
+        fontFamily = IxiFamily,
+        fontWeight = FontWeight.Normal,
+        fontStyle = FontStyle.Normal,
+        letterSpacing = 1.sp,
+        bgColor = android.R.color.transparent,
+        textDecoration = TextDecoration.None
+    )
+    val buttonLarge = IxiStyle(
+        textColor =  R.color.white,
+        fontSize = 24.sp,
+        fontFamily = IxiFamily,
+        fontWeight = FontWeight.Normal,
+        fontStyle = FontStyle.Normal,
+        letterSpacing = 0.5.sp,
+        bgColor = android.R.color.transparent,
+        textDecoration = TextDecoration.None
+    )
 }
 
 object IxiShapes {
@@ -94,10 +126,4 @@ object IxiShapes {
     val startRoundRectSmall = RoundedCornerShape(4.dp, 0.dp, 0.dp, 4.dp)
     val endRoundRectSmall =
         RoundedCornerShape(bottomStart = 0.dp, bottomEnd = 4.dp, topEnd = 4.dp, topStart = 0.dp)
-}
-
-class a {
-    fun b() {
-        IxiShapes.endRoundRectSmall.copy(bottomEnd = CornerSize(8), topEnd = CornerSize(8))
-    }
 }

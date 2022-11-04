@@ -19,4 +19,19 @@
     <color name="o200">#FED7B6</color>
     <color name="o100">#FEE4CF</color>
     <color name="o50">#FFF2E7</color>
+
+    <color name="b900">#001833</color>
+    <color name="b800">#002B59</color>
+    <color name="b700">#00438C</color>
+    <color name="b600">#005BBF</color>
+    <color name="b500">#0770E4</color>
+    <color name="b400">#207EE7</color>
+    <color name="b300">#519BEC</color>
+    <color name="b200">#91BFF2</color>
+    <color name="b100">#C8DEF7</color>
+    <color name="b50">#E5F0FC</color>
+
+
+    <color name="disabled_bg">#F3F3F4</color>
+    <color name="disabled_text">#CDCFD4</color>
 </resources>
