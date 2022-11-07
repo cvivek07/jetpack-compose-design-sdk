@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
 import com.ixigo.design_sdk.components.IxiState
 import com.ixigo.design_sdk.components.buttons.shapes.ButtonStyles
@@ -24,14 +25,35 @@ abstract class BaseButton @JvmOverloads constructor(
     protected val b700XXlargeRegularShapeRadius = 5
     protected val b700NormalRegularShapeRadius = 6
     protected val b700NormalRegularShapeRadiusOutlined = 7
-    protected val b700NormalLeadingShapeRadiusOutlined = 8
-    protected val b700NormalTrailingShapeRadiusOutlined = 9
+    protected val b700NormalTrailingShapeRadiusOutlined = 8
+    protected val b700NormalLeadingShapeRadiusOutlined = 9
     protected val b700NormalBottomShapeRadiusOutlined = 10
 
 
+    protected var startDrawableState = mutableStateOf(0)
     protected var state = mutableStateOf(IxiState())
+    protected var endDrawableState = mutableStateOf(0)
     protected var flag: Int = o700NormalTrailingShapeRadius
 
+    init {
+        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseButton);
+        try {
+            val text = typedArray.getString(R.styleable.BaseButton_android_text) ?: ""
+            setText(text)
+
+            flag = typedArray.getInt(
+                R.styleable.BaseButton_ixi_button_style,
+                o700NormalTrailingShapeRadius
+            )
+            setStyle(mapFlagsWithStyle(flag))
+
+            val drawableEnd = typedArray.getResourceId(R.styleable.BaseButton_android_drawableEnd ,0)
+            val drawableStart = typedArray.getResourceId(R.styleable.BaseButton_android_drawableStart, 0)
+            setHorizontalDrawables(drawableStart, drawableEnd)
+        } finally {
+            typedArray.recycle()
+        }
+    }
 
     fun setText(text: String) {
         val inState = state.value
@@ -53,24 +75,31 @@ abstract class BaseButton @JvmOverloads constructor(
     }
 
     fun setStartImageDrawable(@DrawableRes imageRes: Int) {
-        val initState = state.value
-        state.value = initState.copy(style = initState.style.copy(startDrawable = imageRes))
+        startDrawableState.value = imageRes
     }
 
     fun setEndImageDrawable(@DrawableRes imageRes: Int) {
-        val initState = state.value
-        state.value = initState.copy(style = initState.style.copy(endDrawable = imageRes))
+        endDrawableState.value = imageRes
     }
 
     fun setHorizontalDrawables(@DrawableRes imageResStart: Int, @DrawableRes imageResEnd: Int) {
-        val initState = state.value
-        state.value = initState.copy(
-            style = initState.style.copy(
-                startDrawable = imageResStart,
-                endDrawable = imageResEnd
-            )
-        )
+        startDrawableState.value  = imageResStart
+        endDrawableState.value = imageResEnd
     }
+
+    fun removeDrawables() {
+        startDrawableState.value  = 0
+        endDrawableState.value = 0
+    }
+
+    fun removeStartDrawables() {
+        startDrawableState.value  = 0
+    }
+
+    fun removeEndDrawables() {
+        endDrawableState.value = 0
+    }
+
 
     fun setClickListener(onClick: () -> Unit) {
         val inState = state.value
@@ -91,28 +120,4 @@ abstract class BaseButton @JvmOverloads constructor(
         b700NormalBottomShapeRadiusOutlined -> ButtonStyles.b700NormalBottomShapeRadiusOutlined
         else -> ButtonStyles.b700NormalRegularShapeRadius
     }
-
-//    companion object {
-//
-//        protected const val o700NormalTrailingShapeRadius = 0
-//        protected const val o700NormalLeadingShapeRadius = 1
-//        protected const val b700NormalLeadingShapeRadius = 2
-//        protected const val b700XXlargeBottomShapeRadius = 3
-//        protected const val b700XXlargeBottomShapeRadiusDisabled = 4
-//        protected const val b700XXlargeRegularShapeRadius = 5
-//        protected const val b700NormalRegularShapeRadius = 6
-//
-//        @IntDef(
-//            flag = true, value = [
-//                o700NormalTrailingShapeRadius,
-//                o700NormalLeadingShapeRadius,
-//                b700NormalLeadingShapeRadius,
-//                b700XXlargeBottomShapeRadius,
-//                b700XXlargeBottomShapeRadiusDisabled,
-//                b700XXlargeRegularShapeRadius,
-//                b700NormalRegularShapeRadius]
-//        )
-//        @Retention(AnnotationRetention.SOURCE)
-//        annotation class ButtonStyleFlags
-//    }
 }

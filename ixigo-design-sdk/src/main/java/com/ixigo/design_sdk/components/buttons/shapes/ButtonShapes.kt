@@ -1,26 +1,19 @@
 package com.ixigo.design_sdk.components.buttons.shapes
 
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.IxiStyle
-import com.ixigo.design_sdk.IxiTypography.button
-import com.ixigo.design_sdk.IxiTypography.buttonLarge
-import com.ixigo.design_sdk.IxiTypography.outlinedButton
-import com.ixigo.design_sdk.components.buttons.shapes.IxiButtonShapes.normalBottomOutlineShape
-import com.ixigo.design_sdk.components.buttons.shapes.IxiButtonShapes.normalLeadingOutlinedShape
-import com.ixigo.design_sdk.components.buttons.shapes.IxiButtonShapes.normalTrailingOutlineShape
+import com.ixigo.design_sdk.components.BottomOutlineShape
+import com.ixigo.design_sdk.components.LeadingOutlineShape
+import com.ixigo.design_sdk.components.TrailingOutlineShape
+import com.ixigo.design_sdk.components.styles.ComponentTextStyle
+import com.ixigo.design_sdk.components.styles.IxiTextStyles.button
+import com.ixigo.design_sdk.components.styles.IxiTextStyles.buttonLarge
+import com.ixigo.design_sdk.components.styles.IxiTextStyles.outlinedButton
 
 data class ComponentPadding(
     val startPadding: Dp,
@@ -43,11 +36,9 @@ data class ComponentStyle(
     @ColorRes val strokeColor: Int = android.R.color.transparent,
     @ColorRes val disableTextColor: Int = R.color.disabled_text,
     val shape: ButtonShapes,
-    val textStyle: IxiStyle,
+    val textStyle: ComponentTextStyle,
     val isEnabled: Boolean,
     val isOutLined: Boolean = false,
-    @DrawableRes val startDrawable: Int = 0,
-    @DrawableRes val endDrawable: Int = 0
 )
 
 
@@ -111,19 +102,6 @@ object IxiButtonShapes {
             bottomStart = CornerSize(ButtonRadius.regularShapeRadius.bottomStartRadius)
         )
     )
-    val xLargeLeadingShape = ButtonShapes(
-        ButtonPadding.xlPadding, ButtonRadius.leadingShapeRadius,
-        LeadingOutlineShape()
-    )
-    val xLargeTrailingShape =
-        ButtonShapes(
-            ButtonPadding.xlPadding, ButtonRadius.trailingShapeRadius,
-            TrailingOutlineShape()
-        )
-    val xLargeBottomShape = ButtonShapes(
-        ButtonPadding.xlPadding, ButtonRadius.bottomShapeRadius,
-        BottomOutlineShape()
-    )
 
 
     val xxLargeRegularShape =
@@ -150,273 +128,91 @@ object IxiButtonShapes {
         ButtonPadding.xxlPadding, ButtonRadius.bottomShapeRadius,
         BottomOutlineShape()
     )
-
-
-    val normalLeadingOutlinedShape = ButtonShapes(
-        ButtonPadding.normalPadding,
-        ButtonRadius.regularShapeRadius,
-        LeadingOutlineShape()
-    )
-
-    val normalTrailingOutlineShape = ButtonShapes(
-        ButtonPadding.normalPadding,
-        ButtonRadius.regularShapeRadius,
-        TrailingOutlineShape()
-    )
-    val normalBottomOutlineShape = ButtonShapes(
-        ButtonPadding.normalPadding,
-        ButtonRadius.regularShapeRadius,
-        BottomOutlineShape(ButtonRadius.regularShapeRadius.bottomEndRadius)
-    )
-
 }
 
 
 object ButtonStyles {
-    val o700NormalTrailingShapeRadius = ComponentStyle(
+    private val defaultStyle = ComponentStyle(
+        bgColor = R.color.b700,
+        hoverColor = R.color.b600,
+        disableColor = R.color.disabled_bg,
+        strokeColor = android.R.color.transparent,
+        disableTextColor = R.color.disabled_text,
+        shape = IxiButtonShapes.normalRegularShape,
+        textStyle = button,
+        isEnabled = true,
+        isOutLined = false
+    )
+
+    val defaultOutlinedStyle = defaultStyle.copy(
+        bgColor = android.R.color.transparent,
+        hoverColor = R.color.b400,
+        strokeColor = R.color.b700,
+        textStyle = outlinedButton.copy(
+            textColor = R.color.b700,
+            bgColor = android.R.color.transparent
+        ),
+        isOutLined = true
+    )
+
+    // Naming convention
+    // colorName +
+    // Size(Normal, XLarge, XXLarge ) +
+    // Shape (RegularShapeRadius, LeadingShapeRadius, BottomShapeRadius, TrailingShapeRadius)
+    val o700NormalRegularShapeRadius = defaultStyle.copy(
         bgColor = R.color.o700,
-        hoverColor = R.color.o600,
-        disableColor = R.color.disabled_bg,
-        strokeColor = android.R.color.transparent,
-        disableTextColor = R.color.disabled_text,
-        shape = normalTrailingOutlineShape,
-        textStyle = button,
-        isEnabled = true,
-        isOutLined = false,
-        startDrawable = R.drawable.ic_call_24,
-        endDrawable = R.drawable.ic_call_24
+        hoverColor = R.color.o600, shape = IxiButtonShapes.normalTrailingShape,
     )
-    val o700NormalLeadingShapeRadius = ComponentStyle(
-        bgColor = R.color.o700,
-        hoverColor = R.color.o600,
-        disableColor = R.color.disabled_bg,
-        strokeColor = android.R.color.transparent,
-        disableTextColor = R.color.disabled_text,
-        shape = normalLeadingOutlinedShape,
-        textStyle = button,
-        isEnabled = true,
-        isOutLined = false,
-        endDrawable = R.drawable.ic_call_24
+    val o700NormalTrailingShapeRadius = o700NormalRegularShapeRadius.copy(
+        shape = IxiButtonShapes.normalTrailingShape
     )
-    val b700NormalLeadingShapeRadius = ComponentStyle(
-        bgColor = R.color.b700,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = android.R.color.transparent,
-        disableTextColor = R.color.disabled_text,
-        shape = IxiButtonShapes.normalLeadingShape,
-        textStyle = button,
-        isEnabled = true,
-        isOutLined = false
+
+
+    val o700NormalBottomShapeRadius = o700NormalRegularShapeRadius.copy(
+        shape = IxiButtonShapes.normalBottomShape
     )
-    val b700XXlargeBottomShapeRadius = ComponentStyle(
-        bgColor = R.color.b700,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = android.R.color.transparent,
-        disableTextColor = R.color.disabled_text,
-        shape = IxiButtonShapes.xxLargeBottomShape,
-        textStyle = buttonLarge,
-        isEnabled = true,
-        isOutLined = false
+
+    val b700NormalRegularShapeRadius = defaultStyle.copy(
+        shape = IxiButtonShapes.normalRegularShape
     )
-    val b700XXlargeBottomShapeRadiusDisabled = ComponentStyle(
-        bgColor = R.color.b700,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = android.R.color.transparent,
-        disableTextColor = R.color.disabled_text,
-        shape = IxiButtonShapes.xxLargeBottomShape,
-        textStyle = buttonLarge,
-        isEnabled = false,
-        isOutLined = false
+
+    val b700NormalRegularShapeRadiusOutlined = defaultOutlinedStyle
+
+    val b700NormalLeadingShapeRadius = b700NormalRegularShapeRadius.copy(
+        shape = IxiButtonShapes.normalLeadingShape
     )
-    val b700XXlargeRegularShapeRadius = ComponentStyle(
-        bgColor = R.color.b700,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = android.R.color.transparent,
-        disableTextColor = R.color.disabled_text,
+    val b700NormalLeadingShapeRadiusOutlined = b700NormalRegularShapeRadiusOutlined.copy(
+        shape = IxiButtonShapes.normalLeadingShape
+    )
+
+    val b700NormalTrailingShapeRadius = b700NormalRegularShapeRadius.copy(
+        shape = IxiButtonShapes.normalTrailingShape
+    )
+    val o700NormalLeadingShapeRadius = o700NormalRegularShapeRadius.copy(
+        shape = IxiButtonShapes.normalLeadingShape
+    )
+
+
+    val b700NormalTrailingShapeRadiusOutlined = defaultOutlinedStyle.copy(
+        shape = IxiButtonShapes.normalTrailingShape
+    )
+
+    val b700NormalBottomShapeRadius = b700NormalRegularShapeRadius.copy(
+        shape = IxiButtonShapes.normalBottomShape
+    )
+
+    val b700NormalBottomShapeRadiusOutlined = defaultOutlinedStyle.copy(
+        shape = IxiButtonShapes.normalBottomShape
+    )
+
+    val b700XXlargeRegularShapeRadius = b700NormalRegularShapeRadius.copy(
         shape = IxiButtonShapes.xxLargeRegularShape,
         textStyle = buttonLarge,
-        isEnabled = true,
-        isOutLined = false
     )
-
-    val b700NormalRegularShapeRadius = ComponentStyle(
-        bgColor = R.color.b700,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = R.color.disabled_text,
-        disableTextColor = android.R.color.transparent,
-        shape = IxiButtonShapes.normalRegularShape,
-        textStyle = button,
-        isEnabled = true,
-        isOutLined = false
+    val b700XXlargeBottomShapeRadius = b700XXlargeRegularShapeRadius.copy(
+        shape = IxiButtonShapes.xxLargeBottomShape,
     )
-    val b700NormalRegularShapeRadiusOutlined = ComponentStyle(
-        bgColor = android.R.color.transparent,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = R.color.b700,
-        disableTextColor = R.color.disabled_text,
-        shape = IxiButtonShapes.normalRegularShape,
-        textStyle = outlinedButton.copy(
-            textColor = R.color.b700,
-            bgColor = android.R.color.transparent
-        ),
-        isEnabled = true,
-        isOutLined = true
+    val b700XXlargeBottomShapeRadiusDisabled = b700XXlargeBottomShapeRadius.copy(
+        isEnabled = false
     )
-    val b700NormalLeadingShapeRadiusOutlined = ComponentStyle(
-        bgColor = android.R.color.transparent,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = R.color.b700,
-        disableTextColor = R.color.disabled_text,
-        shape = normalLeadingOutlinedShape,
-        textStyle = outlinedButton.copy(
-            textColor = R.color.b700,
-            bgColor = android.R.color.transparent
-        ),
-        isEnabled = true,
-        isOutLined = true
-    )
-
-    val b700NormalTrailingShapeRadiusOutlined = ComponentStyle(
-        bgColor = android.R.color.transparent,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = R.color.b700,
-        disableTextColor = R.color.disabled_text,
-        shape = normalTrailingOutlineShape,
-        textStyle = outlinedButton.copy(
-            textColor = R.color.b700,
-            bgColor = android.R.color.transparent
-        ),
-        isEnabled = true,
-        isOutLined = true
-    )
-    val b700NormalBottomShapeRadiusOutlined = ComponentStyle(
-        bgColor = android.R.color.transparent,
-        hoverColor = R.color.b400,
-        disableColor = R.color.disabled_bg,
-        strokeColor = R.color.b700,
-        disableTextColor = R.color.disabled_text,
-        shape = normalBottomOutlineShape,
-        textStyle = outlinedButton.copy(
-            textColor = R.color.b700,
-            bgColor = android.R.color.transparent
-        ),
-        isEnabled = true,
-        isOutLined = true
-    )
-}
-
-class TrailingOutlineShape : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        val radius = if (size.width > size.height) size.width / 2f else size.height / 2f
-        val shapeHeight = size.height
-        val shapeWidth = size.width - radius
-
-        val rect = Rect(
-            left = size.width - size.height,
-            top = 0f,
-            right = size.width,
-            bottom = shapeHeight
-        )
-        val path = Path().apply {
-            moveTo(0f, 0f)
-            lineTo(shapeWidth, 0f)
-            arcTo(
-                rect = rect,
-                startAngleDegrees = -90.0f,
-                sweepAngleDegrees = 180.0f,
-                forceMoveTo = false
-            )
-            lineTo(0f, shapeHeight)
-        }
-        return Outline.Generic(path)
-    }
-}
-
-class LeadingOutlineShape : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        val radius = if (size.width > size.height) size.width / 2f else size.height / 2f
-        val shapeHeight = size.height
-        val shapeWidth = size.width - radius
-
-        val rect = Rect(
-            left = 0f,
-            top = 0f,
-            right = shapeHeight,
-            bottom = shapeHeight
-        )
-        val path = Path().apply {
-            moveTo(size.width, 0f)
-            lineTo(shapeWidth, 0f)
-            arcTo(
-                rect = rect,
-                startAngleDegrees = -90.0f,
-                sweepAngleDegrees = -180.0f,
-                forceMoveTo = false
-            )
-            lineTo(size.width, shapeHeight)
-        }
-        return Outline.Generic(path)
-    }
-}
-
-class BottomOutlineShape(private val radius: Dp = 8.dp) : Shape {
-    override fun createOutline(
-        size: Size,
-        layoutDirection: LayoutDirection,
-        density: Density
-    ): Outline {
-        val radiusValue = with(density) { radius.toPx() }
-        val diameter = 2 * radiusValue
-        val shapeHeight = size.height - diameter
-        val shapeWidth = size.width - diameter
-
-        val bottomStartRect = Rect(
-            left = 0f,
-            top = shapeHeight,
-            right = diameter,
-            bottom = size.height
-        )
-        val bottomEndRect = Rect(
-            left = shapeWidth,
-            top = shapeHeight,
-            right = size.width,
-            bottom = size.height
-        )
-        val path = Path().apply {
-            moveTo(0f, 0f)
-            lineTo(0f, shapeHeight)
-            arcTo(
-                rect = bottomStartRect,
-                startAngleDegrees = -180.0f,
-                sweepAngleDegrees = -90.0f,
-                forceMoveTo = false
-            )
-            lineTo(shapeWidth, size.height)
-            arcTo(
-                rect = bottomEndRect,
-                startAngleDegrees = -270.0f,
-                sweepAngleDegrees = -90.0f,
-                forceMoveTo = false
-            )
-            lineTo(size.width, 0F)
-        }
-
-        return Outline.Generic(path)
-    }
 }

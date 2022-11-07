@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="IxigoButton">
+    <declare-styleable name="BaseButton">
         <attr name="android:text" format="string" />
+        <attr name="android:drawableEnd" format="reference" />
+        <attr name="android:drawableStart" format="reference" />
+
         <attr name="ixi_button_style" format="flags">
             <flag name="o700NormalTrailingShapeRadius" value="0" />
             <flag name="o700NormalLeadingShapeRadius" value="1" />
@@ -18,4 +21,6 @@
         </attr>
     </declare-styleable>
 
+    <declare-styleable name="SolidIxigoButton" parent = "IxigoButton"/>
+    <declare-styleable name="OutlinedIxigoButton" parent = "IxigoButton"/>
 </resources>

@@ -1,5 +1,6 @@
 package com.ixigo.design_sdk.components.buttons
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -19,13 +20,17 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.ixigo.design_sdk.components.buttons.shapes.ButtonStyles
 import com.ixigo.design_sdk.components.buttons.shapes.ComponentStyle
 
 @Composable
 fun ComposableButton(
     text: String = "Compose  Button",
     style: ComponentStyle,
+    @DrawableRes startDrawable: Int = 0,
+    @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
 ) {
 
@@ -34,6 +39,42 @@ fun ComposableButton(
     val enabledBgColor = if (isPressed) style.hoverColor else style.bgColor
     val bgColor = if (style.isEnabled) enabledBgColor else style.disableColor
 
+    val paddingValues = PaddingValues(
+        style.shape.padding.startPadding,
+        style.shape.padding.topPadding,
+        style.shape.padding.endPadding,
+        style.shape.padding.bottomPadding
+    )
+
+    Button(
+        onClick = onClick,
+        modifier = Modifier,
+        enabled = style.isEnabled,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = colorResource(id = bgColor)
+        ),
+        contentPadding = paddingValues,
+        interactionSource = interactionSource,
+        shape = style.shape.shape,
+    ) {
+        DrawComponents(style, text, isPressed, startDrawable, endDrawable)
+    }
+
+}
+
+@Composable
+fun ComposableButtonOutlined(
+    text: String = "Compose  Button",
+    style: ComponentStyle,
+    @DrawableRes startDrawable: Int = 0,
+    @DrawableRes endDrawable: Int = 0,
+    onClick: () -> Unit = {}
+) {
+
+    val interactionSource = remember { MutableInteractionSource() }
+    val isPressed by interactionSource.collectIsPressedAsState()
+    val bgColor = if (isPressed) style.hoverColor else style.bgColor
+    val borderColor = if (style.isEnabled) style.strokeColor else style.disableColor
 
     val paddingValues = PaddingValues(
         style.shape.padding.startPadding,
@@ -42,37 +83,21 @@ fun ComposableButton(
         style.shape.padding.bottomPadding
     )
 
+    OutlinedButton(
+        onClick = onClick,
+        modifier = Modifier,
+        enabled = style.isEnabled,
+        colors = ButtonDefaults.buttonColors(
+            backgroundColor = colorResource(id = bgColor),
+            disabledBackgroundColor = colorResource(id = android.R.color.transparent)
+        ),
 
-    if (style.isOutLined) {
-        OutlinedButton(
-            onClick = onClick,
-            modifier = Modifier,
-            enabled = style.isEnabled,
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = colorResource(id = bgColor),
-            ),
-            interactionSource = interactionSource,
-            contentPadding = paddingValues,
-            shape = style.shape.shape,
-            border = BorderStroke(2.dp, colorResource(id = style.strokeColor))
-        ) {
-            DrawComponents(style, text)
-        }
-    } else {
-
-        Button(
-            onClick = onClick,
-            modifier = Modifier,
-            enabled = style.isEnabled,
-            colors = ButtonDefaults.buttonColors(
-                backgroundColor = colorResource(id = bgColor)
-            ),
-            contentPadding = paddingValues,
-            interactionSource = interactionSource,
-            shape = style.shape.shape,
-        ) {
-            DrawComponents(style, text)
-        }
+        interactionSource = interactionSource,
+        contentPadding = paddingValues,
+        shape = style.shape.shape,
+        border = BorderStroke(2.dp, colorResource(id = borderColor))
+    ) {
+        DrawComponents(style, text, isPressed, startDrawable, endDrawable)
     }
 }
 
@@ -80,9 +105,14 @@ fun ComposableButton(
 private fun DrawComponents(
     style: ComponentStyle,
     text: String,
+    isPressed: Boolean = false,
+    @DrawableRes startDrawableRes: Int = 0,
+    @DrawableRes endDrawableRes: Int = 0,
 ) {
     val textStyle = if (!style.isEnabled) {
         style.textStyle.copy(textColor = style.disableTextColor)
+    } else if (isPressed) {
+        style.textStyle.copy(textColor = android.R.color.white)
     } else style.textStyle
 
 
@@ -98,7 +128,7 @@ private fun DrawComponents(
 
     val startDrawable = @Composable {
         Image(
-            painter = painterResource(id = style.startDrawable),
+            painter = painterResource(id = startDrawableRes),
             contentDescription = "Image",
             modifier = Modifier.padding(0.dp, 0.dp, 8.dp, 0.dp)
         )
@@ -107,72 +137,23 @@ private fun DrawComponents(
 
     val endDrawable = @Composable {
         Image(
-            painter = painterResource(id = style.endDrawable),
+            painter = painterResource(id = endDrawableRes),
             contentDescription = "Image",
             modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp)
         )
     }
 
-    if (style.startDrawable != 0) {
+    if (startDrawableRes != 0) {
         startDrawable()
     }
     textComposable()
-    if (style.endDrawable != 0) {
+    if (endDrawableRes != 0) {
         endDrawable()
     }
 }
 
-fun ComposeView.setContent() {
-//    setContent {
-//        IxigoButton()
-//    }
+@Preview(showBackground = true)
+@Composable
+fun ComposablePreview() {
+    ComposableButton("Button", ButtonStyles.b700NormalRegularShapeRadiusOutlined)
 }
-
-fun ComposeView.setTextContent() {
-    setContent {
-        Text(text = "This is the textview in Compose", color = Color.Blue)
-    }
-}
-
-//@Composable
-//fun buttonComposableUsingRow() {
-//    Row(
-//        modifier = Modifier
-//            .wrapContentWidth()
-//            .clip(
-//                shape = RoundedCornerShape(
-//                    topStart = CornerSize(style.shape.radius.topStartRadius),
-//                    topEnd = CornerSize(style.shape.radius.topEndRadius),
-//                    bottomEnd = CornerSize(style.shape.radius.bottomEndRadius),
-//                    bottomStart = CornerSize(style.shape.radius.bottomStartRadius)
-//                )
-//            )
-//            .background(color = colorResource(id = bgColor))
-//            .border(BorderStroke(2.dp, SolidColor(Color.Black)))
-//            .clickable(
-//                interactionSource = interactionSource,
-//                indication = rememberRipple(bounded = true),
-//                enabled = style.isEnabled,
-//                role = Role.Button,
-//                onClick = onClick,
-//            )
-//            .padding(
-//                style.shape.padding.startPadding,
-//                style.shape.padding.topPadding,
-//                style.shape.padding.endPadding,
-//                style.shape.padding.bottomPadding
-//            )
-//
-//    )
-//    {
-//        val textStyle = if (!style.isEnabled) {
-//            style.textStyle.copy(textColor = style.disableTextColor)
-//        } else style.textStyle
-//        Text(
-//            text = text,
-//            modifier = Modifier.padding(),
-//            style = textStyle.toTextStyle(),
-//
-//            )
-//    }
-//}

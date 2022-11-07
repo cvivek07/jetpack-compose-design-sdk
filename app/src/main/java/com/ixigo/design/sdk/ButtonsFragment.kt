@@ -32,29 +32,34 @@ class ButtonsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.buttonFirst.setText("Button 1")
-        binding.buttonFirst.setClickListener{
-                context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }
+        binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
+        binding.buttonFirst.setStartImageDrawable(R.drawable.ic_call_24)
+        binding.buttonFirst.setClickListener {
+            context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }
         }
 
         binding.buttonSecond.setText("Button 2")
         binding.buttonSecond.setStyle(ButtonStyles.o700NormalLeadingShapeRadius)
-        binding.buttonSecond.setClickListener{
+        binding.buttonSecond.setClickListener {
             context?.let { it1 -> "Button2 Clicked Change".toToast(it1) }
         }
 
         binding.buttonThird.setText("Button 3")
         binding.buttonThird.setStyle(ButtonStyles.b700NormalLeadingShapeRadius)
-        binding.buttonThird.setClickListener{
+        binding.buttonThird.setClickListener {
             context?.let { it1 -> "Button3 Clicked Change".toToast(it1) }
-            binding.buttonFourth.isEnabled =  !binding.buttonFourth.isEnabled
+            binding.buttonFourth.isEnabled = !binding.buttonFourth.isEnabled
         }
 
-        binding.buttonFourth.setClickListener{
+        binding.buttonFourth.setClickListener {
             context?.let { it1 -> "Button4 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonFifth.setClickListener{
+//        binding.buttonEight.setStyle(ButtonStyles.b700NormalTrailingShapeRadiusOutlined)
+        binding.buttonSeven.setEnabled(false)
+        binding.buttonFifth.setClickListener {
             context?.let { it1 -> "Button5 Clicked Change".toToast(it1) }
+            binding.buttonSeven.isEnabled = !binding.buttonSeven.isEnabled
         }
     }
 
