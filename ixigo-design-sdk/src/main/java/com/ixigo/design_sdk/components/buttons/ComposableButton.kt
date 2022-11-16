@@ -134,7 +134,6 @@ private fun DrawComponents(
         )
     }
 
-
     val endDrawable = @Composable {
         Image(
             painter = painterResource(id = endDrawableRes),

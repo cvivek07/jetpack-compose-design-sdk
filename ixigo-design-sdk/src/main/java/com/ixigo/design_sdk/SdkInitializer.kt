@@ -4,16 +4,16 @@ object SdkInitializer {
     var projectName: Projects? = null
         private set
         get() =
-            field ?: throw java.lang.RuntimeException("Design Sdk is not initialised, Please initialise the sdk by calling initSdk(config: DesignConfig)")
+            field ?: Projects.TRAIN//throw java.lang.RuntimeException("Design Sdk is not initialised, Please initialise the sdk by calling initSdk(config: DesignConfig)")
 
 
 
     fun initSdk(config: DesignConfig) {
-        projectName = config.projectName
+
     }
 }
 
-data class DesignConfig(val projectName: Projects = Projects.TRAIN)
+abstract class DesignConfig(val abc: String)
 enum class Projects {
     TRAIN,
     FLIGHT,

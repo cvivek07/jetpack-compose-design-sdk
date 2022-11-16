@@ -7,6 +7,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
+import com.ixigo.design_sdk.components.BaseComposition
 import com.ixigo.design_sdk.components.BottomOutlineShape
 import com.ixigo.design_sdk.components.LeadingOutlineShape
 import com.ixigo.design_sdk.components.TrailingOutlineShape
@@ -39,7 +40,7 @@ data class ComponentStyle(
     val textStyle: ComponentTextStyle,
     val isEnabled: Boolean,
     val isOutLined: Boolean = false,
-)
+): BaseComposition()
 
 
 object ButtonPadding {
@@ -161,7 +162,8 @@ object ButtonStyles {
     // Shape (RegularShapeRadius, LeadingShapeRadius, BottomShapeRadius, TrailingShapeRadius)
     val o700NormalRegularShapeRadius = defaultStyle.copy(
         bgColor = R.color.o700,
-        hoverColor = R.color.o600, shape = IxiButtonShapes.normalTrailingShape,
+        hoverColor = R.color.o600,
+        shape = IxiButtonShapes.normalTrailingShape,
     )
     val o700NormalTrailingShapeRadius = o700NormalRegularShapeRadius.copy(
         shape = IxiButtonShapes.normalTrailingShape

@@ -2,13 +2,15 @@ package com.ixigo.design_sdk.components.buttons
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.IxiState
+import com.ixigo.design_sdk.components.buttons.shapes.ButtonShapes
 import com.ixigo.design_sdk.components.buttons.shapes.ButtonStyles
 import com.ixigo.design_sdk.components.buttons.shapes.ComponentStyle
+import com.ixigo.design_sdk.components.styles.ComponentTextStyle
 
 abstract class BaseButton @JvmOverloads constructor(
     context: Context,
@@ -74,6 +76,36 @@ abstract class BaseButton @JvmOverloads constructor(
         return state.value.style.isEnabled
     }
 
+    fun setHoverColor(@ColorRes colorRes: Int) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(hoverColor = colorRes))
+    }
+
+    fun setDisableColor(@ColorRes colorRes: Int) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(disableColor = colorRes))
+    }
+
+    fun setDisableTextColor(@ColorRes colorRes: Int) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(disableTextColor = colorRes))
+    }
+
+    fun setShapes(shapes: ButtonShapes) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(shape = shapes))
+    }
+
+    fun setTextStyle(textStyle: ComponentTextStyle) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(textStyle = textStyle))
+    }
+
+    fun isOutlined(isOutlined: Boolean) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(isOutLined = isOutlined))
+    }
+
     fun setStartImageDrawable(@DrawableRes imageRes: Int) {
         startDrawableState.value = imageRes
     }
@@ -106,6 +138,10 @@ abstract class BaseButton @JvmOverloads constructor(
         state.value = inState.copy(onClick = onClick)
     }
 
+    fun setBgColor(@ColorRes color: Int) {
+        val inState = state.value
+        state.value = inState.copy(style = inState.style.copy(bgColor = color))
+    }
     protected fun mapFlagsWithStyle(flag: Int) = when (flag) {
         o700NormalLeadingShapeRadius -> ButtonStyles.o700NormalLeadingShapeRadius
         o700NormalTrailingShapeRadius -> ButtonStyles.o700NormalTrailingShapeRadius
@@ -120,4 +156,13 @@ abstract class BaseButton @JvmOverloads constructor(
         b700NormalBottomShapeRadiusOutlined -> ButtonStyles.b700NormalBottomShapeRadiusOutlined
         else -> ButtonStyles.b700NormalRegularShapeRadius
     }
+
+//
 }
+
+
+data class IxiState(
+    val text: String = "",
+    val style: ComponentStyle = ButtonStyles.o700NormalTrailingShapeRadius,
+    val onClick: () -> Unit = {}
+)

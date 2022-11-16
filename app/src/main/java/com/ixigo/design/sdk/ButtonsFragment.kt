@@ -39,7 +39,7 @@ class ButtonsFragment : Fragment() {
         }
 
         binding.buttonSecond.setText("Button 2")
-        binding.buttonSecond.setStyle(ButtonStyles.o700NormalLeadingShapeRadius)
+        binding.buttonSecond.setStyle(ButtonStyles.o700NormalLeadingShapeRadius.copy())
         binding.buttonSecond.setClickListener {
             context?.let { it1 -> "Button2 Clicked Change".toToast(it1) }
         }
