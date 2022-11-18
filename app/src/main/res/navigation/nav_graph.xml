@@ -3,26 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/componentFragment">
 
     <fragment
-        android:id="@+id/FirstFragment"
+        android:id="@+id/componentFragment"
         android:name="com.ixigo.design.sdk.ComponentsFragment"
         android:label="@string/components_fragments"
         tools:layout="@layout/fragment_components">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_ComponentFragment_to_ButtonsFragment"
+            app:destination="@id/buttonsFragment" />
+
+        <action
+            android:id="@+id/action_ComponentFragment_to_inputFieldFragment"
+            app:destination="@id/inputFieldsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/SecondFragment"
+        android:id="@+id/buttonsFragment"
         android:name="com.ixigo.design.sdk.ButtonsFragment"
         android:label="@string/buttons"
         tools:layout="@layout/fragment_buttons">
 
         <action
             android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            app:destination="@id/componentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inputFieldsFragment"
+        android:name="com.ixigo.design.sdk.InputFieldsFragment"
+        android:label="@string/input_fields"
+        tools:layout="@layout/fragment_input_fields">
     </fragment>
 </navigation>

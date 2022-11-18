@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ixigo-design-sdk</string>
+    <string name="outlined_input_drawable_end_des">Image</string>
 </resources>

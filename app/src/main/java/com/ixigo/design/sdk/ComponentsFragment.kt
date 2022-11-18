@@ -32,7 +32,10 @@ class ComponentsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.buttonFirst.setOnClickListener {
-            findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+            findNavController().navigate(R.id.action_ComponentFragment_to_ButtonsFragment)
+        }
+        binding.inputFields.setOnClickListener {
+            findNavController().navigate(R.id.action_ComponentFragment_to_inputFieldFragment)
         }
     }
 
