@@ -24,7 +24,11 @@ abstract class BaseInputField @JvmOverloads constructor(
             helperText = "",
             text = "",
             label = "",
-            iconTint = R.color.black
+            iconTint = R.color.black,
+            onClickActionIcon = {},
+            onClickActionText = {},
+            onClickDrawableEnd = {},
+            onClickDrawableStart = {}
         )
     )
 
@@ -42,6 +46,7 @@ abstract class BaseInputField @JvmOverloads constructor(
         val initState = state.value.copy(helperText = text)
         state.value = initState
     }
+
     fun setLabel(text: String) {
         val initState = state.value.copy(label = text)
         state.value = initState
@@ -77,6 +82,26 @@ abstract class BaseInputField @JvmOverloads constructor(
         val initState = state.value.copy(iconTint = tintColor)
         state.value = initState
     }
+
+    fun setActionTextClickListener(onClick: () -> Unit) {
+        val initState = state.value.copy(onClickActionText = onClick)
+        state.value = initState
+    }
+
+    fun setActionIconClickListener(onClick: () -> Unit) {
+        val initState = state.value.copy(onClickActionIcon = onClick)
+        state.value = initState
+    }
+
+    fun setDrawableStartClickListener(onClick: () -> Unit) {
+        val initState = state.value.copy(onClickDrawableStart = onClick)
+        state.value = initState
+    }
+
+    fun setDrawableEndClickListener(onClick: () -> Unit) {
+        val initState = state.value.copy(onClickDrawableEnd = onClick)
+        state.value = initState
+    }
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseInputField);
         try {
@@ -97,7 +122,8 @@ abstract class BaseInputField @JvmOverloads constructor(
             )
             setActionDrawable(typedArray.getResourceId(R.styleable.BaseInputField_actionImage, 0))
             val defColor = ContextCompat.getColor(context, R.color.black)
-            val color = typedArray.getResourceId(R.styleable.BaseInputField_drawableTintColor, defColor)
+            val color =
+                typedArray.getResourceId(R.styleable.BaseInputField_drawableTintColor, defColor)
             setDrawableTint(color)
         } finally {
             typedArray.recycle()
@@ -115,5 +141,9 @@ data class InputFieldState(
     val helperText: String,
     val text: String,
     val label: String,
-    @ColorRes val iconTint: Int
+    @ColorRes val iconTint: Int,
+    val onClickActionText: () -> Unit,
+    val onClickActionIcon: () -> Unit,
+    val onClickDrawableStart: () -> Unit,
+    val onClickDrawableEnd: () -> Unit,
 )

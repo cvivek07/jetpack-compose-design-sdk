@@ -4,9 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.buttons.ComposableButtonOutlined
 
 class OutlinedInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -18,7 +15,7 @@ class OutlinedInputField @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
 
-        OutlinedIxiInputField(
+        OutlinedInputField(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,
             drawableStart = state.value.drawableStart,

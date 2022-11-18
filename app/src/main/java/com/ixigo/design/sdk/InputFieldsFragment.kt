@@ -36,6 +36,9 @@ class InputFieldsFragment : Fragment() {
             setDrawableTint(R.color.b700)
             setMaxCharCount(10)
             setText("ViVel")
+            setActionTextClickListener { "Action Text Click".toToast(this.context) }
+            setDrawableStartClickListener { "DrawableStart Click".toToast(this.context) }
+            setDrawableEndClickListener { "DrawableEnd Click".toToast(this.context) }
         }
 
     }
