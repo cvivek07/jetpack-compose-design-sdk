@@ -7,6 +7,14 @@
 
     <com.ixigo.design_sdk.components.input_fields.OutlinedInputField
         android:id="@+id/inputField1"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="8dp"/>
+    <com.ixigo.design_sdk.components.input_fields.LinedInputField
+        android:id="@+id/inputField2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
 </LinearLayout>

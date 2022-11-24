@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.buttons.shapes
+package com.ixigo.design_sdk.components.buttons.styles
 
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.shape.CornerSize

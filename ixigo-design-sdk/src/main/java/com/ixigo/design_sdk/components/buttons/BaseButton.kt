@@ -7,9 +7,9 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.buttons.shapes.ButtonShapes
-import com.ixigo.design_sdk.components.buttons.shapes.ButtonStyles
-import com.ixigo.design_sdk.components.buttons.shapes.ComponentStyle
+import com.ixigo.design_sdk.components.buttons.styles.ButtonShapes
+import com.ixigo.design_sdk.components.buttons.styles.ButtonStyles
+import com.ixigo.design_sdk.components.buttons.styles.ComponentStyle
 import com.ixigo.design_sdk.components.styles.ComponentTextStyle
 
 abstract class BaseButton @JvmOverloads constructor(

@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 
-class OutlinedInputField @JvmOverloads constructor(
+class LinedInputField  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseInputField(context, attrs, defStyleAttr) {
 
@@ -15,7 +15,7 @@ class OutlinedInputField @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
 
-        OutlinedInputField(
+        LinedInputField(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,
             drawableStart = state.value.drawableStart,

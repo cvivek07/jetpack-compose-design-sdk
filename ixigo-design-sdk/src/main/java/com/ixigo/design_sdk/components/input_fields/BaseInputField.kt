@@ -28,7 +28,8 @@ abstract class BaseInputField @JvmOverloads constructor(
             onClickActionIcon = {},
             onClickActionText = {},
             onClickDrawableEnd = {},
-            onClickDrawableStart = {}
+            onClickDrawableStart = {},
+            onTextChange = {}
         )
     )
 
@@ -102,6 +103,7 @@ abstract class BaseInputField @JvmOverloads constructor(
         val initState = state.value.copy(onClickDrawableEnd = onClick)
         state.value = initState
     }
+
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseInputField);
         try {
@@ -146,4 +148,5 @@ data class InputFieldState(
     val onClickActionIcon: () -> Unit,
     val onClickDrawableStart: () -> Unit,
     val onClickDrawableEnd: () -> Unit,
+    val onTextChange: (String) -> Unit,
 )

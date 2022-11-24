@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
-import com.ixigo.design_sdk.components.buttons.shapes.ButtonStyles
+import com.ixigo.design_sdk.components.buttons.styles.ButtonStyles
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
