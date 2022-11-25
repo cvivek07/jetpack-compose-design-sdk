@@ -94,7 +94,7 @@ internal fun ComposableTextButton(
 }
 
 @Composable
-fun ComposableButtonOutlined(
+internal fun ComposableButtonOutlined(
     text: String = "",
     colors: Colors,
     shapes: Shapes,
@@ -199,6 +199,6 @@ private fun DrawComponents(
 
 @Preview(showBackground = true)
 @Composable
-fun ComposablePreview() {
+private fun ComposablePreview() {
 
 }

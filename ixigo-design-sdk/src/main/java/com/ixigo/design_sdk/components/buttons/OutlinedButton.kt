@@ -10,7 +10,7 @@ import com.ixigo.design_sdk.components.buttons.styles.Colors
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
 import com.ixigo.design_sdk.components.buttons.styles.Sizes
 
-class OutlinedIxigoButton @JvmOverloads constructor(
+class OutlinedButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

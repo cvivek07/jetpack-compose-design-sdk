@@ -126,5 +126,3 @@ private class BottomShape(private val radius: Dp = 8.dp) : Shape {
         return Outline.Generic(path)
     }
 }
-
-class RegularShape

@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedIxigoButton
+                <com.ixigo.design_sdk.components.buttons.OutlinedButton
                     android:id="@+id/button_sixth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedIxigoButton
+                <com.ixigo.design_sdk.components.buttons.OutlinedButton
                     android:id="@+id/button_seven"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedIxigoButton
+                <com.ixigo.design_sdk.components.buttons.OutlinedButton
                     android:id="@+id/button_eight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -105,7 +105,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedIxigoButton
+                <com.ixigo.design_sdk.components.buttons.OutlinedButton
                     android:id="@+id/button_nine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

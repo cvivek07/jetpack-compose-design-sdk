@@ -8,7 +8,7 @@ import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
 import com.ixigo.design_sdk.components.buttons.styles.*
 
-internal abstract class BaseButton @JvmOverloads constructor(
+abstract class BaseButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

@@ -24,7 +24,7 @@ class ButtonsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentButtonsBinding.inflate(inflater, container, false)
         return binding.root
@@ -59,7 +59,7 @@ class ButtonsFragment : Fragment() {
             context?.let { it1 -> "Button4 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonFifth.setStyle(Shapes.TrailingShape, Colors.Warning, Sizes.XLarge)
+        binding.buttonFifth.setStyle(Shapes.TrailingShape, Colors.Warning, Sizes.Small)
         binding.buttonFifth.setClickListener {
             context?.let { it1 -> "Button5 Clicked Change".toToast(it1) }
         }
@@ -70,6 +70,7 @@ class ButtonsFragment : Fragment() {
         }
 
         binding.buttonSeven.isEnabled = false
+        binding.buttonSeven.setStyle(Shapes.RegularShape, Colors.Extension, Sizes.Small)
         binding.buttonFifth.setClickListener {
             context?.let { it1 -> "Button5 Clicked Change".toToast(it1) }
             binding.buttonSeven.isEnabled = !binding.buttonSeven.isEnabled
@@ -77,6 +78,7 @@ class ButtonsFragment : Fragment() {
 
         binding.buttonEleven.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonEleven.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
+        binding.buttonEleven.setStyle(Colors.Extension, Sizes.Large)
         binding.buttonEleven.setClickListener {
             context?.let { it1 -> "Button11 Clicked Change".toToast(it1) }
             binding.buttonTen.isEnabled = !binding.buttonTen.isEnabled
