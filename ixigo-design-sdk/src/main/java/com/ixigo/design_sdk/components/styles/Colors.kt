@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.buttons.styles
+package com.ixigo.design_sdk.components.styles
 
 import androidx.annotation.ColorRes
 import com.ixigo.design.sdk.R

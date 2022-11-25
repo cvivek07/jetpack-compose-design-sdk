@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.buttons.base.BaseButton
 import com.ixigo.design_sdk.components.buttons.composable.ComposableButton
-import com.ixigo.design_sdk.components.buttons.styles.Colors
+import com.ixigo.design_sdk.components.styles.Colors
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
 import com.ixigo.design_sdk.components.buttons.styles.Sizes
 

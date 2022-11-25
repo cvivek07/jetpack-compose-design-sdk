@@ -7,6 +7,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
 import com.ixigo.design_sdk.components.buttons.styles.*
+import com.ixigo.design_sdk.components.styles.Colors
 
 abstract class BaseButton @JvmOverloads constructor(
     context: Context,

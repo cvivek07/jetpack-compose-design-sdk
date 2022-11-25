@@ -23,8 +23,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.ixigo.design_sdk.components.buttons.styles.Colors
+import com.ixigo.design_sdk.components.styles.Colors
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
 import com.ixigo.design_sdk.components.buttons.styles.Sizes
 import com.ixigo.design_sdk.components.styles.IxiFamily

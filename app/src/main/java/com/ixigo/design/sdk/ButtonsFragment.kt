@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
-import com.ixigo.design_sdk.components.buttons.styles.Colors
+import com.ixigo.design_sdk.components.styles.Colors
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
 import com.ixigo.design_sdk.components.buttons.styles.Sizes
 
