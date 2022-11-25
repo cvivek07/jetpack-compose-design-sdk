@@ -19,7 +19,7 @@
         android:padding="10dp"
         tools:context=".ButtonsFragment">
 
-                <com.ixigo.design_sdk.components.buttons.SolidIxigoButton
+                <com.ixigo.design_sdk.components.buttons.PrimaryButton
                     android:id="@+id/button_first"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -30,9 +30,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.SolidIxigoButton
+                <com.ixigo.design_sdk.components.buttons.PrimaryButton
                     android:id="@+id/button_second"
-                    android:layout_width="200dp"
+                    android:layout_width="wrap_content"
                     android:drawableStart = "@drawable/ic_call_24"
                     android:layout_height="wrap_content" />
 
@@ -40,7 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.SolidIxigoButton
+                <com.ixigo.design_sdk.components.buttons.PrimaryButton
                     android:id="@+id/button_third"
                     android:layout_width="wrap_content"
                     android:drawableEnd = "@drawable/ic_call_24"
@@ -50,7 +50,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.SolidIxigoButton
+                <com.ixigo.design_sdk.components.buttons.PrimaryButton
                     android:id="@+id/button_fourth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -61,7 +61,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.SolidIxigoButton
+                <com.ixigo.design_sdk.components.buttons.PrimaryButton
                     android:id="@+id/button_fifth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -111,5 +111,29 @@
                     android:layout_height="wrap_content"
                     android:text="Button"
                     app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+            android:id="@+id/button_ten"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 10"
+            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+            android:id="@+id/button_eleven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button 11"
+            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+
+
     </LinearLayout>
 </ScrollView>
