@@ -157,7 +157,6 @@ private fun DrawComponents(
         fontFamily = IxiFamily,
         fontWeight = FontWeight.Medium,
         fontStyle = FontStyle.Normal,
-        letterSpacing = 3.sp,
     )
 
     val textComposable = @Composable {

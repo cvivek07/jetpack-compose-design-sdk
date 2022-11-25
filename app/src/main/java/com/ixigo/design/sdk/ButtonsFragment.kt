@@ -84,6 +84,7 @@ class ButtonsFragment : Fragment() {
             binding.buttonTen.isEnabled = !binding.buttonTen.isEnabled
         }
 
+        binding.buttonEight.setStyle(Shapes.BottomShape, Colors.Error, Sizes.Large)
         binding.buttonTen.setClickListener {
             context?.let { it1 -> "Button10 Clicked Change".toToast(it1) }
         }
