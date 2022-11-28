@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.buttons.base.BaseButton
 import com.ixigo.design_sdk.components.buttons.composable.ComposableTextButton
-import com.ixigo.design_sdk.components.buttons.styles.Colors
+import com.ixigo.design_sdk.components.styles.IxiColor
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
 import com.ixigo.design_sdk.components.buttons.styles.Sizes
 
@@ -16,18 +16,18 @@ class TertiaryButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseButton(context, attrs, defStyleAttr) {
 
-    private fun mapTertiaryStyle(colors: Colors) = when (colors) {
-        Colors.Blue -> Colors.BlueTertiary
-        Colors.Disabled -> Colors.Disabled
-        Colors.Error -> Colors.ErrorTertiary
-        Colors.Extension -> Colors.ExtensionTertiary
-        Colors.Orange -> Colors.OrangeTertiary
-        Colors.Success -> Colors.SuccessTertiary
-        Colors.Warning -> Colors.WarningTertiary
-        else -> Colors.OrangeTertiary
+    private fun mapTertiaryStyle(colors: IxiColor) = when (colors) {
+        IxiColor.Blue -> IxiColor.BlueTertiary
+        IxiColor.Disabled -> IxiColor.Disabled
+        IxiColor.Error -> IxiColor.ErrorTertiary
+        IxiColor.Extension -> IxiColor.ExtensionTertiary
+        IxiColor.Orange -> IxiColor.OrangeTertiary
+        IxiColor.Success -> IxiColor.SuccessTertiary
+        IxiColor.Warning -> IxiColor.WarningTertiary
+        else -> IxiColor.OrangeTertiary
     }
 
-    fun setStyle(colors: Colors, sizes: Sizes) {
+    fun setStyle(colors: IxiColor, sizes: Sizes) {
         super.setStyle(Shapes.RegularShape, colors, sizes)
     }
 

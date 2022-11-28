@@ -23,8 +23,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.ixigo.design_sdk.components.buttons.styles.Colors
+import com.ixigo.design_sdk.components.styles.IxiColor
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
 import com.ixigo.design_sdk.components.buttons.styles.Sizes
 import com.ixigo.design_sdk.components.styles.IxiFamily
@@ -32,7 +31,7 @@ import com.ixigo.design_sdk.components.styles.IxiFamily
 @Composable
 internal fun ComposableButton(
     text: String = "",
-    colors: Colors,
+    colors: IxiColor,
     shapes: Shapes,
     sizes: Sizes,
     isEnabled: Boolean = true,
@@ -44,11 +43,11 @@ internal fun ComposableButton(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val enabledBgColor = if (isPressed) colors.pressedColor else colors.bgColor
-    val bgColor = if (isEnabled) enabledBgColor else Colors.Disabled.bgColor
+    val bgColor = if (isEnabled) enabledBgColor else IxiColor.Disabled.bgColor
 
 
     val paddingValues = createPaddingValues(sizes)
-    val textColor = if (isEnabled) colors.textColor else Colors.Disabled.textColor
+    val textColor = if (isEnabled) colors.textColor else IxiColor.Disabled.textColor
 
     Button(
         onClick = onClick,
@@ -70,7 +69,7 @@ internal fun ComposableButton(
 @Composable
 internal fun ComposableTextButton(
     text: String = "",
-    colors: Colors,
+    colors: IxiColor,
     sizes: Sizes,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
@@ -80,7 +79,7 @@ internal fun ComposableTextButton(
 
 
     val paddingValues = createPaddingValues(sizes)
-    val textColor = if (isEnabled) colors.textColor else Colors.Disabled.textColor
+    val textColor = if (isEnabled) colors.textColor else IxiColor.Disabled.textColor
 
     TextButton(
         onClick = onClick,
@@ -96,7 +95,7 @@ internal fun ComposableTextButton(
 @Composable
 internal fun ComposableButtonOutlined(
     text: String = "",
-    colors: Colors,
+    colors: IxiColor,
     shapes: Shapes,
     sizes: Sizes,
     isEnabled: Boolean = true,
@@ -108,10 +107,10 @@ internal fun ComposableButtonOutlined(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val enabledBorderColor = if (isPressed) colors.pressedColor else colors.bgColor
-    val borderColor = if (isEnabled) enabledBorderColor else Colors.Disabled.bgColor
+    val borderColor = if (isEnabled) enabledBorderColor else IxiColor.Disabled.bgColor
 
     val paddingValues = createPaddingValues(sizes)
-    val textColor = if (isEnabled) colors.bgColor else Colors.Disabled.textColor
+    val textColor = if (isEnabled) colors.bgColor else IxiColor.Disabled.textColor
 
     OutlinedButton(
         onClick = onClick,
