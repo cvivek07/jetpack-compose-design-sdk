@@ -39,7 +39,7 @@ abstract class BaseButton @JvmOverloads constructor(
         state.value = inState.copy(text = text)
     }
 
-    protected open fun setStyle(shapes: Shapes, colors: IxiColor, sizes: Sizes) {
+    protected open fun setStyle(shapes: Shapes, colors: IxiColor, sizes: ButtonSize) {
         val initState = state.value
         state.value = initState.copy(shapes = shapes, colors = colors, sizes = sizes)
     }
@@ -92,7 +92,7 @@ data class ButtonState(
     val text: String = "",
     val colors: IxiColor = IxiColor.Orange,
     val shapes: Shapes = Shapes.RegularShape,
-    val sizes: Sizes = Sizes.Large,
+    val sizes: ButtonSize = ButtonSize.Large,
     val isEnabled: Boolean = true,
     val onClick: () -> Unit = {}
 )

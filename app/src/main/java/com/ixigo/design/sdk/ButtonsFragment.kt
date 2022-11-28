@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
 import com.ixigo.design_sdk.components.styles.IxiColor
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
-import com.ixigo.design_sdk.components.buttons.styles.Sizes
+import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -36,41 +36,41 @@ class ButtonsFragment : Fragment() {
         binding.buttonFirst.setText("Button 1")
         binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setStartImageDrawable(R.drawable.ic_call_24)
-        binding.buttonFirst.setStyle(Shapes.RegularShape, IxiColor.Orange, Sizes.Large)
+        binding.buttonFirst.setStyle(Shapes.RegularShape, IxiColor.Orange, ButtonSize.Large)
         binding.buttonFirst.setClickListener {
             context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }
         }
 
         binding.buttonSecond.setText("Button 2")
-        binding.buttonSecond.setStyle(Shapes.BottomShape, IxiColor.Blue, Sizes.Large)
+        binding.buttonSecond.setStyle(Shapes.BottomShape, IxiColor.Blue, ButtonSize.Large)
         binding.buttonSecond.setClickListener {
             context?.let { it1 -> "Button2 Clicked Change".toToast(it1) }
         }
 
         binding.buttonThird.setText("Button 3")
-        binding.buttonThird.setStyle(Shapes.LeadingShape, IxiColor.Error, Sizes.XXLarge)
+        binding.buttonThird.setStyle(Shapes.LeadingShape, IxiColor.Error, ButtonSize.XXLarge)
         binding.buttonThird.setClickListener {
             context?.let { it1 -> "Button3 Clicked Change".toToast(it1) }
             binding.buttonFourth.isEnabled = !binding.buttonFourth.isEnabled
         }
 
-        binding.buttonFourth.setStyle(Shapes.TrailingShape, IxiColor.Success, Sizes.XLarge)
+        binding.buttonFourth.setStyle(Shapes.TrailingShape, IxiColor.Success, ButtonSize.XLarge)
         binding.buttonFourth.setClickListener {
             context?.let { it1 -> "Button4 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonFifth.setStyle(Shapes.TrailingShape, IxiColor.Warning, Sizes.Small)
+        binding.buttonFifth.setStyle(Shapes.TrailingShape, IxiColor.Warning, ButtonSize.Small)
         binding.buttonFifth.setClickListener {
             context?.let { it1 -> "Button5 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonSixth.setStyle(Shapes.RegularShape, IxiColor.Extension, Sizes.Medium)
+        binding.buttonSixth.setStyle(Shapes.RegularShape, IxiColor.Extension, ButtonSize.Medium)
         binding.buttonSixth.setClickListener {
             context?.let { it1 -> "Button6 Clicked Change".toToast(it1) }
         }
 
         binding.buttonSeven.isEnabled = false
-        binding.buttonSeven.setStyle(Shapes.RegularShape, IxiColor.Extension, Sizes.Small)
+        binding.buttonSeven.setStyle(Shapes.RegularShape, IxiColor.Extension, ButtonSize.Small)
         binding.buttonFifth.setClickListener {
             context?.let { it1 -> "Button5 Clicked Change".toToast(it1) }
             binding.buttonSeven.isEnabled = !binding.buttonSeven.isEnabled
@@ -78,13 +78,13 @@ class ButtonsFragment : Fragment() {
 
         binding.buttonEleven.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonEleven.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
-        binding.buttonEleven.setStyle(IxiColor.Extension, Sizes.Large)
+        binding.buttonEleven.setStyle(IxiColor.Extension, ButtonSize.Large)
         binding.buttonEleven.setClickListener {
             context?.let { it1 -> "Button11 Clicked Change".toToast(it1) }
             binding.buttonTen.isEnabled = !binding.buttonTen.isEnabled
         }
 
-        binding.buttonEight.setStyle(Shapes.BottomShape, IxiColor.Error, Sizes.Large)
+        binding.buttonEight.setStyle(Shapes.BottomShape, IxiColor.Error, ButtonSize.Large)
         binding.buttonTen.setClickListener {
             context?.let { it1 -> "Button10 Clicked Change".toToast(it1) }
         }

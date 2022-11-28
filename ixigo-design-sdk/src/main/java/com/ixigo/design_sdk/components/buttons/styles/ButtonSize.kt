@@ -1,5 +1,6 @@
 package com.ixigo.design_sdk.components.buttons.styles
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -11,50 +12,30 @@ data class ComponentPadding(
     val endPadding: Dp,
     val bottomPadding: Dp
 )
-sealed class Sizes(val padding: ComponentPadding, val textSize: TextUnit) {
 
-    object Small : Sizes(
-        ComponentPadding(
-            startPadding = 8.dp,
-            endPadding = 8.dp,
-            topPadding = 6.dp,
-            bottomPadding = 6.dp
-        ), 14.sp
+sealed class ButtonSize(
+    val height: Dp,
+    val textSize: TextUnit,
+    val horizontalPadding: PaddingValues
+) {
+
+    object Small : ButtonSize(
+        height = 30.dp, textSize = 14.sp, horizontalPadding = PaddingValues(horizontal = 10.dp)
     )
 
-    object Medium : Sizes(
-        ComponentPadding(
-            startPadding = 12.dp,
-            endPadding = 12.dp,
-            topPadding = 9.dp,
-            bottomPadding = 9.dp
-        ), 16.sp
+    object Medium : ButtonSize(
+        height = 40.dp, textSize = 16.sp, horizontalPadding = PaddingValues(horizontal = 10.dp)
     )
 
-    object Large : Sizes(
-        ComponentPadding(
-            startPadding = 16.dp,
-            endPadding = 16.dp,
-            topPadding = 14.dp,
-            bottomPadding = 14.dp
-        ), 18.sp
+    object Large : ButtonSize(
+        height = 50.dp, textSize = 18.sp, horizontalPadding = PaddingValues(horizontal = 15.dp)
     )
 
-    object XLarge : Sizes(
-        ComponentPadding(
-            startPadding = 20.dp,
-            endPadding = 20.dp,
-            topPadding = 16.dp,
-            bottomPadding = 16.dp
-        ), 24.sp
+    object XLarge : ButtonSize(
+        height = 56.dp, textSize = 24.sp, horizontalPadding = PaddingValues(horizontal = 20.dp)
     )
 
-    object XXLarge : Sizes(
-        ComponentPadding(
-            startPadding = 32.dp,
-            endPadding = 32.dp,
-            topPadding = 32.dp,
-            bottomPadding = 32.dp
-        ), 24.sp
+    object XXLarge : ButtonSize(
+        height = 90.dp, textSize = 24.sp, horizontalPadding = PaddingValues(horizontal = 30.dp)
     )
 }

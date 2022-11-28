@@ -8,7 +8,7 @@ import com.ixigo.design_sdk.components.buttons.base.BaseButton
 import com.ixigo.design_sdk.components.buttons.composable.ComposableTextButton
 import com.ixigo.design_sdk.components.styles.IxiColor
 import com.ixigo.design_sdk.components.buttons.styles.Shapes
-import com.ixigo.design_sdk.components.buttons.styles.Sizes
+import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 
 class TertiaryButton @JvmOverloads constructor(
     context: Context,
@@ -27,7 +27,7 @@ class TertiaryButton @JvmOverloads constructor(
         else -> IxiColor.OrangeTertiary
     }
 
-    fun setStyle(colors: IxiColor, sizes: Sizes) {
+    fun setStyle(colors: IxiColor, sizes: ButtonSize) {
         super.setStyle(Shapes.RegularShape, colors, sizes)
     }
 
