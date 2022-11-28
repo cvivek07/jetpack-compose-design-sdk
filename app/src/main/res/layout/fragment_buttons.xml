@@ -22,8 +22,7 @@
                 <com.ixigo.design_sdk.components.buttons.PrimaryButton
                     android:id="@+id/button_first"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ixi_button_style="o700NormalTrailingShapeRadius" />
+                    android:layout_height="wrap_content" />
 
 
                 <Space
@@ -54,8 +53,7 @@
                     android:id="@+id/button_fourth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button four"
-                    app:ixi_button_style="b700XXlargeBottomShapeRadiusDisabled" />
+                    android:text="Button four" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -65,8 +63,7 @@
                     android:id="@+id/button_fifth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="5"
-                    app:ixi_button_style="b700NormalRegularShapeRadius" />
+                    android:text="5" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -76,8 +73,7 @@
                     android:id="@+id/button_sixth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="6"
-                    app:ixi_button_style="b700NormalRegularShapeRadiusOutlined" />
+                    android:text="6" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -87,8 +83,7 @@
                     android:id="@+id/button_seven"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="7"
-                    app:ixi_button_style="b700NormalLeadingShapeRadiusOutlined" />
+                    android:text="7" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -98,8 +93,7 @@
                     android:id="@+id/button_eight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8"
-                    app:ixi_button_style="b700NormalTrailingShapeRadiusOutlined" />
+                    android:text="8" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -109,8 +103,7 @@
                     android:id="@+id/button_nine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Button"
-                    app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+                    android:text="Button" />
 
         <Space
             android:layout_width="match_parent"
@@ -120,8 +113,7 @@
             android:id="@+id/button_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button 10"
-            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+            android:text="Button 10" />
 
         <Space
             android:layout_width="match_parent"
@@ -131,8 +123,7 @@
             android:id="@+id/button_eleven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button 11"
-            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+            android:text="Button 11" />
 
 
     </LinearLayout>

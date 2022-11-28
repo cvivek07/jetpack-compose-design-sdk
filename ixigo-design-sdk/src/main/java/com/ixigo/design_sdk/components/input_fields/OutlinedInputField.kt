@@ -4,6 +4,8 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import com.ixigo.design_sdk.components.input_fields.base.BaseInputField
+import com.ixigo.design_sdk.components.input_fields.composables.OutlinedInputField
 
 class OutlinedInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -28,7 +30,8 @@ class OutlinedInputField @JvmOverloads constructor(
             onDrawableEndClick = state.value.onClickDrawableEnd,
             onActionTextClick = state.value.onClickActionText,
             onActionIconClick = state.value.onClickActionIcon,
-            onTextChange = state.value.onTextChange
+            onTextChange = state.value.onTextChange,
+            colors = state.value.color
         )
 
     }

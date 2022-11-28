@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.input_fields
+package com.ixigo.design_sdk.components.input_fields.base
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
+import com.ixigo.design_sdk.components.styles.Colors
 
 abstract class BaseInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -29,7 +30,8 @@ abstract class BaseInputField @JvmOverloads constructor(
             onClickActionText = {},
             onClickDrawableEnd = {},
             onClickDrawableStart = {},
-            onTextChange = {}
+            onTextChange = {},
+            color = Colors.Orange
         )
     )
 
@@ -58,6 +60,11 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState
     }
 
+    fun setColor(color: Colors) {
+        val initState = state.value.copy(color = color)
+        state.value = initState
+    }
+
 
     protected fun setActualCharCountText(text: String) {
         val initState = state.value.copy(actionText = text)
@@ -76,11 +83,6 @@ abstract class BaseInputField @JvmOverloads constructor(
 
     fun setActionDrawable(@DrawableRes imageRes: Int) {
         val initState = state.value.copy(actionImage = imageRes)
-        state.value = initState
-    }
-
-    fun setDrawableTint(@ColorRes tintColor: Int) {
-        val initState = state.value.copy(iconTint = tintColor)
         state.value = initState
     }
 
@@ -111,7 +113,7 @@ abstract class BaseInputField @JvmOverloads constructor(
             setHelperText(typedArray.getString(R.styleable.BaseInputField_helperText) ?: "")
             setActionText(typedArray.getString(R.styleable.BaseInputField_actionText) ?: "")
             setLabel(typedArray.getString(R.styleable.BaseInputField_label) ?: "")
-            setMaxCharCount(typedArray.getInt(R.styleable.BaseInputField_maxCharCount, 0))
+            setMaxCharCount(typedArray.getInt(R.styleable.BaseInputField_maxCharCount, Int.MAX_VALUE))
             setActualCharCountText(
                 typedArray.getString(R.styleable.BaseInputField_actualCharCounter) ?: ""
             )
@@ -123,10 +125,6 @@ abstract class BaseInputField @JvmOverloads constructor(
                 typedArray.getResourceId(R.styleable.BaseInputField_android_drawableStart, 0)
             )
             setActionDrawable(typedArray.getResourceId(R.styleable.BaseInputField_actionImage, 0))
-            val defColor = ContextCompat.getColor(context, R.color.black)
-            val color =
-                typedArray.getResourceId(R.styleable.BaseInputField_drawableTintColor, defColor)
-            setDrawableTint(color)
         } finally {
             typedArray.recycle()
         }
@@ -134,6 +132,7 @@ abstract class BaseInputField @JvmOverloads constructor(
 }
 
 data class InputFieldState(
+    val color: Colors,
     @DrawableRes val actionImage: Int,
     @DrawableRes val drawableStart: Int,
     @DrawableRes val drawableEnd: Int,

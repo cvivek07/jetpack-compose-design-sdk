@@ -1,12 +1,15 @@
-package com.ixigo.design_sdk.components.input_fields
+package com.ixigo.design_sdk.components.input_fields.composables
 
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -15,6 +18,9 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
+import com.ixigo.design_sdk.components.styles.Colors
+
+private val unFocusColor = R.color.n100
 
 @Composable
 fun OutlinedInputField(
@@ -27,29 +33,29 @@ fun OutlinedInputField(
     text: String = "",
     label: String = "",
     hint: String = "",
-    tintColor: Int = R.color.black,
+    tint: Int = 0,
+    colors: Colors = Colors.Orange,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
     onTextChange: (String) -> Unit
 ) {
+
     val trailingIcons = getTrailingActions(
         actionText,
         onActionTextClick,
         drawableEnd,
         onDrawableEndClick,
-        tintColor,
         actionImage,
-        onActionIconClick
+        onActionIconClick,
     )
 
-    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick, tintColor)
-
-    val placeHolder = getPlaceHolder(hint)
+    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick, )
 
     val labelComposable = getPlaceHolder(label)
     val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
+
     Column(Modifier.width(IntrinsicSize.Min)) {
         OutlinedTextField(
             value = textValue.value,
@@ -59,30 +65,41 @@ fun OutlinedInputField(
                 onTextChange(it.text)
             },
             label = labelComposable,
-            placeholder = placeHolder,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcons,
-            maxLines = 1,
+            singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            colors = getInputFieldColors(colors),
+//            tint = tint
         )
         GetBottomText(helperText, maxCharCount, textValue)
     }
 }
 
-@OptIn(ExperimentalMaterialApi::class)
+@Composable
+private fun getInputFieldColors(colors: Colors) =
+    TextFieldDefaults.outlinedTextFieldColors(
+        focusedBorderColor = colorResource(id = colors.bgColor),
+        unfocusedBorderColor = colorResource(id = unFocusColor),
+        textColor = colorResource(id = R.color.n800),
+        cursorColor = colorResource(id = colors.bgColor),
+        focusedLabelColor = colorResource(id = colors.bgColor),
+        unfocusedLabelColor = colorResource(id = R.color.n800)
+    )
+
 @Composable
 fun LinedInputField(
     actionImage: Int = 0,
     drawableStart: Int = 0,
     drawableEnd: Int = 0,
-    maxCharCount: Int = 0,
+    maxCharCount: Int = Int.MAX_VALUE,
     actionText: String? = "",
     helperText: String = "",
     text: String = "",
     label: String = "",
     hint: String = "",
-    tintColor: Int = R.color.black,
+    colors: Colors = Colors.Orange,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
@@ -94,14 +111,11 @@ fun LinedInputField(
         onActionTextClick,
         drawableEnd,
         onDrawableEndClick,
-        tintColor,
         actionImage,
         onActionIconClick
     )
 
-    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick, tintColor)
-
-    val placeHolder = getPlaceHolder(hint)
+    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
 
     val labelComposable = getPlaceHolder(label)
     val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
@@ -116,18 +130,13 @@ fun LinedInputField(
             },
 
             label = labelComposable,
-            placeholder = placeHolder,
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcons,
-            maxLines = 1,
+            singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
             modifier = Modifier.padding(0.dp),
-            colors = TextFieldDefaults.textFieldColors(
-                backgroundColor = Color.Transparent,
-            ),
-
-            )
-
+            colors = getInputFieldColors(colors = colors)
+        )
 
         GetBottomText(helperText, maxCharCount, textValue)
     }
@@ -151,7 +160,7 @@ private fun GetBottomText(
         if (helperText.isNotEmpty() || maxCharCountText.isNotEmpty()) {
             Spacer(modifier = Modifier.weight(1f))
         }
-        if (maxCharCountText.isNotEmpty()) {
+        if (maxCharCountText.isNotEmpty() && maxCharCount != Int.MAX_VALUE) {
             Text(text = "${textValue.value.text.length} / $maxCharCountText")
         }
     }
@@ -171,7 +180,6 @@ private fun getPlaceHolder(hint: String): @Composable () -> Unit {
 private fun getLeadingAction(
     drawableStart: Int,
     onDrawableStartClick: () -> Unit,
-    tintColor: Int
 ): (@Composable () -> Unit)? {
     return if (drawableStart != 0) {
         @Composable {
@@ -179,7 +187,6 @@ private fun getLeadingAction(
                 Image(
                     painter = painterResource(id = drawableStart),
                     contentDescription = stringResource(id = R.string.outlined_input_drawable_end_des),
-                    colorFilter = ColorFilter.tint(colorResource(id = tintColor)),
                     modifier = Modifier.padding(2.dp)
                 )
             }
@@ -195,18 +202,25 @@ private fun getTrailingActions(
     onActionTextClick: () -> Unit,
     drawableEnd: Int,
     onDrawableEndClick: () -> Unit,
-    tintColor: Int,
     actionImage: Int,
-    onActionIconClick: () -> Unit
-): (@Composable () -> Unit) {
+    onActionIconClick: () -> Unit,
+): (@Composable () -> Unit)? {
+    if (actionText.isNullOrBlank() && drawableEnd == 0 && actionImage == 0) {
+        return null
+    }
+
     val trailingIcons = @Composable {
-        Row(verticalAlignment = Alignment.CenterVertically) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier.wrapContentWidth()
+        ) {
             if (!actionText.isNullOrBlank()) {
                 TextButton(onClick = onActionTextClick) {
                     Text(
                         text = actionText,
                         modifier = Modifier
-                            .padding(2.dp)
+                            .padding(2.dp),
+                        color = colorResource(id = R.color.n600)
                     )
                 }
             }
@@ -217,7 +231,7 @@ private fun getTrailingActions(
                             .padding(2.dp),
                         painter = painterResource(id = drawableEnd),
                         contentDescription = stringResource(id = R.string.outlined_input_drawable_end_des),
-                        colorFilter = ColorFilter.tint(colorResource(id = tintColor))
+//                        colorFilter = ColorFilter.tint(colorResource(id = drawableTint)),
                     )
                 }
             }
@@ -226,9 +240,8 @@ private fun getTrailingActions(
                     Image(
                         painter = painterResource(id = drawableEnd),
                         contentDescription = stringResource(id = R.string.outlined_input_drawable_end_des),
-                        colorFilter = ColorFilter.tint(colorResource(id = tintColor)),
-                        modifier = Modifier
-                            .padding(2.dp)
+                        modifier = Modifier.padding(2.dp),
+//                        colorFilter = ColorFilter.tint(colorResource(id = drawableTint)),
                     )
                 }
             }

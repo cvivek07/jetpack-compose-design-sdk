@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -40,14 +39,14 @@ class ComponentsFragment : Fragment() {
         return ComposeView(requireContext()).apply {
             setContent {
                 MaterialTheme {
-                    showList()
+                    ShowList()
                 }
             }
         }
     }
 
     @Composable
-    fun showList() {
+    fun ShowList() {
         LazyColumn(modifier = Modifier.fillMaxHeight()) {
             items(items = componentList) {
                 Box(
