@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_ComponentFragment_to_inputFieldFragment"
             app:destination="@id/inputFieldsFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_separatorFragment"
+            app:destination="@id/separatorFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -35,5 +38,12 @@
         android:name="com.ixigo.design.sdk.InputFieldsFragment"
         android:label="@string/input_fields"
         tools:layout="@layout/fragment_input_fields">
+    </fragment>
+
+    <fragment
+        android:id="@+id/separatorFragment"
+        android:name="com.ixigo.design.sdk.SeparatorFragment"
+        android:label="@string/separator"
+        tools:layout="@layout/fragment_separator">
     </fragment>
 </navigation>

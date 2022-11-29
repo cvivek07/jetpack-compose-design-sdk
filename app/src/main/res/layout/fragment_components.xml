@@ -19,4 +19,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/input_fields" />
+
+    <Button
+        android:id="@+id/separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/separator" />
 </LinearLayout>

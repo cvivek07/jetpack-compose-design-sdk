@@ -1,10 +1,10 @@
 package com.ixigo.design.sdk
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.ixigo.design.sdk.databinding.FragmentComponentsBinding
 
@@ -36,6 +36,9 @@ class ComponentsFragment : Fragment() {
         }
         binding.inputFields.setOnClickListener {
             findNavController().navigate(R.id.action_ComponentFragment_to_inputFieldFragment)
+        }
+        binding.separator.setOnClickListener {
+            findNavController().navigate(R.id.action_componentFragment_to_separatorFragment)
         }
     }
 
