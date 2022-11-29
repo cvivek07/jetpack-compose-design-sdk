@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.ixigo.design_sdk.components.styles.IxiColor
 import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
@@ -142,17 +143,17 @@ private fun DrawComponents(
     @DrawableRes endDrawableRes: Int = 0,
     @ColorRes drawableTint: Int = 0,
 ) {
-    ConstraintLayout {
+    ConstraintLayout() {
         val (imageStart, textView, imageEnd) = createRefs()
         var startTextPadding = 0.dp
         var endTextPadding = 0.dp
 
-        if ((startDrawableRes == 0 && endDrawableRes != 0) || startDrawableRes != 0) {
+        if ((startDrawableRes == 0 && endDrawableRes != 0)) {
             // Adding Start Padding as 5dp either Only start drawable is present or
             // Start drawable is not present but End drawable is present
             startTextPadding = 5.dp
         }
-        if ((endDrawableRes == 0 && startDrawableRes != 0) || endDrawableRes != 0) {
+        if ((endDrawableRes == 0 && startDrawableRes != 0)) {
             // Adding End Padding as 5dp either Only End drawable is present or
             // End drawable is not present but Start drawable is present
             endTextPadding = 5.dp
@@ -161,14 +162,31 @@ private fun DrawComponents(
             Image(
                 painter = painterResource(id = startDrawableRes),
                 contentDescription = "Image",
-                modifier = Modifier.constrainAs(imageStart) {
-                    start.linkTo(parent.start)
+                modifier = Modifier.padding(start = 5.dp, end = 5.dp).constrainAs(imageStart) {
+                    start.linkTo(parent.start, margin = 5.dp, goneMargin = 5.dp)
+                    end.linkTo(textView.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 },
                 colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
             )
         }
+
+        if (endDrawableRes != 0) {
+            Image(
+                painter = painterResource(id = endDrawableRes),
+                contentDescription = "Image",
+                modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+                    .constrainAs(imageEnd) {
+                        start.linkTo(textView.end)
+                        end.linkTo(parent.end, 5.dp, 5.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
+                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            )
+        }
+
         Text(
             text = text,
             maxLines=1,
@@ -195,19 +213,8 @@ private fun DrawComponents(
                 fontStyle = FontStyle.Normal,
             ),
         )
-        if (endDrawableRes != 0) {
-            Image(
-                painter = painterResource(id = endDrawableRes),
-                contentDescription = "Image",
-                modifier = Modifier
-                    .constrainAs(imageEnd) {
-                        end.linkTo(parent.end)
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                    },
-                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
-            )
-        }
+        createHorizontalChain(imageStart,  textView, imageEnd, chainStyle = ChainStyle.Packed)
+
     }
 }
 

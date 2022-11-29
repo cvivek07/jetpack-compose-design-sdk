@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.BaseComponent
 import com.ixigo.design_sdk.components.buttons.styles.*

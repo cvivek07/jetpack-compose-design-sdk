@@ -149,7 +149,7 @@
             android:id="@+id/button_fourteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="S T Sm W" />
+            android:text="S T Sm W " />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -158,7 +158,7 @@
             android:id="@+id/button_eleven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tertiary Large Extension"/>
+            android:text="Tertiary Large Extension "/>
 
         <Space
             android:layout_width="match_parent"

@@ -47,7 +47,7 @@ class ButtonsFragment : Fragment() {
             context?.let { it1 -> "Button2 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonThird.setText("Leading Primary XXL")
+        binding.buttonThird.setText("Leading Primary XXLarge Button")
         binding.buttonThird.setStyle(ButtonShape.LeadingShape, IxiColor.Error, ButtonSize.XXLarge)
         binding.buttonThird.setClickListener {
             context?.let { it1 -> "Button3 Clicked Change".toToast(it1) }
@@ -96,7 +96,7 @@ class ButtonsFragment : Fragment() {
         binding.buttonFifteen.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonFifteen.setStyle(IxiColor.Success, ButtonSize.Medium)
         binding.buttonFifteen.setClickListener {
-            context?.let { it1 -> "Button11 Clicked Change".toToast(it1) }
+            context?.let { it1 -> "Button15 Clicked Change".toToast(it1) }
             binding.buttonThirteen.isEnabled = !binding.buttonTen.isEnabled
         }
 
@@ -104,7 +104,7 @@ class ButtonsFragment : Fragment() {
         binding.buttonSixteen.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonSixteen.setStyle(IxiColor.Warning, ButtonSize.XXLarge)
         binding.buttonSixteen.setClickListener {
-            context?.let { it1 -> "Button11 Clicked Change".toToast(it1) }
+            context?.let { it1 -> "Button16 Clicked Change".toToast(it1) }
             binding.buttonFifteen.isEnabled = !binding.buttonTen.isEnabled
         }
 
@@ -113,21 +113,18 @@ class ButtonsFragment : Fragment() {
         binding.buttonTwelve.setStyle(ButtonShape.BottomShape,IxiColor.Error, ButtonSize.Large)
         binding.buttonTwelve.setClickListener {
             context?.let { it1 -> "Button12 Clicked Change".toToast(it1) }
-            binding.buttonTen.isEnabled = !binding.buttonTen.isEnabled
         }
 
         binding.buttonThirteen.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonThirteen.setStyle(ButtonShape.LeadingShape,IxiColor.Success, ButtonSize.Medium)
         binding.buttonThirteen.setClickListener {
             context?.let { it1 -> "Button13 Clicked Change".toToast(it1) }
-            binding.buttonEleven.isEnabled = !binding.buttonTen.isEnabled
         }
 
         binding.buttonFourteen.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonFourteen.setStyle(ButtonShape.TrailingShape,IxiColor.Warning, ButtonSize.Small)
         binding.buttonFourteen.setClickListener {
             context?.let { it1 -> "Button14 Clicked Change".toToast(it1) }
-            binding.buttonEleven.isEnabled = !binding.buttonTen.isEnabled
         }
 
         binding.buttonEight.setStyle(ButtonShape.BottomShape, IxiColor.Error, ButtonSize.Large)
