@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.buttons.base.BaseButton
 import com.ixigo.design_sdk.components.buttons.composable.ComposableButton
 import com.ixigo.design_sdk.components.styles.IxiColor
-import com.ixigo.design_sdk.components.buttons.styles.Shapes
+import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 
 class SecondaryButton @JvmOverloads constructor(
@@ -27,7 +27,7 @@ class SecondaryButton @JvmOverloads constructor(
         else -> IxiColor.OrangeSecondary
     }
 
-    public override fun  setStyle(shapes: Shapes, colors: IxiColor, sizes: ButtonSize) {
+    public override fun  setStyle(shapes: ButtonShape, colors: IxiColor, sizes: ButtonSize) {
         super.setStyle(shapes, colors, sizes)
     }
 

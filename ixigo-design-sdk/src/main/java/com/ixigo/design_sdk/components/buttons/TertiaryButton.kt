@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.buttons.base.BaseButton
 import com.ixigo.design_sdk.components.buttons.composable.ComposableTextButton
 import com.ixigo.design_sdk.components.styles.IxiColor
-import com.ixigo.design_sdk.components.buttons.styles.Shapes
+import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 
 class TertiaryButton @JvmOverloads constructor(
@@ -28,7 +28,7 @@ class TertiaryButton @JvmOverloads constructor(
     }
 
     fun setStyle(colors: IxiColor, sizes: ButtonSize) {
-        super.setStyle(Shapes.RegularShape, colors, sizes)
+        super.setStyle(ButtonShape.RegularShape, colors, sizes)
     }
 
     @Composable

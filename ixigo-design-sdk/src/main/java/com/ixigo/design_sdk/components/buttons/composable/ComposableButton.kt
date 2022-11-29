@@ -19,10 +19,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.ixigo.design_sdk.components.styles.IxiColor
-import com.ixigo.design_sdk.components.buttons.styles.Shapes
+import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design_sdk.components.styles.IxiFamily
 
@@ -30,7 +32,7 @@ import com.ixigo.design_sdk.components.styles.IxiFamily
 internal fun ComposableButton(
     text: String = "",
     colors: IxiColor,
-    shapes: Shapes,
+    shapes: ButtonShape,
     size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
@@ -94,7 +96,7 @@ internal fun ComposableTextButton(
 internal fun ComposableButtonOutlined(
     text: String = "",
     colors: IxiColor,
-    shapes: Shapes,
+    shapes: ButtonShape,
     size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
@@ -140,42 +142,72 @@ private fun DrawComponents(
     @DrawableRes endDrawableRes: Int = 0,
     @ColorRes drawableTint: Int = 0,
 ) {
-    if (startDrawableRes != 0) {
-        Image(
-            painter = painterResource(id = startDrawableRes),
-            contentDescription = "Image",
-            modifier = Modifier.padding(PaddingValues()),
-            colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+    ConstraintLayout {
+        val (imageStart, textView, imageEnd) = createRefs()
+        var startTextPadding = 0.dp
+        var endTextPadding = 0.dp
+
+        if ((startDrawableRes == 0 && endDrawableRes != 0) || startDrawableRes != 0) {
+            // Adding Start Padding as 5dp either Only start drawable is present or
+            // Start drawable is not present but End drawable is present
+            startTextPadding = 5.dp
+        }
+        if ((endDrawableRes == 0 && startDrawableRes != 0) || endDrawableRes != 0) {
+            // Adding End Padding as 5dp either Only End drawable is present or
+            // End drawable is not present but Start drawable is present
+            endTextPadding = 5.dp
+        }
+        if (startDrawableRes != 0) {
+            Image(
+                painter = painterResource(id = startDrawableRes),
+                contentDescription = "Image",
+                modifier = Modifier.constrainAs(imageStart) {
+                    start.linkTo(parent.start)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                },
+                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            )
+        }
+        Text(
+            text = text,
+            maxLines=1,
+            overflow = TextOverflow.Ellipsis,
+            modifier = Modifier
+                .padding(
+                    start = startTextPadding,
+                    end = endTextPadding,
+                    top = 0.dp,
+                    bottom = 0.dp
+                )
+                .constrainAs(textView) {
+                    start.linkTo(imageStart.end)
+                    end.linkTo(imageEnd.start)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                },
+
+            style = TextStyle(
+                color = colorResource(id = textColor),
+                fontSize = size.textSize,
+                fontFamily = IxiFamily,
+                fontWeight = FontWeight.Medium,
+                fontStyle = FontStyle.Normal,
+            ),
         )
-        Spacer(modifier = Modifier.width(5.dp))
-    } else if (endDrawableRes != 0) {
-        // Adding 5dp extra in case we have only End drawable and not Start drawable
-        Spacer(modifier = Modifier.width(5.dp))
-    }
-    Text(
-        text = text,
-        modifier = Modifier
-            .padding(PaddingValues())
-            .wrapContentWidth(),
-        style = TextStyle(
-            color = colorResource(id = textColor),
-            fontSize = size.textSize,
-            fontFamily = IxiFamily,
-            fontWeight = FontWeight.Medium,
-            fontStyle = FontStyle.Normal,
-        ),
-    )
-    if (endDrawableRes != 0) {
-        Spacer(modifier = Modifier.width(5.dp))
-        Image(
-            painter = painterResource(id = endDrawableRes),
-            contentDescription = "Image",
-            modifier = Modifier.padding(PaddingValues()),
-            colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
-        )
-    } else if (startDrawableRes != 0) {
-        // Adding 5dp extra in case we have only start drawable and not end drawable
-        Spacer(modifier = Modifier.width(5.dp))
+        if (endDrawableRes != 0) {
+            Image(
+                painter = painterResource(id = endDrawableRes),
+                contentDescription = "Image",
+                modifier = Modifier
+                    .constrainAs(imageEnd) {
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
+                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            )
+        }
     }
 }
 

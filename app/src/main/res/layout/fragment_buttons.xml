@@ -19,98 +19,97 @@
         android:padding="10dp"
         tools:context=".ButtonsFragment">
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
-                    android:id="@+id/button_first"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:ixi_button_style="o700NormalTrailingShapeRadius" />
+        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+            android:id="@+id/button_first"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
-                    android:id="@+id/button_second"
-                    android:layout_width="wrap_content"
-                    android:drawableStart = "@drawable/ic_call_24"
-                    android:layout_height="wrap_content" />
+        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+            android:id="@+id/button_second"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_call_24" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
-                    android:id="@+id/button_third"
-                    android:layout_width="wrap_content"
-                    android:drawableEnd = "@drawable/ic_call_24"
-                    android:layout_height="wrap_content" />
+        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+            android:id="@+id/button_third"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableEnd="@drawable/ic_call_24" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
-                    android:id="@+id/button_fourth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button four"
-                    app:ixi_button_style="b700XXlargeBottomShapeRadiusDisabled" />
+        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+            android:id="@+id/button_fourth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button four"
+            app:ixi_button_style="b700XXlargeBottomShapeRadiusDisabled" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
-                    android:id="@+id/button_fifth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="5"
-                    app:ixi_button_style="b700NormalRegularShapeRadius" />
+        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+            android:id="@+id/button_fifth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            app:ixi_button_style="b700NormalRegularShapeRadius" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
-                    android:id="@+id/button_sixth"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="6"
-                    app:ixi_button_style="b700NormalRegularShapeRadiusOutlined" />
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/button_sixth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            app:ixi_button_style="b700NormalRegularShapeRadiusOutlined" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
-                    android:id="@+id/button_seven"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="7"
-                    app:ixi_button_style="b700NormalLeadingShapeRadiusOutlined" />
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/button_seven"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            app:ixi_button_style="b700NormalLeadingShapeRadiusOutlined" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
-                    android:id="@+id/button_eight"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="8"
-                    app:ixi_button_style="b700NormalTrailingShapeRadiusOutlined" />
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/button_eight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8"
+            app:ixi_button_style="b700NormalTrailingShapeRadiusOutlined" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
-                    android:id="@+id/button_nine"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button"
-                    app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/button_nine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button"
+            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
 
         <Space
             android:layout_width="match_parent"
@@ -120,9 +119,37 @@
             android:id="@+id/button_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button 10"
-            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+            android:text="Button 10" />
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+            android:id="@+id/button_twelve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Secondary Bottom Error" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+            android:id="@+id/button_thirteen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sec M Su" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+            android:id="@+id/button_fourteen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S T Sm W" />
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
@@ -131,9 +158,27 @@
             android:id="@+id/button_eleven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button 11"
-            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+            android:text="Tertiary Large Extension"/>
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+            android:id="@+id/button_fifteen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ter Med Su"/>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+            android:id="@+id/button_sixteen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ter xx War"/>
 
     </LinearLayout>
 </ScrollView>
