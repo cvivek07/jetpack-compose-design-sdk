@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.separator
+package com.ixigo.design.sdk.components.separator
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxHeight

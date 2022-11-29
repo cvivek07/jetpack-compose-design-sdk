@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <com.ixigo.design_sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.Separator
         android:layout_width="match_parent"
         android:layout_height="1dp"
         />
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <com.ixigo.design_sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.Separator
         android:paddingHorizontal="30dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -24,11 +24,24 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <com.ixigo.design_sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.Separator
         android:layout_width="match_parent"
         android:layout_height="10dp"
         />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
+    <com.ixigo.design.sdk.components.separator.Separator
+        android:layout_width="1dp"
+        android:layout_gravity="center"
+        android:layout_height="100dp"
+        />
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+    <com.ixigo.design.sdk.components.separator.Separator
+        android:layout_gravity="center"
+        android:layout_width="5dp"
+        android:layout_height="300dp"
+        />
 </LinearLayout>
