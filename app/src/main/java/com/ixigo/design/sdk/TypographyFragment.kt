@@ -34,11 +34,11 @@ public class TypographyFragment : Fragment() {
             displayText500.setText("Display Text 500")
             displayText500.setTypography(com.ixigo.design_sdk.components.styles.Typography.Heading.DisplayLarge500)
 
-            h1900.setText("H1 900")
+            h1900.setText("Header1 900")
             h1900.setTypography(com.ixigo.design_sdk.components.styles.Typography.Heading.h1_900)
-            h1700.setText("H1 700")
+            h1700.setText("Header1 700")
             h1700.setTypography(com.ixigo.design_sdk.components.styles.Typography.Heading.h1_700)
-            h1500.setText("H1 500")
+            h1500.setText("Header1 500")
             h1500.setTypography(com.ixigo.design_sdk.components.styles.Typography.Heading.h1_500)
 
             h2900.setText("Header2 900")
