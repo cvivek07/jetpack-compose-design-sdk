@@ -33,7 +33,7 @@ class ButtonsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonFirst.setText("Large Primary Button")
+        binding.buttonFirst.setText("Large Primary Button Very Large Text")
         binding.buttonFirst.setStartImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setStyle(ButtonShape.RegularShape, IxiColor.Orange, ButtonSize.Large)

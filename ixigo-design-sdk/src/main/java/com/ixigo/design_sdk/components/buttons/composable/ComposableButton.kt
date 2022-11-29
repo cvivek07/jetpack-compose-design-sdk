@@ -24,6 +24,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design_sdk.components.styles.IxiColor
 import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
@@ -171,22 +172,6 @@ private fun DrawComponents(
                 colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
             )
         }
-
-        if (endDrawableRes != 0) {
-            Image(
-                painter = painterResource(id = endDrawableRes),
-                contentDescription = "Image",
-                modifier = Modifier.padding(start = 5.dp, end = 5.dp)
-                    .constrainAs(imageEnd) {
-                        start.linkTo(textView.end)
-                        end.linkTo(parent.end, 5.dp, 5.dp)
-                        top.linkTo(parent.top)
-                        bottom.linkTo(parent.bottom)
-                    },
-                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
-            )
-        }
-
         Text(
             text = text,
             maxLines=1,
@@ -203,6 +188,7 @@ private fun DrawComponents(
                     end.linkTo(imageEnd.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
+                    width = Dimension.preferredWrapContent
                 },
 
             style = TextStyle(
@@ -211,8 +197,24 @@ private fun DrawComponents(
                 fontFamily = IxiFamily,
                 fontWeight = FontWeight.Medium,
                 fontStyle = FontStyle.Normal,
-            ),
+                ),
         )
+        if (endDrawableRes != 0) {
+            Image(
+                painter = painterResource(id = endDrawableRes),
+                contentDescription = "Image",
+                modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+                    .constrainAs(imageEnd) {
+                        start.linkTo(textView.end)
+                        end.linkTo(parent.end, 5.dp, 5.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
+                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            )
+        }
+
+
         createHorizontalChain(imageStart,  textView, imageEnd, chainStyle = ChainStyle.Packed)
 
     }
