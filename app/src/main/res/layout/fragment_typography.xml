@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/displayText900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/displayText700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/displayText500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h1900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h1700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h1500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h2900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h2700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h2500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h3900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h3700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h3500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h4900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h4700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h4500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h5900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h5700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h5500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="20dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h6900"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h6700"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/h6500"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+
+
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyLargeReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyLargeMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyLargeBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyLargeStrike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyLargeItalic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyLargeUnderlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyMediumReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyMediumMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyMediumBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyMediumStrike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyMediumItalic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyMediumUnderlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+
+
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodySmallReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodySmallMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodySmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodySmallStrike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodySmallItalic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodySmallUnderlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+
+
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyXSmallReg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyXSmallMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyXSmallBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyXSmallStrike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyXSmallItalic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="10dp" />
+
+        <com.ixigo.design_sdk.components.text.Text
+            android:id="@+id/bodyXSmallUnderlined"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="40dp" />
+
+    </LinearLayout>
+</ScrollView>

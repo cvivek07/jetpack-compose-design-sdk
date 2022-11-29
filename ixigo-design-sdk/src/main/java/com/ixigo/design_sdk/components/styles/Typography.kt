@@ -204,7 +204,6 @@ object Typography {
                 fontWeight = W400,
                 color = n800,
                 fontStyle = FontStyle.Italic,
-                textDecoration = TextDecoration.Underline
             )
 
             val underline = TextStyle(
