@@ -97,7 +97,7 @@ class ButtonsFragment : Fragment() {
         binding.buttonFifteen.setStyle(IxiColor.Success, ButtonSize.Medium)
         binding.buttonFifteen.setClickListener {
             context?.let { it1 -> "Button15 Clicked Change".toToast(it1) }
-            binding.buttonThirteen.isEnabled = !binding.buttonTen.isEnabled
+            binding.buttonThirteen.isEnabled = !binding.buttonThirteen.isEnabled
         }
 
 
@@ -105,7 +105,7 @@ class ButtonsFragment : Fragment() {
         binding.buttonSixteen.setStyle(IxiColor.Warning, ButtonSize.XXLarge)
         binding.buttonSixteen.setClickListener {
             context?.let { it1 -> "Button16 Clicked Change".toToast(it1) }
-            binding.buttonFifteen.isEnabled = !binding.buttonTen.isEnabled
+            binding.buttonFifteen.isEnabled = !binding.buttonFifteen.isEnabled
         }
 
         binding.buttonTwelve.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
