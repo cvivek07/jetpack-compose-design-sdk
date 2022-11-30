@@ -1,5 +1,6 @@
-package com.ixigo.design_sdk.components
+package com.ixigo.design_sdk.components.buttons.styles
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Outline
@@ -10,8 +11,15 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
+sealed class ButtonShape(val shape: Shape) {
+    object TrailingShape : ButtonShape(TrailingShape())
+    object LeadingShape : ButtonShape(LeadingShape())
+    object BottomShape : ButtonShape(BottomShape())
+    object RegularShape : ButtonShape(RoundedCornerShape(10.dp))
+}
 
-class TrailingOutlineShape : Shape {
+
+private class TrailingShape : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
@@ -42,7 +50,7 @@ class TrailingOutlineShape : Shape {
     }
 }
 
-class LeadingOutlineShape : Shape {
+private class LeadingShape : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
@@ -73,7 +81,7 @@ class LeadingOutlineShape : Shape {
     }
 }
 
-class BottomOutlineShape(private val radius: Dp = 8.dp) : Shape {
+private class BottomShape(private val radius: Dp = 8.dp) : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
