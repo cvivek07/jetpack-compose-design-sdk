@@ -6,9 +6,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -21,19 +19,23 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.ixigo.design_sdk.components.styles.Colors
-import com.ixigo.design_sdk.components.buttons.styles.Shapes
-import com.ixigo.design_sdk.components.buttons.styles.Sizes
+import androidx.constraintlayout.compose.ChainStyle
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
+import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design_sdk.components.styles.IxiFamily
 
 @Composable
 internal fun ComposableButton(
     text: String = "",
-    colors: Colors,
-    shapes: Shapes,
-    sizes: Sizes,
+    colors: IxiColor,
+    shapes: ButtonShape,
+    size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -43,25 +45,26 @@ internal fun ComposableButton(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val enabledBgColor = if (isPressed) colors.pressedColor else colors.bgColor
-    val bgColor = if (isEnabled) enabledBgColor else Colors.Disabled.bgColor
+    val bgColor = if (isEnabled) enabledBgColor else IxiColor.Disabled.bgColor
 
 
-    val paddingValues = createPaddingValues(sizes)
-    val textColor = if (isEnabled) colors.textColor else Colors.Disabled.textColor
+    val textColor = if (isEnabled) colors.textColor else IxiColor.Disabled.textColor
 
     Button(
         onClick = onClick,
-        modifier = Modifier,
+        modifier = Modifier
+            .height(size.height)
+            .wrapContentWidth(),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
         ),
-        contentPadding = paddingValues,
+        contentPadding = size.horizontalPadding,
         interactionSource = interactionSource,
         shape = shapes.shape,
         elevation = ButtonDefaults.elevation(0.dp)
     ) {
-        DrawComponents(text, textColor, sizes, startDrawable, endDrawable)
+        DrawComponents(text, textColor, size, startDrawable, endDrawable)
     }
 
 }
@@ -69,25 +72,24 @@ internal fun ComposableButton(
 @Composable
 internal fun ComposableTextButton(
     text: String = "",
-    colors: Colors,
-    sizes: Sizes,
+    colors: IxiColor,
+    size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
 ) {
-
-
-    val paddingValues = createPaddingValues(sizes)
-    val textColor = if (isEnabled) colors.textColor else Colors.Disabled.textColor
+    val textColor = if (isEnabled) colors.textColor else IxiColor.Disabled.textColor
 
     TextButton(
         onClick = onClick,
-        modifier = Modifier,
+        modifier = Modifier
+            .height(size.height)
+            .wrapContentWidth(),
         enabled = isEnabled,
-        contentPadding = paddingValues,
+        contentPadding = size.horizontalPadding,
     ) {
-        DrawComponents(text, textColor, sizes, startDrawable, endDrawable)
+        DrawComponents(text, textColor, size, startDrawable, endDrawable)
     }
 
 }
@@ -95,9 +97,9 @@ internal fun ComposableTextButton(
 @Composable
 internal fun ComposableButtonOutlined(
     text: String = "",
-    colors: Colors,
-    shapes: Shapes,
-    sizes: Sizes,
+    colors: IxiColor,
+    shapes: ButtonShape,
+    size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -107,14 +109,15 @@ internal fun ComposableButtonOutlined(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val enabledBorderColor = if (isPressed) colors.pressedColor else colors.bgColor
-    val borderColor = if (isEnabled) enabledBorderColor else Colors.Disabled.bgColor
+    val borderColor = if (isEnabled) enabledBorderColor else IxiColor.Disabled.bgColor
 
-    val paddingValues = createPaddingValues(sizes)
-    val textColor = if (isEnabled) colors.bgColor else Colors.Disabled.textColor
+    val textColor = if (isEnabled) colors.bgColor else IxiColor.Disabled.textColor
 
     OutlinedButton(
         onClick = onClick,
-        modifier = Modifier,
+        modifier = Modifier
+            .height(size.height)
+            .wrapContentWidth(),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,
@@ -122,76 +125,98 @@ internal fun ComposableButtonOutlined(
         ),
 
         interactionSource = interactionSource,
-        contentPadding = paddingValues,
+        contentPadding = size.horizontalPadding,
         shape = shapes.shape,
         border = BorderStroke(2.dp, colorResource(id = borderColor)),
         elevation = ButtonDefaults.elevation(0.dp)
     ) {
-        DrawComponents(text, textColor, sizes, startDrawable, endDrawable)
+        DrawComponents(text, textColor, size, startDrawable, endDrawable)
     }
 }
-
-@Composable
-private fun createPaddingValues(sizes: Sizes) =
-    PaddingValues(
-        sizes.padding.startPadding,
-        sizes.padding.topPadding,
-        sizes.padding.endPadding,
-        sizes.padding.bottomPadding
-    )
 
 
 @Composable
 private fun DrawComponents(
     text: String,
     @ColorRes textColor: Int,
-    sizes: Sizes,
+    size: ButtonSize,
     @DrawableRes startDrawableRes: Int = 0,
     @DrawableRes endDrawableRes: Int = 0,
     @ColorRes drawableTint: Int = 0,
 ) {
-    val textStyle = TextStyle(
-        color = colorResource(id = textColor),
-        fontSize = sizes.textSize,
-        fontFamily = IxiFamily,
-        fontWeight = FontWeight.Medium,
-        fontStyle = FontStyle.Normal,
-    )
+    ConstraintLayout() {
+        val (imageStart, textView, imageEnd) = createRefs()
+        var startTextPadding = 0.dp
+        var endTextPadding = 0.dp
 
-    val textComposable = @Composable {
+        if ((startDrawableRes == 0 && endDrawableRes != 0)) {
+            // Adding Start Padding as 5dp either Only start drawable is present or
+            // Start drawable is not present but End drawable is present
+            startTextPadding = 5.dp
+        }
+        if ((endDrawableRes == 0 && startDrawableRes != 0)) {
+            // Adding End Padding as 5dp either Only End drawable is present or
+            // End drawable is not present but Start drawable is present
+            endTextPadding = 5.dp
+        }
+        if (startDrawableRes != 0) {
+            Image(
+                painter = painterResource(id = startDrawableRes),
+                contentDescription = "Image",
+                modifier = Modifier.padding(start = 5.dp, end = 5.dp).constrainAs(imageStart) {
+                    start.linkTo(parent.start, margin = 5.dp, goneMargin = 5.dp)
+                    end.linkTo(textView.start)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                },
+                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            )
+        }
         Text(
             text = text,
+            maxLines=1,
+            overflow = TextOverflow.Ellipsis,
             modifier = Modifier
-                .padding(PaddingValues())
-                .wrapContentWidth(),
-            style = textStyle,
-        )
-    }
+                .padding(
+                    start = startTextPadding,
+                    end = endTextPadding,
+                    top = 0.dp,
+                    bottom = 0.dp
+                )
+                .constrainAs(textView) {
+                    start.linkTo(imageStart.end)
+                    end.linkTo(imageEnd.start)
+                    top.linkTo(parent.top)
+                    bottom.linkTo(parent.bottom)
+                    width = Dimension.preferredWrapContent
+                },
 
-    val startDrawable = @Composable {
-        Image(
-            painter = painterResource(id = startDrawableRes),
-            contentDescription = "Image",
-            modifier = Modifier.padding(0.dp, 0.dp, 8.dp, 0.dp),
-            colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            style = TextStyle(
+                color = colorResource(id = textColor),
+                fontSize = size.textSize,
+                fontFamily = IxiFamily,
+                fontWeight = FontWeight.Medium,
+                fontStyle = FontStyle.Normal,
+                ),
         )
-    }
+        if (endDrawableRes != 0) {
+            Image(
+                painter = painterResource(id = endDrawableRes),
+                contentDescription = "Image",
+                modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+                    .constrainAs(imageEnd) {
+                        start.linkTo(textView.end)
+                        end.linkTo(parent.end, 5.dp, 5.dp)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
+                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
+            )
+        }
 
-    val endDrawable = @Composable {
-        Image(
-            painter = painterResource(id = endDrawableRes),
-            contentDescription = "Image",
-            modifier = Modifier.padding(8.dp, 0.dp, 0.dp, 0.dp),
-            colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
-        )
-    }
 
-    if (startDrawableRes != 0) {
-        startDrawable()
-    }
-    textComposable()
-    if (endDrawableRes != 0) {
-        endDrawable()
+        createHorizontalChain(imageStart,  textView, imageEnd, chainStyle = ChainStyle.Packed)
+
     }
 }
 

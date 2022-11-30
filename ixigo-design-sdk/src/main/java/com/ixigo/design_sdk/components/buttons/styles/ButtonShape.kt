@@ -11,11 +11,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 
-sealed class Shapes(val shape: Shape) {
-    object TrailingShape : Shapes(TrailingShape())
-    object LeadingShape : Shapes(LeadingShape())
-    object BottomShape : Shapes(BottomShape())
-    object RegularShape : Shapes(RoundedCornerShape(10.dp))
+sealed class ButtonShape(val shape: Shape) {
+    object TrailingShape : ButtonShape(TrailingShape())
+    object LeadingShape : ButtonShape(LeadingShape())
+    object BottomShape : ButtonShape(BottomShape())
+    object RegularShape : ButtonShape(RoundedCornerShape(10.dp))
 }
 
 

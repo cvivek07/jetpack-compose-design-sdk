@@ -6,9 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.buttons.base.BaseButton
 import com.ixigo.design_sdk.components.buttons.composable.ComposableButton
-import com.ixigo.design_sdk.components.styles.Colors
-import com.ixigo.design_sdk.components.buttons.styles.Shapes
-import com.ixigo.design_sdk.components.buttons.styles.Sizes
+import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
 
 class SecondaryButton @JvmOverloads constructor(
     context: Context,
@@ -16,18 +16,18 @@ class SecondaryButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseButton(context, attrs, defStyleAttr) {
 
-    private fun mapSecStyle(colors: Colors) = when (colors) {
-        Colors.Blue -> Colors.BlueSecondary
-        Colors.Disabled -> Colors.Disabled
-        Colors.Error -> Colors.ErrorSecondary
-        Colors.Extension -> Colors.ExtensionSecondary
-        Colors.Orange -> Colors.OrangeSecondary
-        Colors.Success -> Colors.SuccessSecondary
-        Colors.Warning -> Colors.WarningSecondary
-        else -> Colors.OrangeSecondary
+    private fun mapSecStyle(colors: IxiColor) = when (colors) {
+        IxiColor.Blue -> IxiColor.BlueSecondary
+        IxiColor.Disabled -> IxiColor.Disabled
+        IxiColor.Error -> IxiColor.ErrorSecondary
+        IxiColor.Extension -> IxiColor.ExtensionSecondary
+        IxiColor.Orange -> IxiColor.OrangeSecondary
+        IxiColor.Success -> IxiColor.SuccessSecondary
+        IxiColor.Warning -> IxiColor.WarningSecondary
+        else -> IxiColor.OrangeSecondary
     }
 
-    public override fun  setStyle(shapes: Shapes, colors: Colors, sizes: Sizes) {
+    public override fun  setStyle(shapes: ButtonShape, colors: IxiColor, sizes: ButtonSize) {
         super.setStyle(shapes, colors, sizes)
     }
 
