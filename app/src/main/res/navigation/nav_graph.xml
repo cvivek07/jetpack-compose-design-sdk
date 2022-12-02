@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/typographyFragment"
         android:name="com.ixigo.design.sdk.TypographyFragment"
-        android:label="@string/input_fields"
-        tools:layout="@layout/fragment_input_fields">
+        android:label="@string/typography"
+        tools:layout="@layout/fragment_typography">
     </fragment>
 </navigation>
