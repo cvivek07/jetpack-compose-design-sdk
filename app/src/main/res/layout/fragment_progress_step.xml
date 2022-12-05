@@ -5,13 +5,52 @@
     android:fillViewport="true">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <com.ixigo.design_sdk.components.progress_step.VerticalProgressStep
             android:id="@+id/vProgressStep"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
+
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next Step" />
+
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/nextError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error Step" />
+
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design_sdk.components.progress_step.VerticalProgressStep
+            android:id="@+id/vProgressStep2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <include layout="@layout/divider"/>
+
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/next2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next Step" />
+
+        <include layout="@layout/divider"/>
+
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/next2Error"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error Step" />
     </LinearLayout>
 </ScrollView>

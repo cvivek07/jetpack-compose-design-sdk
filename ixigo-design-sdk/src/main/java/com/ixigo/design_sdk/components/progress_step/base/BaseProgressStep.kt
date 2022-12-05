@@ -40,12 +40,12 @@ abstract class BaseProgressStep @JvmOverloads constructor(
             state.value = initState
         }
 
-    var progressState: ProgressState = ProgressState.Error
-        set(value) {
-            field = value
-            val initState = state.value.copy(progressState = value)
-            state.value = initState
-        }
+//    var progressState: ProgressState = ProgressState.Error
+//        set(value) {
+//            field = value
+//            val initState = state.value.copy(currentItemProgressState = value)
+//            state.value = initState
+//        }
 
     protected var stepSize: ProgressStepSize = ProgressStepSize.Large
         set(value) {
@@ -54,13 +54,14 @@ abstract class BaseProgressStep @JvmOverloads constructor(
             state.value = initState
         }
 
-    fun selectNext(progressState: ProgressState) {
-        progress++
+    fun selectNext(progressState: ProgressState = ProgressState.Active) {
+        if (progressState == ProgressState.Active)
+            progress++
 
-        val initState = state.value.copy(currentIndex = progress, progressState = progressState)
+        val initState = state.value.copy(currentIndex = progress, currentItemProgressState = progressState)
         state.value = initState
 
-        if (progress == getMaxProgress() - 1) {
+        if ((progress == getMaxProgress() - 1) || progressState != ProgressState.Active) {
             onCompletionListener?.onCompletion(progressState)
         }
     }
@@ -73,7 +74,9 @@ abstract class BaseProgressStep @JvmOverloads constructor(
     }
 
     fun setProgress(position: Int, progressState: ProgressState) {
-
+        progress = position
+        val initState = state.value.copy(steps = steps)
+        state.value = initState
     }
 
     fun getMaxProgress() = steps.size
@@ -125,7 +128,7 @@ data class ProgressStepState(
     val selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     val stepSize: ProgressStepSize = ProgressStepSize.Large,
     val steps: MutableList<ProgressStepData> = mutableListOf(),
-    val progressState: ProgressState = ProgressState.InActive,
+    val currentItemProgressState: ProgressState? = null,
     val currentIndex: Int = 0
 )
 

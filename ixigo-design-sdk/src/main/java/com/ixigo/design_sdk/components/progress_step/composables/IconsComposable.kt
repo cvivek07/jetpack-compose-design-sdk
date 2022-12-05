@@ -1,15 +1,23 @@
 package com.ixigo.design_sdk.components.progress_step.composables
 
-import android.content.Context
+import android.R.attr
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.Stroke
-import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.drawscope.translate
+import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -18,6 +26,7 @@ import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.progress_step.base.ProgressState
 import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
+
 
 private val outerRadius = 12.5.dp
 private val middleRadius = 9.5.dp
@@ -54,6 +63,28 @@ fun ProgressStepIcon(
 }
 
 @Composable
+fun ProgressStepIconSuccess(
+    state: ProgressState,
+    progressSize: ProgressStepSize,
+    modifier: Modifier = Modifier,
+) {
+    val innerColor = colorResource(id = getInnerColor(state))
+    val painter = rememberVectorPainter(Icons.Rounded.Check)
+    val tickColor = colorResource(id = R.color.n0)
+    Canvas(
+        modifier = modifier
+            .size(progressSize.size)
+    ) {
+        drawCircle(
+            color = innerColor,
+            radius = 10.dp.toPx(),
+        )
+        drawLine(strokeWidth = 1.dp.toPx(), color = tickColor, start = Offset(x = 10.dp.toPx(), y = 14.dp.toPx()), end =  Offset(x = 13.dp.toPx(), y = 18.dp.toPx()))
+        drawLine(strokeWidth = 1.dp.toPx(), color = tickColor, start = Offset(x = 13.dp.toPx(), y = 18.dp.toPx()), end =  Offset(x = 20.dp.toPx(), y = 12.dp.toPx()))
+    }
+}
+
+@Composable
 fun ProgressStepNumber(
     state: ProgressState,
     progressSize: ProgressStepSize,
@@ -81,6 +112,45 @@ fun ProgressStepNumber(
             style = Stroke(width = 1.dp.toPx()),
         )
 
+
+        drawContext.canvas.nativeCanvas.apply {
+            drawText(
+                text.toString(),
+                size.width / 2,
+                size.height / 2 + (innerRadius.toPx()),
+                Paint().apply {
+                    textSize = progressSize.textStyle.fontSize.toPx()
+                    color = textColor
+                    textAlign = Paint.Align.CENTER
+                    isAntiAlias = true
+                }
+            )
+        }
+    }
+
+}
+
+@Composable
+fun ProgressStepNumberSuccess(
+    state: ProgressState,
+    progressSize: ProgressStepSize,
+    text: Int,
+    modifier: Modifier = Modifier
+) {
+    val innerColorRes = getInnerColor(state)
+    val innerColor = colorResource(id = innerColorRes)
+    val textColor = ContextCompat.getColor(LocalContext.current, R.color.n0)
+
+
+    Canvas(
+        modifier = modifier
+            .size(size = progressSize.size)
+    ) {
+
+        drawCircle(
+            color = innerColor,
+            radius = 10.dp.toPx(),
+        )
 
         drawContext.canvas.nativeCanvas.apply {
             drawText(
@@ -136,7 +206,20 @@ fun getInnerColor(state: ProgressState) = when (state) {
 }
 
 @Composable
-@Preview
+@Preview(showSystemUi = true)
 fun preview() {
-    ProgressStepNumber(ProgressState.Completed, ProgressStepSize.Large, 1)
+    Column() {
+
+
+        ProgressStepNumberSuccess(
+            state = ProgressState.Completed,
+            progressSize = ProgressStepSize.Large,
+            text = 1
+        )
+        Spacer(modifier = Modifier.height(10.dp))
+        ProgressStepIconSuccess(
+            ProgressState.Completed,
+            ProgressStepSize.Large
+        )
+    }
 }

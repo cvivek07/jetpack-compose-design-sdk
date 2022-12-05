@@ -59,9 +59,24 @@ class ProgressStepFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.vProgressStep.apply {
             addSteps(data)
-            progressState = ProgressState.Error
-            selectionIndicator = SelectionIndicator.NUMBER
+            selectionIndicator = SelectionIndicator.ICON
+
         }
+        binding.next.setClickListener {
+            binding.vProgressStep.selectNext()
+        }
+        binding.nextError.setClickListener {
+            binding.vProgressStep.selectNext(ProgressState.Error)
+        }
+
+        binding.vProgressStep2.apply {
+            addSteps(data)
+//            progressState = ProgressState.Error
+            selectionIndicator = SelectionIndicator.NUMBER
+
+        }
+        binding.next2.setClickListener { binding.vProgressStep2.selectNext() }
+        binding.next2Error.setClickListener { binding.vProgressStep2.selectNext(ProgressState.Delay) }
     }
 
     override fun onDestroyView() {

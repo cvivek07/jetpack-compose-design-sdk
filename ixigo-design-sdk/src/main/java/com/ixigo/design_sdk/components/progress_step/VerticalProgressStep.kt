@@ -21,8 +21,9 @@ class VerticalProgressStep @JvmOverloads constructor(
             DrawSteps(
                 steps = steps,
                 progressStepSize = stepSize,
-                progressState = progressState,
-                selectionIndicator = selectionIndicator
+                selectionIndicator = selectionIndicator,
+                currentItem = currentIndex,
+                currentProgressState = currentItemProgressState
             )
         }
     }

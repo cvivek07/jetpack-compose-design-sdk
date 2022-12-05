@@ -7,6 +7,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -19,19 +20,29 @@ import com.ixigo.design_sdk.components.progress_step.base.ProgressStepData
 import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
 import com.ixigo.design_sdk.components.progress_step.base.SelectionIndicator
 import com.ixigo.design_sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.R
+import com.ixigo.design_sdk.components.styles.Typography
 
 @Composable
 fun DrawNode(
     data: ProgressStepData,
-    textStyle: TextStyle = com.ixigo.design_sdk.components.styles.Typography.Body.Large.regular,
-    subTitleTextStyle: TextStyle = com.ixigo.design_sdk.components.styles.Typography.Body.Small.regular,
+
     actionView: View? = null,
     isLastItem: Boolean = false,
-    progressStepSize: ProgressStepSize ,
+    progressStepSize: ProgressStepSize,
     progressState: ProgressState = ProgressState.Active,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
-    index: Int
+    index: Int,
+    lineColor: Int
 ) {
+
+    val textStyle: TextStyle = if (progressState == ProgressState.Active) {
+        Typography.Body.Large.medium
+    } else {
+        Typography.Body.Large.regular
+    }
+    val subTitleTextStyle: TextStyle = Typography.Body.Small.regular
+
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         ConstraintLayout(
             modifier = Modifier.fillMaxWidth()
@@ -39,29 +50,52 @@ fun DrawNode(
             val (icon, title, subtitle, line, view, spacer) = createRefs()
             val bottomBarrier = createBottomBarrier(title, subtitle, view, spacer)
             if (selectionIndicator == SelectionIndicator.NUMBER) {
-                ProgressStepNumber(
-                    state = progressState,
-                    modifier = Modifier.constrainAs(icon) {
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.top)
-                    },
-                    text = index,
-                    progressSize = progressStepSize
-                )
+                if (progressState == ProgressState.Completed) {
+                    ProgressStepNumberSuccess(
+                        state = progressState,
+                        progressSize = progressStepSize,
+                        text = index,
+                        modifier = Modifier.constrainAs(icon) {
+                            start.linkTo(parent.start)
+                            top.linkTo(parent.top)
+                        }
+                    )
+                } else {
+                    ProgressStepNumber(
+                        state = progressState,
+                        modifier = Modifier.constrainAs(icon) {
+                            start.linkTo(parent.start)
+                            top.linkTo(parent.top)
+                        },
+                        text = index,
+                        progressSize = progressStepSize
+                    )
+                }
             } else {
-                ProgressStepIcon(
-                    state = progressState,
-                    modifier = Modifier.constrainAs(icon) {
-                        start.linkTo(parent.start)
-                        top.linkTo(parent.top)
-                    },
-                    progressSize = progressStepSize
-                )
+                if (progressState == ProgressState.Completed) {
+                    ProgressStepIconSuccess(
+                        state = progressState,
+                        progressSize = progressStepSize,
+                        modifier = Modifier.constrainAs(icon) {
+                            start.linkTo(parent.start)
+                            top.linkTo(parent.top)
+                        }
+                    )
+                } else {
+                    ProgressStepIcon(
+                        state = progressState,
+                        modifier = Modifier.constrainAs(icon) {
+                            start.linkTo(parent.start)
+                            top.linkTo(parent.top)
+                        },
+                        progressSize = progressStepSize
+                    )
+                }
             }
 
             if (!isLastItem) {
                 Divider(
-                    color = Color.Red,
+                    color = colorResource(id = lineColor),
                     modifier = Modifier
                         .fillMaxHeight()
                         .width(1.dp)
@@ -134,18 +168,34 @@ fun DrawNode(
 fun DrawSteps(
     steps: List<ProgressStepData>,
     progressStepSize: ProgressStepSize = ProgressStepSize.Large,
-    progressState: ProgressState = ProgressState.Active,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+    currentItem: Int = 0,
+    currentProgressState: ProgressState? = null
 ) {
+
     Column {
         steps.forEachIndexed { index, stepData ->
+
+            val progressStateValue = if (index < currentItem) {
+                ProgressState.Completed
+            } else if (index == currentItem) {
+                currentProgressState ?: ProgressState.Active
+            } else {
+                ProgressState.InActive
+            }
+            val lineColor = if (index < currentItem) {
+                R.color.g500
+            } else {
+                R.color.n300
+            }
             DrawNode(
                 data = stepData,
                 isLastItem = index == steps.size - 1,
                 index = index,
                 progressStepSize = progressStepSize,
-                progressState = progressState,
-                selectionIndicator = selectionIndicator
+                progressState = progressStateValue,
+                selectionIndicator = selectionIndicator,
+                lineColor = lineColor
             )
         }
     }
