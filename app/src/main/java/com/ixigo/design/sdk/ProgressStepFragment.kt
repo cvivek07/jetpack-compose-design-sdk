@@ -6,10 +6,40 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentProgressStepBinding
+import com.ixigo.design_sdk.components.progress_step.base.*
 
 class ProgressStepFragment : Fragment() {
 
     private var _binding: FragmentProgressStepBinding? = null
+
+    private val data = listOf(
+        ProgressStepData(
+            "Label 1",
+            "A lot of sub text with some jucy content and some cowboy shit with some of the other snacks today for all of us"
+        ),
+        ProgressStepData(
+            "Label 2",
+            "A lot of sub text with some "
+        ),
+
+        ProgressStepData(
+            "Label 3",
+            "A lot of sub text with some jucy content and some cowboy shit with some of the other snacks today for all of us jucy content and some cowboy shit with some of the other snacks today for all of us jucy content and some cowboy shit with some of the other snacks today for all of us"
+        ),
+        ProgressStepData(
+            "Label 4",
+            "A lot of sub text with some jucy content and some cowboy shit with some of the other snacks today for all of us"
+        ),
+        ProgressStepData(
+            "Label 5",
+            "A lot of sub text with some jucy content and some cowboy shit with some of the other snacks today for all of us"
+        ),
+
+        ProgressStepData(
+            "Label 6",
+            "A lot of sub text with some jucy "
+        ),
+    )
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -18,7 +48,7 @@ class ProgressStepFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentProgressStepBinding.inflate(inflater, container, false)
         return binding.root
@@ -27,5 +57,15 @@ class ProgressStepFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.vProgressStep.apply {
+            addSteps(data)
+            progressState = ProgressState.Error
+            selectionIndicator = SelectionIndicator.NUMBER
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

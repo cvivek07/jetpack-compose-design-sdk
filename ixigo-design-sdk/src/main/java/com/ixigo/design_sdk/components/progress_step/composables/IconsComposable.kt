@@ -1,5 +1,6 @@
 package com.ixigo.design_sdk.components.progress_step.composables
 
+import android.content.Context
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -9,34 +10,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.progress_step.base.ProgressState
+import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
 
-private val outerRadius = 10.dp
-private val middleRadius = 7.dp
-private val innerRadius = 4.dp
+private val outerRadius = 12.5.dp
+private val middleRadius = 9.5.dp
+private val innerRadius = 5.dp
 
 @Composable
-fun ProgressStepIcon(state: ProgressState, modifier: Modifier = Modifier) {
+fun ProgressStepIcon(
+    state: ProgressState,
+    modifier: Modifier = Modifier,
+    progressSize: ProgressStepSize,
+) {
     val outerColor = colorResource(id = getOuterColor(state))
     val innerColor = colorResource(id = getInnerColor(state))
     Canvas(
         modifier = modifier
-            .size(30.dp)
+            .size(progressSize.size)
             .background(Color.Transparent)
     ) {
         drawCircle(
             color = outerColor,
             radius = outerRadius.toPx(),
-            style = Stroke(width = 6.dp.toPx())
+            style = Stroke(width = 2.5.dp.toPx())
         )
         drawCircle(
             color = innerColor,
             radius = middleRadius.toPx(),
-            style = Stroke(width = 1.dp.toPx())
+            style = Stroke(width = 0.5.dp.toPx())
         )
         drawCircle(
             color = innerColor,
@@ -46,22 +54,26 @@ fun ProgressStepIcon(state: ProgressState, modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun ProgressStepNumber(state: ProgressState, text: Int, modifier: Modifier = Modifier) {
+fun ProgressStepNumber(
+    state: ProgressState,
+    progressSize: ProgressStepSize,
+    text: Int,
+    modifier: Modifier = Modifier
+) {
     val outerColor = colorResource(id = getOuterColor(state))
-    val innerColor = colorResource(id = getInnerColor(state))
-    val typography = com.ixigo.design_sdk.components.styles.Typography.Body.XSmall.regular
+    val innerColorRes = getInnerColor(state)
+    val innerColor = colorResource(id = innerColorRes)
+    val textColor = ContextCompat.getColor(LocalContext.current, innerColorRes)
 
 
     Canvas(
         modifier = modifier
-            .size(30.dp)
-            .background(Color.Transparent)
-
+            .size(size = progressSize.size)
     ) {
         drawCircle(
             color = outerColor,
             radius = outerRadius.toPx(),
-            style = Stroke(width = 6.dp.toPx())
+            style = Stroke(width = 5.dp.toPx())
         )
         drawCircle(
             color = innerColor,
@@ -69,14 +81,15 @@ fun ProgressStepNumber(state: ProgressState, text: Int, modifier: Modifier = Mod
             style = Stroke(width = 1.dp.toPx()),
         )
 
+
         drawContext.canvas.nativeCanvas.apply {
             drawText(
                 text.toString(),
                 size.width / 2,
-                size.height/2 + ( innerRadius.toPx()),
+                size.height / 2 + (innerRadius.toPx()),
                 Paint().apply {
-                    textSize = typography.fontSize.toPx()
-                    color = getInnerColor(state)
+                    textSize = progressSize.textStyle.fontSize.toPx()
+                    color = textColor
                     textAlign = Paint.Align.CENTER
                     isAntiAlias = true
                 }
@@ -125,5 +138,5 @@ fun getInnerColor(state: ProgressState) = when (state) {
 @Composable
 @Preview
 fun preview() {
-    ProgressStepNumber(ProgressState.Completed, 1)
+    ProgressStepNumber(ProgressState.Completed, ProgressStepSize.Large, 1)
 }

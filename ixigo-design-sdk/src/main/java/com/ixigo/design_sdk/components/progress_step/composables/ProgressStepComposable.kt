@@ -1,18 +1,12 @@
 package com.ixigo.design_sdk.components.progress_step.composables
 
 import android.view.View
-import android.widget.Button
-import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,38 +14,52 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.ixigo.design.sdk.R
+import com.ixigo.design_sdk.components.progress_step.base.ProgressState
 import com.ixigo.design_sdk.components.progress_step.base.ProgressStepData
+import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
+import com.ixigo.design_sdk.components.progress_step.base.SelectionIndicator
 import com.ixigo.design_sdk.components.styles.IxiFamily
 
 @Composable
 fun DrawNode(
-    @DrawableRes iconRes: Int = R.drawable.ic_baseline_cancel_24,
     data: ProgressStepData,
     textStyle: TextStyle = com.ixigo.design_sdk.components.styles.Typography.Body.Large.regular,
     subTitleTextStyle: TextStyle = com.ixigo.design_sdk.components.styles.Typography.Body.Small.regular,
     actionView: View? = null,
-    isLastItem: Boolean = false
+    isLastItem: Boolean = false,
+    progressStepSize: ProgressStepSize ,
+    progressState: ProgressState = ProgressState.Active,
+    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+    index: Int
 ) {
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         ConstraintLayout(
-            modifier = Modifier
-                .padding(horizontal = 10.dp)
-                .fillMaxWidth()
+            modifier = Modifier.fillMaxWidth()
         ) {
             val (icon, title, subtitle, line, view, spacer) = createRefs()
             val bottomBarrier = createBottomBarrier(title, subtitle, view, spacer)
-            Image(
-                painter = painterResource(id = iconRes),
-                contentDescription = "Image",
-                modifier = Modifier.constrainAs(icon) {
-                    start.linkTo(parent.start, margin = 15.dp)
-                    top.linkTo(parent.top)
-                },
-//                colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
-            )
+            if (selectionIndicator == SelectionIndicator.NUMBER) {
+                ProgressStepNumber(
+                    state = progressState,
+                    modifier = Modifier.constrainAs(icon) {
+                        start.linkTo(parent.start)
+                        top.linkTo(parent.top)
+                    },
+                    text = index,
+                    progressSize = progressStepSize
+                )
+            } else {
+                ProgressStepIcon(
+                    state = progressState,
+                    modifier = Modifier.constrainAs(icon) {
+                        start.linkTo(parent.start)
+                        top.linkTo(parent.top)
+                    },
+                    progressSize = progressStepSize
+                )
+            }
 
-            if(!isLastItem) {
+            if (!isLastItem) {
                 Divider(
                     color = Color.Red,
                     modifier = Modifier
@@ -117,18 +125,28 @@ fun DrawNode(
                     top.linkTo(view.bottom)
                     top.linkTo(subtitle.bottom)
                 })
-
-
         }
     }
 }
 
 
 @Composable
-fun DrawSteps(steps: List<ProgressStepData>) {
-    Column() {
-        steps.forEachIndexed { index,stepData ->
-            DrawNode(data = stepData, isLastItem = index == steps.size-1)
+fun DrawSteps(
+    steps: List<ProgressStepData>,
+    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    progressState: ProgressState = ProgressState.Active,
+    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+) {
+    Column {
+        steps.forEachIndexed { index, stepData ->
+            DrawNode(
+                data = stepData,
+                isLastItem = index == steps.size - 1,
+                index = index,
+                progressStepSize = progressStepSize,
+                progressState = progressState,
+                selectionIndicator = selectionIndicator
+            )
         }
     }
 }
@@ -166,16 +184,4 @@ fun Preview() {
     )
 
     DrawSteps(steps = steps)
-//    DrawNode(
-//        iconRes = R.drawable.ic_baseline_cancel_24,
-//        data = ProgressStepData(
-//            "Label jskahlkshak",
-//            "A lot of sub text with some jucy content and some cowboy shit with some of the other snacks today for all of us"
-//        ),
-//        textStyle = com.ixigo.design_sdk.components.styles.Typography.Body.Large.regular,
-//        subTitleTextStyle = com.ixigo.design_sdk.components.styles.Typography.Body.Small.regular,
-////        actionView = Button(LocalContext.current).apply {
-////            setText("Action")
-////        }
-//    )
 }
