@@ -20,12 +20,12 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.progress_step.base.ProgressState
 import com.ixigo.design_sdk.components.progress_step.base.ProgressStepData
 import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
 import com.ixigo.design_sdk.components.progress_step.base.SelectionIndicator
 import com.ixigo.design_sdk.components.styles.IxiFamily
-import com.ixigo.design.sdk.R
 import com.ixigo.design_sdk.components.styles.Typography
 import kotlinx.coroutines.CoroutineScope
 
@@ -103,7 +103,7 @@ fun DrawVerticalNode(
                 Divider(
                     color = colorResource(id = lineColor),
                     modifier = Modifier
-                        .fillMaxHeight()
+                        .height(IntrinsicSize.Max)
                         .width(1.dp)
                         .constrainAs(line) {
                             start.linkTo(icon.start)
@@ -141,7 +141,7 @@ fun DrawVerticalNode(
                 textDecoration = subTitleTextStyle.textDecoration,
                 fontStyle = subTitleTextStyle.fontStyle,
                 lineHeight = subTitleTextStyle.lineHeight,
-                modifier = Modifier.constrainAs(subtitle) {
+                modifier = Modifier.heightIn(max = 200.dp).constrainAs(subtitle) {
                     start.linkTo(title.start)
                     end.linkTo(parent.end)
                     top.linkTo(title.bottom)
@@ -169,86 +169,6 @@ fun DrawVerticalNode(
     }
 }
 
-
-@Composable
-fun DrawVerticalSteps(
-    steps: List<ProgressStepData>,
-    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
-    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
-    currentItem: Int = 0,
-    currentProgressState: ProgressState? = null,
-) {
-    Column( ) {
-        steps.forEachIndexed { index, stepData ->
-            val progressStateValue = getProgressState(index, currentItem, currentProgressState)
-            val lineColor = getLineColor(index, currentItem)
-
-            DrawVerticalNode(
-                data = stepData,
-                isLastItem = index == steps.size - 1,
-                index = index,
-                progressStepSize = progressStepSize,
-                progressState = progressStateValue,
-                selectionIndicator = selectionIndicator,
-                lineColor = lineColor
-            )
-        }
-    }
-
-}
-
-@Composable
-fun DrawHorizontalSteps(
-    steps: List<ProgressStepData>,
-    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
-    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
-    currentItem: Int = 0,
-    currentProgressState: ProgressState? = null,
-    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
-) {
-    val coroutineScope = rememberCoroutineScope()
-    val listState = rememberLazyListState()
-    LazyRow(state = listState) {
-        items(steps.size) { index ->
-            val stepData = steps[index]
-            val progressStateValue = getProgressState(index, currentItem, currentProgressState)
-            val lineColor = getLineColor(index, currentItem)
-
-            DrawHorizontalNode(
-                data = stepData,
-                isLastItem = index == steps.size - 1,
-                index = index,
-                progressStepSize = progressStepSize,
-                progressState = progressStateValue,
-                selectionIndicator = selectionIndicator,
-                lineColor = lineColor
-            )
-        }
-        scrollToPosition?.invoke(listState, coroutineScope)
-    }
-
-}
-@Composable
-private fun getLineColor(index: Int, currentItem: Int) = if (index < currentItem) {
-    R.color.g500
-} else {
-    R.color.n300
-}
-
-private fun getProgressState(
-    index: Int,
-    currentItem: Int,
-    currentProgressState: ProgressState?
-) = if (index < currentItem) {
-    ProgressState.Completed
-} else if (index == currentItem) {
-    currentProgressState ?: ProgressState.Active
-} else {
-    ProgressState.InActive
-}
-
-
-
 @Composable
 fun DrawHorizontalNode(
     data: ProgressStepData,
@@ -260,7 +180,6 @@ fun DrawHorizontalNode(
     index: Int,
     lineColor: Int
 ) {
-
     val textStyle: TextStyle = if (progressState == ProgressState.Active) {
         Typography.Body.Large.medium
     } else {
@@ -389,23 +308,93 @@ fun DrawHorizontalNode(
     }
 }
 
-//@Preview(showBackground = true, showSystemUi = true)
-//@Composable
-//fun PreviewNode() {
-//    DrawHorizontalNode(
-//        data = ProgressStepData(
-//            "Label 1",
-//            "Subtitle Bjjadj hkask ajskajs ajsasj kasjka jskajsk ajskaj skjask jaksjk asjkajska hjahjs hsahkska"
-//        ),
-//        progressStepSize = ProgressStepSize.Large,
-//        index = 0,
-//        progressState = ProgressState.Active,
-//        selectionIndicator = SelectionIndicator.ICON,
-//        isLastItem = false,
-//        lineColor = R.color.n100
-//    )
-//}
-//
+
+@Composable
+fun DrawVerticalSteps(
+    steps: List<ProgressStepData>,
+    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+    currentItem: Int = 0,
+    currentProgressState: ProgressState? = null,
+    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+    LazyColumn( state = listState, modifier = Modifier.heightIn(max = 1200.dp)) {
+        items(steps.size) { index ->
+            val stepData = steps[index]
+            val progressStateValue = getProgressState(index, currentItem, currentProgressState)
+            val lineColor = getLineColor(index, currentItem)
+
+            DrawVerticalNode(
+                data = stepData,
+                isLastItem = index == steps.size - 1,
+                index = index,
+                progressStepSize = progressStepSize,
+                progressState = progressStateValue,
+                selectionIndicator = selectionIndicator,
+                lineColor = lineColor
+            )
+        }
+        scrollToPosition?.invoke(listState, coroutineScope)
+    }
+
+}
+
+@Composable
+fun DrawHorizontalSteps(
+    steps: List<ProgressStepData>,
+    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+    currentItem: Int = 0,
+    currentProgressState: ProgressState? = null,
+    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+    LazyRow(state = listState) {
+        items(steps.size) { index ->
+            val stepData = steps[index]
+            val progressStateValue = getProgressState(index, currentItem, currentProgressState)
+            val lineColor = getLineColor(index, currentItem)
+
+            DrawHorizontalNode(
+                data = stepData,
+                isLastItem = index == steps.size - 1,
+                index = index,
+                progressStepSize = progressStepSize,
+                progressState = progressStateValue,
+                selectionIndicator = selectionIndicator,
+                lineColor = lineColor
+            )
+        }
+        scrollToPosition?.invoke(listState, coroutineScope)
+    }
+
+}
+@Composable
+private fun getLineColor(index: Int, currentItem: Int) = if (index < currentItem) {
+    R.color.g500
+} else {
+    R.color.n300
+}
+
+private fun getProgressState(
+    index: Int,
+    currentItem: Int,
+    currentProgressState: ProgressState?
+) = if (index < currentItem) {
+    ProgressState.Completed
+} else if (index == currentItem) {
+    currentProgressState ?: ProgressState.Active
+} else {
+    ProgressState.InActive
+}
+
+
+
+
+
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun Preview() {

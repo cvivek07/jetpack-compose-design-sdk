@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.progress_step.base.BaseProgressStep
 import com.ixigo.design_sdk.components.progress_step.composables.DrawVerticalSteps
+import kotlinx.coroutines.launch
 
 class VerticalProgressStep @JvmOverloads constructor(
     context: Context,
@@ -23,7 +24,11 @@ class VerticalProgressStep @JvmOverloads constructor(
                 selectionIndicator = selectionIndicator,
                 currentItem = currentIndex,
                 currentProgressState = currentItemProgressState,
-            )
+            ){ state, scope ->
+                scope.launch {
+                    state.animateScrollToItem(currentIndex)
+                }
+            }
         }
     }
 }

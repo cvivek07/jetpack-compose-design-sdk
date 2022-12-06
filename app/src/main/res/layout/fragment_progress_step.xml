@@ -54,15 +54,10 @@
             android:text="Error Step" />
 
 
-        <androidx.core.widget.NestedScrollView
+        <com.ixigo.design_sdk.components.progress_step.HorizontalProgressStep
+            android:id="@+id/hProgressStep"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.ixigo.design_sdk.components.progress_step.HorizontalProgressStep
-                android:id="@+id/hProgressStep"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </androidx.core.widget.NestedScrollView>
+            android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />
 
