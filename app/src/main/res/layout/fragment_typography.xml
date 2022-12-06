@@ -313,7 +313,6 @@
 
 
 
-
         <com.ixigo.design_sdk.components.text.Text
             android:id="@+id/bodyXSmallReg"
             android:layout_width="wrap_content"

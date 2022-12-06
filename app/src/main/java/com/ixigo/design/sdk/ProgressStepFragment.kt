@@ -77,6 +77,20 @@ class ProgressStepFragment : Fragment() {
         }
         binding.next2.setClickListener { binding.vProgressStep2.selectNext() }
         binding.next2Error.setClickListener { binding.vProgressStep2.selectNext(ProgressState.Delay) }
+
+
+
+        binding.hProgressStep.apply {
+            addSteps(data)
+            selectionIndicator = SelectionIndicator.ICON
+
+        }
+        binding.nextH.setClickListener {
+            binding.hProgressStep.selectNext()
+        }
+        binding.nextHError.setClickListener {
+            binding.hProgressStep.selectNext(ProgressState.Error)
+        }
     }
 
     override fun onDestroyView() {

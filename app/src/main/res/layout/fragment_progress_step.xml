@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design_sdk.components.buttons.OutlinedButton
             android:id="@+id/next2"
@@ -45,12 +45,41 @@
             android:layout_height="wrap_content"
             android:text="Next Step" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design_sdk.components.buttons.OutlinedButton
             android:id="@+id/next2Error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Error Step" />
+
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.ixigo.design_sdk.components.progress_step.HorizontalProgressStep
+                android:id="@+id/hProgressStep"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </androidx.core.widget.NestedScrollView>
+
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/nextH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Next Step" />
+
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            android:id="@+id/nextHError"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Error Step" />
+
+        <include layout="@layout/divider" />
     </LinearLayout>
 </ScrollView>

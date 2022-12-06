@@ -2,12 +2,15 @@ package com.ixigo.design_sdk.components.progress_step.base
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design_sdk.components.BaseComponent
 import com.ixigo.design_sdk.components.styles.IxiColor
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 abstract class BaseProgressStep @JvmOverloads constructor(
     context: Context,
@@ -19,6 +22,13 @@ abstract class BaseProgressStep @JvmOverloads constructor(
 
     val steps = mutableListOf<ProgressStepData>()
 
+
+//    val scrollToPosition: ((LazyListState, CoroutineScope) -> Unit) = {state, scope->
+//        scope.launch {
+//            // Animate scroll to the 10th item
+//            state.animateScrollToItem(index = 10)
+//        }
+//    }
     /**
      * The progress denote currently selected Item
      */
@@ -58,8 +68,17 @@ abstract class BaseProgressStep @JvmOverloads constructor(
         if (progressState == ProgressState.Active)
             progress++
 
-        val initState = state.value.copy(currentIndex = progress, currentItemProgressState = progressState)
+        val initState = state.value.copy(
+            currentIndex = progress,
+            currentItemProgressState = progressState,
+            scrollToPosition = { state, scope ->
+                scope.launch {
+                    // Animate scroll to the 10th item
+                    state.animateScrollToItem(index = progress)
+                }
+            })
         state.value = initState
+
 
         if ((progress == getMaxProgress() - 1) || progressState != ProgressState.Active) {
             onCompletionListener?.onCompletion(progressState)
@@ -129,6 +148,7 @@ data class ProgressStepState(
     val stepSize: ProgressStepSize = ProgressStepSize.Large,
     val steps: MutableList<ProgressStepData> = mutableListOf(),
     val currentItemProgressState: ProgressState? = null,
-    val currentIndex: Int = 0
+    val currentIndex: Int = 0,
+    val scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
 )
 

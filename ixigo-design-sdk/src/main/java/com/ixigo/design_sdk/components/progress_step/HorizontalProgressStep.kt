@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.progress_step.base.BaseProgressStep
-import com.ixigo.design_sdk.components.progress_step.composables.DrawVerticalSteps
+import com.ixigo.design_sdk.components.progress_step.composables.DrawHorizontalSteps
 
-class VerticalProgressStep @JvmOverloads constructor(
+class HorizontalProgressStep  @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -17,7 +17,7 @@ class VerticalProgressStep @JvmOverloads constructor(
         setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindow)
 
         with(state.value) {
-            DrawVerticalSteps(
+            DrawHorizontalSteps(
                 steps = steps,
                 progressStepSize = stepSize,
                 selectionIndicator = selectionIndicator,
