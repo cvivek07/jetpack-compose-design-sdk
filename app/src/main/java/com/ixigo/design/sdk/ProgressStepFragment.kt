@@ -91,6 +91,52 @@ class ProgressStepFragment : Fragment() {
         binding.nextHError.setClickListener {
             binding.hProgressStep.selectNext(ProgressState.Error)
         }
+
+        binding.hProgressStepNumber.apply {
+            addSteps(data)
+            selectionIndicator = SelectionIndicator.NUMBER
+
+        }
+        binding.nextHNumber.setClickListener {
+            binding.hProgressStepNumber.selectNext()
+        }
+        binding.nextHErrorNumber.setClickListener {
+            binding.hProgressStepNumber.selectNext(ProgressState.Delay)
+        }
+
+
+
+
+
+        binding.hProgressInlineStep.apply {
+            addSteps(data)
+            selectionIndicator = SelectionIndicator.NUMBER
+            mode = ProgressStepMode.Dark
+
+        }
+        binding.nextInlineLight.setClickListener {
+            binding.hProgressInlineStep.selectNext()
+        }
+        binding.errorInlineLight.setClickListener {
+            binding.hProgressInlineStep.selectNext(ProgressState.Delay)
+        }
+
+
+
+
+
+        binding.hProgressInlineStepDark.apply {
+            addSteps(data)
+            selectionIndicator = SelectionIndicator.CHECK
+            mode = ProgressStepMode.Light
+
+        }
+        binding.nextInlineDark.setClickListener {
+            binding.hProgressInlineStepDark.selectNext()
+        }
+        binding.nextInlineErrorDark.setClickListener {
+            binding.hProgressInlineStepDark.selectNext(ProgressState.Delay)
+        }
     }
 
     override fun onDestroyView() {

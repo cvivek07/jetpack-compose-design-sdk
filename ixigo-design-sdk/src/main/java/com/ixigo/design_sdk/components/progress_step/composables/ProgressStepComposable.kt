@@ -21,10 +21,7 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.progress_step.base.ProgressState
-import com.ixigo.design_sdk.components.progress_step.base.ProgressStepData
-import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
-import com.ixigo.design_sdk.components.progress_step.base.SelectionIndicator
+import com.ixigo.design_sdk.components.progress_step.base.*
 import com.ixigo.design_sdk.components.styles.IxiFamily
 import com.ixigo.design_sdk.components.styles.Typography
 import kotlinx.coroutines.CoroutineScope
@@ -32,7 +29,6 @@ import kotlinx.coroutines.CoroutineScope
 @Composable
 fun DrawVerticalNode(
     data: ProgressStepData,
-
     actionView: View? = null,
     isLastItem: Boolean = false,
     progressStepSize: ProgressStepSize,
@@ -141,12 +137,14 @@ fun DrawVerticalNode(
                 textDecoration = subTitleTextStyle.textDecoration,
                 fontStyle = subTitleTextStyle.fontStyle,
                 lineHeight = subTitleTextStyle.lineHeight,
-                modifier = Modifier.heightIn(max = 200.dp).constrainAs(subtitle) {
-                    start.linkTo(title.start)
-                    end.linkTo(parent.end)
-                    top.linkTo(title.bottom)
-                    width = Dimension.fillToConstraints
-                }
+                modifier = Modifier
+                    .heightIn(max = 200.dp)
+                    .constrainAs(subtitle) {
+                        start.linkTo(title.start)
+                        end.linkTo(parent.end)
+                        top.linkTo(title.bottom)
+                        width = Dimension.fillToConstraints
+                    }
             )
 
             if (actionView != null) {
@@ -281,11 +279,13 @@ fun DrawHorizontalNode(
                 lineHeight = subTitleTextStyle.lineHeight,
                 maxLines = 3,
                 overflow = TextOverflow.Ellipsis,
-                modifier = Modifier.widthIn(max = 200.dp).constrainAs(subtitle) {
-                    start.linkTo(title.start)
-                    top.linkTo(title.bottom)
-                    width = Dimension.fillToConstraints
-                }
+                modifier = Modifier
+                    .widthIn(max = 200.dp)
+                    .constrainAs(subtitle) {
+                        start.linkTo(title.start)
+                        top.linkTo(title.bottom)
+                        width = Dimension.fillToConstraints
+                    }
             )
 
             if (actionView != null) {
@@ -308,7 +308,147 @@ fun DrawHorizontalNode(
     }
 }
 
+@Composable
+fun DrawHorizontalInlineNode(
+    data: ProgressStepData,
+    isLastItem: Boolean = false,
+    progressStepSize: ProgressStepSize,
+    progressState: ProgressState = ProgressState.Active,
+    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+    index: Int,
+    lineColor: Int,
+    mode: ProgressStepMode = ProgressStepMode.Dark
+) {
+    val textStyle: TextStyle = if (progressState == ProgressState.Active) {
+        Typography.Body.Large.medium
+    } else {
+        Typography.Body.Large.regular
+    }
 
+    val textColor  = if(mode == ProgressStepMode.Dark) {
+        R.color.n0
+    } else {
+        if(progressState == ProgressState.Active) {
+            R.color.b500
+        } else {
+            R.color.n600
+        }
+    }
+    BoxWithConstraints(modifier = Modifier.wrapContentWidth()) {
+        ConstraintLayout(
+            modifier = Modifier.wrapContentWidth()
+        ) {
+            val (icon, title, subtitle, line, view, spacer) = createRefs()
+            val endBarrier = createEndBarrier(title, subtitle, view, spacer)
+
+            if (selectionIndicator == SelectionIndicator.NUMBER) {
+                when (progressState) {
+                    ProgressState.Completed -> {
+                        ProgressStepInlineSuccessIcon(
+                            mode = mode,
+                            progressSize = progressStepSize,
+                            modifier = Modifier.constrainAs(icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                            }
+                        )
+                    }
+                    ProgressState.Active -> {
+                        ProgressStepInlineActiveIcon(
+                            mode = mode,
+                            progressSize = progressStepSize,
+                            modifier = Modifier.constrainAs(icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                            }, text = index.toString()
+                        )
+                    }
+                    else -> {
+                        ProgressStepInlineInactiveIcon(
+                            mode = mode,
+                            progressSize = progressStepSize,
+                            modifier = Modifier.constrainAs(icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                            }, text = index.toString()
+                        )
+                    }
+                }
+            } else {
+                when (progressState) {
+                    ProgressState.Completed -> {
+                        ProgressStepInlineSuccessIcon(
+                            mode = mode,
+                            progressSize = progressStepSize,
+                            modifier = Modifier.constrainAs(icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                            }
+                        )
+                    }
+                    ProgressState.Active -> {
+                        ProgressStepInlineActiveIcon(
+                            mode = mode,
+                            progressSize = progressStepSize,
+                            modifier = Modifier.constrainAs(icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                            }
+                        )
+                    }
+                    else -> {
+                        ProgressStepInlineInactiveIcon(
+                            mode = mode,
+                            progressSize = progressStepSize,
+                            modifier = Modifier.constrainAs(icon) {
+                                start.linkTo(parent.start)
+                                top.linkTo(parent.top)
+                            }
+                        )
+                    }
+                }
+            }
+
+            if (!isLastItem) {
+                Divider(
+                    color = colorResource(id = lineColor),
+                    modifier = Modifier
+                        .padding(horizontal = 5.dp)
+                        .width(20.dp)
+                        .height(1.dp)
+                        .constrainAs(line) {
+                            start.linkTo(title.end)
+                            top.linkTo(title.top)
+                            bottom.linkTo(title.bottom)
+                        }
+                )
+            }
+
+            Text(
+                text = data.label,
+                fontSize = textStyle.fontSize,
+                fontWeight = textStyle.fontWeight,
+                fontFamily = IxiFamily,
+                letterSpacing = 0.sp,
+                color = colorResource(id = textColor),
+                textDecoration = textStyle.textDecoration,
+                fontStyle = textStyle.fontStyle,
+                lineHeight = textStyle.lineHeight,
+                modifier = Modifier.constrainAs(title) {
+                    start.linkTo(icon.end, margin = 10.dp)
+                    top.linkTo(icon.top)
+                    bottom.linkTo(icon.bottom)
+                }
+            )
+        }
+    }
+}
+
+/**
+ * Draw the Vertical Progress Steps. Scrolling behaviour will only work if the VerticalProgressStep
+ * is either not a child of any vertical scrolling Component or the items are so large that height
+ * of this VerticalProgressStep is greater than 1200dp
+ */
 @Composable
 fun DrawVerticalSteps(
     steps: List<ProgressStepData>,
@@ -320,7 +460,7 @@ fun DrawVerticalSteps(
 ) {
     val coroutineScope = rememberCoroutineScope()
     val listState = rememberLazyListState()
-    LazyColumn( state = listState, modifier = Modifier.heightIn(max = 1200.dp)) {
+    LazyColumn(state = listState, modifier = Modifier.heightIn(max = 1200.dp)) {
         items(steps.size) { index ->
             val stepData = steps[index]
             val progressStateValue = getProgressState(index, currentItem, currentProgressState)
@@ -372,6 +512,45 @@ fun DrawHorizontalSteps(
     }
 
 }
+
+@Composable
+fun DrawHorizontalInlineSteps(
+    steps: List<ProgressStepData>,
+    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
+    currentItem: Int = 0,
+    currentProgressState: ProgressState? = null,
+    mode: ProgressStepMode = ProgressStepMode.Dark,
+    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
+) {
+    val coroutineScope = rememberCoroutineScope()
+    val listState = rememberLazyListState()
+    LazyRow(state = listState) {
+        items(steps.size) { index ->
+            val stepData = steps[index]
+            val progressStateValue = getProgressState(index, currentItem, currentProgressState)
+            val lineColor = if(mode == ProgressStepMode.Dark) {
+                R.color.n100
+            } else {
+                R.color.n300
+            }
+
+            DrawHorizontalInlineNode(
+                data = stepData,
+                isLastItem = index == steps.size - 1,
+                index = index,
+                progressStepSize = progressStepSize,
+                progressState = progressStateValue,
+                selectionIndicator = selectionIndicator,
+                lineColor = lineColor,
+                mode = mode
+            )
+        }
+        scrollToPosition?.invoke(listState, coroutineScope)
+    }
+
+}
+
 @Composable
 private fun getLineColor(index: Int, currentItem: Int) = if (index < currentItem) {
     R.color.g500
@@ -390,9 +569,6 @@ private fun getProgressState(
 } else {
     ProgressState.InActive
 }
-
-
-
 
 
 @Preview(showBackground = true, showSystemUi = true)
@@ -427,5 +603,5 @@ fun Preview() {
         ),
     )
 
-    DrawHorizontalSteps(steps = steps)
+    DrawHorizontalInlineSteps(steps = steps, mode = ProgressStepMode.Light)
 }

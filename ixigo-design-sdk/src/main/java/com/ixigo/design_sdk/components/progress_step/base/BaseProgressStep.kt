@@ -22,13 +22,6 @@ abstract class BaseProgressStep @JvmOverloads constructor(
 
     val steps = mutableListOf<ProgressStepData>()
 
-
-//    val scrollToPosition: ((LazyListState, CoroutineScope) -> Unit) = {state, scope->
-//        scope.launch {
-//            // Animate scroll to the 10th item
-//            state.animateScrollToItem(index = 10)
-//        }
-//    }
     /**
      * The progress denote currently selected Item
      */
@@ -50,17 +43,18 @@ abstract class BaseProgressStep @JvmOverloads constructor(
             state.value = initState
         }
 
-//    var progressState: ProgressState = ProgressState.Error
-//        set(value) {
-//            field = value
-//            val initState = state.value.copy(currentItemProgressState = value)
-//            state.value = initState
-//        }
 
     protected var stepSize: ProgressStepSize = ProgressStepSize.Large
         set(value) {
             field = value
             val initState = state.value.copy(stepSize = value)
+            state.value = initState
+        }
+
+    protected open var mode: ProgressStepMode = ProgressStepMode.Light
+        set(value) {
+            field = value
+            val initState = state.value.copy(mode = value)
             state.value = initState
         }
 
@@ -140,6 +134,12 @@ sealed class ProgressStepSize(val size: Dp, val textStyle: TextStyle) {
     )
 }
 
+sealed class ProgressStepMode {
+    object Dark : ProgressStepMode()
+
+    object Light : ProgressStepMode()
+}
+
 data class ProgressStepData(val label: String, val subText: String?)
 
 data class ProgressStepState(
@@ -149,6 +149,7 @@ data class ProgressStepState(
     val steps: MutableList<ProgressStepData> = mutableListOf(),
     val currentItemProgressState: ProgressState? = null,
     val currentIndex: Int = 0,
+    val mode: ProgressStepMode = ProgressStepMode.Dark,
     val scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
 )
 
