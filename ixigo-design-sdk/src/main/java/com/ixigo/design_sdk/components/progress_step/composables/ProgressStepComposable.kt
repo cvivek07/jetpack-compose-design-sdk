@@ -204,11 +204,11 @@ fun DrawHorizontalSteps(
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     currentItem: Int = 0,
     currentProgressState: ProgressState? = null,
-//    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
+    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
 ) {
     val coroutineScope = rememberCoroutineScope()
     val listState = rememberLazyListState()
-    LazyRow() {
+    LazyRow(state = listState) {
         items(steps.size) { index ->
             val stepData = steps[index]
             val progressStateValue = getProgressState(index, currentItem, currentProgressState)
@@ -224,7 +224,7 @@ fun DrawHorizontalSteps(
                 lineColor = lineColor
             )
         }
-//        scrollToPosition?.invoke(listState, coroutineScope)
+        scrollToPosition?.invoke(listState, coroutineScope)
     }
 
 }

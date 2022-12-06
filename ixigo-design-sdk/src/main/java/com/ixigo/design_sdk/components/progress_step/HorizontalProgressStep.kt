@@ -6,8 +6,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design_sdk.components.progress_step.base.BaseProgressStep
 import com.ixigo.design_sdk.components.progress_step.composables.DrawHorizontalSteps
+import kotlinx.coroutines.launch
 
-class HorizontalProgressStep  @JvmOverloads constructor(
+class HorizontalProgressStep @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -23,7 +24,11 @@ class HorizontalProgressStep  @JvmOverloads constructor(
                 selectionIndicator = selectionIndicator,
                 currentItem = currentIndex,
                 currentProgressState = currentItemProgressState,
-            )
+            ) { state, scope ->
+                scope.launch {
+                    state.animateScrollToItem(currentIndex)
+                }
+            }
         }
     }
 }
