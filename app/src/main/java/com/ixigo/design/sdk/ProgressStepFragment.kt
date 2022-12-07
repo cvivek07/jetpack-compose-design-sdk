@@ -117,12 +117,6 @@ class ProgressStepFragment : Fragment() {
         binding.nextInlineLight.setClickListener {
             binding.hProgressInlineStep.selectNext()
         }
-        binding.errorInlineLight.setClickListener {
-            binding.hProgressInlineStep.selectNext(ProgressState.Delay)
-        }
-
-
-
 
 
         binding.hProgressInlineStepDark.apply {
@@ -133,9 +127,6 @@ class ProgressStepFragment : Fragment() {
         }
         binding.nextInlineDark.setClickListener {
             binding.hProgressInlineStepDark.selectNext()
-        }
-        binding.nextInlineErrorDark.setClickListener {
-            binding.hProgressInlineStepDark.selectNext(ProgressState.Delay)
         }
     }
 
