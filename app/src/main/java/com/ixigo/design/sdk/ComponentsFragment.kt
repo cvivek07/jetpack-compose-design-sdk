@@ -32,6 +32,7 @@ class ComponentsFragment : Fragment() {
         Pair("Input Fields", R.id.action_ComponentFragment_to_inputFieldFragment),
         Pair("Typography", R.id.action_componentFragment_to_typographyFragment),
         Pair("Progress Step", R.id.action_componentFragment_to_progressStepFragment),
+        Pair("TopAppBar", R.id.action_componentFragment_to_topAppBarFragment),
     )
 
     override fun onCreateView(
