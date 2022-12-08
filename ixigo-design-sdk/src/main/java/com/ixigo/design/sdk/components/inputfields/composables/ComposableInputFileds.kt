@@ -1,6 +1,5 @@
-package com.ixigo.design_sdk.components.input_fields.composables
+package com.ixigo.design.sdk.components.inputfields.composables
 
-import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,7 +9,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -18,7 +16,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.styles.Colors
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 private val unFocusColor = R.color.n100
 
@@ -34,7 +32,7 @@ fun OutlinedInputField(
     label: String = "",
     hint: String = "",
     tint: Int = 0,
-    colors: Colors = Colors.Orange,
+    colors: IxiColor = IxiColor.Orange,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
@@ -78,7 +76,7 @@ fun OutlinedInputField(
 }
 
 @Composable
-private fun getInputFieldColors(colors: Colors) =
+private fun getInputFieldColors(colors: IxiColor) =
     TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = colorResource(id = colors.bgColor),
         unfocusedBorderColor = colorResource(id = unFocusColor),
@@ -99,7 +97,7 @@ fun LinedInputField(
     text: String = "",
     label: String = "",
     hint: String = "",
-    colors: Colors = Colors.Orange,
+    colors: IxiColor = IxiColor.Orange,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,

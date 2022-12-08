@@ -1,9 +1,9 @@
-package com.ixigo.design_sdk.components
+package com.ixigo.design.sdk.components
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.ui.platform.AbstractComposeView
-import com.ixigo.design_sdk.SdkInitializer
+import com.ixigo.design.sdk.SdkInitializer
 
 abstract class BaseComponent @JvmOverloads constructor(
     context: Context,

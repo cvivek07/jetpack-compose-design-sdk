@@ -1,14 +1,13 @@
-package com.ixigo.design_sdk.components.input_fields.base
+package com.ixigo.design.sdk.components.inputfields.base
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
-import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.styles.Colors
+import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 abstract class BaseInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -31,7 +30,7 @@ abstract class BaseInputField @JvmOverloads constructor(
             onClickDrawableEnd = {},
             onClickDrawableStart = {},
             onTextChange = {},
-            color = Colors.Orange
+            color = IxiColor.Orange
         )
     )
 
@@ -60,7 +59,7 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState
     }
 
-    fun setColor(color: Colors) {
+    fun setColor(color: IxiColor) {
         val initState = state.value.copy(color = color)
         state.value = initState
     }
@@ -132,7 +131,7 @@ abstract class BaseInputField @JvmOverloads constructor(
 }
 
 data class InputFieldState(
-    val color: Colors,
+    val color: IxiColor,
     @DrawableRes val actionImage: Int,
     @DrawableRes val drawableStart: Int,
     @DrawableRes val drawableEnd: Int,

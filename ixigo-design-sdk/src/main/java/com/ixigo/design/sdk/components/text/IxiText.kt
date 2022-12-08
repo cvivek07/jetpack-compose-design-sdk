@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.text
+package com.ixigo.design.sdk.components.text
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,14 +8,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.ixigo.design_sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
-class Text @JvmOverloads constructor(
+class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
 
     protected val state = mutableStateOf(
-        TextState("", com.ixigo.design_sdk.components.styles.Typography.Heading.DisplayLarge500)
+        TextState("", IxiTypography.Heading.DisplayLarge.regular)
     )
 
     fun setText(text: String) {

@@ -1,16 +1,16 @@
-package com.ixigo.design_sdk.components.buttons
+package com.ixigo.design.sdk.components.buttons
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.ixigo.design_sdk.components.buttons.base.BaseButton
-import com.ixigo.design_sdk.components.buttons.composable.ComposableTextButton
-import com.ixigo.design_sdk.components.styles.IxiColor
-import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
-import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.buttons.base.BaseButton
+import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
+import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 
-class TertiaryButton @JvmOverloads constructor(
+class IxiTertiaryButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

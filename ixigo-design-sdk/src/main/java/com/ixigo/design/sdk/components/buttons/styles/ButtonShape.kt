@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.buttons.styles
+package com.ixigo.design.sdk.components.buttons.styles
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.geometry.Rect

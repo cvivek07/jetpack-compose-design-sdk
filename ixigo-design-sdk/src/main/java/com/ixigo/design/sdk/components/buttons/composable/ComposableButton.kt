@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.buttons.composable
+package com.ixigo.design.sdk.components.buttons.composable
 
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.ixigo.design_sdk.components.styles.IxiColor
-import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
-import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
-import com.ixigo.design_sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiFamily
 
 @Composable
 internal fun ComposableButton(
