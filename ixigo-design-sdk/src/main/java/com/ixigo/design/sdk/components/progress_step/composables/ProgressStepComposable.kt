@@ -21,9 +21,10 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.progress_step.base.*
-import com.ixigo.design_sdk.components.styles.IxiFamily
-import com.ixigo.design_sdk.components.styles.Typography
+import com.ixigo.design.sdk.components.progress_step.base.*
+import com.ixigo.design.sdk.components.progress_step.composables.*
+import com.ixigo.design.sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiTypography
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
@@ -39,11 +40,11 @@ fun DrawVerticalNode(
 ) {
 
     val textStyle: TextStyle = if (progressState == ProgressState.Active) {
-        Typography.Body.Large.medium
+        IxiTypography.Body.Large.medium
     } else {
-        Typography.Body.Large.regular
+        IxiTypography.Body.Large.regular
     }
-    val subTitleTextStyle: TextStyle = Typography.Body.Small.regular
+    val subTitleTextStyle: TextStyle = IxiTypography.Body.Small.regular
 
     BoxWithConstraints(modifier = Modifier.fillMaxWidth()) {
         ConstraintLayout(
@@ -179,11 +180,11 @@ fun DrawHorizontalNode(
     lineColor: Int
 ) {
     val textStyle: TextStyle = if (progressState == ProgressState.Active) {
-        Typography.Body.Large.medium
+        IxiTypography.Body.Large.medium
     } else {
-        Typography.Body.Large.regular
+        IxiTypography.Body.Large.regular
     }
-    val subTitleTextStyle: TextStyle = Typography.Body.Small.regular
+    val subTitleTextStyle: TextStyle = IxiTypography.Body.Small.regular
 
     BoxWithConstraints(modifier = Modifier.wrapContentWidth()) {
         ConstraintLayout(
@@ -320,9 +321,9 @@ fun DrawHorizontalInlineNode(
     mode: ProgressStepMode = ProgressStepMode.Dark
 ) {
     val textStyle: TextStyle = if (progressState == ProgressState.Active) {
-        Typography.Body.Large.medium
+        IxiTypography.Body.Large.medium
     } else {
-        Typography.Body.Large.regular
+        IxiTypography.Body.Large.regular
     }
 
     val textColor  = if(mode == ProgressStepMode.Dark) {

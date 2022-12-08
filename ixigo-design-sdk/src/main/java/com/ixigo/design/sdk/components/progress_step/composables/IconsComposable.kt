@@ -1,6 +1,5 @@
-package com.ixigo.design_sdk.components.progress_step.composables
+package com.ixigo.design.sdk.components.progress_step.composables
 
-import android.R.attr
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
@@ -8,27 +7,20 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.graphics.drawscope.*
-import androidx.compose.ui.graphics.vector.rememberVectorPainter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.text.TextMeasurer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.progress_step.base.ProgressState
-import com.ixigo.design_sdk.components.progress_step.base.ProgressStepMode
-import com.ixigo.design_sdk.components.progress_step.base.ProgressStepSize
-import com.ixigo.design_sdk.components.progress_step.base.SelectionIndicator
-import com.ixigo.design_sdk.components.styles.Colors
+import com.ixigo.design.sdk.components.progress_step.base.ProgressState
+import com.ixigo.design.sdk.components.progress_step.base.ProgressStepMode
+import com.ixigo.design.sdk.components.progress_step.base.ProgressStepSize
 
 
 private val outerRadius = 10.dp

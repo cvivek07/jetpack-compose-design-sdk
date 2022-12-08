@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.progress_step.base
+package com.ixigo.design.sdk.components.progress_step.base
 
 import android.content.Context
 import android.util.AttributeSet
@@ -7,8 +7,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiTypography
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -125,12 +126,12 @@ sealed class ProgressState(
 sealed class ProgressStepSize(val size: Dp, val textStyle: TextStyle) {
     object Small : ProgressStepSize(
         20.dp,
-        com.ixigo.design_sdk.components.styles.Typography.Body.XSmall.regular
+        IxiTypography.Body.XSmall.regular
     )
 
     object Large : ProgressStepSize(
         30.dp,
-        com.ixigo.design_sdk.components.styles.Typography.Body.XSmall.regular
+        IxiTypography.Body.XSmall.regular
     )
 }
 

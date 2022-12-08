@@ -1,11 +1,11 @@
-package com.ixigo.design_sdk.components.progress_step
+package com.ixigo.design.sdk.components.progress_step
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.ixigo.design_sdk.components.progress_step.base.BaseProgressStep
-import com.ixigo.design_sdk.components.progress_step.base.ProgressStepMode
+import com.ixigo.design.sdk.components.progress_step.base.BaseProgressStep
+import com.ixigo.design.sdk.components.progress_step.base.ProgressStepMode
 import com.ixigo.design_sdk.components.progress_step.composables.DrawHorizontalInlineSteps
 import kotlinx.coroutines.launch
 
