@@ -10,49 +10,49 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <com.ixigo.design_sdk.components.input_fields.OutlinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiOutlinedInputField
             android:id="@+id/inputField1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
 
-        <com.ixigo.design_sdk.components.input_fields.LinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
             android:id="@+id/inputField2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
 
-        <com.ixigo.design_sdk.components.input_fields.LinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
             android:id="@+id/inputField3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
 
-        <com.ixigo.design_sdk.components.input_fields.OutlinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiOutlinedInputField
             android:id="@+id/inputField4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
 
-        <com.ixigo.design_sdk.components.input_fields.OutlinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiOutlinedInputField
             android:id="@+id/inputField5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
 
-        <com.ixigo.design_sdk.components.input_fields.LinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
             android:id="@+id/inputField6"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
 
-        <com.ixigo.design_sdk.components.input_fields.LinedInputField
+        <com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
             android:id="@+id/inputField7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ixigo.design.sdk.components.progress_step.base.ProgressState
+import com.ixigo.design.sdk.components.progress_step.base.ProgressStepData
+import com.ixigo.design.sdk.components.progress_step.base.ProgressStepMode
+import com.ixigo.design.sdk.components.progress_step.base.SelectionIndicator
+import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.databinding.FragmentProgressStepBinding
-import com.ixigo.design_sdk.components.progress_step.base.*
 
 class ProgressStepFragment : Fragment() {
 
@@ -57,6 +61,20 @@ class ProgressStepFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.h1.setText("Vertical Progress Steps Using Icons")
+        binding.h2.setText("Vertical Progress Steps Using Numbers")
+        binding.h3.setText("Horizontal Progress Steps Using Icons")
+        binding.h4.setText("Horizontal Progress Steps Using Numbers")
+        binding.h5.setText("Horizontal Inline Progress Steps Using Dark Mode")
+        binding.h6.setText("Horizontal Progress Steps Using Light Mode")
+
+        binding.h1.setTypography(IxiTypography.Body.Large.bold)
+        binding.h2.setTypography(IxiTypography.Body.Large.bold)
+        binding.h3.setTypography(IxiTypography.Body.Large.bold)
+        binding.h4.setTypography(IxiTypography.Body.Large.bold)
+        binding.h5.setTypography(IxiTypography.Body.Large.bold)
+        binding.h6.setTypography(IxiTypography.Body.Large.bold)
+
         binding.vProgressStep.apply {
             addSteps(data)
             selectionIndicator = SelectionIndicator.ICON
@@ -68,6 +86,7 @@ class ProgressStepFragment : Fragment() {
         binding.nextError.setClickListener {
             binding.vProgressStep.selectNext(ProgressState.Error)
         }
+
 
         binding.vProgressStep2.apply {
             addSteps(data)

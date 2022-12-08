@@ -7,23 +7,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="20dp">
 
-        <TextView
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/h1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Vertical Progress Steps Using Icons" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.progress_step.VerticalProgressStep
+        <com.ixigo.design.sdk.components.progress_step.VerticalProgressStep
             android:id="@+id/vProgressStep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,29 +33,31 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/nextError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Error Step" />
 
         <include layout="@layout/divider" />
+        <include layout="@layout/divider" />
 
-        <TextView
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/h2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Vertical Progress Steps Using Numbers" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.progress_step.VerticalProgressStep
+        <com.ixigo.design.sdk.components.progress_step.VerticalProgressStep
             android:id="@+id/vProgressStep2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/next2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -61,27 +65,31 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/next2Error"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Error Step" />
 
-        <TextView
+        <include layout="@layout/divider" />
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/h3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Horizontal Progress Steps Using Icons" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.progress_step.HorizontalProgressStep
+        <com.ixigo.design.sdk.components.progress_step.HorizontalProgressStep
             android:id="@+id/hProgressStep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/nextH"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -89,29 +97,32 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/nextHError"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Error Step" />
 
+
+        <include layout="@layout/divider" />
         <include layout="@layout/divider" />
 
-        <TextView
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/h4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Horizontal Progress Steps Using Numberss" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.progress_step.HorizontalProgressStep
+        <com.ixigo.design.sdk.components.progress_step.HorizontalProgressStep
             android:id="@+id/hProgressStepNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/nextHNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -119,16 +130,18 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/nextHErrorNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Error Step" />
 
         <include layout="@layout/divider" />
+        <include layout="@layout/divider" />
 
 
-        <TextView
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/h5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Horizontal Inline Progress Steps Using Dark Mode" />
@@ -141,7 +154,7 @@
             android:background="@color/b700"
             android:orientation="vertical">
 
-            <com.ixigo.design_sdk.components.progress_step.HorizontalInlineProgressStep
+            <com.ixigo.design.sdk.components.progress_step.HorizontalInlineProgressStep
                 android:id="@+id/hProgressInlineStep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -149,7 +162,7 @@
 
             <include layout="@layout/divider" />
 
-            <com.ixigo.design_sdk.components.buttons.OutlinedButton
+            <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
                 android:id="@+id/nextInlineLight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -158,21 +171,25 @@
             <include layout="@layout/divider" />
         </LinearLayout>
 
-        <TextView
+        <include layout="@layout/divider" />
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/h6"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Horizontal Progress Steps Using Light Mode" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.progress_step.HorizontalInlineProgressStep
+        <com.ixigo.design.sdk.components.progress_step.HorizontalInlineProgressStep
             android:id="@+id/hProgressInlineStepDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
+        <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
             android:id="@+id/nextInlineDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
