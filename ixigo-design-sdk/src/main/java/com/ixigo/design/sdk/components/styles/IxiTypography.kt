@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.styles
+package com.ixigo.design.sdk.components.styles
 
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle

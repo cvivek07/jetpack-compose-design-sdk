@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.buttons.styles
+package com.ixigo.design.sdk.components.buttons.styles
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.Dp

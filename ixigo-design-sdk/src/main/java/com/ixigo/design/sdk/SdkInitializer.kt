@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk
+package com.ixigo.design.sdk
 
 object SdkInitializer {
     var projectName: Projects? = null

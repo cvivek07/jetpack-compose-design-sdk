@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentTypographyBinding
-import com.ixigo.design_sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
 class TypographyFragment : Fragment() {
     private var _binding: FragmentTypographyBinding? = null

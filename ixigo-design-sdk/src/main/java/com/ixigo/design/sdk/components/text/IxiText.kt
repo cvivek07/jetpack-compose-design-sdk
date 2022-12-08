@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.text
+package com.ixigo.design.sdk.components.text
 
 import android.content.Context
 import android.util.AttributeSet
@@ -8,8 +8,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.ixigo.design_sdk.components.styles.IxiFamily
-import com.ixigo.design_sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
 class Text @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

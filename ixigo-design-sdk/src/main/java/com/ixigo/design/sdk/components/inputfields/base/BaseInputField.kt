@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.input_fields.base
+package com.ixigo.design.sdk.components.inputfields.base
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,8 +6,8 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 abstract class BaseInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

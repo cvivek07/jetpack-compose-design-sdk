@@ -19,7 +19,7 @@
         android:padding="10dp"
         tools:context=".ButtonsFragment">
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
+                <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
                     android:id="@+id/button_fourth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -59,7 +59,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.PrimaryButton
+                <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
                     android:id="@+id/button_fifth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
                     android:id="@+id/button_sixth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
                     android:id="@+id/button_seven"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
                     android:id="@+id/button_eight"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-                <com.ixigo.design_sdk.components.buttons.OutlinedButton
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
                     android:id="@+id/button_nine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_twelve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_thirteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -139,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_fourteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
             android:id="@+id/button_eleven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
             android:id="@+id/button_fifteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -168,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
             android:id="@+id/button_sixteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -1,14 +1,14 @@
-package com.ixigo.design_sdk.components.buttons.base
+package com.ixigo.design.sdk.components.buttons.base
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.BaseComponent
-import com.ixigo.design_sdk.components.buttons.styles.*
-import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 abstract class BaseButton @JvmOverloads constructor(
     context: Context,

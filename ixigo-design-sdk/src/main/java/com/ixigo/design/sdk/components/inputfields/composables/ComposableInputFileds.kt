@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.input_fields.composables
+package com.ixigo.design.sdk.components.inputfields.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -16,7 +16,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 private val unFocusColor = R.color.n100
 

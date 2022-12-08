@@ -1,13 +1,13 @@
-package com.ixigo.design_sdk.components.input_fields
+package com.ixigo.design.sdk.components.inputfields
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.ixigo.design_sdk.components.input_fields.base.BaseInputField
-import com.ixigo.design_sdk.components.input_fields.composables.LinedInputField
+import com.ixigo.design.sdk.components.inputfields.base.BaseInputField
+import com.ixigo.design.sdk.components.inputfields.composables.OutlinedInputField
 
-class LinedInputField  @JvmOverloads constructor(
+class IxiOutlinedInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseInputField(context, attrs, defStyleAttr) {
 
@@ -17,7 +17,7 @@ class LinedInputField  @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
 
-        LinedInputField(
+        OutlinedInputField(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,
             drawableStart = state.value.drawableStart,

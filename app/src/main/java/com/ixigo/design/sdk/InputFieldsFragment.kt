@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
-import com.ixigo.design_sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 class InputFieldsFragment : Fragment() {
 
@@ -20,7 +20,7 @@ class InputFieldsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentInputFieldsBinding.inflate(inflater, container, false)
         return binding.root
