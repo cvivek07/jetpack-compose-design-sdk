@@ -2,14 +2,12 @@ package com.ixigo.design.sdk.components.text
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.sp
-import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

@@ -1,4 +1,4 @@
-package com.ixigo.design_sdk.components.topappbar.composable
+package com.ixigo.design.sdk.components.topappbar.composable
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -17,7 +17,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design_sdk.components.text.composable.TypographyText
+import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 @Composable
 fun MainToolBar(
@@ -47,16 +48,16 @@ fun MainToolBar(
                     text = title,
                     modifier = Modifier.align(Alignment.CenterHorizontally),
                     textStyle = if (subTitle.isNullOrEmpty()) {
-                        com.ixigo.design_sdk.components.styles.Typography.Heading.h5_500
+                       IxiTypography.Heading.H5.regular
                     } else {
-                        com.ixigo.design_sdk.components.styles.Typography.Heading.h6_500
+                        IxiTypography.Heading.H6.regular
                     }
                 )
             }
             if (!subTitle.isNullOrBlank()) {
                 TypographyText(
                     text = subTitle,
-                    textStyle = com.ixigo.design_sdk.components.styles.Typography.Body.XSmall.regular
+                    textStyle = IxiTypography.Body.XSmall.regular
                 )
             }
         }

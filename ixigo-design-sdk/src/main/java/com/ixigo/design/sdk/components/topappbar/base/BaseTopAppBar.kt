@@ -1,9 +1,9 @@
-package com.ixigo.design_sdk.components.topappbar.base
+package com.ixigo.design.sdk.components.topappbar.base
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
-import com.ixigo.design_sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.BaseComponent
 
 abstract class BaseTopAppBar @JvmOverloads constructor(
     context: Context,

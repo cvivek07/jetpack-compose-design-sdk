@@ -1,11 +1,11 @@
-package com.ixigo.design_sdk.components.text.composable
+package com.ixigo.design.sdk.components.text.composable
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.sp
-import com.ixigo.design_sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiFamily
 
 @Composable
 fun TypographyText(text: String,modifier: Modifier = Modifier, textStyle: TextStyle) {
@@ -18,6 +18,7 @@ fun TypographyText(text: String,modifier: Modifier = Modifier, textStyle: TextSt
         color = textStyle.color,
         textDecoration = textStyle.textDecoration,
         fontStyle = textStyle.fontStyle,
-        lineHeight = textStyle.lineHeight
+        lineHeight = textStyle.lineHeight,
+        modifier = modifier
     )
 }
