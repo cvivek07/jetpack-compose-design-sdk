@@ -5,20 +5,6 @@
         <attr name="android:text" format="string" />
         <attr name="android:drawableEnd" format="reference" />
         <attr name="android:drawableStart" format="reference" />
-
-        <attr name="ixi_button_style" format="flags">
-            <flag name="o700NormalTrailingShapeRadius" value="0" />
-            <flag name="o700NormalLeadingShapeRadius" value="1" />
-            <flag name="b700NormalLeadingShapeRadius" value="2" />
-            <flag name="b700XXlargeBottomShapeRadius" value="3" />
-            <flag name="b700XXlargeBottomShapeRadiusDisabled" value="4" />
-            <flag name="b700XXlargeRegularShapeRadius" value="5" />
-            <flag name="b700NormalRegularShapeRadius" value="6" />
-            <flag name="b700NormalRegularShapeRadiusOutlined" value="7" />
-            <flag name="b700NormalTrailingShapeRadiusOutlined" value="8" />
-            <flag name="b700NormalLeadingShapeRadiusOutlined" value="9" />
-            <flag name="b700NormalBottomShapeRadiusOutlined" value="10" />
-        </attr>
     </declare-styleable>
 
     <declare-styleable name="SolidIxigoButton" parent = "IxigoButton"/>

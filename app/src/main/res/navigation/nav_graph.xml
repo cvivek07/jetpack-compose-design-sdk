@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_ComponentFragment_to_inputFieldFragment"
             app:destination="@id/inputFieldsFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_typographyFragment"
+            app:destination="@id/typographyFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -35,5 +38,12 @@
         android:name="com.ixigo.design.sdk.InputFieldsFragment"
         android:label="@string/input_fields"
         tools:layout="@layout/fragment_input_fields">
+    </fragment>
+
+    <fragment
+        android:id="@+id/typographyFragment"
+        android:name="com.ixigo.design.sdk.TypographyFragment"
+        android:label="@string/typography"
+        tools:layout="@layout/fragment_typography">
     </fragment>
 </navigation>

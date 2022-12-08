@@ -30,6 +30,7 @@ class ComponentsFragment : Fragment() {
     private val componentList: MutableList<Pair<String, Int>> = mutableListOf(
         Pair("Buttons", R.id.action_ComponentFragment_to_ButtonsFragment),
         Pair("Input Fields", R.id.action_ComponentFragment_to_inputFieldFragment),
+        Pair("Typography", R.id.action_componentFragment_to_typographyFragment),
     )
 
     override fun onCreateView(
