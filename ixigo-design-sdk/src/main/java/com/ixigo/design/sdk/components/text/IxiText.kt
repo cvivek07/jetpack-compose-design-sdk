@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.sp
 import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.styles.IxiTypography
 
-class Text @JvmOverloads constructor(
+class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
 
