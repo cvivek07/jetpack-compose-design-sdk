@@ -10,165 +10,179 @@ import androidx.compose.ui.text.font.FontWeight.Companion.W900
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 
-object Typography {
-    val n800 = Color(29, 38, 60)
+object IxiTypography {
+    private val n800 = Color(29, 38, 60)
 
     object Heading {
-        val DisplayLarge500 = TextStyle(
-            fontSize = 54.sp,
-            lineHeight = 65.sp,
-            letterSpacing = 4.sp,
-            fontWeight = W500,
-            color = n800
-        )
-        val DisplayLarge700 = TextStyle(
-            fontSize = 54.sp,
-            lineHeight = 65.sp,
-            letterSpacing = 4.sp,
-            fontWeight = W700,
-            color = n800
-        )
-        val DisplayLarge900 = TextStyle(
-            fontSize = 54.sp,
-            lineHeight = 65.sp,
-            letterSpacing = 4.sp,
-            fontWeight = W900,
-            color = n800
-        )
+        object DisplayLarge {
+            val regular = TextStyle(
+                fontSize = 54.sp,
+                lineHeight = 65.sp,
+                letterSpacing = 4.sp,
+                fontWeight = W500,
+                color = n800
+            )
+            val semiBold = TextStyle(
+                fontSize = 54.sp,
+                lineHeight = 65.sp,
+                letterSpacing = 4.sp,
+                fontWeight = W700,
+                color = n800
+            )
+            val bold = TextStyle(
+                fontSize = 54.sp,
+                lineHeight = 65.sp,
+                letterSpacing = 4.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
 
-        val h1_500 = TextStyle(
-            fontSize = 40.sp,
-            lineHeight = 48.sp,
-            letterSpacing = 3.sp,
-            fontWeight = W500,
-            color = n800
-        )
-        val h1_700 = TextStyle(
-            fontSize = 40.sp,
-            lineHeight = 48.sp,
-            letterSpacing = 3.sp,
-            fontWeight = W700,
-            color = n800
-        )
-        val h1_900 = TextStyle(
-            fontSize = 40.sp,
-            lineHeight = 48.sp,
-            letterSpacing = 3.sp,
-            fontWeight = W900,
-            color = n800
-        )
+        object H1 {
+            val regular = TextStyle(
+                fontSize = 40.sp,
+                lineHeight = 48.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W500,
+                color = n800
+            )
+            val semiBold = TextStyle(
+                fontSize = 40.sp,
+                lineHeight = 48.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W700,
+                color = n800
+            )
+            val bold = TextStyle(
+                fontSize = 40.sp,
+                lineHeight = 48.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
 
-        val h2_500 = TextStyle(
-            fontSize = 36.sp,
-            lineHeight = 43.sp,
-            letterSpacing = 3.sp,
-            fontWeight = W500,
-            color = n800
-        )
+        object H2 {
+            val regular = TextStyle(
+                fontSize = 36.sp,
+                lineHeight = 43.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W500,
+                color = n800
+            )
 
-        val h2_700 = TextStyle(
-            fontSize = 36.sp,
-            lineHeight = 43.sp,
-            letterSpacing = 3.sp,
-            fontWeight = W700,
-            color = n800
-        )
+            val semiBold = TextStyle(
+                fontSize = 36.sp,
+                lineHeight = 43.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W700,
+                color = n800
+            )
 
-        val h2_900 = TextStyle(
-            fontSize = 36.sp,
-            lineHeight = 43.sp,
-            letterSpacing = 3.sp,
-            fontWeight = W900,
-            color = n800
-        )
+            val bold = TextStyle(
+                fontSize = 36.sp,
+                lineHeight = 43.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
 
-        val h3_500 = TextStyle(
-            fontSize = 30.sp,
-            lineHeight = 36.sp,
-            letterSpacing = 2.sp,
-            fontWeight = W500,
-            color = n800
-        )
-        val h3_700 = TextStyle(
-            fontSize = 30.sp,
-            lineHeight = 36.sp,
-            letterSpacing = 2.sp,
-            fontWeight = W700,
-            color = n800
-        )
-        val h3_900 = TextStyle(
-            fontSize = 30.sp,
-            lineHeight = 36.sp,
-            letterSpacing = 2.sp,
-            fontWeight = W900,
-            color = n800
-        )
+        object H3 {
+            val regular = TextStyle(
+                fontSize = 30.sp,
+                lineHeight = 36.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W500,
+                color = n800
+            )
+            val semiBold = TextStyle(
+                fontSize = 30.sp,
+                lineHeight = 36.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W700,
+                color = n800
+            )
+            val bold = TextStyle(
+                fontSize = 30.sp,
+                lineHeight = 36.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
 
-        val h4_500 = TextStyle(
-            fontSize = 24.sp,
-            lineHeight = 29.sp,
-            letterSpacing = 2.sp,
-            fontWeight = W500,
-            color = n800
-        )
-        val h4_700 = TextStyle(
-            fontSize = 24.sp,
-            lineHeight = 29.sp,
-            letterSpacing = 2.sp,
-            fontWeight = W700,
-            color = n800
-        )
-        val h4_900 = TextStyle(
-            fontSize = 24.sp,
-            lineHeight = 29.sp,
-            letterSpacing = 2.sp,
-            fontWeight = W900,
-            color = n800
-        )
+        object H4 {
+            val regular = TextStyle(
+                fontSize = 24.sp,
+                lineHeight = 29.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W500,
+                color = n800
+            )
+            val semiBold = TextStyle(
+                fontSize = 24.sp,
+                lineHeight = 29.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W700,
+                color = n800
+            )
+            val bold = TextStyle(
+                fontSize = 24.sp,
+                lineHeight = 29.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
 
-        val h5_500 = TextStyle(
-            fontSize = 20.sp,
-            lineHeight = 24.sp,
-            letterSpacing = 1.sp,
-            fontWeight = W500,
-            color = n800
-        )
-        val h5_700 = TextStyle(
-            fontSize = 20.sp,
-            lineHeight = 24.sp,
-            letterSpacing = 1.sp,
-            fontWeight = W700,
-            color = n800
-        )
-        val h5_900 = TextStyle(
-            fontSize = 20.sp,
-            lineHeight = 24.sp,
-            letterSpacing = 1.sp,
-            fontWeight = W900,
-            color = n800
-        )
+        object H5 {
+            val regular = TextStyle(
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W500,
+                color = n800
+            )
+            val semiBold = TextStyle(
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W700,
+                color = n800
+            )
+            val bold = TextStyle(
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
 
-        val h6_500 = TextStyle(
-            fontSize = 18.sp,
-            lineHeight = 22.sp,
-            letterSpacing = 1.sp,
-            fontWeight = W500,
-            color = n800
-        )
-        val h6_700 = TextStyle(
-            fontSize = 18.sp,
-            lineHeight = 22.sp,
-            letterSpacing = 1.sp,
-            fontWeight = W700,
-            color = n800
-        )
-        val h6_900 = TextStyle(
-            fontSize = 18.sp,
-            lineHeight = 22.sp,
-            letterSpacing = 1.sp,
-            fontWeight = W900,
-            color = n800
-        )
+        object H6 {
+            val regular = TextStyle(
+                fontSize = 18.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W500,
+                color = n800
+            )
+            val semiBold = TextStyle(
+                fontSize = 18.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W700,
+                color = n800
+            )
+            val bold = TextStyle(
+                fontSize = 18.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W900,
+                color = n800
+            )
+        }
     }
 
     object Body {
