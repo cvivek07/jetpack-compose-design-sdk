@@ -5,10 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.graphics.Color
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
-import com.ixigo.design_sdk.components.styles.Colors
+import com.ixigo.design_sdk.components.styles.IxiColor
 
 class InputFieldsFragment : Fragment() {
 
@@ -38,7 +37,7 @@ class InputFieldsFragment : Fragment() {
             setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
             setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
             setMaxCharCount(30)
-            setColor(Colors.Error)
+            setColor(IxiColor.Error)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
             }
@@ -71,7 +70,7 @@ class InputFieldsFragment : Fragment() {
         _binding?.inputField3?.apply {
             setLabel("Label")
             setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
-            setColor(Colors.Warning)
+            setColor(IxiColor.Warning)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
             }
@@ -86,7 +85,7 @@ class InputFieldsFragment : Fragment() {
 
         _binding?.inputField4?.apply {
             setLabel("Label")
-            setColor(Colors.Success)
+            setColor(IxiColor.Success)
             setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
             setMaxCharCount(10)
             setActionTextClickListener {
@@ -104,7 +103,7 @@ class InputFieldsFragment : Fragment() {
         _binding?.inputField5?.apply {
             setLabel("Label")
             setMaxCharCount(100)
-            setColor(Colors.Error)
+            setColor(IxiColor.Error)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
             }
@@ -119,7 +118,7 @@ class InputFieldsFragment : Fragment() {
 
         _binding?.inputField6?.apply {
             setLabel("Label")
-            setColor(Colors.Extension)
+            setColor(IxiColor.Extension)
             setMaxCharCount(10)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
