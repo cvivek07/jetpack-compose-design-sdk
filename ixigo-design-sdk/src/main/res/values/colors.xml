@@ -7,4 +7,91 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="o900">#CA610A</color>
+    <color name="o800">#ED6C02</color>
+    <color name="o700">#FC790D</color>
+    <color name="o600">#FD943D</color>
+    <color name="o500">#FDA156</color>
+    <color name="o400">#FEBC86</color>
+    <color name="o300">#FEC99E</color>
+    <color name="o200">#FED7B6</color>
+    <color name="o100">#FEE4CF</color>
+    <color name="o50">#FFF2E7</color>
+
+    <color name="b900">#001833</color>
+    <color name="b800">#002B59</color>
+    <color name="b700">#00438C</color>
+    <color name="b600">#005BBF</color>
+    <color name="b500">#0770E4</color>
+    <color name="b400">#207EE7</color>
+    <color name="b300">#519BEC</color>
+    <color name="b200">#91BFF2</color>
+    <color name="b100">#C8DEF7</color>
+    <color name="b50">#E5F0FC</color>
+
+
+    <color name="disabled_bg">#F3F3F4</color>
+    <color name="disabled_text">#CDCFD4</color>
+
+
+    <color name="n900">#040E26</color>
+    <color name="n800">#1D263C</color>
+    <color name="n700">#363E52</color>
+    <color name="n600">#606778</color>
+    <color name="n500">#818793</color>
+    <color name="n400">#A0A5B0</color>
+    <color name="n300">#CDCFD4</color>
+    <color name="n200">#D9DBDF</color>
+    <color name="n100">#E0E1E3</color>
+    <color name="n80">#E6E7E9</color>
+    <color name="n60">#EFEFF0</color>
+    <color name="n40">#F3F3F4</color>
+    <color name="n20">#F9F9FA</color>
+    <color name="n0">#FFFFFF</color>
+
+    <color name="r900">#42100F</color>
+    <color name="r800">#6E1B19</color>
+    <color name="r700">#9A2523</color>
+    <color name="r600">#C6302D</color>
+    <color name="r500">#DC3532</color>
+    <color name="r400">#E04947</color>
+    <color name="r300">#E77270</color>
+    <color name="r200">#EE9A99</color>
+    <color name="r100">#F5C2C2</color>
+    <color name="r50">#FCEBEB</color>
+
+    <color name="g900">#0D2E18</color>
+    <color name="g800">#164D28</color>
+    <color name="g700">#1E6B38</color>
+    <color name="g600">#278A48</color>
+    <color name="g500">#2B9950</color>
+    <color name="g400">#40A362</color>
+    <color name="g300">#6BB885</color>
+    <color name="g200">#95CCA8</color>
+    <color name="g100">#BFE0CB</color>
+    <color name="g50">#EAF5EE</color>
+
+    <color name="y900">#423209</color>
+    <color name="y800">#9A7614</color>
+    <color name="y700">#C6971A</color>
+    <color name="y600">#DCA81D</color>
+    <color name="y500">#F6C350</color>
+    <color name="y400">#F7C962</color>
+    <color name="y300">#F9D585</color>
+    <color name="y200">#FBE1A8</color>
+    <color name="y100">#FCEDCB</color>
+    <color name="y50">#FEF9EE</color>
+
+    <color name="p900">#2C0A4A</color>
+    <color name="p800">#370C5D</color>
+    <color name="p700">#4D1182</color>
+    <color name="p600">#581394</color>
+    <color name="p500">#6E18B9</color>
+    <color name="p400">#7D2FC0</color>
+    <color name="p300">#9A5DCE</color>
+    <color name="p200">#B78CDC</color>
+    <color name="p100">#D4BAEA</color>
+    <color name="p50">#F1E8F8</color>
 </resources>
