@@ -23,4 +23,12 @@
         <attr name="actionImage" format="reference" />
         <attr name="drawableTintColor" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="BaseBottomSheet">
+        <attr name="image" format="reference" />
+        <attr name="headerText" format="string" />
+        <attr name="imageBackgroundColor" format="reference" />
+        <attr name="bodyText" format="string" />
+        <attr name="toolbarText" format="string" />
+    </declare-styleable>
 </resources>

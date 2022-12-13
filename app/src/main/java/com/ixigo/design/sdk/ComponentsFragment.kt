@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
@@ -31,6 +34,7 @@ class ComponentsFragment : Fragment() {
         Pair("Buttons", R.id.action_ComponentFragment_to_ButtonsFragment),
         Pair("Input Fields", R.id.action_ComponentFragment_to_inputFieldFragment),
         Pair("Typography", R.id.action_componentFragment_to_typographyFragment),
+        Pair("Bottom Sheet", R.id.action_componentFragment_to_bottomSheetFragment)
     )
 
     override fun onCreateView(

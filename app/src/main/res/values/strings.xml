@@ -12,4 +12,5 @@
     <string name="buttons">Buttons</string>
     <string name="input_fields">Input Fields</string>
     <string name="typography">Typography</string>
+    <string name="bottom_sheets">Bottom Sheets</string>
 </resources>

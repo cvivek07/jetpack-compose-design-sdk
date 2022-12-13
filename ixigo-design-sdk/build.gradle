@@ -15,6 +15,7 @@ version = '0.0.1'
 android {
     compileSdkVersion 33
     buildFeatures {
+        viewBinding true
         compose true
     }
 
