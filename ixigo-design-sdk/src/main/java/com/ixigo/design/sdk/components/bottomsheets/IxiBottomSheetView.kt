@@ -24,6 +24,10 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 imageBackgroundColor = imageBackgroundColor,
                 bodyText = bodyText,
                 toolbarText = toolbarText,
+                primaryButton = primaryButton,
+                secondaryButton = secondaryButton,
+                closeActionListener = onClose,
+                isToolbarCentered = isToolbarCentered
             )
         }
     }

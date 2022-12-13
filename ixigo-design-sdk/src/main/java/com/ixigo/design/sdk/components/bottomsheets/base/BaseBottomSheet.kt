@@ -53,7 +53,7 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
 
     fun setCloseActionListener(closeActionListener: (() -> Unit)?){
         val inState = state.value
-        state.value = inState.copy(closeActionListener = closeActionListener)
+        state.value = inState.copy(onClose = closeActionListener)
     }
 }
 
@@ -65,5 +65,6 @@ data class BottomSheetState(
     val toolbarText: String? = null,
     val primaryButton: IxiPrimaryButton? = null,
     val secondaryButton: IxiSecondaryButton? = null,
-    val closeActionListener: (() -> Unit)? = null
+    val onClose: (() -> Unit)? = null,
+    val isToolbarCentered: Boolean? = false
     ):java.io.Serializable

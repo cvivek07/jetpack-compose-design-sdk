@@ -6,13 +6,57 @@
     <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
-        android:id="@+id/button_first"
-        android:text="Bottom Sheet Open"
+        android:id="@+id/first"
+        android:text="Bottom Sheet 1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
-<!--    <com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView-->
-<!--        android:id="@+id/test_bottom_sheet_view"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"/>-->
+
+    <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/second"
+        android:text="Bottom Sheet 2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/third"
+        android:text="Bottom Sheet 3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/fourth"
+        android:text="Bottom Sheet 4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/fifth"
+        android:text="Bottom Sheet 5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/sixth"
+        android:text="Bottom Sheet 6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
+        android:id="@+id/seventh"
+        android:text="Bottom Sheet 7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

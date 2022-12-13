@@ -40,7 +40,8 @@ fun BaseBottomSheetComposable(
     toolbarText: String? = null,
     primaryButton: IxiPrimaryButton? = null,
     secondaryButton: IxiSecondaryButton? = null,
-    closeActionListener: (() -> Unit)? = null
+    closeActionListener: (() -> Unit)? = null,
+    isToolbarCentered:Boolean? = false
 ) {
     Box(modifier = Modifier
         .clip(RoundedCornerShape(30.dp, 30.dp, 0.dp, 0.dp))) {
@@ -48,11 +49,15 @@ fun BaseBottomSheetComposable(
             Box {
                 Column {
                     toolbarText?.let {
-                        TopToolbar(modifier = Modifier.padding(top = 21.dp), text = toolbarText, closeActionListener = closeActionListener)
+                        if(isToolbarCentered == true){
+                            TopToolbar(modifier = Modifier.padding(top = 21.dp), text = toolbarText, closeActionListener = closeActionListener, alignment = Alignment.Center)
+                        } else if(isToolbarCentered == false){
+                            TopToolbar(modifier = Modifier.padding(top = 21.dp), text = toolbarText, closeActionListener = closeActionListener, alignment = Alignment.TopStart)
+                        }
                         Spacer(modifier = Modifier.height(16.dp))
                     }
                     image?.let {
-                        if(imageBackgroundColor!=null && toolbarText==null){
+                        if(imageBackgroundColor==null && toolbarText==null){
                             Spacer(modifier = Modifier.height(45.dp))
                         }
                         BannerImage(
@@ -204,7 +209,7 @@ private fun BottomSheetButtons(
 @Composable
 private fun TopToolbar(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, closeActionListener: (() -> Unit)? = null){
     Box(modifier = modifier.fillMaxWidth(), contentAlignment = alignment){
-        Text(text = text, textAlign = TextAlign.Center, style = IxiTypography.Heading.H6.regular)
+        Text(text = text, textAlign = TextAlign.Center, style = IxiTypography.Heading.H6.regular, modifier = Modifier.padding(horizontal = 20.dp))
         closeActionListener?.let {
             Box(modifier = Modifier
                 .align(Alignment.CenterEnd)
@@ -212,7 +217,7 @@ private fun TopToolbar(modifier: Modifier = Modifier, alignment: Alignment  = Al
                 .clickable {
                     closeActionListener.invoke()
                 }){
-                Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(12.dp))
+                Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(22.dp))
             }
         }
     }
@@ -227,6 +232,5 @@ fun BottomSheetView() {
         bodyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis volutpat tortor quis ultrices. Proin posuere dictum aliquet. In quis tempor sapien, eget faucibus nisl. Maecenas non nibh ultricies dui iaculis fringilla ac nec mauris. Sed eget aliquam ante. Nunc ex",
         image = R.drawable.ic_launcher_background,
         imageBackgroundColor = R.color.r50,
-        toolbarText = "test"
     )
 }
