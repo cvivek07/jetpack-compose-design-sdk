@@ -5,14 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragment
-import com.ixigo.design.sdk.components.bottomsheets.base.BottomSheetState
-import com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
-import com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
-import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
-import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
-import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.databinding.FragmentBottomSheetBinding
+import com.ixigo.design.sdk.fragments.BottomSheetImplementation
 
 class BottomSheetFragment: Fragment() {
 
@@ -31,100 +25,105 @@ class BottomSheetFragment: Fragment() {
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val primaryButton = IxiPrimaryButton(requireContext())
-        primaryButton.setText("Button")
-        primaryButton.setStyle(ButtonShape.RegularShape, IxiColor.Orange, ButtonSize.Large)
-        primaryButton.setClickListener {
-            context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }
-        }
 
-        val secondaryButton = IxiSecondaryButton(requireContext())
-        secondaryButton.setText("Button")
-        secondaryButton.setStyle(ButtonShape.RegularShape, IxiColor.Orange, ButtonSize.Large)
-        secondaryButton.setClickListener {
-            context?.let { it1 -> "Button2 Clicked Change".toToast(it1) }
-        }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //variant 1
         binding.first.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                image = R.drawable.ic_launcher_background,
-                imageBackgroundColor = R.color.r50,
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setImageBackgroundColor(R.color.r50)
+            fragment.setIconSize(127f)
+            fragment.setImage(R.drawable.sample_image)
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.setSecondaryButton("Button"){
+                "Secondary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
 
         //variant 2
         binding.second.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                image = R.drawable.ic_launcher_background,
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setIconSize(80f)
+            fragment.setImage(R.drawable.sample_logo)
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.setSecondaryButton("Button"){
+                "Secondary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
 
         //variant 3
         binding.third.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.setSecondaryButton("Button"){
+                "Secondary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
 
         //variant 4
         binding.fourth.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                image = R.drawable.ic_launcher_background,
-                imageBackgroundColor = R.color.r50,
-                primaryButton = primaryButton,
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setImageBackgroundColor(R.color.r50)
+            fragment.setImage(R.drawable.sample_image)
+            fragment.setIconSize(127f)
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
 
         //variant 5
         binding.fifth.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                image = R.drawable.ic_launcher_background,
-                primaryButton = primaryButton,
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setImage(R.drawable.sample_logo)
+            fragment.setIconSize(80f)
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
 
         //variant 6
         binding.sixth.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                primaryButton = primaryButton,
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
 
         //variant 7
         binding.seventh.setClickListener {
-            IxiBottomSheetDialogFragment.newInstance(BottomSheetState(
-                toolbarText = "Title",
-                headerText = "Main title sentence",
-                bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                primaryButton = primaryButton,
-                isToolbarCentered = true
-            )
-            ).show(childFragmentManager, IxiBottomSheetDialogFragment.TAG)
+            val fragment = BottomSheetImplementation.newInstance()
+            fragment.setTitleText("Main title sentence")
+            fragment.setBodyText("Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum")
+            fragment.setIsToolbarCentered(true)
+            fragment.setToolbarText("Test")
+            fragment.setPrimaryButton("Button"){
+                "Primary Button".toToast(requireContext())
+            }
+            fragment.show(childFragmentManager, BottomSheetImplementation.TAG)
         }
     }
 }

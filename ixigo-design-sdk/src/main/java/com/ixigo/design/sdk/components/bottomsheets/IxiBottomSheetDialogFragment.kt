@@ -6,14 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.ixigo.design.sdk.components.bottomsheets.base.BottomSheetState
+import com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+import com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
+import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.databinding.IxiBottomSheetFragmentBinding
 
 
-class IxiBottomSheetDialogFragment:BottomSheetDialogFragment() {
+abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
     private lateinit var _binding: IxiBottomSheetFragmentBinding
+    private var uiState: IxiBottomSheetDialogFragmentUiMode = IxiBottomSheetDialogFragmentUiMode()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,20 +33,78 @@ class IxiBottomSheetDialogFragment:BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = IxiBottomSheetFragmentBinding.inflate(inflater)
-        (arguments?.getSerializable(STATE) as? BottomSheetState)?.let {
-            _binding.ixiBottomSheet.setImage(it.image)
-            _binding.ixiBottomSheet.setHeaderText(it.headerText)
-            _binding.ixiBottomSheet.setImageBackgroundColor(it.imageBackgroundColor)
-            _binding.ixiBottomSheet.setBodyText(it.bodyText)
-            _binding.ixiBottomSheet.setPrimaryButton(it.primaryButton)
-            _binding.ixiBottomSheet.setSecondaryButton(it.secondaryButton)
-            _binding.ixiBottomSheet.setCloseActionListener{
-                this.dismiss()
-                it.onClose?.invoke()
-            }
-            _binding.ixiBottomSheet.setToolbarText(it.toolbarText)
-        }
+        setupUi()
         return _binding.root
+    }
+
+
+    private fun setupUi(){
+        _binding.ixiBottomSheet.setImage(uiState.image)
+        _binding.ixiBottomSheet.setHeaderText(uiState.titleText)
+        _binding.ixiBottomSheet.setImageBackgroundColor(uiState.imageBackgroundColor)
+        _binding.ixiBottomSheet.setBodyText(uiState.bodyText)
+        _binding.ixiBottomSheet.setToolbarText(uiState.toolbarText)
+        _binding.ixiBottomSheet.setIsToolbarCentered(uiState.isToolbarCentered?:false)
+        _binding.ixiBottomSheet.setIconSize(uiState.iconSize)
+        uiState.primaryButtonText?.let {
+            val primaryButton = IxiPrimaryButton(context = requireContext())
+            primaryButton.setText(it)
+            primaryButton.setStyle(ButtonShape.RegularShape, uiState.primaryButtonColor?:IxiColor.Orange, ButtonSize.Large)
+            primaryButton.setClickListener {
+                uiState.primaryButtonAction?.invoke()
+            }
+            _binding.ixiBottomSheet.setPrimaryButton(primaryButton)
+        }
+        uiState.secondaryButtonText?.let {
+            val secondaryButton = IxiSecondaryButton(context = requireContext())
+            secondaryButton.setText(it)
+            secondaryButton.setStyle(ButtonShape.RegularShape, uiState.secondaryButtonColor?:IxiColor.Orange, ButtonSize.Large)
+            secondaryButton.setClickListener {
+                uiState.secondaryButtonAction?.invoke()
+            }
+            _binding.ixiBottomSheet.setSecondaryButton(secondaryButton)
+        }
+        _binding.ixiBottomSheet.setCloseActionListener{
+            this.dismiss()
+            onCloseActionListener()
+        }
+    }
+    abstract fun onCloseActionListener()
+
+    fun setImage(@DrawableRes image:Int?){
+        uiState = uiState.copy(image = image)
+    }
+
+    fun setTitleText(headerText:String?){
+        uiState = uiState.copy(titleText = headerText)
+    }
+
+    fun setImageBackgroundColor(@ColorRes imageBackgroundColor: Int?){
+        uiState = uiState.copy(imageBackgroundColor = imageBackgroundColor)
+    }
+
+    fun setBodyText(bodyText:String?){
+        uiState = uiState.copy(bodyText = bodyText)
+    }
+
+    fun setToolbarText(toolbarText:String?){
+        uiState = uiState.copy(toolbarText = toolbarText)
+    }
+
+    fun setPrimaryButton(primaryButtonText: String, ixiColor: IxiColor? = null, action:(()->Unit)? = null){
+        uiState = uiState.copy(primaryButtonText = primaryButtonText, primaryButtonAction = action, primaryButtonColor = ixiColor)
+    }
+
+    fun setSecondaryButton(secondaryButtonText: String, ixiColor: IxiColor?=null, action:(()->Unit)? = null){
+        uiState = uiState.copy(secondaryButtonText = secondaryButtonText, secondaryButtonAction = action, secondaryButtonColor = ixiColor)
+    }
+
+    fun setIsToolbarCentered(boolean: Boolean){
+        uiState = uiState.copy(isToolbarCentered = boolean)
+    }
+
+    fun setIconSize(size: Float){
+        uiState = uiState.copy(iconSize = size)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -54,18 +119,21 @@ class IxiBottomSheetDialogFragment:BottomSheetDialogFragment() {
         }
         return dialog
     }
-
-    companion object {
-        val TAG: String = IxiBottomSheetDialogFragment::class.java.simpleName
-        val TAG2: String? = IxiBottomSheetDialogFragment::class.java.canonicalName
-        const val STATE = "STATE"
-        @JvmStatic
-        fun newInstance(bottomSheetState: BottomSheetState):IxiBottomSheetDialogFragment{
-            val bundle = Bundle()
-            bundle.putSerializable(STATE, bottomSheetState)
-            val fragment = IxiBottomSheetDialogFragment()
-            fragment.arguments = bundle
-            return fragment
-        }
-    }
 }
+
+data class IxiBottomSheetDialogFragmentUiMode(
+    @DrawableRes val image:Int? = null,
+    val titleText:String? = null,
+    @ColorRes val imageBackgroundColor: Int? = null,
+    val bodyText: String? = null,
+    val toolbarText: String? = null,
+    val primaryButtonText: String? = null,
+    val primaryButtonAction: (()->Unit)? = null,
+    val primaryButtonColor:IxiColor? = null,
+    val secondaryButtonText: String? = null,
+    val secondaryButtonAction: (()->Unit)? = null,
+    val secondaryButtonColor:IxiColor? = null,
+    val onClose: (() -> Unit)? = null,
+    val isToolbarCentered: Boolean? = false,
+    val iconSize:Float? = null
+)

@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomsheets.base.BaseBottomSheet
 import com.ixigo.design.sdk.components.bottomsheets.composable.BaseBottomSheetComposable
+import com.ixigo.design.sdk.util.Util
 
 class IxiBottomSheetView @JvmOverloads constructor(
     context: Context,
@@ -20,14 +21,15 @@ class IxiBottomSheetView @JvmOverloads constructor(
         with(state.value) {
             BaseBottomSheetComposable(
                 image = image,
-                headerText = headerText,
+                titleText = headerText,
                 imageBackgroundColor = imageBackgroundColor,
                 bodyText = bodyText,
-                toolbarText = toolbarText,
+                masterTitleText = toolbarText,
                 primaryButton = primaryButton,
                 secondaryButton = secondaryButton,
                 closeActionListener = onClose,
-                isToolbarCentered = isToolbarCentered
+                isToolbarCentered = isToolbarCentered,
+                iconSize = Util.convertDimensionToDp(px = iconSize?:80f)
             )
         }
     }

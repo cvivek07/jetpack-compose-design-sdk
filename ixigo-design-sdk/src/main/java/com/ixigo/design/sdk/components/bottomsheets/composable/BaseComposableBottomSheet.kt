@@ -32,38 +32,39 @@ import com.ixigo.design.sdk.components.styles.IxiTypography
 @Composable
 fun BaseBottomSheetComposable(
     @DrawableRes image: Int? = null,
-    headerText: String? = null,
+    titleText: String? = null,
     @ColorRes imageBackgroundColor: Int? = null,
-    headerStyle: TextStyle = IxiTypography.Heading.H5.bold.copy(color = colorResource(id = R.color.black)),
+    titleStyle: TextStyle = IxiTypography.Heading.H5.regular.copy(color = colorResource(id = R.color.black)),
     bodyText: String? = null,
-    bodyStyle: TextStyle = IxiTypography.Body.Medium.regular.copy(color = colorResource(id = R.color.black)),
-    toolbarText: String? = null,
+    bodyStyle: TextStyle = IxiTypography.Body.Medium.regular,
+    masterTitleText: String? = null,
     primaryButton: IxiPrimaryButton? = null,
     secondaryButton: IxiSecondaryButton? = null,
     closeActionListener: (() -> Unit)? = null,
-    isToolbarCentered:Boolean? = false
+    isToolbarCentered:Boolean? = false,
+    iconSize: Dp? = 80.dp
 ) {
     Box(modifier = Modifier
         .clip(RoundedCornerShape(30.dp, 30.dp, 0.dp, 0.dp))) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.background(colorResource(id = R.color.white))) {
             Box {
                 Column {
-                    toolbarText?.let {
+                    masterTitleText?.let {
                         if(isToolbarCentered == true){
-                            TopToolbar(modifier = Modifier.padding(top = 21.dp), text = toolbarText, closeActionListener = closeActionListener, alignment = Alignment.Center)
+                            MasterTitle(modifier = Modifier.padding(top = 21.dp), text = masterTitleText, closeActionListener = closeActionListener, alignment = Alignment.Center)
                         } else if(isToolbarCentered == false){
-                            TopToolbar(modifier = Modifier.padding(top = 21.dp), text = toolbarText, closeActionListener = closeActionListener, alignment = Alignment.TopStart)
+                            MasterTitle(modifier = Modifier.padding(top = 21.dp), text = masterTitleText, closeActionListener = closeActionListener, alignment = Alignment.TopStart)
                         }
                         Spacer(modifier = Modifier.height(16.dp))
                     }
                     image?.let {
-                        if(imageBackgroundColor==null && toolbarText==null){
+                        if(imageBackgroundColor==null && masterTitleText==null){
                             Spacer(modifier = Modifier.height(45.dp))
                         }
                         BannerImage(
                             logo = it,
                             backgroundColor = imageBackgroundColor,
-                            iconSize = 80.dp
+                            iconSize = iconSize
                         )
                     }
                 }
@@ -76,7 +77,7 @@ fun BaseBottomSheetComposable(
             Spacer(modifier = Modifier.height(30.dp))
             BottomSheetContent(
                 modifier = Modifier.padding(horizontal = 20.dp),
-                heading = { BottomSheetTextComposable(headerText, style = headerStyle) },
+                heading = { BottomSheetTextComposable(titleText, style = titleStyle) },
                 subtitle = { BottomSheetTextComposable(text = bodyText, style = bodyStyle) }
             )
             Spacer(modifier = Modifier.height(30.dp))
@@ -207,7 +208,7 @@ private fun BottomSheetButtons(
 }
 
 @Composable
-private fun TopToolbar(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, closeActionListener: (() -> Unit)? = null){
+private fun MasterTitle(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, closeActionListener: (() -> Unit)? = null){
     Box(modifier = modifier.fillMaxWidth(), contentAlignment = alignment){
         Text(text = text, textAlign = TextAlign.Center, style = IxiTypography.Heading.H6.regular, modifier = Modifier.padding(horizontal = 20.dp))
         closeActionListener?.let {
@@ -228,7 +229,7 @@ private fun TopToolbar(modifier: Modifier = Modifier, alignment: Alignment  = Al
 @Composable
 fun BottomSheetView() {
     BaseBottomSheetComposable(
-        headerText = "Example",
+        titleText = "Example",
         bodyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis volutpat tortor quis ultrices. Proin posuere dictum aliquet. In quis tempor sapien, eget faucibus nisl. Maecenas non nibh ultricies dui iaculis fringilla ac nec mauris. Sed eget aliquam ante. Nunc ex",
         image = R.drawable.ic_launcher_background,
         imageBackgroundColor = R.color.r50,

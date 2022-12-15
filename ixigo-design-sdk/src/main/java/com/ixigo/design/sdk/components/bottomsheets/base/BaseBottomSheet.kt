@@ -41,6 +41,11 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         state.value = inState.copy(toolbarText = toolbarText)
     }
 
+    fun setIsToolbarCentered(boolean: Boolean = false){
+        val inState = state.value
+        state.value = inState.copy(isToolbarCentered = boolean)
+    }
+
     fun setPrimaryButton(ixiPrimaryButton: IxiPrimaryButton?){
         val inState = state.value
         state.value = inState.copy(primaryButton = ixiPrimaryButton)
@@ -55,6 +60,11 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         val inState = state.value
         state.value = inState.copy(onClose = closeActionListener)
     }
+
+    fun setIconSize(size: Float?){
+        val inState = state.value
+        state.value = inState.copy(iconSize = size)
+    }
 }
 
 data class BottomSheetState(
@@ -66,5 +76,6 @@ data class BottomSheetState(
     val primaryButton: IxiPrimaryButton? = null,
     val secondaryButton: IxiSecondaryButton? = null,
     val onClose: (() -> Unit)? = null,
-    val isToolbarCentered: Boolean? = false
-    ):java.io.Serializable
+    val isToolbarCentered: Boolean? = false,
+    val iconSize:Float? = null
+    )
