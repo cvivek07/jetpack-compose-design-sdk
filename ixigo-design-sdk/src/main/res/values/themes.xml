@@ -13,4 +13,45 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="ToolbarTitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">20sp</item>
+        <item name="font">@font/ixi_sans_medium</item>
+        <item name="android:textColor">@color/n800</item>
+        <!-- include other attributes you want to change: textColor, textStyle, etc -->
+    </style>
+    <style name="ToolbarTitleAppearanceWithSubtitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">18sp</item>
+        <item name="font">@font/ixi_sans_medium</item>
+        <item name="android:textColor">@color/n800</item>
+        <!-- include other attributes you want to change: textColor, textStyle, etc -->
+    </style>
+
+    <style name="ToolbarSubtitleAppearance" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">14sp</item>
+        <item name="font">@font/ixi_sans_medium</item>
+        <item name="android:textColor">@color/n600</item>
+    </style>
+
+    <style name="ToolbarPopupThemeOrange" parent="ThemeOverlay.AppCompat">
+        <item name="android:textSize">18sp</item>
+        <item name="font">@font/ixi_sans_medium</item>
+        <item name="android:textColor">@color/o600</item>
+        <item name="android:textColorPrimary">@color/o600</item>
+        <item name="android:colorControlActivated">@color/o600 </item>
+        <item name="android:colorControlHighlight">@color/o600</item>
+        <item name="android:colorControlNormal">@color/o600</item>
+
+    </style>
+
+    <style name="OrangeToolbarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="actionMenuTextColor">@color/o500</item>
+        <item name="actionMenuTextAppearance">@style/ToolBarMenuTextAppearance</item>
+    </style>
+
+    <style name="ToolBarMenuTextAppearance">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+        <item name="fontFamily">@font/ixi_sans_bold</item>
+    </style>
 </resources>
