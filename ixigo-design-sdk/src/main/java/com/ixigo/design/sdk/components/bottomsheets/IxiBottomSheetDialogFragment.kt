@@ -44,7 +44,7 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
         _binding.ixiBottomSheet.setImageBackgroundColor(uiState.imageBackgroundColor)
         _binding.ixiBottomSheet.setBodyText(uiState.bodyText)
         _binding.ixiBottomSheet.setToolbarText(uiState.masterTitle)
-        _binding.ixiBottomSheet.setIsToolbarCentered(uiState.isToolbarCentered?:false)
+        _binding.ixiBottomSheet.setIsToolbarCentered(uiState.isMasterTitleCentered?:false)
         _binding.ixiBottomSheet.setIconSize(uiState.iconSize)
         uiState.primaryButtonText?.let {
             val primaryButton = IxiPrimaryButton(context = requireContext())
@@ -99,8 +99,8 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
         uiState = uiState.copy(secondaryButtonText = secondaryButtonText, secondaryButtonAction = action, secondaryButtonColor = ixiColor)
     }
 
-    fun setIsToolbarCentered(boolean: Boolean){
-        uiState = uiState.copy(isToolbarCentered = boolean)
+    fun setIsMasterTitleCentered(boolean: Boolean){
+        uiState = uiState.copy(isMasterTitleCentered = boolean)
     }
 
     fun setIconSize(size: Float){
@@ -134,6 +134,6 @@ data class IxiBottomSheetDialogFragmentUiMode(
     val secondaryButtonAction: (()->Unit)? = null,
     val secondaryButtonColor:IxiColor? = null,
     val onClose: (() -> Unit)? = null,
-    val isToolbarCentered: Boolean? = false,
+    val isMasterTitleCentered: Boolean? = false,
     val iconSize:Float? = null
 )

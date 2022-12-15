@@ -82,8 +82,8 @@ fun BaseBottomSheetComposable(
             )
             Spacer(modifier = Modifier.height(30.dp))
             BottomSheetButtons(
-                positiveAction = primaryButton,
-                negativeAction = secondaryButton
+                primaryButton = primaryButton,
+                secondaryButton = secondaryButton
             ) {
 
             }
@@ -165,21 +165,21 @@ private fun BottomSheetContent(
 
 @Composable
 private fun BottomSheetButtons(
-    negativeAction: IxiSecondaryButton? = null,
-    negativeActionListener: (() -> Unit)? = null,
-    positiveAction: IxiPrimaryButton? = null,
-    positiveActionListener: (() -> Unit)? = null
+    secondaryButton: IxiSecondaryButton? = null,
+    secondaryActionListener: (() -> Unit)? = null,
+    primaryButton: IxiPrimaryButton? = null,
+    primaryActionListener: (() -> Unit)? = null
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
-        negativeAction?.let {
+        secondaryButton?.let {
             Box(modifier = Modifier
                 .weight(1f)
                 .padding(start = 20.dp)) {
                 AndroidView(
                     factory = {
-                        negativeAction.apply {
+                        secondaryButton.apply {
                             setOnClickListener {
-                                negativeActionListener?.invoke()
+                                secondaryActionListener?.invoke()
                             }
                         }
                     }, modifier = Modifier.align(Alignment.TopEnd)
@@ -187,7 +187,7 @@ private fun BottomSheetButtons(
             }
             Spacer(modifier = Modifier.width(30.dp))
         }
-        positiveAction?.let {
+        primaryButton?.let {
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -195,12 +195,12 @@ private fun BottomSheetButtons(
             ) {
                 AndroidView(
                     factory = {
-                        positiveAction.apply {
+                        primaryButton.apply {
                             setOnClickListener {
-                                positiveActionListener?.invoke()
+                                primaryActionListener?.invoke()
                             }
                         }
-                    }, modifier = Modifier.then(if(negativeAction==null) Modifier.align(Alignment.Center) else Modifier.align(Alignment.TopStart))
+                    }, modifier = Modifier.then(if(secondaryButton==null) Modifier.align(Alignment.Center) else Modifier.align(Alignment.TopStart))
                 )
             }
         }
