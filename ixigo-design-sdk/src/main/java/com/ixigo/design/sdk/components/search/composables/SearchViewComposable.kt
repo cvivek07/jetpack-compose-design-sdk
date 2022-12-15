@@ -56,7 +56,6 @@ fun SearchViewComposable(
                 onSearchFocusChange(it.isFocused)
             }
             .focusRequester(focusRequester)
-
             .padding(top = 9.dp, bottom = 8.dp, start = 24.dp, end = 8.dp),
         singleLine = true,
         trailingIcon = {

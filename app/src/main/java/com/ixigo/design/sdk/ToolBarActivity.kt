@@ -6,14 +6,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.ixigo.design.sdk.components.search.IxiSearchView
-import com.ixigo.design.sdk.components.topappbar.IxiAppBar
-import com.ixigo.design.sdk.components.topappbar.IxiSearchBar
-import com.ixigo.design.sdk.components.topappbar.IxiSegmentedControlBar
-import com.ixigo.design.sdk.components.topappbar.IxiToolBar
+import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.topappbar.*
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
-import com.ixigo.design.sdk.databinding.ActivitySampleBinding
 import com.ixigo.design.sdk.databinding.ActivityToolBarBinding
 
 class ToolBarActivity : AppCompatActivity() {
@@ -24,6 +20,7 @@ class ToolBarActivity : AppCompatActivity() {
         const val SUBTITLED_TOOLBAR = 1
         const val SEARCH_TOOLBAR = 2
         const val SEGMENT_CONTROL_TOOLBAR = 3
+        const val SRP_TOOLBAR = 4
         const val TOOLBAR_TYPE = "toolbar type"
 
         fun startActivity(context: Context, toolbarType: Int) {
@@ -44,6 +41,7 @@ class ToolBarActivity : AppCompatActivity() {
             SUBTITLED_TOOLBAR -> basicSubTitledToolbar()
             SEARCH_TOOLBAR -> searchToolbar()
             SEGMENT_CONTROL_TOOLBAR -> segmentedControlToolbar()
+            SRP_TOOLBAR -> srpToolbar()
         }
     }
 
@@ -155,9 +153,39 @@ class ToolBarActivity : AppCompatActivity() {
                 }
             }
         })
+        binding.appBar.removeAllViews()
+        binding.appBar.addView(toolbar)
+        binding.appBar.elevation = 100F
+    }
+
+    fun srpToolbar() {
+        val toolbar = IxiSrpToolbar(context = this)
+
+        toolbar.setData(SrpModel("DLI", "FBD", "15 Dec 2022", "188829920"))
+        toolbar.addMenuProvider(object : IxiMenuProvider {
+            override fun provideMenu(): List<IxiMenu> {
+                return listOf( IxiMenu(0, null, R.drawable.ic_baseline_cancel_24),)
+            }
+
+            override fun onMenuItemClick(id: Int) {
+                when (id) {
+                    android.R.id.home -> {
+                        finish()
+                        Log.e("ToolbarActivity", "Back Arrow clicked")
+                    }
+                    0 -> {
+                        Log.e("ToolbarActivity", "$id item clicked")
+                    }
+                    1 -> {
+                        Log.e("ToolbarActivity", "$id item clicked")
+                    }
+                }
+            }
+        })
 
         binding.appBar.removeAllViews()
         binding.appBar.addView(toolbar)
         binding.appBar.elevation = 100F
     }
+
 }

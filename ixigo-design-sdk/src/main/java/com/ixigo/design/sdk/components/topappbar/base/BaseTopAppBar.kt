@@ -8,6 +8,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 abstract class BaseTopAppBar @JvmOverloads constructor(
@@ -76,5 +77,6 @@ data class AppBarState(
     val title: String? = null,
     val subTitle: String? = null,
     val elevation: Dp = 10.dp,
-    val menuProvider: IxiMenuProvider? = null
+    val menuProvider: IxiMenuProvider? = null,
+    val srpData: SrpModel? = null
 )

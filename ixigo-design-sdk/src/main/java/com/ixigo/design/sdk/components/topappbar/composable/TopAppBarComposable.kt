@@ -2,15 +2,12 @@ package com.ixigo.design.sdk.components.topappbar.composable
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
@@ -18,11 +15,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
-import androidx.core.view.MenuProvider
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.search.IxiSearchView
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
+import com.ixigo.design.sdk.components.srp.composables.SrpComposable
+import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
@@ -118,6 +115,32 @@ fun SegmentedControlBar(
             onItemSelection = onItemSelection
 
         )
+    }
+}
+
+@Composable
+fun SrpBar(
+    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    elevation: Dp = 10.dp,
+    menuProvider: IxiMenuProvider? = null,
+    data: SrpModel?,
+) {
+    BasicToolbar(
+        homeIcon = homeIcon,
+        elevation = elevation,
+        menuProvider = menuProvider
+    ) {
+        if (data != null) {
+            SrpComposable(
+                data = data,
+                modifier = Modifier
+                    .height(36.dp)
+                    .weight(1f)
+                    .padding(
+                        end = 15.dp
+                    ),
+            )
+        }
     }
 }
 
