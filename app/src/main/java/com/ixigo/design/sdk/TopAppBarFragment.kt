@@ -36,6 +36,7 @@ class TopAppBarFragment : BaseFragment() {
         "Basic Tool Bar (Title Only)",
         "Basic Tool Bar (With Sub-title)",
         "SearchBar",
+        "Segment Control Toolbar"
     )
     private var _binding: FragmentTopAppBarBinding? = null
 
@@ -105,6 +106,11 @@ class TopAppBarFragment : BaseFragment() {
             2 -> {
                 context?.let {
                     ToolBarActivity.startActivity(it, ToolBarActivity.SEARCH_TOOLBAR)
+                }
+            }
+            3 -> {
+                context?.let {
+                    ToolBarActivity.startActivity(it, ToolBarActivity.SEGMENT_CONTROL_TOOLBAR)
                 }
             }
 

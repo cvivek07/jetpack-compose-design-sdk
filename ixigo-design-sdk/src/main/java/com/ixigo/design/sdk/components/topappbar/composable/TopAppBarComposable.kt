@@ -22,6 +22,7 @@ import androidx.core.view.MenuProvider
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.search.IxiSearchView
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
+import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
@@ -72,8 +73,8 @@ fun SearchBar(
     menuProvider: IxiMenuProvider? = null
 ) {
     BasicToolbar(
-        homeIcon = R.drawable.left_arrow,
-        elevation = 10.dp,
+        homeIcon = homeIcon,
+        elevation = elevation,
         menuProvider = menuProvider
     ) {
         SearchViewComposable(
@@ -85,8 +86,37 @@ fun SearchBar(
             modifier = Modifier
                 .weight(1f)
                 .padding(
-                    end =  15.dp
+                    end = 15.dp
                 )
+        )
+    }
+}
+
+@Composable
+fun SegmentedControlBar(
+    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    elevation: Dp = 10.dp,
+    menuProvider: IxiMenuProvider? = null,
+    items: List<String>,
+    defaultSelectedItemIndex: Int = 0,
+    onItemSelection: (selectedItemIndex: Int) -> Unit
+) {
+    BasicToolbar(
+        homeIcon = homeIcon,
+        elevation = elevation,
+        menuProvider = menuProvider
+    ) {
+        SegmentedControl(
+            items = items,
+            defaultSelectedItemIndex = defaultSelectedItemIndex,
+            modifier = Modifier
+                .height(36.dp)
+                .weight(1f)
+                .padding(
+                    end = 15.dp
+                ),
+            onItemSelection = onItemSelection
+
         )
     }
 }

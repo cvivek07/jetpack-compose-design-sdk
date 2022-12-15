@@ -11,6 +11,8 @@
   <com.google.android.material.appbar.AppBarLayout
       android:id="@+id/appBar"
       android:layout_width="match_parent"
+      app:elevation="10dp"
+
       android:layout_height="match_parent"/>
 
   </LinearLayout>

@@ -16,6 +16,7 @@ sealed class ButtonShape(val shape: Shape) {
     object LeadingShape : ButtonShape(LeadingShape())
     object BottomShape : ButtonShape(BottomShape())
     object RegularShape : ButtonShape(RoundedCornerShape(10.dp))
+    object PillShape : ButtonShape(RoundedCornerShape(percent = 50))
 }
 
 

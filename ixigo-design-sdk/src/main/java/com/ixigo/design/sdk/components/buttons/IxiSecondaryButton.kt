@@ -3,6 +3,7 @@ package com.ixigo.design.sdk.components.buttons
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableButton
@@ -40,6 +41,7 @@ class IxiSecondaryButton @JvmOverloads constructor(
             ComposableButton(
                 text,
                 mapSecStyle(colors),
+                Modifier,
                 shapes,
                 sizes,
                 isEnabled,

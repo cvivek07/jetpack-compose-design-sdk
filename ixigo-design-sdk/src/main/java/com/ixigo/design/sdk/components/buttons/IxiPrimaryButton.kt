@@ -3,6 +3,7 @@ package com.ixigo.design.sdk.components.buttons
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableButton
@@ -28,6 +29,7 @@ class IxiPrimaryButton @JvmOverloads constructor(
             ComposableButton(
                 text,
                 colors,
+                Modifier,
                 shapes,
                 sizes,
                 isEnabled,

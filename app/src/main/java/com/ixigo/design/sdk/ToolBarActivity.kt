@@ -9,6 +9,7 @@ import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.components.search.IxiSearchView
 import com.ixigo.design.sdk.components.topappbar.IxiAppBar
 import com.ixigo.design.sdk.components.topappbar.IxiSearchBar
+import com.ixigo.design.sdk.components.topappbar.IxiSegmentedControlBar
 import com.ixigo.design.sdk.components.topappbar.IxiToolBar
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
@@ -22,6 +23,7 @@ class ToolBarActivity : AppCompatActivity() {
         const val BASIC_TOOLBAR = 0
         const val SUBTITLED_TOOLBAR = 1
         const val SEARCH_TOOLBAR = 2
+        const val SEGMENT_CONTROL_TOOLBAR = 3
         const val TOOLBAR_TYPE = "toolbar type"
 
         fun startActivity(context: Context, toolbarType: Int) {
@@ -41,6 +43,7 @@ class ToolBarActivity : AppCompatActivity() {
             BASIC_TOOLBAR -> basicToolbar()
             SUBTITLED_TOOLBAR -> basicSubTitledToolbar()
             SEARCH_TOOLBAR -> searchToolbar()
+            SEGMENT_CONTROL_TOOLBAR -> segmentedControlToolbar()
         }
     }
 
@@ -126,5 +129,35 @@ class ToolBarActivity : AppCompatActivity() {
 
         binding.appBar.removeAllViews()
         binding.appBar.addView(toolbar)
+        binding.appBar.elevation = 100F
+    }
+
+    fun segmentedControlToolbar() {
+        val toolbar = IxiSegmentedControlBar(context = this)
+        toolbar.segments = listOf("Segment 1", "Segment 2", "Segment 3")
+        toolbar.addMenuProvider(object : IxiMenuProvider {
+            override fun provideMenu(): List<IxiMenu> {
+                return listOf()
+            }
+
+            override fun onMenuItemClick(id: Int) {
+                when (id) {
+                    android.R.id.home -> {
+                        finish()
+                        Log.e("ToolbarActivity", "Back Arrow clicked")
+                    }
+                    0 -> {
+                        Log.e("ToolbarActivity", "$id item clicked")
+                    }
+                    1 -> {
+                        Log.e("ToolbarActivity", "$id item clicked")
+                    }
+                }
+            }
+        })
+
+        binding.appBar.removeAllViews()
+        binding.appBar.addView(toolbar)
+        binding.appBar.elevation = 100F
     }
 }

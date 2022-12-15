@@ -38,4 +38,10 @@ sealed class ButtonSize(
     object XXLarge : ButtonSize(
         height = 90.dp, textSize = 24.sp, horizontalPadding = PaddingValues(horizontal = 30.dp)
     )
+
+    data class Extra(
+        val extraHeight: Dp,
+        val extraTextSize: TextUnit,
+        val extraHorizontalPadding: Dp
+    ) : ButtonSize(extraHeight, extraTextSize, PaddingValues(horizontal = extraHorizontalPadding))
 }
