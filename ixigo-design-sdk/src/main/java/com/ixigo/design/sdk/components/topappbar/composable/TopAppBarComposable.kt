@@ -13,45 +13,32 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.compositeOver
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.core.view.MenuProvider
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.search.IxiSearchView
+import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
+import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 @Composable
 fun MainToolBar(
     @DrawableRes homeIcon: Int = R.drawable.left_arrow,
-    homeIconClick: () -> Unit = {},
     title: String? = null,
     subTitle: String? = null,
-    actionText: String? = null,
-    actionTextClick: () -> Unit = {},
-    @DrawableRes actionIcon1: Int = 0,
-    actionIcon1Click: () -> Unit = {},
-    @DrawableRes actionIcon2: Int = 0,
-    actionIcon2Click: () -> Unit = {},
-    elevation: Dp = 0.dp,
+    elevation: Dp = 10.dp,
+    menuProvider: IxiMenuProvider? = null
 ) {
-    TopAppBar(
-        backgroundColor = colorResource(id = R.color.n0),
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(60.dp)
-            .shadow(elevation),
-        elevation = elevation,
-        contentPadding = PaddingValues(0.dp)
+    BasicToolbar(
+        homeIcon = R.drawable.left_arrow,
+        elevation = 10.dp,
+        menuProvider = menuProvider
     ) {
-        if (homeIcon != 0) {
-            IconButton(onClick = homeIconClick) {
-                Image(
-                    painter = painterResource(id = homeIcon),
-                    contentDescription = "Image",
-                )
-            }
-        }
         Column(Modifier.weight(1f)) {
             if (title != null) {
                 TypographyText(
@@ -72,31 +59,87 @@ fun MainToolBar(
                 )
             }
         }
+        if (menuProvider == null || menuProvider.provideMenu().isEmpty()) {
+            Spacer(modifier = Modifier.width(40.dp))
+        }
+    }
+}
 
-        if (actionIcon1 != 0) {
-            IconButton(onClick = actionIcon1Click) {
+@Composable
+fun SearchBar(
+    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    elevation: Dp = 10.dp,
+    menuProvider: IxiMenuProvider? = null
+) {
+    BasicToolbar(
+        homeIcon = R.drawable.left_arrow,
+        elevation = 10.dp,
+        menuProvider = menuProvider
+    ) {
+        SearchViewComposable(
+            query = TextFieldValue(),
+            onQueryChange = {},
+            onSearchFocusChange = {},
+            onClearQuery = { },
+            hint = "Search",
+            modifier = Modifier
+                .weight(1f)
+                .padding(
+                    end =  15.dp
+                )
+        )
+    }
+}
+
+
+@Composable
+fun BasicToolbar(
+    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    elevation: Dp = 10.dp,
+    menuProvider: IxiMenuProvider? = null,
+    content: @Composable RowScope.() -> Unit
+) {
+    TopAppBar(
+        backgroundColor = colorResource(id = R.color.n0),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(60.dp)
+            .shadow(10.dp)
+            .zIndex(10.dp.value),
+        elevation = elevation,
+        contentPadding = PaddingValues(0.dp)
+    ) {
+        if (homeIcon != 0) {
+            IconButton(onClick = { menuProvider?.onMenuItemClick(android.R.id.home) }) {
                 Image(
-                    painter = painterResource(id = actionIcon1),
+                    painter = painterResource(id = homeIcon),
                     contentDescription = "Image",
                 )
             }
         }
-        if (actionIcon2 != 0) {
-            IconButton(onClick = actionIcon2Click) {
-                Image(
-                    painter = painterResource(id = actionIcon2),
-                    contentDescription = "Image",
-                )
-            }
-        }
-        if (!actionText.isNullOrEmpty()) {
-            TextButton(onClick = actionTextClick) {
-                Text(
-                    text = actionText,
-                )
-            }
-        }
+        content()
 
+
+        if (menuProvider != null && menuProvider.provideMenu().isNotEmpty()) {
+
+            menuProvider.provideMenu().forEach {
+                if (it.icon != null) {
+                    IconButton(onClick = { menuProvider.onMenuItemClick(it.id) }) {
+                        Image(
+                            painter = painterResource(id = it.icon),
+                            contentDescription = "Image",
+                        )
+                    }
+                } else {
+                    TextButton(onClick = { menuProvider.onMenuItemClick(it.id) }) {
+                        Text(
+                            text = it.text ?: "",
+                        )
+                    }
+                }
+            }
+
+        }
     }
 }
 
@@ -106,9 +149,6 @@ fun PreviewToolBar() {
     MainToolBar(
         title = "Title",
         subTitle = "Subtitle",
-        actionIcon1 = R.drawable.ic_baseline_cancel_24,
-        actionIcon2 = R.drawable.ic_baseline_cancel_24,
-        actionText = "Send",
-        elevation = 10.dp
+        elevation = 10.dp,
     )
 }

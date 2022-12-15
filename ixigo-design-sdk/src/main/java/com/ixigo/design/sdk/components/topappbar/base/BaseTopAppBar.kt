@@ -6,7 +6,9 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 abstract class BaseTopAppBar @JvmOverloads constructor(
     context: Context,
@@ -15,6 +17,7 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
     protected var state = mutableStateOf(AppBarState())
+    protected var menuProvider: IxiMenuProvider? = null
 
     fun setTitle(title: String) {
         val initState = state.value
@@ -26,20 +29,25 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
         state.value = initState.copy(subTitle = subTitle)
     }
 
-    fun setupActionText(text: String, actionTextClick: () -> Unit) {
+//    fun setupActionText(text: String, actionTextClick: () -> Unit) {
+//        val initState = state.value
+//        state.value = initState.copy(actionText = text, actionTextClick = actionTextClick)
+//    }
+//
+//    fun setupActionIcon1(@DrawableRes actionIcon: Int, actionIconClick: () -> Unit) {
+//        val initState = state.value
+//        state.value = initState.copy(actionIcon1 = actionIcon, action1Click = actionIconClick)
+//    }
+
+    fun addMenuProvider(provider: IxiMenuProvider) {
         val initState = state.value
-        state.value = initState.copy(actionText = text, actionTextClick = actionTextClick)
+        state.value = initState.copy(menuProvider = provider)
     }
 
-    fun setupActionIcon1(@DrawableRes actionIcon: Int, actionIconClick: () -> Unit) {
-        val initState = state.value
-        state.value = initState.copy(actionIcon1 = actionIcon, action1Click = actionIconClick)
-    }
-
-    fun setupActionIcon2(@DrawableRes actionIcon: Int, actionIconClick: () -> Unit) {
-        val initState = state.value
-        state.value = initState.copy(actionIcon2 = actionIcon, action2Click = actionIconClick)
-    }
+//    fun setupActionIcon2(@DrawableRes actionIcon: Int, actionIconClick: () -> Unit) {
+//        val initState = state.value
+//        state.value = initState.copy(actionIcon2 = actionIcon, action2Click = actionIconClick)
+//    }
 
     fun setNavigationIcon(@DrawableRes actionIcon: Int) {
         val initState = state.value
@@ -63,15 +71,10 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 }
 
 data class AppBarState(
-    @DrawableRes val homeIcon: Int = 0,
+    @DrawableRes val homeIcon: Int = R.drawable.left_arrow,
     val homeIconClick: () -> Unit = {},
     val title: String? = null,
     val subTitle: String? = null,
-    val actionText: String? = null,
-    val actionTextClick: () -> Unit = {},
-    @DrawableRes val actionIcon1: Int = 0,
-    val action1Click: () -> Unit = {},
-    @DrawableRes val actionIcon2: Int = 0,
-    val action2Click: () -> Unit = {},
-    val elevation: Dp = 4.dp
+    val elevation: Dp = 10.dp,
+    val menuProvider: IxiMenuProvider? = null
 )

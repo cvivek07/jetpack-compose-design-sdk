@@ -2,8 +2,6 @@ package com.ixigo.design.sdk.components.topappbar.menu
 
 import android.view.Menu
 import android.view.MenuItem
-import androidx.core.view.MenuItemCompat
-import com.ixigo.design.sdk.R
 
 data class MenuBuilder(
     val id: Int = 0,
@@ -11,9 +9,12 @@ data class MenuBuilder(
     val icon: Int? = null,
     val groupId: Int = 0,
     val order: Int = Menu.NONE
-) {
-
-}
+)
+data class IxiMenu(
+    val id: Int = 0,
+    val text: String? = null,
+    val icon: Int? = null,
+)
 
 fun List<MenuBuilder>.addMenuItems(menu: Menu) {
     forEach {
@@ -25,9 +26,8 @@ fun List<MenuBuilder>.addMenuItems(menu: Menu) {
     }
 }
 
-object MenuProvider {
-    fun getSingleOptionMenuProvider() {
-
-    }
+interface IxiMenuProvider {
+    fun provideMenu(): List<IxiMenu>
+    fun onMenuItemClick(id: Int)
 }
 

@@ -20,10 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.ixigo.design.sdk.components.topappbar.menu.MenuBuilder
-import com.ixigo.design.sdk.components.topappbar.menu.addMenuItems
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.

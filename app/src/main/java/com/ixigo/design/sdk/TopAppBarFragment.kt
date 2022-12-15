@@ -1,5 +1,6 @@
 package com.ixigo.design.sdk
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
@@ -21,6 +22,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
+import com.ixigo.design.sdk.components.topappbar.IxiAppBar
+import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
+import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 import com.ixigo.design.sdk.components.topappbar.menu.MenuBuilder
 import com.ixigo.design.sdk.components.topappbar.menu.addMenuItems
 import com.ixigo.design.sdk.databinding.FragmentTopAppBarBinding
@@ -31,7 +35,7 @@ class TopAppBarFragment : BaseFragment() {
     private val componentList: MutableList<String> = mutableListOf(
         "Basic Tool Bar (Title Only)",
         "Basic Tool Bar (With Sub-title)",
-        "Basic Tool Bar (With Sub-title and Action)",
+        "SearchBar",
     )
     private var _binding: FragmentTopAppBarBinding? = null
 
@@ -91,45 +95,63 @@ class TopAppBarFragment : BaseFragment() {
     private fun updateToolBar(index: Int) {
         when (index) {
             0 -> {
-                basicToolBar()
+                context?.let { ToolBarActivity.startActivity(it, ToolBarActivity.BASIC_TOOLBAR) }
             }
             1 -> {
-                toolbarWithSubTitleAndTwoIcons()
+                context?.let {
+                    ToolBarActivity.startActivity(it, ToolBarActivity.SUBTITLED_TOOLBAR)
+                }
             }
             2 -> {
-                toolbarWithSubTitleAndOneIconAndActionText()
-
-
+                context?.let {
+                    ToolBarActivity.startActivity(it, ToolBarActivity.SEARCH_TOOLBAR)
+                }
             }
 
         }
     }
 
     private fun toolbarWithSubTitleAndOneIconAndActionText() {
-        (activity as AppCompatActivity).supportActionBar?.title = title
-        (activity as AppCompatActivity).supportActionBar?.subtitle = subTitle
 
-        activity?.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menu.clear()
-                listOf(
-                    MenuBuilder(0, "Send"),
-                ).addMenuItems(menu)
+
+        val appBar = IxiAppBar(context = requireContext())
+        appBar.setTitle(title)
+        appBar.addMenuProvider(object : IxiMenuProvider {
+            override fun provideMenu(): List<IxiMenu> {
+                return listOf(
+                    IxiMenu(0, "Send"),
+                )
             }
 
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when (menuItem.itemId) {
-                    0 -> {
-                        return true
-                    }
-                    else -> {
-                        return false
-                    }
-
-                }
-
+            override fun onMenuItemClick(id: Int) {
+//                TODO("Not yet implemented")
             }
         })
+
+        (activity as AppCompatActivity).supportActionBar?.title = title
+        (activity as AppCompatActivity).supportActionBar?.subtitle = subTitle
+        (activity as AppCompatActivity).supportActionBar?.customView = appBar
+//        activity?.addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menu.clear()
+//                listOf(
+//                    MenuBuilder(0, "Send"),
+//                ).addMenuItems(menu)
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                when (menuItem.itemId) {
+//                    0 -> {
+//                        return true
+//                    }
+//                    else -> {
+//                        return false
+//                    }
+//
+//                }
+//
+//            }
+//        })
 
     }
 
@@ -148,6 +170,7 @@ class TopAppBarFragment : BaseFragment() {
 
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 when (menuItem.itemId) {
+
                     0 -> {
                         return true
                     }
@@ -162,6 +185,33 @@ class TopAppBarFragment : BaseFragment() {
     }
 
     private fun basicToolBar() {
+        startActivity(Intent(context, ToolBarActivity::class.java))
+//        (activity as AppCompatActivity).supportActionBar?.title = title
+//        (activity as AppCompatActivity).supportActionBar?.subtitle = null
+//        (activity as AppCompatActivity).supportActionBar?.elevation = context?.dpToPx(10) ?: 0F
+//        activity?.addMenuProvider(object : MenuProvider {
+//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+//                menu.clear()
+//                listOf(
+//                    MenuBuilder(0, null, R.drawable.ic_baseline_cancel_24),
+//                    MenuBuilder(3, "Done")
+//                ).addMenuItems(menu)
+//            }
+//
+//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+//                when (menuItem.itemId) {
+//                    0 -> {
+//                        return true
+//                    }
+//
+//                }
+//                return false
+//
+//            }
+//        })
+    }
+
+    private fun basicToolBar1() {
         (activity as AppCompatActivity).supportActionBar?.title = title
         (activity as AppCompatActivity).supportActionBar?.subtitle = null
         (activity as AppCompatActivity).supportActionBar?.elevation = context?.dpToPx(10) ?: 0F
