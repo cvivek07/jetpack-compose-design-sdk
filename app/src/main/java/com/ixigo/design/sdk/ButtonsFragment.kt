@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
-import com.ixigo.design_sdk.components.styles.IxiColor
-import com.ixigo.design_sdk.components.buttons.styles.ButtonShape
-import com.ixigo.design_sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -33,7 +33,7 @@ class ButtonsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonFirst.setText("Large Primary Button")
+        binding.buttonFirst.setText("Large Primary Button Very Large Text")
         binding.buttonFirst.setStartImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setStyle(ButtonShape.RegularShape, IxiColor.Orange, ButtonSize.Large)
@@ -110,19 +110,19 @@ class ButtonsFragment : Fragment() {
 
         binding.buttonTwelve.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
         binding.buttonTwelve.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
-        binding.buttonTwelve.setStyle(ButtonShape.BottomShape,IxiColor.Error, ButtonSize.Large)
+        binding.buttonTwelve.setStyle(ButtonShape.BottomShape, IxiColor.Error, ButtonSize.Large)
         binding.buttonTwelve.setClickListener {
             context?.let { it1 -> "Button12 Clicked Change".toToast(it1) }
         }
 
         binding.buttonThirteen.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
-        binding.buttonThirteen.setStyle(ButtonShape.LeadingShape,IxiColor.Success, ButtonSize.Medium)
+        binding.buttonThirteen.setStyle(ButtonShape.LeadingShape, IxiColor.Success, ButtonSize.Medium)
         binding.buttonThirteen.setClickListener {
             context?.let { it1 -> "Button13 Clicked Change".toToast(it1) }
         }
 
         binding.buttonFourteen.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
-        binding.buttonFourteen.setStyle(ButtonShape.TrailingShape,IxiColor.Warning, ButtonSize.Small)
+        binding.buttonFourteen.setStyle(ButtonShape.TrailingShape, IxiColor.Warning, ButtonSize.Small)
         binding.buttonFourteen.setClickListener {
             context?.let { it1 -> "Button14 Clicked Change".toToast(it1) }
         }

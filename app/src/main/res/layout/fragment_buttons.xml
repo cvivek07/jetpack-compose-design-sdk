@@ -19,7 +19,7 @@
         android:padding="10dp"
         tools:context=".ButtonsFragment">
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_first"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_second"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_third"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -49,73 +49,67 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
-            android:id="@+id/button_fourth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button four"
-            app:ixi_button_style="b700XXlargeBottomShapeRadiusDisabled" />
+                <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+                    android:id="@+id/button_fourth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button four" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.PrimaryButton
-            android:id="@+id/button_fifth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="5"
-            app:ixi_button_style="b700NormalRegularShapeRadius" />
+                <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+                    android:id="@+id/button_fifth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
-            android:id="@+id/button_sixth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="6"
-            app:ixi_button_style="b700NormalRegularShapeRadiusOutlined" />
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
+                    android:id="@+id/button_sixth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="6" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
-            android:id="@+id/button_seven"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="7"
-            app:ixi_button_style="b700NormalLeadingShapeRadiusOutlined" />
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
+                    android:id="@+id/button_seven"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="7" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
-            android:id="@+id/button_eight"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="8"
-            app:ixi_button_style="b700NormalTrailingShapeRadiusOutlined" />
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
+                    android:id="@+id/button_eight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="8" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.OutlinedButton
-            android:id="@+id/button_nine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button"
-            app:ixi_button_style="b700NormalBottomShapeRadiusOutlined" />
+                <com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
+                    android:id="@+id/button_nine"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Button" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_ten"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -125,7 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_twelve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,7 +129,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_thirteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,7 +139,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.SecondaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
             android:id="@+id/button_fourteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -154,7 +148,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
             android:id="@+id/button_eleven"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -164,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
             android:id="@+id/button_fifteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -174,7 +168,7 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <com.ixigo.design_sdk.components.buttons.TertiaryButton
+        <com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
             android:id="@+id/button_sixteen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

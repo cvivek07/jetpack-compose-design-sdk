@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 class InputFieldsFragment : Fragment() {
 
@@ -19,7 +20,7 @@ class InputFieldsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         _binding = FragmentInputFieldsBinding.inflate(inflater, container, false)
         return binding.root
@@ -30,13 +31,13 @@ class InputFieldsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding?.inputField1?.apply {
             setLabel("Label")
+
             setActionText("Add-On")
             setHelperText("This is helper Text")
             setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
-            setStartImageDrawable(R.drawable.ic_call_24)
-            setDrawableTint(R.color.b700)
-            setMaxCharCount(10)
-//            setText("ViVel")
+            setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
+            setMaxCharCount(30)
+            setColor(IxiColor.Error)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
             }
@@ -51,13 +52,88 @@ class InputFieldsFragment : Fragment() {
 
         _binding?.inputField2?.apply {
             setLabel("Label")
-//            setActionText("Add-On")
-//            setHelperText("This is helper Text")
-//            setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
-            setStartImageDrawable(R.drawable.ic_call_24)
-            setDrawableTint(R.color.b700)
+            setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
             setMaxCharCount(10)
-//            setText("ViVel")
+            setActionTextClickListener {
+                Log.e("Action", "ActionTextClick")
+            }
+            setDrawableStartClickListener {
+                Log.e("Action", "DrawableStart Click")
+
+            }
+            setDrawableEndClickListener {
+                Log.e("Action", "\"DrawableEnd Click")
+            }
+        }
+
+
+        _binding?.inputField3?.apply {
+            setLabel("Label")
+            setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
+            setColor(IxiColor.Warning)
+            setActionTextClickListener {
+                Log.e("Action", "ActionTextClick")
+            }
+            setDrawableStartClickListener {
+                Log.e("Action", "DrawableStart Click")
+
+            }
+            setDrawableEndClickListener {
+                Log.e("Action", "\"DrawableEnd Click")
+            }
+        }
+
+        _binding?.inputField4?.apply {
+            setLabel("Label")
+            setColor(IxiColor.Success)
+            setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
+            setMaxCharCount(10)
+            setActionTextClickListener {
+                Log.e("Action", "ActionTextClick")
+            }
+            setDrawableStartClickListener {
+                Log.e("Action", "DrawableStart Click")
+
+            }
+            setDrawableEndClickListener {
+                Log.e("Action", "\"DrawableEnd Click")
+            }
+        }
+
+        _binding?.inputField5?.apply {
+            setLabel("Label")
+            setMaxCharCount(100)
+            setColor(IxiColor.Error)
+            setActionTextClickListener {
+                Log.e("Action", "ActionTextClick")
+            }
+            setDrawableStartClickListener {
+                Log.e("Action", "DrawableStart Click")
+
+            }
+            setDrawableEndClickListener {
+                Log.e("Action", "\"DrawableEnd Click")
+            }
+        }
+
+        _binding?.inputField6?.apply {
+            setLabel("Label")
+            setColor(IxiColor.Extension)
+            setMaxCharCount(10)
+            setActionTextClickListener {
+                Log.e("Action", "ActionTextClick")
+            }
+            setDrawableStartClickListener {
+                Log.e("Action", "DrawableStart Click")
+
+            }
+            setDrawableEndClickListener {
+                Log.e("Action", "\"DrawableEnd Click")
+            }
+        }
+
+        _binding?.inputField7?.apply {
+            setLabel("Label")
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
             }

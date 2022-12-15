@@ -11,5 +11,6 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="buttons">Buttons</string>
     <string name="input_fields">Input Fields</string>
+    <string name="typography">Typography</string>
     <string name="separator">Separator</string>
 </resources>
