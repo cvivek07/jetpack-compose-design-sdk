@@ -37,7 +37,8 @@ class TopAppBarFragment : BaseFragment() {
         "Basic Tool Bar (With Sub-title)",
         "SearchBar",
         "Segment Control Toolbar",
-        "SRP Toolbar"
+        "SRP Toolbar",
+        "Tabbed Toolbar"
     )
     private var _binding: FragmentTopAppBarBinding? = null
 
@@ -117,6 +118,11 @@ class TopAppBarFragment : BaseFragment() {
             4 -> {
                 context?.let {
                     ToolBarActivity.startActivity(it, ToolBarActivity.SRP_TOOLBAR)
+                }
+            }
+            5 -> {
+                context?.let {
+                    ToolBarActivity.startActivity(it, ToolBarActivity.TABBED_TOOLBAR)
                 }
             }
 

@@ -6,9 +6,13 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.tabs.base.TabType
+import com.ixigo.design.sdk.components.topappbar.TabItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 abstract class BaseTopAppBar @JvmOverloads constructor(
@@ -30,10 +34,6 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
         state.value = initState.copy(subTitle = subTitle)
     }
 
-//    fun setupActionText(text: String, actionTextClick: () -> Unit) {
-//        val initState = state.value
-//        state.value = initState.copy(actionText = text, actionTextClick = actionTextClick)
-//    }
 //
 //    fun setupActionIcon1(@DrawableRes actionIcon: Int, actionIconClick: () -> Unit) {
 //        val initState = state.value
@@ -78,5 +78,10 @@ data class AppBarState(
     val subTitle: String? = null,
     val elevation: Dp = 10.dp,
     val menuProvider: IxiMenuProvider? = null,
-    val srpData: SrpModel? = null
+    val srpData: SrpModel? = null,
+    val tabbedData: List<TabItem>? = null,
+    val viewPager: ViewPager2? = null,
+    val adapter: FragmentStateAdapter? = null,
+    val tabType: TabType = TabType.LINED,
+    val tabbedSelectionListener: (selectedItemIndex: Int) -> Unit = {}
 )

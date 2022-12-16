@@ -6,7 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentStatePagerAdapter
+import androidx.lifecycle.Lifecycle
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.tabs.base.TabType
 import com.ixigo.design.sdk.components.topappbar.*
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
@@ -21,6 +27,7 @@ class ToolBarActivity : AppCompatActivity() {
         const val SEARCH_TOOLBAR = 2
         const val SEGMENT_CONTROL_TOOLBAR = 3
         const val SRP_TOOLBAR = 4
+        const val TABBED_TOOLBAR = 5
         const val TOOLBAR_TYPE = "toolbar type"
 
         fun startActivity(context: Context, toolbarType: Int) {
@@ -42,6 +49,7 @@ class ToolBarActivity : AppCompatActivity() {
             SEARCH_TOOLBAR -> searchToolbar()
             SEGMENT_CONTROL_TOOLBAR -> segmentedControlToolbar()
             SRP_TOOLBAR -> srpToolbar()
+            TABBED_TOOLBAR -> tabbedToolbar()
         }
     }
 
@@ -164,7 +172,7 @@ class ToolBarActivity : AppCompatActivity() {
         toolbar.setData(SrpModel("DLI", "FBD", "15 Dec 2022", "188829920"))
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
-                return listOf( IxiMenu(0, null, R.drawable.ic_baseline_cancel_24),)
+                return listOf(IxiMenu(0, null, R.drawable.ic_baseline_cancel_24))
             }
 
             override fun onMenuItemClick(id: Int) {
@@ -188,4 +196,65 @@ class ToolBarActivity : AppCompatActivity() {
         binding.appBar.elevation = 100F
     }
 
+
+    fun tabbedToolbar() {
+        val listTabsName = listOf(
+            TabItem("Buttons", R.drawable.ic_search,0),
+            TabItem("InputField",0, R.drawable.ic_search),
+            TabItem("Progress Steps", 0, 0),
+            TabItem("Typography", R.drawable.ic_search, R.drawable.ic_baseline_cancel_24)
+        )
+        val fragmentList = listOf(
+            ButtonsFragment(),
+            InputFieldsFragment(),
+            ProgressStepFragment(),
+            TypographyFragment()
+        )
+        val toolbar = IxiTabbedToolBar(context = this)
+        toolbar.setData(listTabsName)
+        toolbar.setTabType(TabType.PILL)
+        val adapter = DemoAdapter(supportFragmentManager, lifecycle, fragmentList)
+        toolbar.setupViewPager(binding.viewPager, adapter)
+
+        toolbar.addMenuProvider(object : IxiMenuProvider {
+            override fun provideMenu(): List<IxiMenu> {
+                return listOf()
+            }
+
+            override fun onMenuItemClick(id: Int) {
+                when (id) {
+                    android.R.id.home -> {
+                        finish()
+                        Log.e("ToolbarActivity", "Back Arrow clicked")
+                    }
+                    0 -> {
+                        Log.e("ToolbarActivity", "$id item clicked")
+                    }
+                    1 -> {
+                        Log.e("ToolbarActivity", "$id item clicked")
+                    }
+                }
+            }
+        })
+
+        binding.appBar.removeAllViews()
+        binding.appBar.addView(toolbar)
+        binding.appBar.elevation = 100F
+    }
+
+}
+
+class DemoAdapter(
+    fm: FragmentManager,
+    lifecycle: Lifecycle,
+    private val contents: List<Fragment>
+) : FragmentStateAdapter(fm, lifecycle) {
+
+    override fun getItemCount(): Int {
+        return contents.size
+    }
+
+    override fun createFragment(position: Int): Fragment {
+        return contents[position]
+    }
 }
