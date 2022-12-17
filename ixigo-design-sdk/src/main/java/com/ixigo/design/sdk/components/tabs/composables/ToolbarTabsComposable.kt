@@ -100,3 +100,47 @@ fun PillTabComposable(
         }
     }
 }
+
+@Composable
+fun LineTabComposable(
+    modifier: Modifier = Modifier,
+    @DrawableRes startIcon: Int = 0,
+    @DrawableRes endIcon: Int = 0,
+    text: String?,
+    isSelected: Boolean = false
+) {
+    val textColor =
+        if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
+    Column(modifier = Modifier.width(IntrinsicSize.Max)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = modifier
+                .wrapContentWidth()
+                .height(40.dp)
+                .padding(8.dp),
+        ) {
+            if (startIcon != 0) {
+                Icon(painter = painterResource(id = startIcon), contentDescription = "")
+            }
+            if (!text.isNullOrBlank()) {
+                TypographyText(
+                    text = text,
+                    textStyle = IxiTypography.Body.Medium.regular.copy(color = textColor),
+                    modifier = Modifier.padding(horizontal = 8.dp)
+                )
+            }
+            if (endIcon != 0) {
+                Icon(painter = painterResource(id = endIcon), contentDescription = "")
+            }
+        }
+        if(isSelected) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(3.dp)
+                    .background(color = colorResource(id = R.color.b500))
+            )
+        }
+    }
+
+}

@@ -1,6 +1,13 @@
 package com.ixigo.design.sdk.components.topappbar.composable
 
+import android.content.Context
+import android.graphics.Paint
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.RectShape
+import android.graphics.drawable.shapes.RoundRectShape
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
@@ -17,27 +24,26 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.compose.ui.zIndex
-import androidx.fragment.app.Fragment
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.tabs.IxiLineTabItems
 import com.ixigo.design.sdk.components.tabs.IxiPillTabItem
 import com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
 import com.ixigo.design.sdk.components.tabs.base.TabType
-import com.ixigo.design.sdk.components.tabs.composables.ToolbarTabsComposable
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.topappbar.TabItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 import com.ixigo.design.sdk.utils.DimensionUtils.dpToPx
+
 
 @Composable
 fun MainToolBar(
@@ -159,6 +165,16 @@ fun SrpBar(
     }
 }
 
+fun getRoundRect(context: Context, @ColorRes color: Int): Drawable {
+    val rectShape = RectShape()
+    val shapeDrawable = ShapeDrawable(rectShape)
+    shapeDrawable.paint.color = ContextCompat.getColor(context, color)
+    shapeDrawable.paint.style = Paint.Style.FILL
+    shapeDrawable.paint.isAntiAlias = true
+    shapeDrawable.paint.flags = Paint.ANTI_ALIAS_FLAG
+    return shapeDrawable
+}
+
 @Composable
 fun TabbedBar(
     modifier: Modifier = Modifier,
@@ -178,9 +194,9 @@ fun TabbedBar(
     ) {
         AndroidView(factory = {
             val tabLayout = IxiTabLayout(it)
-            if (tabType == TabType.PILL) {
-                tabLayout.setSelectedTabIndicator(null)
-            }
+
+            tabLayout.setSelectedTabIndicator(null)
+
             tabLayout.tabMode = MODE_SCROLLABLE
             tabLayout.tabRippleColor = null
             viewPager.adapter = adapter
@@ -194,15 +210,24 @@ fun TabbedBar(
                     tabItem.setTitle(data[position].title ?: "")
                     tab.customView = tabItem
                 } else {
-                    val tabItem = TextView(it)
-                    tabItem.text = data[position].title
-                    tabItem.compoundDrawablePadding = it.dpToPx(10).toInt()
-                    tabItem.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                        data[position].startIcon,
-                        0,
-                        data[position].endIcon,
-                        0
-                    )
+//                    val color = if(tab.isSelected)R.color.b500 else R.color.n800
+//                    tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(it, R.color.b500))
+////                    tabLayout.setSelectedTabIndicator(getRoundRect(it, R.color.b500))
+//                    val tabItem = TextView(it)
+//                    tabItem.setTextColor(ContextCompat.getColor(it, color))
+//                    tabItem.text = data[position].title
+//                    tabItem.compoundDrawablePadding = it.dpToPx(8).toInt()
+//                    tabItem.setCompoundDrawablesRelativeWithIntrinsicBounds(
+//                        data[position].startIcon,
+//                        0,
+//                        data[position].endIcon,
+//                        0
+//                    )
+//                    tab.customView = tabItem
+                    val tabItem = IxiLineTabItems(it)
+                    tabItem.setEndDrawable(data[position].endIcon)
+                    tabItem.setStartDrawable(data[position].startIcon)
+                    tabItem.setTitle(data[position].title ?: "")
                     tab.customView = tabItem
                 }
             }.attach()
