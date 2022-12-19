@@ -29,6 +29,7 @@ import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 @Composable
 internal fun ComposableButton(
@@ -164,16 +165,18 @@ private fun DrawComponents(
             Image(
                 painter = painterResource(id = startDrawableRes),
                 contentDescription = "Image",
-                modifier = Modifier.padding(start = 5.dp, end = 5.dp).constrainAs(imageStart) {
-                    start.linkTo(parent.start, margin = 5.dp, goneMargin = 5.dp)
-                    end.linkTo(textView.start)
-                    top.linkTo(parent.top)
-                    bottom.linkTo(parent.bottom)
-                },
+                modifier = Modifier
+                    .padding(start = 5.dp, end = 5.dp)
+                    .constrainAs(imageStart) {
+                        start.linkTo(parent.start, margin = 5.dp, goneMargin = 5.dp)
+                        end.linkTo(textView.start)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
                 colorFilter = if (drawableTint != 0) ColorFilter.tint(Color.Black) else null
             )
         }
-        Text(
+        TypographyText(
             text = text,
             maxLines=1,
             overflow = TextOverflow.Ellipsis,
@@ -192,19 +195,14 @@ private fun DrawComponents(
                     width = Dimension.preferredWrapContent
                 },
 
-            style = TextStyle(
-                color = colorResource(id = textColor),
-                fontSize = size.textSize,
-                fontFamily = IxiFamily,
-                fontWeight = FontWeight.Medium,
-                fontStyle = FontStyle.Normal,
-                ),
+            textStyle = size.typography.copy(color = colorResource(id = textColor)),
         )
         if (endDrawableRes != 0) {
             Image(
                 painter = painterResource(id = endDrawableRes),
                 contentDescription = "Image",
-                modifier = Modifier.padding(start = 5.dp, end = 5.dp)
+                modifier = Modifier
+                    .padding(start = 5.dp, end = 5.dp)
                     .constrainAs(imageEnd) {
                         start.linkTo(textView.end)
                         end.linkTo(parent.end, 5.dp, 5.dp)

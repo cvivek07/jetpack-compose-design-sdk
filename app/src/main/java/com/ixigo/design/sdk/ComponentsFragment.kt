@@ -21,6 +21,8 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -84,10 +86,9 @@ class ComponentsFragment : Fragment() {
                         .height(60.dp)
                         .clickable(onClick = { findNavController().navigate(it.second) }),
                 ) {
-                    Text(
+                    TypographyText(
                         text = it.first,
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp
+                        textStyle = IxiTypography.Heading.H6.regular
                     )
                 }
                 Divider(color = Color.Black)

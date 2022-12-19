@@ -1,10 +1,12 @@
 package com.ixigo.design.sdk.components.buttons.styles
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
 data class ComponentPadding(
     val startPadding: Dp,
@@ -15,33 +17,33 @@ data class ComponentPadding(
 
 sealed class ButtonSize(
     val height: Dp,
-    val textSize: TextUnit,
-    val horizontalPadding: PaddingValues
+    val horizontalPadding: PaddingValues,
+    val typography: TextStyle
 ) {
 
     object Small : ButtonSize(
-        height = 30.dp, textSize = 14.sp, horizontalPadding = PaddingValues(horizontal = 10.dp)
+        height = 30.dp, typography = IxiTypography.Button.Small.regular, horizontalPadding = PaddingValues(horizontal = 10.dp)
     )
 
     object Medium : ButtonSize(
-        height = 40.dp, textSize = 16.sp, horizontalPadding = PaddingValues(horizontal = 10.dp)
+        height = 40.dp, typography = IxiTypography.Button.Medium.regular, horizontalPadding = PaddingValues(horizontal = 10.dp)
     )
 
     object Large : ButtonSize(
-        height = 50.dp, textSize = 18.sp, horizontalPadding = PaddingValues(horizontal = 15.dp)
+        height = 50.dp, typography = IxiTypography.Button.Large.regular, horizontalPadding = PaddingValues(horizontal = 15.dp)
     )
 
     object XLarge : ButtonSize(
-        height = 56.dp, textSize = 24.sp, horizontalPadding = PaddingValues(horizontal = 20.dp)
+        height = 56.dp, typography = IxiTypography.Button.XLarge.regular, horizontalPadding = PaddingValues(horizontal = 20.dp)
     )
 
     object XXLarge : ButtonSize(
-        height = 90.dp, textSize = 24.sp, horizontalPadding = PaddingValues(horizontal = 30.dp)
+        height = 90.dp, typography = IxiTypography.Button.XLarge.regular, horizontalPadding = PaddingValues(horizontal = 30.dp)
     )
 
     data class Extra(
         val extraHeight: Dp,
-        val extraTextSize: TextUnit,
+        val extraTextSize: TextStyle,
         val extraHorizontalPadding: Dp
-    ) : ButtonSize(extraHeight, extraTextSize, PaddingValues(horizontal = extraHorizontalPadding))
+    ) : ButtonSize(height = extraHeight, typography =  extraTextSize, horizontalPadding = PaddingValues(horizontal = extraHorizontalPadding))
 }

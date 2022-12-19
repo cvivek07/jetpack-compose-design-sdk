@@ -13,6 +13,51 @@ import androidx.compose.ui.unit.sp
 object IxiTypography {
     private val n800 = Color(29, 38, 60)
 
+    object Button {
+        object XLarge {
+            val regular = TextStyle(
+                fontSize = 24.sp,
+                lineHeight = 27.07.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W500,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+        }
+
+        object Large {
+            val regular = TextStyle(
+                fontSize = 18.sp,
+                lineHeight = 23.4.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W500,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+        }
+
+        object Medium {
+            val regular = TextStyle(
+                fontSize = 16.sp,
+                lineHeight = 20.8.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W500,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+        }
+        object Small {
+            val regular = TextStyle(
+                fontSize = 14.sp,
+                lineHeight = 18.2.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W500,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+        }
+    }
+
     object Heading {
         object DisplayLarge {
             val regular = TextStyle(
@@ -20,21 +65,24 @@ object IxiTypography {
                 lineHeight = 65.sp,
                 letterSpacing = 4.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val semiBold = TextStyle(
                 fontSize = 54.sp,
                 lineHeight = 65.sp,
                 letterSpacing = 4.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val bold = TextStyle(
                 fontSize = 54.sp,
                 lineHeight = 65.sp,
                 letterSpacing = 4.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
 
@@ -44,21 +92,24 @@ object IxiTypography {
                 lineHeight = 48.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val semiBold = TextStyle(
                 fontSize = 40.sp,
                 lineHeight = 48.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val bold = TextStyle(
                 fontSize = 40.sp,
                 lineHeight = 48.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
 
@@ -68,7 +119,8 @@ object IxiTypography {
                 lineHeight = 43.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
 
             val semiBold = TextStyle(
@@ -76,7 +128,8 @@ object IxiTypography {
                 lineHeight = 43.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
 
             val bold = TextStyle(
@@ -84,7 +137,8 @@ object IxiTypography {
                 lineHeight = 43.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
 
@@ -94,21 +148,24 @@ object IxiTypography {
                 lineHeight = 36.sp,
                 letterSpacing = 2.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val semiBold = TextStyle(
                 fontSize = 30.sp,
                 lineHeight = 36.sp,
                 letterSpacing = 2.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val bold = TextStyle(
                 fontSize = 30.sp,
                 lineHeight = 36.sp,
                 letterSpacing = 2.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
 
@@ -118,21 +175,24 @@ object IxiTypography {
                 lineHeight = 29.sp,
                 letterSpacing = 2.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val semiBold = TextStyle(
                 fontSize = 24.sp,
                 lineHeight = 29.sp,
                 letterSpacing = 2.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val bold = TextStyle(
                 fontSize = 24.sp,
                 lineHeight = 29.sp,
                 letterSpacing = 2.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
 
@@ -142,21 +202,24 @@ object IxiTypography {
                 lineHeight = 24.sp,
                 letterSpacing = 1.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val semiBold = TextStyle(
                 fontSize = 20.sp,
                 lineHeight = 24.sp,
                 letterSpacing = 1.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val bold = TextStyle(
                 fontSize = 20.sp,
                 lineHeight = 24.sp,
                 letterSpacing = 1.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
 
@@ -166,21 +229,24 @@ object IxiTypography {
                 lineHeight = 22.sp,
                 letterSpacing = 1.sp,
                 fontWeight = W500,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val semiBold = TextStyle(
                 fontSize = 18.sp,
                 lineHeight = 22.sp,
                 letterSpacing = 1.sp,
                 fontWeight = W700,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
             val bold = TextStyle(
                 fontSize = 18.sp,
                 lineHeight = 22.sp,
                 letterSpacing = 1.sp,
                 fontWeight = W900,
-                color = n800
+                color = n800,
+                fontFamily = IxiFamily
             )
         }
     }
@@ -193,6 +259,7 @@ object IxiTypography {
                 letterSpacing = 5.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val medium = TextStyle(
@@ -201,6 +268,7 @@ object IxiTypography {
                 letterSpacing = 5.sp,
                 fontWeight = W500,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val bold = TextStyle(
@@ -209,6 +277,7 @@ object IxiTypography {
                 letterSpacing = 5.sp,
                 fontWeight = W700,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val italics = TextStyle(
@@ -217,6 +286,7 @@ object IxiTypography {
                 letterSpacing = 5.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 fontStyle = FontStyle.Italic,
             )
 
@@ -226,6 +296,7 @@ object IxiTypography {
                 letterSpacing = 5.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.Underline
             )
 
@@ -235,6 +306,7 @@ object IxiTypography {
                 letterSpacing = 5.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.LineThrough
             )
         }
@@ -246,6 +318,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val medium = TextStyle(
@@ -254,6 +327,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W500,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val bold = TextStyle(
@@ -262,6 +336,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W700,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val italics = TextStyle(
@@ -270,6 +345,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 fontStyle = FontStyle.Italic,
                 textDecoration = TextDecoration.Underline
             )
@@ -280,6 +356,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.Underline
             )
 
@@ -289,6 +366,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.LineThrough
             )
         }
@@ -300,6 +378,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val medium = TextStyle(
@@ -308,6 +387,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W500,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val bold = TextStyle(
@@ -316,6 +396,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W700,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val italics = TextStyle(
@@ -324,6 +405,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 fontStyle = FontStyle.Italic,
                 textDecoration = TextDecoration.Underline
             )
@@ -334,6 +416,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.Underline
             )
 
@@ -343,6 +426,7 @@ object IxiTypography {
                 letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.LineThrough
             )
         }
@@ -354,6 +438,7 @@ object IxiTypography {
                 letterSpacing = 3.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val medium = TextStyle(
@@ -362,6 +447,7 @@ object IxiTypography {
                 letterSpacing = 3.sp,
                 fontWeight = W500,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val bold = TextStyle(
@@ -370,6 +456,7 @@ object IxiTypography {
                 letterSpacing = 3.sp,
                 fontWeight = W700,
                 color = n800,
+                fontFamily = IxiFamily,
             )
 
             val italics = TextStyle(
@@ -378,6 +465,7 @@ object IxiTypography {
                 letterSpacing = 3.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 fontStyle = FontStyle.Italic,
                 textDecoration = TextDecoration.Underline
             )
@@ -388,6 +476,7 @@ object IxiTypography {
                 letterSpacing = 3.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.Underline
             )
 
@@ -397,6 +486,7 @@ object IxiTypography {
                 letterSpacing = 3.sp,
                 fontWeight = W400,
                 color = n800,
+                fontFamily = IxiFamily,
                 textDecoration = TextDecoration.LineThrough
             )
         }

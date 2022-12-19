@@ -20,6 +20,7 @@ import com.ixigo.design.sdk.components.buttons.composable.ComposableButton
 import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
 @Composable
 fun SegmentedControl(
@@ -43,7 +44,7 @@ fun SegmentedControl(
         horizontalArrangement = Arrangement.Center
     ) {
         items.forEachIndexed { index, item ->
-            if(index != 0) {
+            if (index != 0) {
                 Spacer(modifier = Modifier.width(5.dp))
             }
             ComposableButton(
@@ -79,8 +80,12 @@ fun SegmentedControl(
                     onItemSelection(selectedIndex.value)
                 },
                 shapes = ButtonShape.PillShape,
-                size = ButtonSize.Extra(26.dp,16.sp,10.dp),
-                colors = IxiColor.Extra(bg =if(selectedIndex.value == index) R.color.n0 else android.R.color.transparent, pressed = R.color.n0, text = R.color.n800),
+                size = ButtonSize.Extra(26.dp, IxiTypography.Button.Medium.regular, 10.dp),
+                colors = IxiColor.Extra(
+                    bg = if (selectedIndex.value == index) R.color.n0 else android.R.color.transparent,
+                    pressed = R.color.n0,
+                    text = R.color.n800
+                ),
             )
 
         }
