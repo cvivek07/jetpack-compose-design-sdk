@@ -71,9 +71,8 @@ fun PillTabComposable(
         if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
     Row(
         verticalAlignment = Alignment.CenterVertically,
-
         modifier = modifier
-            .wrapContentWidth()
+            .width(IntrinsicSize.Min)
             .height(40.dp)
             .border(
                 border = BorderStroke(1.dp, colorResource(id = borderColor)),
@@ -111,9 +110,10 @@ fun LineTabComposable(
 ) {
     val textColor =
         if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
-    Column(modifier = Modifier.width(IntrinsicSize.Max)) {
+    Column(modifier = Modifier.width(IntrinsicSize.Min), horizontalAlignment = Alignment.CenterHorizontally) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center,
             modifier = modifier
                 .wrapContentWidth()
                 .height(40.dp)

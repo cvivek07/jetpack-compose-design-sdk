@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
@@ -213,7 +212,7 @@ class ToolBarActivity : AppCompatActivity() {
         val toolbar = IxiTabbedToolBar(context = this)
         toolbar.setData(listTabsName)
         toolbar.setTabType(TabType.PILL)
-        val adapter = DemoAdapter(supportFragmentManager, lifecycle, fragmentList)
+        val adapter = PagerAdapter(supportFragmentManager, lifecycle, fragmentList)
         toolbar.setupViewPager(binding.viewPager, adapter)
 
         toolbar.addMenuProvider(object : IxiMenuProvider {
@@ -244,7 +243,7 @@ class ToolBarActivity : AppCompatActivity() {
 
 }
 
-class DemoAdapter(
+class PagerAdapter(
     fm: FragmentManager,
     lifecycle: Lifecycle,
     private val contents: List<Fragment>

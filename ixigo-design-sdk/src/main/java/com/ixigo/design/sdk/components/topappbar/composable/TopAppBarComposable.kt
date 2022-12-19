@@ -183,73 +183,30 @@ fun TabbedBar(
     menuProvider: IxiMenuProvider? = null,
     data: List<TabItem>,
     adapter: FragmentStateAdapter?,
-    onItemSelection: (selectedItemIndex: Int) -> Unit,
     viewPager: ViewPager2,
     tabType: TabType = TabType.LINED
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        modifier = modifier
     ) {
         AndroidView(factory = {
             val tabLayout = IxiTabLayout(it)
-
-            tabLayout.setSelectedTabIndicator(null)
-
             tabLayout.tabMode = MODE_SCROLLABLE
-            tabLayout.tabRippleColor = null
+            tabLayout.tabType = tabType
             viewPager.adapter = adapter
-            TabLayoutMediator(
-                tabLayout, viewPager
-            ) { tab, position ->
-                if (tabType == TabType.PILL) {
-                    val tabItem = IxiPillTabItem(it)
-                    tabItem.setEndDrawable(data[position].endIcon)
-                    tabItem.setStartDrawable(data[position].startIcon)
-                    tabItem.setTitle(data[position].title ?: "")
-                    tab.customView = tabItem
-                } else {
-//                    val color = if(tab.isSelected)R.color.b500 else R.color.n800
-//                    tabLayout.setSelectedTabIndicatorColor(ContextCompat.getColor(it, R.color.b500))
-////                    tabLayout.setSelectedTabIndicator(getRoundRect(it, R.color.b500))
-//                    val tabItem = TextView(it)
-//                    tabItem.setTextColor(ContextCompat.getColor(it, color))
-//                    tabItem.text = data[position].title
-//                    tabItem.compoundDrawablePadding = it.dpToPx(8).toInt()
-//                    tabItem.setCompoundDrawablesRelativeWithIntrinsicBounds(
-//                        data[position].startIcon,
-//                        0,
-//                        data[position].endIcon,
-//                        0
-//                    )
-//                    tab.customView = tabItem
-                    val tabItem = IxiLineTabItems(it)
-                    tabItem.setEndDrawable(data[position].endIcon)
-                    tabItem.setStartDrawable(data[position].startIcon)
-                    tabItem.setTitle(data[position].title ?: "")
-                    tab.customView = tabItem
-                }
-            }.attach()
+            tabLayout.setupWithViewPager2(viewPager, data)
             tabLayout
         })
-//        ToolbarTabsComposable(
-//            data = data,
-//            menuProvider = menuProvider,
-//            onItemSelection = onItemSelection,
-//            modifier = modifier
-//                .height(36.dp)
-//                .weight(1f)
-//                .padding(
-//                    end = 15.dp
-//                ),
-//        )
     }
 }
 
 
 @Composable
 fun BasicToolbar(
+    modifier: Modifier = Modifier,
     @DrawableRes homeIcon: Int = R.drawable.left_arrow,
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
@@ -257,7 +214,7 @@ fun BasicToolbar(
 ) {
     TopAppBar(
         backgroundColor = colorResource(id = R.color.n0),
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .height(60.dp)
             .shadow(10.dp)

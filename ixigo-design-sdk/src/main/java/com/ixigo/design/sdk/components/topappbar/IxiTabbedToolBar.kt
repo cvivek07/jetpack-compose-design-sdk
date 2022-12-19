@@ -26,11 +26,6 @@ class IxiTabbedToolBar @JvmOverloads constructor(
         state.value = initState.copy(tabType = tabType)
     }
 
-    fun setItemSelectedListener(listener: (selectedItemIndex: Int) -> Unit) {
-        val initState = state.value
-        state.value = initState.copy(tabbedSelectionListener = listener)
-    }
-
     fun setupViewPager(viewPager: ViewPager2, adapter: FragmentStateAdapter) {
         val initState = state.value
         state.value = initState.copy(viewPager = viewPager, adapter = adapter)
@@ -49,7 +44,6 @@ class IxiTabbedToolBar @JvmOverloads constructor(
                         elevation = elevation,
                         menuProvider = menuProvider,
                         data = it,
-                        onItemSelection = this.tabbedSelectionListener,
                         viewPager = it1,
                         adapter = adapter,
                         tabType = tabType
