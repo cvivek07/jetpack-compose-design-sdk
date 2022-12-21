@@ -81,6 +81,7 @@ fun SegmentedControl(
                 },
                 shapes = ButtonShape.PillShape,
                 size = ButtonSize.Extra(26.dp, IxiTypography.Button.Medium.regular, 10.dp),
+                width = -2,
                 colors = IxiColor.Extra(
                     bg = if (selectedIndex.value == index) R.color.n0 else android.R.color.transparent,
                     pressed = R.color.n0,

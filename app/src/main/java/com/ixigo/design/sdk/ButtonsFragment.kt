@@ -33,7 +33,7 @@ class ButtonsFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonFirst.setText("Large Primary Button Very Large Text")
+        binding.buttonFirst.setText("Primary Button ")
         binding.buttonFirst.setStartImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setStyle(ButtonShape.RegularShape, IxiColor.Orange, ButtonSize.Large)
@@ -41,13 +41,13 @@ class ButtonsFragment : BaseFragment() {
             context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonSecond.setText("XLarge Blue Bottom Shaped Primary Button")
+        binding.buttonSecond.setText("XLarge Blue Bottom ")
         binding.buttonSecond.setStyle(ButtonShape.BottomShape, IxiColor.Blue, ButtonSize.XLarge)
         binding.buttonSecond.setClickListener {
             context?.let { it1 -> "Button2 Clicked Change".toToast(it1) }
         }
 
-        binding.buttonThird.setText("Leading Primary XXLarge Button")
+        binding.buttonThird.setText("Leading Primary ")
         binding.buttonThird.setStyle(ButtonShape.LeadingShape, IxiColor.Error, ButtonSize.XXLarge)
         binding.buttonThird.setClickListener {
             context?.let { it1 -> "Button3 Clicked Change".toToast(it1) }

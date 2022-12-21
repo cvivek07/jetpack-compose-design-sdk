@@ -52,6 +52,7 @@ fun ToolbarTabsComposable(
                 size = ButtonSize.Medium,
                 shapes = ButtonShape.PillShape,
                 onClick = { onItemSelection(index) },
+                width = -2
             )
         }
     }
@@ -71,8 +72,9 @@ fun PillTabComposable(
         if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
     Row(
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
         modifier = modifier
-            .width(IntrinsicSize.Min)
+            .width(IntrinsicSize.Max)
             .height(40.dp)
             .border(
                 border = BorderStroke(1.dp, colorResource(id = borderColor)),
@@ -81,11 +83,12 @@ fun PillTabComposable(
             .background(
                 color = colorResource(id = bgColor),
                 shape = ButtonShape.PillShape.shape
-            )
-            .padding(8.dp),
+            ).padding(8.dp)
     ) {
         if (startIcon != 0) {
-            Icon(painter = painterResource(id = startIcon), contentDescription = "")
+            Icon(
+                painter = painterResource(id = startIcon), contentDescription = "",
+            )
         }
         if (!text.isNullOrBlank()) {
             TypographyText(
@@ -95,7 +98,9 @@ fun PillTabComposable(
             )
         }
         if (endIcon != 0) {
-            Icon(painter = painterResource(id = endIcon), contentDescription = "")
+            Icon(
+                painter = painterResource(id = endIcon), contentDescription = "",
+            )
         }
     }
 }
@@ -110,7 +115,10 @@ fun LineTabComposable(
 ) {
     val textColor =
         if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
-    Column(modifier = Modifier.width(IntrinsicSize.Min), horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier.width(IntrinsicSize.Max),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center,
@@ -133,7 +141,7 @@ fun LineTabComposable(
                 Icon(painter = painterResource(id = endIcon), contentDescription = "")
             }
         }
-        if(isSelected) {
+        if (isSelected) {
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

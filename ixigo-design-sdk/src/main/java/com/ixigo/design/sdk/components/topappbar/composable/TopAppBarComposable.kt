@@ -5,13 +5,14 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
-import android.graphics.drawable.shapes.RoundRectShape
-import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.IconButton
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
+import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -28,21 +29,17 @@ import androidx.core.content.ContextCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
-import com.google.android.material.tabs.TabLayoutMediator
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.styles.IxiTypography
-import com.ixigo.design.sdk.components.tabs.IxiLineTabItems
-import com.ixigo.design.sdk.components.tabs.IxiPillTabItem
 import com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
 import com.ixigo.design.sdk.components.tabs.base.TabType
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.topappbar.TabItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
-import com.ixigo.design.sdk.utils.DimensionUtils.dpToPx
 
 
 @Composable
@@ -88,7 +85,8 @@ fun MainToolBar(
 fun SearchBar(
     @DrawableRes homeIcon: Int = R.drawable.left_arrow,
     elevation: Dp = 10.dp,
-    menuProvider: IxiMenuProvider? = null
+    menuProvider: IxiMenuProvider? = null,
+    onQueryChange: (String) -> Unit
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
@@ -96,8 +94,8 @@ fun SearchBar(
         menuProvider = menuProvider
     ) {
         SearchViewComposable(
-            query = TextFieldValue(),
-            onQueryChange = {},
+            query = "",
+            onQueryChange = onQueryChange,
             onSearchFocusChange = {},
             onClearQuery = { },
             hint = "Search",
@@ -186,17 +184,20 @@ fun TabbedBar(
     viewPager: ViewPager2,
     tabType: TabType = TabType.LINED
 ) {
+    val padding = 5.dp.value.toInt()
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
         menuProvider = menuProvider,
         modifier = modifier
     ) {
+
         AndroidView(factory = {
             val tabLayout = IxiTabLayout(it)
             tabLayout.tabMode = MODE_SCROLLABLE
             tabLayout.tabType = tabType
             viewPager.adapter = adapter
+            tabLayout.setPaddingRelative(padding, 0,0,0)
             tabLayout.setupWithViewPager2(viewPager, data)
             tabLayout
         })

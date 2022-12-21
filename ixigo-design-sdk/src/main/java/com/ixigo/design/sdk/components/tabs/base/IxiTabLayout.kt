@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.tabs.base
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.core.view.ViewCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -23,7 +24,6 @@ class IxiTabLayout @JvmOverloads constructor(
          }
 
          val items = viewPager.adapter!!.itemCount
-
          if(items != tabItems.size) {
              throw java.lang.RuntimeException("TabItems Count does not match with ViewPager fragment count")
          }
@@ -31,6 +31,8 @@ class IxiTabLayout @JvmOverloads constructor(
          tabMode =  MODE_SCROLLABLE
          setSelectedTabIndicator(null)
          tabRippleColor = null
+         setPaddingRelative(0,0,0,0)
+
          TabLayoutMediator(
              this, viewPager
          ) { tab, position ->

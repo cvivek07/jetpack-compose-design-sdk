@@ -37,7 +37,7 @@ fun OutlinedInputField(
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
-    onTextChange: (String) -> Unit
+    onTextChange: ((String) -> Unit)?
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -60,7 +60,7 @@ fun OutlinedInputField(
             onValueChange = {
                 if (it.text.length <= maxCharCount)
                     textValue.value = it
-                onTextChange(it.text)
+                onTextChange?.invoke(it.text)
             },
             label = labelComposable,
             leadingIcon = leadingIcon,
@@ -102,7 +102,7 @@ fun LinedInputField(
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
-    onTextChange: (String) -> Unit
+    onTextChange: ((String) -> Unit)?
 ) {
     val trailingIcons = getTrailingActions(
         actionText,
@@ -124,7 +124,7 @@ fun LinedInputField(
             onValueChange = {
                 if (it.text.length <= maxCharCount)
                     textValue.value = it
-                onTextChange(it.text)
+                onTextChange?.invoke(it.text)
             },
 
             label = labelComposable,

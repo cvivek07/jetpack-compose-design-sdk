@@ -16,11 +16,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
@@ -28,16 +26,17 @@ import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
-import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.text.composable.TypographyText
+import com.ixigo.design.sdk.utils.DimensionUtils.toDp
 
 @Composable
 internal fun ComposableButton(
+    modifier: Modifier = Modifier,
     text: String = "",
     colors: IxiColor,
-    modifier: Modifier = Modifier,
     shapes: ButtonShape,
     size: ButtonSize,
+    width: Int,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -52,11 +51,12 @@ internal fun ComposableButton(
 
     val textColor = if (isEnabled) colors.textColor else IxiColor.Disabled.textColor
 
+
     Button(
         onClick = onClick,
         modifier = modifier
             .height(size.height)
-            .wrapContentWidth(),
+            .updateSizeModifier(width),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
@@ -76,6 +76,7 @@ internal fun ComposableTextButton(
     text: String = "",
     colors: IxiColor,
     size: ButtonSize,
+    width: Int,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -87,7 +88,7 @@ internal fun ComposableTextButton(
         onClick = onClick,
         modifier = Modifier
             .height(size.height)
-            .wrapContentWidth(),
+            .updateSizeModifier(width),
         enabled = isEnabled,
         contentPadding = size.horizontalPadding,
     ) {
@@ -96,12 +97,26 @@ internal fun ComposableTextButton(
 
 }
 
+fun Modifier.updateSizeModifier(width: Int) = when (width) {
+    -1 -> {
+        this.fillMaxWidth()
+    }
+    -2 -> {
+        this.wrapContentWidth()
+    }
+    else -> {
+        this.width(Dp(width.toDp.toFloat()))
+    }
+}
+
+
 @Composable
 internal fun ComposableButtonOutlined(
     text: String = "",
     colors: IxiColor,
     shapes: ButtonShape,
     size: ButtonSize,
+    width: Int,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -119,7 +134,7 @@ internal fun ComposableButtonOutlined(
         onClick = onClick,
         modifier = Modifier
             .height(size.height)
-            .wrapContentWidth(),
+            .updateSizeModifier(width),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,
@@ -178,7 +193,7 @@ private fun DrawComponents(
         }
         TypographyText(
             text = text,
-            maxLines=1,
+            maxLines = 1,
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .padding(
@@ -214,7 +229,7 @@ private fun DrawComponents(
         }
 
 
-        createHorizontalChain(imageStart,  textView, imageEnd, chainStyle = ChainStyle.Packed)
+        createHorizontalChain(imageStart, textView, imageEnd, chainStyle = ChainStyle.Packed)
 
     }
 }

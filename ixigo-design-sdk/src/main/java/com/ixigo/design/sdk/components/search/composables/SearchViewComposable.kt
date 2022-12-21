@@ -9,6 +9,7 @@ import androidx.compose.material.Icon
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -26,24 +27,29 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 @Composable
 fun SearchViewComposable(
-    query: TextFieldValue,
-    onQueryChange: (TextFieldValue) -> Unit,
+    query: String,
+    onQueryChange: (String) -> Unit,
     onSearchFocusChange: (Boolean) -> Unit,
     onClearQuery: () -> Unit,
     hint: String,
     modifier: Modifier = Modifier
 ) {
     val focusRequester = remember { FocusRequester() }
+    val textValue = remember { mutableStateOf(TextFieldValue(text = query)) }
     TextField(
-        value = query,
-        onValueChange = onQueryChange,
+        value = textValue.value,
+        onValueChange = {
+            textValue.value = it
+            onQueryChange(it.text)
+        },
         colors = TextFieldDefaults.textFieldColors(
-            textColor = colorResource(id = R.color.n500),
+            textColor = colorResource(id = R.color.n900),
             disabledTextColor = colorResource(id = R.color.n700),
             backgroundColor = Color.Transparent,
             focusedIndicatorColor = Color.Transparent,
             unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent
+            disabledIndicatorColor = Color.Transparent,
+            cursorColor = colorResource(id = R.color.n700),
         ),
         modifier = modifier
             .fillMaxWidth()
@@ -55,17 +61,17 @@ fun SearchViewComposable(
             .onFocusChanged {
                 onSearchFocusChange(it.isFocused)
             }
-            .focusRequester(focusRequester)
-            .padding(top = 9.dp, bottom = 8.dp, start = 24.dp, end = 8.dp),
+            .focusRequester(focusRequester),
         singleLine = true,
-        trailingIcon = {
+        trailingIcon = @Composable {
             Icon(
                 painter = painterResource(id = R.drawable.ic_search),
                 contentDescription = null
             )
         },
-        label = {
+        placeholder = @Composable {
             TypographyText(
+                modifier = Modifier.padding(0.dp),
                 text = hint,
                 textStyle = IxiTypography.Body.Medium.regular.copy(color = colorResource(id = R.color.n700))
             )
@@ -77,7 +83,7 @@ fun SearchViewComposable(
 @Composable
 fun SearchPreview() {
     SearchViewComposable(
-        query = TextFieldValue(),
+        query = "",
         onQueryChange = {},
         onSearchFocusChange = {},
         onClearQuery = { },

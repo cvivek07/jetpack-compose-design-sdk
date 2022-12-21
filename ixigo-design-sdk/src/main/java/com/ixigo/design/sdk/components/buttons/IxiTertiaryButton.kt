@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -41,6 +42,7 @@ class IxiTertiaryButton @JvmOverloads constructor(
                 text,
                 mapTertiaryStyle(colors),
                 sizes,
+                preferredWidth,
                 isEnabled,
                 startDrawableState.value,
                 endDrawableState.value,

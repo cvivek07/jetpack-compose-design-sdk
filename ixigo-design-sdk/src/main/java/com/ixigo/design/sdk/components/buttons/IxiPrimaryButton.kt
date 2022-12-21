@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableButton
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -27,11 +28,12 @@ class IxiPrimaryButton @JvmOverloads constructor(
         )
         with(state.value) {
             ComposableButton(
+                Modifier,
                 text,
                 colors,
-                Modifier,
                 shapes,
                 sizes,
+                preferredWidth,
                 isEnabled,
                 startDrawableState.value,
                 endDrawableState.value,
