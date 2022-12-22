@@ -9,13 +9,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayout.MODE_AUTO
-import com.google.android.material.tabs.TabLayout.MODE_FIXED
+import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.ixigo.design.sdk.components.tabs.base.TabType
 import com.ixigo.design.sdk.components.topappbar.TabItem
-import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
 import com.ixigo.design.sdk.databinding.FragmentTabBarBinding
-import com.ixigo.design.sdk.databinding.FragmentTopAppBarBinding
-import kotlin.concurrent.fixedRateTimer
 
 class TabBarFragment: Fragment() {
     private var _binding: FragmentTabBarBinding? = null
@@ -33,11 +30,11 @@ class TabBarFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val fragments = listOf(TypographyFragment(), ButtonsFragment())
-        val dataList = listOf(TabItem("Typography", 0,0), TabItem("Buttons", 0,0))
+        val dataList = listOf(TabItem("Typo", R.drawable.ic_baseline_cancel_24,0), TabItem("Buttons", 0,R.drawable.ic_baseline_cancel_24))
 
         binding.viewPager.adapter = PagerAdapter(parentFragmentManager, lifecycle, fragments)
         binding.tabLayout.tabType = TabType.LINED
-        binding.tabLayout.tabMode =  MODE_FIXED
+        binding.tabLayout.tabMode =  MODE_SCROLLABLE
         binding.tabLayout.setupWithViewPager2(binding.viewPager, dataList)
 
         val fragments2 = listOf(ProgressStepFragment(), InputFieldsFragment())
