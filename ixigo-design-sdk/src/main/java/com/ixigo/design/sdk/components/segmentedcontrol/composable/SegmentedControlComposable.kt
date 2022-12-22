@@ -8,16 +8,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.buttons.composable.ComposableButton
-import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
@@ -79,7 +77,7 @@ fun SegmentedControl(
                     selectedIndex.value = index
                     onItemSelection(selectedIndex.value)
                 },
-                shapes = ButtonShape.PillShape,
+                shapes = IxiShape.PillShape,
                 size = ButtonSize.Extra(26.dp, IxiTypography.Button.Medium.regular, 10.dp),
                 width = -2,
                 colors = IxiColor.Extra(

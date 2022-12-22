@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.ui.platform.AbstractComposeView
 import com.ixigo.design.sdk.SdkInitializer
-import com.ixigo.design.sdk.utils.DimensionUtils.toDp
 
 abstract class BaseComponent @JvmOverloads constructor(
     context: Context,

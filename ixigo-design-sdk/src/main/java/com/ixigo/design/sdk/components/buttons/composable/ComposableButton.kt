@@ -24,7 +24,7 @@ import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.components.styles.IxiColor
-import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.utils.DimensionUtils.toDp
@@ -34,7 +34,7 @@ internal fun ComposableButton(
     modifier: Modifier = Modifier,
     text: String = "",
     colors: IxiColor,
-    shapes: ButtonShape,
+    shapes: IxiShape,
     size: ButtonSize,
     width: Int,
     isEnabled: Boolean = true,
@@ -56,7 +56,7 @@ internal fun ComposableButton(
         onClick = onClick,
         modifier = modifier
             .height(size.height)
-            .updateSizeModifier(width),
+            .updateWidth(width),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
@@ -88,7 +88,7 @@ internal fun ComposableTextButton(
         onClick = onClick,
         modifier = Modifier
             .height(size.height)
-            .updateSizeModifier(width),
+            .updateWidth(width),
         enabled = isEnabled,
         contentPadding = size.horizontalPadding,
     ) {
@@ -97,7 +97,7 @@ internal fun ComposableTextButton(
 
 }
 
-fun Modifier.updateSizeModifier(width: Int) = when (width) {
+fun Modifier.updateWidth(width: Int) = when (width) {
     -1 -> {
         this.fillMaxWidth()
     }
@@ -114,7 +114,7 @@ fun Modifier.updateSizeModifier(width: Int) = when (width) {
 internal fun ComposableButtonOutlined(
     text: String = "",
     colors: IxiColor,
-    shapes: ButtonShape,
+    shapes: IxiShape,
     size: ButtonSize,
     width: Int,
     isEnabled: Boolean = true,
@@ -134,7 +134,7 @@ internal fun ComposableButtonOutlined(
         onClick = onClick,
         modifier = Modifier
             .height(size.height)
-            .updateSizeModifier(width),
+            .updateWidth(width),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = Color.Transparent,

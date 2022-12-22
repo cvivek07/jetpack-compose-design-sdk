@@ -13,12 +13,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.buttons.composable.ComposableButtonOutlined
-import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
@@ -50,7 +49,7 @@ fun ToolbarTabsComposable(
                 text = data[index],
                 colors = IxiColor.Blue,
                 size = ButtonSize.Medium,
-                shapes = ButtonShape.PillShape,
+                shapes = IxiShape.PillShape,
                 onClick = { onItemSelection(index) },
                 width = -2
             )
@@ -78,11 +77,11 @@ fun PillTabComposable(
             .height(40.dp)
             .border(
                 border = BorderStroke(1.dp, colorResource(id = borderColor)),
-                shape = ButtonShape.PillShape.shape
+                shape = IxiShape.PillShape.shape
             )
             .background(
                 color = colorResource(id = bgColor),
-                shape = ButtonShape.PillShape.shape
+                shape = IxiShape.PillShape.shape
             ).padding(8.dp)
     ) {
         if (startIcon != 0) {

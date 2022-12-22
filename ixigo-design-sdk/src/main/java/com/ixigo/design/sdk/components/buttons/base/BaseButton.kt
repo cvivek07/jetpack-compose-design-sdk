@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
-import com.ixigo.design.sdk.components.buttons.styles.ButtonShape
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 
@@ -40,7 +40,7 @@ abstract class BaseButton @JvmOverloads constructor(
         state.value = inState.copy(text = text)
     }
 
-    protected open fun setStyle(shapes: ButtonShape, colors: IxiColor, sizes: ButtonSize) {
+    protected open fun setStyle(shapes: IxiShape, colors: IxiColor, sizes: ButtonSize) {
         val initState = state.value
         state.value = initState.copy(shapes = shapes, colors = colors, sizes = sizes)
     }
@@ -93,7 +93,7 @@ abstract class BaseButton @JvmOverloads constructor(
 data class ButtonState(
     val text: String = "",
     val colors: IxiColor = IxiColor.Orange,
-    val shapes: ButtonShape = ButtonShape.RegularShape,
+    val shapes: IxiShape = IxiShape.RegularShape,
     val sizes: ButtonSize = ButtonSize.Large,
     val isEnabled: Boolean = true,
     val onClick: () -> Unit = {}
