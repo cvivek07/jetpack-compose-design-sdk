@@ -18,6 +18,9 @@ import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.buttons.composable.updateWidth
 import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiFamily
+import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 private val unFocusColor = R.color.n100
 
@@ -51,8 +54,13 @@ fun OutlinedInputField(
 
     val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
 
-    val labelComposable = getPlaceHolder(label)
     val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
+
+    val isFocussed = remember {
+        mutableStateOf(false)
+    }
+
+    val labelComposable = getPlaceHolder(label, colors, isFocussed.value)
 
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
@@ -67,9 +75,12 @@ fun OutlinedInputField(
             trailingIcon = trailingIcons,
             singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .onFocusChanged {
+                    isFocussed.value = it.isFocused
+                },
             colors = getInputFieldColors(colors),
-//            tint = tint
         )
         GetBottomText(helperText, maxCharCount, textValue)
     }
@@ -83,63 +94,9 @@ private fun getInputFieldColors(colors: IxiColor) =
         textColor = colorResource(id = R.color.n800),
         cursorColor = colorResource(id = colors.bgColor),
         focusedLabelColor = colorResource(id = colors.bgColor),
-        unfocusedLabelColor = colorResource(id = R.color.n800)
+        unfocusedLabelColor = colorResource(id = R.color.n800),
+        placeholderColor = colorResource(id = colors.bgColor),
     )
-
-//@Composable
-//fun LinedInputField(
-//    actionImage: Int = 0,
-//    drawableStart: Int = 0,
-//    drawableEnd: Int = 0,
-//    maxCharCount: Int = Int.MAX_VALUE,
-//    actionText: String? = "",
-//    helperText: String = "",
-//    text: String = "",
-//    label: String = "",
-//    hint: String = "",
-//    colors: IxiColor = IxiColor.Orange,
-//    onDrawableStartClick: () -> Unit,
-//    onDrawableEndClick: () -> Unit,
-//    onActionTextClick: () -> Unit,
-//    onActionIconClick: () -> Unit,
-//    onTextChange: ((String) -> Unit)?
-//) {
-//    val trailingIcons = getTrailingActions(
-//        actionText,
-//        onActionTextClick,
-//        drawableEnd,
-//        onDrawableEndClick,
-//        actionImage,
-//        onActionIconClick
-//    )
-//
-//    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
-//
-//    val labelComposable = getPlaceHolder(label)
-//    val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
-//
-//    Column(Modifier.width(IntrinsicSize.Min)) {
-//        TextField(
-//            value = textValue.value,
-//            onValueChange = {
-//                if (it.text.length <= maxCharCount)
-//                    textValue.value = it
-//                onTextChange?.invoke(it.text)
-//            },
-//
-//            label = labelComposable,
-//            leadingIcon = leadingIcon,
-//            trailingIcon = trailingIcons,
-//            singleLine = true,
-//            textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-//            modifier = Modifier.padding(0.dp),
-//            colors = getInputFieldColors(colors = colors)
-//        )
-//
-//        GetBottomText(helperText, maxCharCount, textValue)
-//    }
-//}
-
 
 @Composable
 private fun GetBottomText(
@@ -149,9 +106,10 @@ private fun GetBottomText(
 ) {
     Row {
         if (helperText.isNotEmpty()) {
-            Text(
+            TypographyText(
                 text = helperText,
                 textAlign = TextAlign.Start,
+                textStyle = IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = R.color.n600))
             )
         }
         val maxCharCountText = if (maxCharCount > 0) maxCharCount.toString() else ""
@@ -159,16 +117,37 @@ private fun GetBottomText(
             Spacer(modifier = Modifier.weight(1f))
         }
         if (maxCharCountText.isNotEmpty() && maxCharCount != Int.MAX_VALUE) {
-            Text(text = "${textValue.value.text.length} / $maxCharCountText")
+            TypographyText(
+                text = "${textValue.value.text.length} / $maxCharCountText",
+                textStyle = IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = R.color.n600))
+            )
         }
     }
 }
 
 @Composable
-private fun getPlaceHolder(hint: String): @Composable () -> Unit {
+private fun getPlaceHolder(
+    hint: String,
+    ixiColor: IxiColor,
+    isFocussed: Boolean
+): @Composable () -> Unit {
+
+    val color = if (isFocussed) ixiColor.bgColor else R.color.n600
+    val typography =
+        if (isFocussed) {
+            IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = color))
+        } else {
+            IxiTypography.Body.Medium.regular.copy(
+                color = colorResource(id = color)
+            )
+        }
     val placeHolder = @Composable {
         if (hint.isNotEmpty()) {
-            Text(text = hint, modifier = Modifier.padding(0.dp))
+            TypographyText(
+                text = hint,
+                modifier = Modifier.padding(0.dp),
+                textStyle = typography
+            )
         }
     }
     return placeHolder
@@ -279,12 +258,15 @@ fun LinedInputField(
 
     val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
 
-    val labelComposable = getPlaceHolder(label)
     val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
 
-    val dividerColor = remember {
-        mutableStateOf(unFocusColor)
+
+    val isFocussed = remember {
+        mutableStateOf(false)
     }
+    val dividerColor = if (isFocussed.value) colors.bgColor else unFocusColor
+    val labelComposable = getPlaceHolder(label, colors, isFocussed.value)
+//    val labelComposable = getPlaceHolder(label, placeholderTextColor.value)
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
             value = textValue.value,
@@ -300,16 +282,7 @@ fun LinedInputField(
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
             modifier = Modifier
                 .fillMaxWidth()
-                .onFocusChanged {
-                    when {
-                        it.isFocused -> {
-                            dividerColor.value = colors.bgColor
-                        }
-                        else -> {
-                            dividerColor.value = unFocusColor
-                        }
-                    }
-                },
+                .onFocusChanged { isFocussed.value = it.isFocused }.padding(PaddingValues(0.dp)),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.Transparent,
                 unfocusedBorderColor = Color.Transparent,
@@ -319,8 +292,8 @@ fun LinedInputField(
                 unfocusedLabelColor = colorResource(id = R.color.n800)
             ),
         )
-
-        Divider(color = colorResource(id = dividerColor.value))
+        Divider(color = colorResource(id = dividerColor), modifier = Modifier.padding(top = 0.dp))
         GetBottomText(helperText, maxCharCount, textValue)
     }
+
 }

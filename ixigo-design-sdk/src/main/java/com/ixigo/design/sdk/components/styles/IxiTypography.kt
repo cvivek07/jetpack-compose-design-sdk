@@ -315,7 +315,7 @@ object IxiTypography {
             val regular = TextStyle(
                 fontSize = 16.sp,
                 lineHeight = 26.sp,
-                letterSpacing = 4.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,

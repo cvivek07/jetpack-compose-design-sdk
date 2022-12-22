@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.sp
 import com.ixigo.design.sdk.components.styles.IxiFamily
@@ -16,6 +17,7 @@ fun TypographyText(
     textStyle: TextStyle,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
+    textAlign: TextAlign? = null,
     maxLines: Int = Int.MAX_VALUE,
 ) {
     Text(
@@ -25,7 +27,8 @@ fun TypographyText(
         modifier = modifier,
         overflow = overflow,
         softWrap = softWrap,
-        maxLines = maxLines
+        maxLines = maxLines,
+        textAlign = textAlign
     )
 }
 
@@ -38,6 +41,7 @@ fun TypographyText(
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
     maxLines: Int = Int.MAX_VALUE,
+    textAlign: TextAlign? = null,
 ) {
     Text(
         text = text,
@@ -46,6 +50,7 @@ fun TypographyText(
         modifier = modifier,
         overflow = overflow,
         softWrap = softWrap,
-        maxLines = maxLines
+        maxLines = maxLines,
+        textAlign = textAlign
     )
 }
