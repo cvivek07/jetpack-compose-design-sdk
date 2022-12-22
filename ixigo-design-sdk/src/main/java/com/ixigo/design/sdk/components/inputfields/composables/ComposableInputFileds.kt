@@ -7,6 +7,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -296,7 +297,6 @@ fun LinedInputField(
             leadingIcon = leadingIcon,
             trailingIcon = trailingIcons,
             singleLine = true,
-            shape = IxiShape.LineShape.shape,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
             modifier = Modifier
                 .fillMaxWidth()
@@ -310,7 +310,14 @@ fun LinedInputField(
                         }
                     }
                 },
-            colors = getInputFieldColors(colors = colors),
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                focusedBorderColor = Color.Transparent,
+                unfocusedBorderColor = Color.Transparent,
+                textColor = colorResource(id = R.color.n800),
+                cursorColor = colorResource(id = colors.bgColor),
+                focusedLabelColor = colorResource(id = colors.bgColor),
+                unfocusedLabelColor = colorResource(id = R.color.n800)
+            ),
         )
 
         Divider(color = colorResource(id = dividerColor.value))
