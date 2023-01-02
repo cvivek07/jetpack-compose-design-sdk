@@ -5,10 +5,10 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -26,7 +26,7 @@ import com.ixigo.design.sdk.components.styles.IxiTypography
 
 
 @Composable
-fun RowScope.ComposableBottomNavItem(
+fun ComposableBottomNavItem(
     @DrawableRes icon: Int?,
     @DrawableRes selectedIcon: Int? = null,
     label: String?,
@@ -34,46 +34,44 @@ fun RowScope.ComposableBottomNavItem(
     onClick: () -> Unit,
     badgeType: BadgeType? = null,
     badgeContent: String? = null,
-    itemType: ItemType = ItemType.LINED,
+    itemType: ItemType = ItemType.FILLED,
     ixiColor: IxiColor = IxiColor.BlueBottomNavbarAndroid
 ) {
-    BottomNavigationItem(
-        icon = {
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                if (selected) {
-                    LinedItem(itemType = itemType, color = ixiColor.textColor)
-                }
-                Spacer(modifier = Modifier.height(3.dp))
-                IconWithBadge(
-                    icon = if (selected && selectedIcon != null) selectedIcon else icon,
-                    badgeType = badgeType,
-                    badgeContent = badgeContent,
-                    tint = if (itemType == ItemType.FILLED && selected) ixiColor.textColor else null,
-                    enableBackground = itemType == ItemType.FILLED && selected,
-                    ixiColor = ixiColor
-                )
-                Spacer(modifier = Modifier.height(2.dp))
-            }
-        },
-        label = {
-            if (label != null) {
-                if (selected && itemType == ItemType.FILLED) {
-                    Text(
-                        label, style = IxiTypography.Body.XSmall.medium.copy(
-                            color = colorResource(
-                                id = ixiColor.textColor
-                            )
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.clickable(onClick = onClick)
+    ) {
+        if (itemType == ItemType.LINED) {
+            LinedItem(color = ixiColor.textColor, selected)
+        } else {
+            Spacer(modifier = Modifier.height(4.dp))
+        }
+        Spacer(modifier = Modifier.height(3.dp))
+        IconWithBadge(
+            icon = if (selected && selectedIcon != null) selectedIcon else icon,
+            badgeType = badgeType,
+            badgeContent = badgeContent,
+            tint = if (itemType == ItemType.FILLED && selected) ixiColor.textColor
+            else if (itemType == ItemType.LINED && selected) R.color.black
+            else null,
+            enableBackground = itemType == ItemType.FILLED && selected,
+            ixiColor = ixiColor
+        )
+        Spacer(modifier = Modifier.height(2.dp))
+        if (label != null) {
+            if (selected && itemType == ItemType.FILLED) {
+                Text(
+                    label, style = IxiTypography.Body.XSmall.medium.copy(
+                        color = colorResource(
+                            id = ixiColor.textColor
                         )
                     )
-                } else {
-                    Text(label, style = IxiTypography.Body.XSmall.medium)
-                }
+                )
+            } else {
+                Text(label, style = IxiTypography.Body.XSmall.medium)
             }
-        },
-        selected = selected,
-        onClick = onClick,
-        selectedContentColor = colorResource(id = R.color.o100)
-    )
+        }
+    }
 }
 
 @Composable
@@ -111,7 +109,10 @@ fun IconWithBadge(
         }
         badgeType?.let {
             NotificationBadge(
-                badgeType = badgeType, content = badgeContent, borderColor = if(enableBackground) ixiColor.pressedColor else ixiColor.bgColor, modifier = Modifier
+                badgeType = badgeType,
+                content = badgeContent,
+                borderColor = if (enableBackground) ixiColor.pressedColor else ixiColor.bgColor,
+                modifier = Modifier
                     .align(Alignment.TopEnd)
             )
         }
@@ -119,16 +120,14 @@ fun IconWithBadge(
 }
 
 @Composable
-fun LinedItem(itemType: ItemType, @ColorRes color:Int) {
-    if (itemType == ItemType.LINED) {
-        Box(
-            Modifier
-                .width(50.dp)
-                .height(4.dp)
-                .clip(RoundedCornerShape(bottomEnd = 4.dp, bottomStart = 4.dp))
-                .background(colorResource(id = color))
-        )
-    }
+fun LinedItem(@ColorRes color: Int, enabled: Boolean) {
+    Box(
+        Modifier
+            .width(50.dp)
+            .height(4.dp)
+            .clip(RoundedCornerShape(bottomEnd = 4.dp, bottomStart = 4.dp))
+            .then(if (enabled) Modifier.background(colorResource(id = color)) else Modifier)
+    )
 }
 
 @Composable
@@ -193,117 +192,6 @@ fun NotificationBadge(
         }
     }
 }
-
-
-//@Composable
-//@Preview(showBackground = true)
-//fun ComposableBottomNavItemPreview() {
-//    val ixiColor: IxiColor = IxiColor.BlueBottomNavbarAndroid
-//    Row(
-//        modifier = Modifier
-//            .height(78.dp)
-//            .background(colorResource(id = ixiColor.bgColor))
-//    ) {
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            selected = false,
-//            itemType = ItemType.FILLED,
-//            onClick = {})
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            selected = true,
-//            badgeType = BadgeType.LARGE,
-//            itemType = ItemType.FILLED,
-//            badgeContent = "9k",
-//            onClick = {})
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            itemType = ItemType.FILLED,
-//            selected = false,
-//            onClick = {})
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            badgeType = BadgeType.LARGE,
-//            badgeContent = "2",
-//            itemType = ItemType.FILLED,
-//            selected = false,
-//            onClick = {})
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            itemType = ItemType.FILLED,
-//            badgeType = BadgeType.SMALL,
-//            selected = false,
-//            onClick = {})
-//    }
-//}
-//
-//@Composable
-//@Preview(showBackground = true)
-//fun ComposableBottomNavItemPreviewVariantB() {
-//    val ixiColor: IxiColor = IxiColor.BlueBottomNavbarIos
-//    Row(
-//        modifier = Modifier
-//            .height(78.dp)
-//            .background(colorResource(id = R.color.white))
-//    ) {
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            selected = true,
-//            onClick = {},
-//            ixiColor = ixiColor
-//
-//        )
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            selected = false,
-//            badgeType = BadgeType.LARGE,
-//            badgeContent = "9k",
-//            onClick = {},
-//            ixiColor = ixiColor
-//        )
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            selected = false,
-//            onClick = {},
-//            ixiColor = ixiColor
-//        )
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            badgeType = BadgeType.LARGE,
-//            badgeContent = "2",
-//            selected = false,
-//            onClick = {},
-//            ixiColor = ixiColor
-//        )
-//        ComposableBottomNavItem(
-//            icon = R.drawable.home,
-//            selectedIcon = R.drawable.home_filled,
-//            label = "Test",
-//            badgeType = BadgeType.SMALL,
-//            selected = false,
-//            onClick = {},
-//            ixiColor = ixiColor
-//        )
-//    }
-//}
 
 enum class BadgeType {
     SMALL,

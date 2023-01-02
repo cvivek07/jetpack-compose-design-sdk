@@ -23,4 +23,11 @@
         <attr name="actionImage" format="reference" />
         <attr name="drawableTintColor" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="BaseBottomNavItem">
+        <attr name="android:icon" format="reference" />
+        <attr name="selectedIcon" format="reference" />
+        <attr name="itemLabel" format="string" />
+        <attr name="selected" format="boolean" />
+    </declare-styleable>
 </resources>

@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_componentFragment_to_typographyFragment"
             app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_bottom_nav_fragment"
+            app:destination="@id/bottom_nav_fragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -45,5 +48,12 @@
         android:name="com.ixigo.design.sdk.TypographyFragment"
         android:label="@string/typography"
         tools:layout="@layout/fragment_typography">
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottom_nav_fragment"
+        android:name="com.ixigo.design.sdk.BottomNavFragment"
+        android:label="@string/bottom_nav"
+        tools:layout="@layout/fragment_bottom_nav">
     </fragment>
 </navigation>
