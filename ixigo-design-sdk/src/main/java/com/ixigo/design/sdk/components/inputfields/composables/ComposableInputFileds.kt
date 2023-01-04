@@ -60,7 +60,7 @@ fun OutlinedInputField(
         mutableStateOf(false)
     }
 
-    val labelComposable = getPlaceHolder(label, colors, isFocussed.value)
+    val labelComposable = getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
 
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
@@ -265,7 +265,7 @@ fun LinedInputField(
         mutableStateOf(false)
     }
     val dividerColor = if (isFocussed.value) colors.bgColor else unFocusColor
-    val labelComposable = getPlaceHolder(label, colors, isFocussed.value)
+    val labelComposable = getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
 //    val labelComposable = getPlaceHolder(label, placeholderTextColor.value)
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
