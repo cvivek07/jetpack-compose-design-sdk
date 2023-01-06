@@ -37,7 +37,7 @@ class ButtonsFragment : Fragment() {
         binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
         binding.buttonFirst.setShape(ButtonShape.RegularShape)
         binding.buttonFirst.setSize( ButtonSize.Large)
-        binding.buttonFirst.setClickListener {
+        binding.buttonFirst.setOnClickListener{
             context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }
         }
 

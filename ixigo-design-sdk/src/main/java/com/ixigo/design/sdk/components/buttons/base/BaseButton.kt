@@ -96,6 +96,13 @@ abstract class BaseButton @JvmOverloads constructor(
         val inState = state.value
         state.value = inState.copy(onClick = onClick)
     }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        super.setOnClickListener(l)
+        setClickListener {
+            l?.onClick(this)
+        }
+    }
 }
 
 
