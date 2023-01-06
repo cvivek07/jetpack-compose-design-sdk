@@ -5,6 +5,6 @@ import android.app.Application
 class SdkApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        SdkManager.initSdk(DesignConfig(Project.TRAIN))
+        SdkManager.initSdk(DesignConfig(Project.FLIGHT))
     }
 }

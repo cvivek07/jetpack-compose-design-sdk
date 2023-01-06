@@ -32,9 +32,7 @@ class ButtonsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.buttonFirst.setText(" Primary Button")
-        binding.buttonFirst.setStartImageDrawable(R.drawable.ic_call_24)
-        binding.buttonFirst.setEndImageDrawable(R.drawable.ic_call_24)
+
         binding.buttonFirst.setShape(ButtonShape.RegularShape)
         binding.buttonFirst.setSize( ButtonSize.Large)
         binding.buttonFirst.setOnClickListener{
