@@ -27,8 +27,16 @@ class IxiSecondaryButton @JvmOverloads constructor(
         else -> IxiColor.OrangeSecondary
     }
 
-    public override fun  setStyle(shapes: ButtonShape, colors: IxiColor, sizes: ButtonSize) {
-        super.setStyle(shapes, colors, sizes)
+    public override fun setColor(color: IxiColor) {
+        super.setColor(color)
+    }
+
+    public override  fun setShape(shapes: ButtonShape) {
+        super.setShape(shapes)
+    }
+
+    public override fun setSize(size: ButtonSize) {
+        super.setSize(size)
     }
 
     @Composable

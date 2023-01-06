@@ -27,8 +27,13 @@ class IxiTertiaryButton @JvmOverloads constructor(
         else -> IxiColor.OrangeTertiary
     }
 
-    fun setStyle(colors: IxiColor, sizes: ButtonSize) {
-        super.setStyle(ButtonShape.RegularShape, colors, sizes)
+
+    public override fun setColor(color: IxiColor) {
+        super.setColor(color)
+    }
+
+    public override fun setSize(size: ButtonSize) {
+        super.setSize(size)
     }
 
     @Composable

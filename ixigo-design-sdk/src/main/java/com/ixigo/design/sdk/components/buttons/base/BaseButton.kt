@@ -17,7 +17,7 @@ abstract class BaseButton @JvmOverloads constructor(
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
     protected var startDrawableState = mutableStateOf(0)
-    protected var state = mutableStateOf(ButtonState())
+    protected var state = mutableStateOf(ButtonState(colors = themeColor))
     protected var endDrawableState = mutableStateOf(0)
 
     init {
@@ -40,9 +40,19 @@ abstract class BaseButton @JvmOverloads constructor(
         state.value = inState.copy(text = text)
     }
 
-    protected open fun setStyle(shapes: ButtonShape, colors: IxiColor, sizes: ButtonSize) {
+    protected open fun setColor(color: IxiColor) {
         val initState = state.value
-        state.value = initState.copy(shapes = shapes, colors = colors, sizes = sizes)
+        state.value = initState.copy(colors = color)
+    }
+
+    protected open fun setShape(shapes: ButtonShape) {
+        val initState = state.value
+        state.value = initState.copy(shapes = shapes)
+    }
+
+    protected open fun setSize(size: ButtonSize) {
+        val initState = state.value
+        state.value = initState.copy(sizes = size)
     }
 
     override fun setEnabled(enable: Boolean) {
