@@ -159,8 +159,8 @@ fun ComposablePrimaryButton(
 @Composable
 fun ComposableSecondaryButton(
     text: String = "",
-    colors: IxiColor,
-    shapes: ButtonShape,
+    color: IxiColor,
+    shape: ButtonShape,
     size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
@@ -169,8 +169,8 @@ fun ComposableSecondaryButton(
 ) {
     ComposablePrimaryButton(
         text = text,
-        color = mapSecStyle(colors),
-        shape = shapes,
+        color = mapSecStyle(color),
+        shape = shape,
         size = size,
         isEnabled = isEnabled,
         startDrawable = startDrawable,
@@ -279,8 +279,8 @@ internal fun ComposableTextButton(
 @Composable
 internal fun ComposableOutlinedButton(
     text: String = "",
-    colors: IxiColor,
-    shapes: ButtonShape,
+    color: IxiColor,
+    shape: ButtonShape,
     size: ButtonSize,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
@@ -290,10 +290,10 @@ internal fun ComposableOutlinedButton(
 
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-    val enabledBorderColor = if (isPressed) colors.pressedColor else colors.bgColor
+    val enabledBorderColor = if (isPressed) color.pressedColor else color.bgColor
     val borderColor = if (isEnabled) enabledBorderColor else IxiColor.Disabled.bgColor
 
-    val textColor = if (isEnabled) colors.bgColor else IxiColor.Disabled.textColor
+    val textColor = if (isEnabled) color.bgColor else IxiColor.Disabled.textColor
 
     OutlinedButton(
         onClick = onClick,
@@ -308,7 +308,7 @@ internal fun ComposableOutlinedButton(
 
         interactionSource = interactionSource,
         contentPadding = size.horizontalPadding,
-        shape = shapes.shape,
+        shape = shape.shape,
         border = BorderStroke(2.dp, colorResource(id = borderColor)),
         elevation = ButtonDefaults.elevation(0.dp)
     ) {
