@@ -45,6 +45,7 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toDp
  *      IxiColor.Blue,
  *      IxiShape.RegularShape
  *      ButtonSize.XLarge,
+ *      -2,
  *      true,
  *      R.drawable.ic_start,
  *      R.drawable.ic_end,
@@ -63,6 +64,8 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toDp
  * @param size Set the size for the Button. Size defines the height of Button, Horizontal padding and
  * text size of Button. Choose from [ButtonSize.Large], [ButtonSize.XLarge]
  * [ButtonSize.XXLarge], [ButtonSize.Medium], [ButtonSize.Small].
+ * @param width Set the width for the widget. -1 for match_parent, -2 for wrap_content and positive
+ * value for width in pixel.
  * @param isEnabled Controls the enabled state of the Button. When `false`, this Button will not
  * be clickable.
  * @param startDrawable drawable at the start of the Primary Button.
@@ -130,6 +133,7 @@ fun ComposablePrimaryButton(
  *      IxiColor.Blue,
  *      IxiShape.RegularShape
  *      ButtonSize.XLarge,
+ *      -1,
  *      true,
  *      R.drawable.ic_start,
  *      R.drawable.ic_end,
@@ -148,6 +152,8 @@ fun ComposablePrimaryButton(
  * @param size Set the size for the Button. Size defines the height of Button, Horizontal padding and
  * text size of Button. Choose from [ButtonSize.Large], [ButtonSize.XLarge]
  * [ButtonSize.XXLarge], [ButtonSize.Medium], [ButtonSize.Small].
+ * @param width Set the width for the widget. -1 for match_parent, -2 for wrap_content and positive
+ * value for width in pixel.
  * @param isEnabled Controls the enabled state of the Button. When `false`, this Button will not
  * be clickable.
  * @param startDrawable drawable at the start of the Primary Button.
@@ -194,6 +200,7 @@ fun ComposableSecondaryButton(
  *      IxiColor.Blue,
  *      ButtonSize.XLarge,
  *      true,
+ *      -1,
  *      R.drawable.ic_start,
  *      R.drawable.ic_end,
  * ) {
@@ -208,6 +215,8 @@ fun ComposableSecondaryButton(
  * @param size Set the size for the Button. Size defines the height of Button, Horizontal padding and
  * text size of Button. Choose from [ButtonSize.Large], [ButtonSize.XLarge]
  * [ButtonSize.XXLarge], [ButtonSize.Medium], [ButtonSize.Small].
+ * @param width Set the width for the widget. -1 for match_parent, -2 for wrap_content and positive
+ * value for width in pixel.
  * @param isEnabled Controls the enabled state of the Button. When `false`, this Button will not
  * be clickable.
  * @param startDrawable drawable at the start of the Primary Button and should be DrawableResource.
@@ -256,6 +265,7 @@ internal fun ComposableTextButton(
  *      "Button",
  *      IxiColor.Blue,
  *      ButtonSize.XLarge,
+ *      200,
  *      true,
  *      R.drawable.ic_start,
  *      R.drawable.ic_end,
@@ -271,6 +281,8 @@ internal fun ComposableTextButton(
  * @param size Set the size for the Button. Size defines the height of Button, Horizontal padding and
  * text size of Button. Choose from [ButtonSize.Large], [ButtonSize.XLarge]
  * [ButtonSize.XXLarge], [ButtonSize.Medium], [ButtonSize.Small].
+ * @param width Set the width for the widget. -1 for match_parent, -2 for wrap_content and positive
+ * value for width in pixel.
  * @param isEnabled Controls the enabled state of the Button. When `false`, this Button will not
  * be clickable.
  * @param startDrawable drawable at the start of the Primary Button and should be DrawableResource.
