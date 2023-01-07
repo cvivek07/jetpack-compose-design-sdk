@@ -9,6 +9,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.ixigo.design.sdk.components.tabs.IxiLineTabItems
 import com.ixigo.design.sdk.components.tabs.IxiPillTabItem
 import com.ixigo.design.sdk.components.topappbar.TabItem
+import com.ixigo.design.sdk.utils.DimensionUtils.toPx
+import kotlin.math.roundToInt
 
 
 class IxiTabLayout @JvmOverloads constructor(
@@ -18,7 +20,11 @@ class IxiTabLayout @JvmOverloads constructor(
 ) : TabLayout(context, attrs, defStyleAttr) {
 
     var tabType: TabType = TabType.LINED
-    var tabPaddingInDp: Float = 5.dp.value
+
+    /**
+     * padding values to be set between two tabs items
+     */
+    var tabPaddingInDp: Int = 5
 
     fun setupWithViewPager2(viewPager: ViewPager2, tabItems: List<TabItem>) {
         if (viewPager.adapter == null) {
@@ -35,7 +41,7 @@ class IxiTabLayout @JvmOverloads constructor(
         setSelectedTabIndicator(null)
         tabRippleColor = null
 
-        val tabPadding = (tabPaddingInDp).toInt()
+        val tabPadding = (tabPaddingInDp.toPx)
         TabLayoutMediator(
             this, viewPager
         ) { tab, position ->
@@ -45,14 +51,14 @@ class IxiTabLayout @JvmOverloads constructor(
                 tabItem.setEndDrawable(tabItems[position].endIcon)
                 tabItem.setStartDrawable(tabItems[position].startIcon)
                 tabItem.setTitle(tabItems[position].title ?: "")
-                tab.view.setPadding(tabPadding,0,tabPadding,0)
+                tab.view.setPadding(tabPadding,0,0,0)
                 tab.customView = tabItem
             } else {
                 val tabItem = IxiLineTabItems(context)
                 tabItem.setEndDrawable(tabItems[position].endIcon)
                 tabItem.setStartDrawable(tabItems[position].startIcon)
                 tabItem.setTitle(tabItems[position].title ?: "")
-                tab.view.setPadding(tabPadding,0,tabPadding,0)
+                tab.view.setPadding(tabPadding,0,0,0)
                 tab.customView = tabItem
             }
         }.attach()

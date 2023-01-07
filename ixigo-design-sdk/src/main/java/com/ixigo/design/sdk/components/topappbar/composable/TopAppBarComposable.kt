@@ -199,7 +199,6 @@ fun TabbedBar(
             tabLayout.tabMode = MODE_SCROLLABLE
             tabLayout.tabType = tabType
             viewPager.adapter = adapter
-            tabLayout.setPaddingRelative(padding, 0,0,0)
             tabLayout.setupWithViewPager2(viewPager, data)
             tabLayout
         })
