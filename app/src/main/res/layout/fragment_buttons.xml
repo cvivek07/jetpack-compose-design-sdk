@@ -22,6 +22,14 @@
         <com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
             android:id="@+id/button_first"
             android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_call_24"
+            android:drawableEnd="@drawable/ic_call_24"
+            android:text="Primary Button"/>
+
+
+        <Space
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider" />

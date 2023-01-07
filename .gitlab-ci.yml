@@ -1,0 +1,80 @@
+## This image extends 'jangrewe/gitlab-ci-android' by adding node and yarn, needed for DangerJS.
+image: 119677764340.dkr.ecr.ap-south-1.amazonaws.com/jangrewe/gitlab-ci-android:1.2
+
+default:
+  tags:
+    - docker-shared
+
+variables:
+  GRADLE_SCAN:
+    value: ""
+    description: "Set to `true` if you want to run a Gradle Scan on this build"
+#  CI_DEBUG_TRACE: "true"
+
+workflow:
+  rules:
+    - if: $CI_COMMIT_MESSAGE =~ /^chore\(release\)/
+      when: never
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == "development"'
+
+stages:
+  - build
+  - deploy
+  - release
+
+before_script:
+  - export
+  - npm install -g gnomon
+  - export GRADLE_USER_HOME=$(pwd)/.gradle
+  - chmod +x ./gradlew
+  - if [ "$GRADLE_SCAN" = "true" ]; then GRADLE_SCAN_OPTION="--scan"; fi
+
+cache:
+  key: ${CI_PROJECT_ID}
+  paths:
+    - .gradle/wrapper
+    - node_modules
+
+build:
+  stage: build
+  interruptible: true
+  script:
+    # `overallCoverageReport` builds everything and creates coverage info
+    # `app:lintDebug` is used as an unmbrella project at the moment to run all module Lints
+    - "./gradlew app:assembleDebug app:assembleAndroidTest app:lintDebug spotlessCheck --stacktrace $GRADLE_SCAN_OPTION"
+  artifacts:
+    when: always
+    paths:
+      - "**/build/reports"
+      - "**/build/outputs"
+
+deploy:ixigo-design-sdk:
+  stage: deploy
+  variables:
+    LIB: ixigo-design-sdk
+  rules:
+      - if: '$CI_COMMIT_BRANCH == "development"'
+  script:
+    - "./gradlew $LIB:publishSnapshotPublicationToNexusSnapshotRepository --stacktrace $GRADLE_SCAN_OPTION"
+
+
+release:
+  stage: release
+  variables:
+    LIB: ixigo-design-sdk
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "development"'
+    - when: manual
+  allow_failure: true
+  before_script:
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+  script:
+    - "./gradlew $LIB:publishReleasePublicationToNexusRepository --stacktrace $GRADLE_SCAN_OPTION"
+  artifacts:
+    name: CHANGELOG
+    paths:
+      - CHANGELOG.md
+
