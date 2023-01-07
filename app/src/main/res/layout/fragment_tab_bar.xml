@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
-        android:id="@+id/tabLayout"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="800dp"/>
+        <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-    <include layout="@layout/divider" />
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="800dp" />
 
-    <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
-        android:id="@+id/linedTabLayout"
-        android:layout_width="match_parent"
-        app:tabPaddingStart="2dp"
-        app:tabPaddingEnd="2dp"
-        android:layout_height="wrap_content"/>
+        <include layout="@layout/divider" />
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager2"
-        android:layout_width="match_parent"
-        android:layout_height="800dp"/>
-</LinearLayout>
+        <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
+            android:id="@+id/linedTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabPaddingEnd="2dp"
+            app:tabPaddingStart="2dp" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager2"
+            android:layout_width="match_parent"
+            android:layout_height="800dp" />
+    </LinearLayout>
 </ScrollView>

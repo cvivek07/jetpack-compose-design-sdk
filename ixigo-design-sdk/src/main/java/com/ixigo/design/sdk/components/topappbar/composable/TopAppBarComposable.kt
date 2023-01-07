@@ -5,6 +5,8 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -28,7 +30,7 @@ import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
+import com.google.android.material.tabs.TabLayout.*
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
