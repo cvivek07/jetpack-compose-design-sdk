@@ -33,7 +33,7 @@ class ButtonsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonFirst.setShape(ButtonShape.RegularShape)
+        binding.buttonFirst.setShape(IxiShape.RegularShape)
         binding.buttonFirst.setSize( ButtonSize.Large)
         binding.buttonFirst.setOnClickListener{
             context?.let { it1 -> "Button1 Clicked Change".toToast(it1) }

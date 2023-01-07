@@ -23,7 +23,6 @@ abstract class BaseComponent @JvmOverloads constructor(
     }
     protected var preferredHeight: Int = 0
     protected var preferredWidth: Int = 0
-    protected val project = SdkInitializer.projectName
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()

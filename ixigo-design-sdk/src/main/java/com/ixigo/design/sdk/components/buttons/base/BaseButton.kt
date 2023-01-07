@@ -67,11 +67,11 @@ abstract class BaseButton @JvmOverloads constructor(
     /**
      * Set the shape for the button.
      *
-     * @param shape Shape to be set. Any shape can be provided from [ButtonShape.RegularShape],
-     * [ButtonShape.BottomShape], [ButtonShape.LeadingShape], [ButtonShape.TrailingShape].
-     * By default [ButtonShape.RegularShape] is used.
+     * @param shape Shape to be set. Any shape can be provided from [IxiShape.RegularShape],
+     * [IxiShape.BottomShape], [IxiShape.LeadingShape], [IxiShape.TrailingShape].
+     * By default [IxiShape.RegularShape] is used.
      */
-    protected open fun setShape(shape: ButtonShape) {
+    protected open fun setShape(shape: IxiShape) {
         val initState = state.value
         state.value = initState.copy(shapes = shape)
     }

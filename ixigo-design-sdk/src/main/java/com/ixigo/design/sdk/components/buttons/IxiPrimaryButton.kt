@@ -69,8 +69,8 @@ class IxiPrimaryButton @JvmOverloads constructor(
         super.setColor(color)
     }
 
-    public override  fun setShape(shapes: ButtonShape) {
-        super.setShape(shapes)
+    public override  fun setShape(shape: IxiShape) {
+        super.setShape(shape)
     }
 
     public override fun setSize(size: ButtonSize) {

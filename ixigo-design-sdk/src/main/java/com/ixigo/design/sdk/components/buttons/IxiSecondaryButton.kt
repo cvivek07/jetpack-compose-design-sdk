@@ -3,14 +3,12 @@ package com.ixigo.design.sdk.components.buttons
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
-import com.ixigo.design.sdk.components.buttons.composable.ComposablePrimaryButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableSecondaryButton
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiShape
-import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 
 /**
  * A user interface element which has translucent colored background and  user can tap or click to perform
@@ -71,7 +69,7 @@ class IxiSecondaryButton @JvmOverloads constructor(
         super.setColor(color)
     }
 
-    public override fun setShape(shape: ButtonShape) {
+    public override fun setShape(shape: IxiShape) {
         super.setShape(shape)
     }
 
@@ -86,13 +84,12 @@ class IxiSecondaryButton @JvmOverloads constructor(
         )
         with(state.value) {
             ComposableSecondaryButton(
-                Modifier,
                 text,
                 colors,
                 shapes,
                 sizes,
-                preferredWidth,
                 isEnabled,
+                preferredWidth,
                 startDrawableState.value,
                 endDrawableState.value,
                 onClick

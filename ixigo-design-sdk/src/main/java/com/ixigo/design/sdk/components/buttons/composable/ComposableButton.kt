@@ -6,9 +6,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,7 +43,7 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toDp
  * ComposablePrimaryButton(
  *      "Button",
  *      IxiColor.Blue,
- *      ButtonShape.RegularShape
+ *      IxiShape.RegularShape
  *      ButtonSize.XLarge,
  *      true,
  *      R.drawable.ic_start,
@@ -60,8 +58,8 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toDp
  * [IxiColor.Orange],[IxiColor.Blue], [IxiColor.Error], [IxiColor.Warning],
  * [IxiColor.Success], [IxiColor.Extension].
  * @param shape Defines the Button's shape. Choose from :
- * [ButtonShape.RegularShape], [ButtonShape.LeadingShape], [ButtonShape.TrailingShape],
- * [ButtonShape.BottomShape].
+ * [IxiShape.RegularShape], [IxiShape.LeadingShape], [IxiShape.TrailingShape],
+ * [IxiShape.BottomShape].
  * @param size Set the size for the Button. Size defines the height of Button, Horizontal padding and
  * text size of Button. Choose from [ButtonSize.Large], [ButtonSize.XLarge]
  * [ButtonSize.XXLarge], [ButtonSize.Medium], [ButtonSize.Small].
@@ -130,7 +128,7 @@ fun ComposablePrimaryButton(
  * ComposableSecondaryButton(
  *      "Button",
  *      IxiColor.Blue,
- *      ButtonShape.RegularShape
+ *      IxiShape.RegularShape
  *      ButtonSize.XLarge,
  *      true,
  *      R.drawable.ic_start,
@@ -145,8 +143,8 @@ fun ComposablePrimaryButton(
  * [IxiColor.Orange],[IxiColor.Blue], [IxiColor.Error], [IxiColor.Warning],
  * [IxiColor.Success], [IxiColor.Extension].
  * @param shape Defines the Button's shape. Choose from :
- * [ButtonShape.RegularShape], [ButtonShape.LeadingShape], [ButtonShape.TrailingShape],
- * [ButtonShape.BottomShape].
+ * [IxiShape.RegularShape], [IxiShape.LeadingShape], [IxiShape.TrailingShape],
+ * [IxiShape.BottomShape].
  * @param size Set the size for the Button. Size defines the height of Button, Horizontal padding and
  * text size of Button. Choose from [ButtonSize.Large], [ButtonSize.XLarge]
  * [ButtonSize.XXLarge], [ButtonSize.Medium], [ButtonSize.Small].
@@ -162,9 +160,10 @@ fun ComposablePrimaryButton(
 fun ComposableSecondaryButton(
     text: String = "",
     color: IxiColor,
-    shape: ButtonShape,
+    shape: IxiShape,
     size: ButtonSize,
     isEnabled: Boolean = true,
+    width: Int,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
@@ -177,7 +176,8 @@ fun ComposableSecondaryButton(
         isEnabled = isEnabled,
         startDrawable = startDrawable,
         endDrawable = endDrawable,
-        onClick = onClick
+        onClick = onClick,
+        width = width
     )
 }
 
@@ -425,6 +425,7 @@ fun Modifier.updateWidth(width: Int) = when (width) {
         this.width(Dp(width.toDp.toFloat()))
     }
 }
+
 @Preview(showBackground = true)
 @Composable
 private fun ComposablePreview() {

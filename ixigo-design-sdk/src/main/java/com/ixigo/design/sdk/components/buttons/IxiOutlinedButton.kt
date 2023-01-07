@@ -68,7 +68,7 @@ class IxiOutlinedButton @JvmOverloads constructor(
         super.setColor(color)
     }
 
-    public override fun setShape(shape: ButtonShape) {
+    public override fun setShape(shape: IxiShape) {
         super.setShape(shape)
     }
 
