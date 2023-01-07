@@ -10,21 +10,82 @@ import com.ixigo.design.sdk.components.tabs.IxiPillTabItem
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.utils.DimensionUtils.toPx
 
-
+/**
+ * IxiTabLayout provides a horizontal layout to display tabs.
+ *
+ * Two types of tabs are supported:
+ * [TabType.PILL] and [TabType.LINE]
+ *
+ * Population of the tabs to display is done through [TabLayout.Tab] instances.
+ * You pass [TabDataItem] instance list to draw tab items in setupWithViewPager2() along with
+ * [ViewPager2] instance to make connection with [ViewPager2]
+ *
+ * Call setupWithViewPager2() after setting up the adapter to view pager else it will
+ * throw [IllegalArgumentException]
+ *
+ * Moreover, If List<TabDataItem> provided mismatch the items in [ViewPager2] adapter items,
+ * it will throw [IllegalStateException]
+ *
+ * You should add a listener via [addOnTabSelectedListener] to be
+ * notified when any tab's selection state has been changed.
+ *
+ * You can  add [IxiTabLayout] in your layout file. An example usage is like so:
+ *
+ * ```
+ * <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
+ *  android:id="@+id/tabLayout"
+ *  android:layout_width="match_parent"
+ *  android:layout_height="wrap_content" />
+ *```
+ *
+ * <h3>ViewPager integration</h3>
+ *
+ * You must use [IxiTabLayout]  together with [ViewPager2] only. You
+ * can call ```setupWithViewPager(ViewPager2)``` to link the two together. This layout will be
+ * automatically populated from the [PagerAdapter]'s page titles.
+ *
+ * ```
+ * <LinearLayout
+ *   android:layout_width="match_parent"
+ *   android:layout_height="wrap_content"
+ *   android:orientation="vertical">
+ *
+ *      <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
+ *      android:id="@+id/tabLayout"
+ *      android:layout_width="match_parent"
+ *      android:layout_height="wrap_content" />
+ *
+ *      <androidx.viewpager2.widget.ViewPager2
+ *      android:id="@+id/viewPager"
+ *      android:layout_width="match_parent"
+ *      android:layout_height="match_parent" />
+ * </LinearLayout>
+ *
+ * @since 1.0
+ */
 class IxiTabLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : TabLayout(context, attrs, defStyleAttr) {
 
-    var tabType: TabType = TabType.LINED
+    /**
+     * specify the type of the tabs. Type can be any of [TabType.LINE] or [TabType.PILL]
+     */
+    var tabType: TabType = TabType.LINE
 
     /**
      * padding values to be set between two tabs items
      */
     var tabPaddingInDp: Int = 5
 
-    fun setupWithViewPager2(viewPager: ViewPager2, tabItems: List<TabItem>) {
+    /**
+     * Set up the [IxiTabLayout] wit [ViewPager2]
+     *
+     * @param viewPager [ViewPager2] instance to connect with the [IxiTabLayout]
+     * @param tabDataItems List of [TabDataItem]s which are used to create the [TabLayout.Tab]s
+     */
+    fun setupWithViewPager2(viewPager: ViewPager2, tabDataItems: List<TabDataItem>) {
         if (viewPager.adapter == null) {
             throw  java.lang.IllegalArgumentException("Please set adapter to the ViewPager")
         }
