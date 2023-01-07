@@ -5,8 +5,6 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
-import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -21,7 +19,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -40,7 +37,7 @@ import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
 import com.ixigo.design.sdk.components.tabs.base.TabType
 import com.ixigo.design.sdk.components.text.composable.TypographyText
-import com.ixigo.design.sdk.components.topappbar.TabItem
+import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 
@@ -53,8 +50,8 @@ fun MainToolBar(
     menuProvider: IxiMenuProvider? = null
 ) {
     BasicToolbar(
-        homeIcon = R.drawable.left_arrow,
-        elevation = 10.dp,
+        homeIcon = homeIcon,
+        elevation = elevation,
         menuProvider = menuProvider
     ) {
         Column(Modifier.weight(1f)) {
@@ -181,12 +178,11 @@ fun TabbedBar(
     @DrawableRes homeIcon: Int = R.drawable.left_arrow,
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
-    data: List<TabItem>,
+    data: List<TabDataItem>,
     adapter: FragmentStateAdapter?,
     viewPager: ViewPager2,
-    tabType: TabType = TabType.LINED
+    tabType: TabType = TabType.LINE
 ) {
-    val padding = 5.dp.value.toInt()
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,

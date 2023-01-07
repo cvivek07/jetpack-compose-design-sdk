@@ -16,7 +16,7 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseTopAppBar(context, attrs, defStyleAttr) {
 
-    fun setData(data: List<TabItem>) {
+    fun setData(data: List<TabDataItem>) {
         val initState = state.value
         state.value = initState.copy(tabbedData = data)
     }
@@ -54,4 +54,4 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     }
 }
 
-data class TabItem(val title: String?, val startIcon: Int, val endIcon: Int)
+data class TabDataItem(val title: String?, val startIcon: Int, val endIcon: Int)
