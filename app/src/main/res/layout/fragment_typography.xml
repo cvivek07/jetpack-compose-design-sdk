@@ -20,14 +20,17 @@
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/displayText700"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="Display"
+            android:textColor="@color/o700"/>
 
         <include layout="@layout/divider"/>
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/displayText500"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/r700" />
 
         <include layout="@layout/divider"/>
         <include layout="@layout/divider"/>

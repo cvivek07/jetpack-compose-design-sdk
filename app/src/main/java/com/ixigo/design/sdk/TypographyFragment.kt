@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentTypographyBinding
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.IxiText
 
 class TypographyFragment : Fragment() {
     private var _binding: FragmentTypographyBinding? = null
@@ -28,18 +30,26 @@ class TypographyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            displayText900.setText("Display Text Bold")
+//            displayText900.setTextColor(ContextCompat.getColor(requireContext(),R.color.b300))
             displayText900.setTypography(IxiTypography.Heading.DisplayLarge.bold)
+            displayText900.setText("Display Text Bold")
+            displayText900.setOnClickListener{
+                (it as? IxiText)?.getText()?.toToast(requireContext())
+            }
+
             displayText700.setText("Display Text SemiBold")
             displayText700.setTypography(IxiTypography.Heading.DisplayLarge.semiBold)
-            displayText500.setText("Display Text Regular")
+
+            displayText500.setHtmlText(R.string.hello_world)
             displayText500.setTypography(IxiTypography.Heading.DisplayLarge.regular)
+            displayText500.setTextColor(ContextCompat.getColor(requireContext(),R.color.g300))
+
 
             h1900.setText("H1 Bold")
             h1900.setTypography(IxiTypography.Heading.H1.bold)
-            h1700.setText("H1 SemiBold")
+            h1700.setHtmlText(R.string.app_name)
             h1700.setTypography(IxiTypography.Heading.H1.semiBold)
-            h1500.setText("H1 Regular")
+            h1500.setHtmlText("<html><b><i><u>Trusted by</u></i></b> <font color=\"#FEB900\">2 crore+ </font>Indian travellers &#127470;&#127475;</html>")
             h1500.setTypography(IxiTypography.Heading.H1.regular)
 
             h2900.setText("H2 Bold")
