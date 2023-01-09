@@ -8,6 +8,9 @@ import com.ixigo.design.sdk.components.progress_step.base.BaseProgressStep
 import com.ixigo.design_sdk.components.progress_step.composables.DrawHorizontalSteps
 import kotlinx.coroutines.launch
 
+/**
+ * Simple Horizontal Progress Step where Icons are used below the Icons
+ */
 class HorizontalProgressStep @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -20,7 +23,7 @@ class HorizontalProgressStep @JvmOverloads constructor(
         with(state.value) {
             DrawHorizontalSteps(
                 steps = steps,
-                progressStepSize = stepSize,
+                progressStepIconSize = stepSize,
                 selectionIndicator = selectionIndicator,
                 currentItem = currentIndex,
                 currentProgressState = currentItemProgressState,

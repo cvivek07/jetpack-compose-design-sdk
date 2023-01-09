@@ -32,7 +32,7 @@ fun DrawVerticalNode(
     data: ProgressStepData,
     actionView: View? = null,
     isLastItem: Boolean = false,
-    progressStepSize: ProgressStepSize,
+    progressStepIconSize: ProgressStepIconSize,
     progressState: ProgressState = ProgressState.Active,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     index: Int,
@@ -56,7 +56,7 @@ fun DrawVerticalNode(
                 if (progressState == ProgressState.Completed) {
                     ProgressStepNumberSuccess(
                         state = progressState,
-                        progressSize = progressStepSize,
+                        progressSize = progressStepIconSize,
                         text = index,
                         modifier = Modifier.constrainAs(icon) {
                             start.linkTo(parent.start)
@@ -71,14 +71,14 @@ fun DrawVerticalNode(
                             top.linkTo(parent.top)
                         },
                         text = index,
-                        progressSize = progressStepSize
+                        progressSize = progressStepIconSize
                     )
                 }
             } else {
                 if (progressState == ProgressState.Completed) {
                     ProgressStepIconSuccess(
                         state = progressState,
-                        progressSize = progressStepSize,
+                        progressSize = progressStepIconSize,
                         modifier = Modifier.constrainAs(icon) {
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
@@ -91,7 +91,7 @@ fun DrawVerticalNode(
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
                         },
-                        progressSize = progressStepSize
+                        iconSize = progressStepIconSize
                     )
                 }
             }
@@ -173,7 +173,7 @@ fun DrawHorizontalNode(
     data: ProgressStepData,
     actionView: View? = null,
     isLastItem: Boolean = false,
-    progressStepSize: ProgressStepSize,
+    progressStepIconSize: ProgressStepIconSize,
     progressState: ProgressState = ProgressState.Active,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     index: Int,
@@ -196,7 +196,7 @@ fun DrawHorizontalNode(
                 if (progressState == ProgressState.Completed) {
                     ProgressStepNumberSuccess(
                         state = progressState,
-                        progressSize = progressStepSize,
+                        progressSize = progressStepIconSize,
                         text = index,
                         modifier = Modifier.constrainAs(icon) {
                             start.linkTo(parent.start)
@@ -211,14 +211,14 @@ fun DrawHorizontalNode(
                             top.linkTo(parent.top)
                         },
                         text = index,
-                        progressSize = progressStepSize
+                        progressSize = progressStepIconSize
                     )
                 }
             } else {
                 if (progressState == ProgressState.Completed) {
                     ProgressStepIconSuccess(
                         state = progressState,
-                        progressSize = progressStepSize,
+                        progressSize = progressStepIconSize,
                         modifier = Modifier.constrainAs(icon) {
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
@@ -231,7 +231,7 @@ fun DrawHorizontalNode(
                             start.linkTo(parent.start)
                             top.linkTo(parent.top)
                         },
-                        progressSize = progressStepSize
+                        iconSize = progressStepIconSize
                     )
                 }
             }
@@ -313,7 +313,7 @@ fun DrawHorizontalNode(
 fun DrawHorizontalInlineNode(
     data: ProgressStepData,
     isLastItem: Boolean = false,
-    progressStepSize: ProgressStepSize,
+    progressStepIconSize: ProgressStepIconSize,
     progressState: ProgressState = ProgressState.Active,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     index: Int,
@@ -347,7 +347,7 @@ fun DrawHorizontalInlineNode(
                     ProgressState.Completed -> {
                         ProgressStepInlineSuccessIcon(
                             mode = mode,
-                            progressSize = progressStepSize,
+                            progressSize = progressStepIconSize,
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
@@ -357,7 +357,7 @@ fun DrawHorizontalInlineNode(
                     ProgressState.Active -> {
                         ProgressStepInlineActiveIcon(
                             mode = mode,
-                            progressSize = progressStepSize,
+                            progressSize = progressStepIconSize,
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
@@ -367,7 +367,7 @@ fun DrawHorizontalInlineNode(
                     else -> {
                         ProgressStepInlineInactiveIcon(
                             mode = mode,
-                            progressSize = progressStepSize,
+                            progressSize = progressStepIconSize,
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
@@ -380,7 +380,7 @@ fun DrawHorizontalInlineNode(
                     ProgressState.Completed -> {
                         ProgressStepInlineSuccessIcon(
                             mode = mode,
-                            progressSize = progressStepSize,
+                            progressSize = progressStepIconSize,
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
@@ -390,7 +390,7 @@ fun DrawHorizontalInlineNode(
                     ProgressState.Active -> {
                         ProgressStepInlineActiveIcon(
                             mode = mode,
-                            progressSize = progressStepSize,
+                            progressSize = progressStepIconSize,
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
@@ -400,7 +400,7 @@ fun DrawHorizontalInlineNode(
                     else -> {
                         ProgressStepInlineInactiveIcon(
                             mode = mode,
-                            progressSize = progressStepSize,
+                            progressSize = progressStepIconSize,
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
@@ -453,7 +453,7 @@ fun DrawHorizontalInlineNode(
 @Composable
 fun DrawVerticalSteps(
     steps: List<ProgressStepData>,
-    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    progressStepIconSize: ProgressStepIconSize = ProgressStepIconSize.Large,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     currentItem: Int = 0,
     currentProgressState: ProgressState? = null,
@@ -471,7 +471,7 @@ fun DrawVerticalSteps(
                 data = stepData,
                 isLastItem = index == steps.size - 1,
                 index = index,
-                progressStepSize = progressStepSize,
+                progressStepIconSize = progressStepIconSize,
                 progressState = progressStateValue,
                 selectionIndicator = selectionIndicator,
                 lineColor = lineColor
@@ -485,7 +485,7 @@ fun DrawVerticalSteps(
 @Composable
 fun DrawHorizontalSteps(
     steps: List<ProgressStepData>,
-    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    progressStepIconSize: ProgressStepIconSize = ProgressStepIconSize.Large,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     currentItem: Int = 0,
     currentProgressState: ProgressState? = null,
@@ -503,7 +503,7 @@ fun DrawHorizontalSteps(
                 data = stepData,
                 isLastItem = index == steps.size - 1,
                 index = index,
-                progressStepSize = progressStepSize,
+                progressStepIconSize = progressStepIconSize,
                 progressState = progressStateValue,
                 selectionIndicator = selectionIndicator,
                 lineColor = lineColor
@@ -517,7 +517,7 @@ fun DrawHorizontalSteps(
 @Composable
 fun DrawHorizontalInlineSteps(
     steps: List<ProgressStepData>,
-    progressStepSize: ProgressStepSize = ProgressStepSize.Large,
+    progressStepIconSize: ProgressStepIconSize = ProgressStepIconSize.Large,
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     currentItem: Int = 0,
     currentProgressState: ProgressState? = null,
@@ -540,7 +540,7 @@ fun DrawHorizontalInlineSteps(
                 data = stepData,
                 isLastItem = index == steps.size - 1,
                 index = index,
-                progressStepSize = progressStepSize,
+                progressStepIconSize = progressStepIconSize,
                 progressState = progressStateValue,
                 selectionIndicator = selectionIndicator,
                 lineColor = lineColor,

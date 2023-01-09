@@ -20,25 +20,28 @@ import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.progress_step.base.ProgressState
 import com.ixigo.design.sdk.components.progress_step.base.ProgressStepMode
-import com.ixigo.design.sdk.components.progress_step.base.ProgressStepSize
+import com.ixigo.design.sdk.components.progress_step.base.ProgressStepIconSize
 
 
 private val outerRadius = 10.dp
 private val middleRadius = 9.dp
 private val innerRadius = 5.dp
-private val outerStroke = 5.dp
+private val outerStroke = 7.dp
 
+/**
+ * Draw the simple rounded icon
+ */
 @Composable
 fun ProgressStepIcon(
     state: ProgressState,
     modifier: Modifier = Modifier,
-    progressSize: ProgressStepSize,
+    iconSize: ProgressStepIconSize,
 ) {
     val outerColor = colorResource(id = getOuterColor(state))
     val innerColor = colorResource(id = getInnerColor(state))
     Canvas(
         modifier = modifier
-            .size(progressSize.size)
+            .size(iconSize.size)
             .background(Color.Transparent)
     ) {
         drawCircle(
@@ -58,10 +61,13 @@ fun ProgressStepIcon(
     }
 }
 
+/**
+ * Draw the simple rounded icon Success State
+ */
 @Composable
 fun ProgressStepIconSuccess(
     state: ProgressState,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     modifier: Modifier = Modifier,
 ) {
     val innerColor = colorResource(id = getInnerColor(state))
@@ -78,10 +84,11 @@ fun ProgressStepIconSuccess(
     }
 }
 
+
 @Composable
 fun ProgressStepNumber(
     state: ProgressState,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     text: Int,
     modifier: Modifier = Modifier
 ) {
@@ -111,7 +118,7 @@ fun ProgressStepNumber(
 @Composable
 fun ProgressStepNumberSuccess(
     state: ProgressState,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     text: Int,
     modifier: Modifier = Modifier
 ) {
@@ -138,7 +145,7 @@ fun ProgressStepNumberSuccess(
 @Composable
 fun ProgressStepInlineSuccessIcon(
     mode: ProgressStepMode,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     modifier: Modifier = Modifier,
 ) {
     val bgColor = if (mode == ProgressStepMode.Dark) {
@@ -165,7 +172,7 @@ fun ProgressStepInlineSuccessIcon(
 @Composable
 fun ProgressStepInlineActiveIcon(
     mode: ProgressStepMode,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     modifier: Modifier = Modifier,
     text: String? = null
 ) {
@@ -205,7 +212,7 @@ fun ProgressStepInlineActiveIcon(
 @Composable
 fun ProgressStepInlineInactiveIcon(
     mode: ProgressStepMode,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     modifier: Modifier = Modifier,
     text: String? = null
 ) {
@@ -280,13 +287,13 @@ fun getInnerColor(state: ProgressState) = when (state) {
 
 private fun DrawScope.drawTick(tickColor: Color) {
     drawLine(
-        strokeWidth = 1.dp.toPx(),
+        strokeWidth = 1.5.dp.toPx(),
         color = tickColor,
         start = Offset(x = 10.dp.toPx(), y = 14.dp.toPx()),
         end = Offset(x = 13.dp.toPx(), y = 18.dp.toPx())
     )
     drawLine(
-        strokeWidth = 1.dp.toPx(),
+        strokeWidth = 1.5.dp.toPx(),
         color = tickColor,
         start = Offset(x = 13.dp.toPx(), y = 18.dp.toPx()),
         end = Offset(x = 20.dp.toPx(), y = 12.dp.toPx())
@@ -296,7 +303,7 @@ private fun DrawScope.drawTick(tickColor: Color) {
 
 private fun DrawScope.drawText(
     text: String,
-    progressSize: ProgressStepSize,
+    progressSize: ProgressStepIconSize,
     textColor: Int
 ) {
     drawContext.canvas.nativeCanvas.apply {
@@ -318,34 +325,39 @@ private fun DrawScope.drawText(
 @Preview(showSystemUi = true, backgroundColor = 0x989a82)
 fun preview() {
     Column() {
+        ProgressStepIcon(
+            state = ProgressState.Completed,
+            iconSize = ProgressStepIconSize.Large,
+        )
+        Spacer(modifier = Modifier.height(10.dp))
         ProgressStepNumberSuccess(
             state = ProgressState.Completed,
-            progressSize = ProgressStepSize.Large,
+            progressSize = ProgressStepIconSize.Large,
             text = 1
         )
         Spacer(modifier = Modifier.height(10.dp))
         ProgressStepIconSuccess(
             ProgressState.Completed,
-            ProgressStepSize.Large
+            ProgressStepIconSize.Large
         )
 
         Spacer(modifier = Modifier.height(10.dp))
         ProgressStepInlineSuccessIcon(
             ProgressStepMode.Dark,
-            ProgressStepSize.Large,
+            ProgressStepIconSize.Large,
             Modifier
         )
         Spacer(modifier = Modifier.height(10.dp))
         ProgressStepInlineInactiveIcon(
             ProgressStepMode.Light,
-            ProgressStepSize.Large,
+            ProgressStepIconSize.Large,
             Modifier, 1.toString()
         )
 
         Spacer(modifier = Modifier.height(10.dp))
         ProgressStepInlineActiveIcon(
             ProgressStepMode.Light,
-            ProgressStepSize.Large,
+            ProgressStepIconSize.Large,
             Modifier
         )
     }

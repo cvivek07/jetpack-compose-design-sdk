@@ -9,12 +9,18 @@ import com.ixigo.design.sdk.components.progress_step.base.ProgressStepMode
 import com.ixigo.design_sdk.components.progress_step.composables.DrawHorizontalInlineSteps
 import kotlinx.coroutines.launch
 
+/**
+ * Special type of Horizontal Progress Step which has text inline with the icons
+ */
 class HorizontalInlineProgressStep @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : BaseProgressStep(context, attrs, defStyleAttr) {
 
+    /**
+     * Field to set the mode of the [HorizontalInlineProgressStep].
+     */
     public override var mode: ProgressStepMode = ProgressStepMode.Dark
     set(value) {
         field = value
@@ -28,7 +34,7 @@ class HorizontalInlineProgressStep @JvmOverloads constructor(
         with(state.value) {
             DrawHorizontalInlineSteps(
                 steps = steps,
-                progressStepSize = stepSize,
+                progressStepIconSize = stepSize,
                 selectionIndicator = selectionIndicator,
                 currentItem = currentIndex,
                 currentProgressState = currentItemProgressState,

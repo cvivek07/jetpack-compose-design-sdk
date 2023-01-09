@@ -9,6 +9,9 @@ import com.ixigo.design.sdk.components.progress_step.base.BaseProgressStep
 import com.ixigo.design_sdk.components.progress_step.composables.DrawVerticalSteps
 import kotlinx.coroutines.launch
 
+/**
+ * Simple Vertical Progress STep where Text is to right side of Icon
+ */
 class VerticalProgressStep @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -21,7 +24,7 @@ class VerticalProgressStep @JvmOverloads constructor(
         with(state.value) {
             DrawVerticalSteps(
                 steps = steps,
-                progressStepSize = stepSize,
+                progressStepIconSize = stepSize,
                 selectionIndicator = selectionIndicator,
                 currentItem = currentIndex,
                 currentProgressState = currentItemProgressState,
