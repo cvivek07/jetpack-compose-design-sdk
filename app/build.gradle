@@ -40,7 +40,9 @@ android {
 }
 
 dependencies {
-    implementation "com.ixigo.sdk:ixigo-design-sdk:1.0.0_alpha1"
+    implementation project(path: ':ixigo-design-sdk')
+    // Comment above line and Uncomment Below line to use particular Version
+    // implementation "com.ixigo.sdk:ixigo-design-sdk:1.0.0_alpha1"
     // Compose Material Design
     implementation 'androidx.compose.material:material:1.3.1'
     // Tooling support (Previews, etc.)
@@ -53,6 +55,6 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
     implementation 'androidx.navigation:navigation-ui-ktx:2.5.3'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }
