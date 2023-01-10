@@ -17,7 +17,7 @@ workflow:
       when: never
     - if: '$CI_PIPELINE_SOURCE == "web"'
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    - if: '$CI_COMMIT_BRANCH == "development"'
+    - if: '$CI_COMMIT_BRANCH == "components"'
 
 stages:
   - build
@@ -55,7 +55,7 @@ deploy:ixigo-design-sdk:
   variables:
     LIB: ixigo-design-sdk
   rules:
-      - if: '$CI_COMMIT_BRANCH == "development"'
+      - if: '$CI_COMMIT_BRANCH == "components"'
   script:
     - "./gradlew $LIB:publishSnapshotPublicationToNexusSnapshotRepository --stacktrace $GRADLE_SCAN_OPTION"
 
@@ -65,7 +65,7 @@ release:
   variables:
     LIB: ixigo-design-sdk
   rules:
-    - if: '$CI_COMMIT_BRANCH == "development"'
+    - if: '$CI_COMMIT_BRANCH == "components"'
     - when: manual
   allow_failure: true
   before_script:
