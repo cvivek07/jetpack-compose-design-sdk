@@ -79,7 +79,6 @@ class IxiOutlinedButton @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        ViewTreeLifecycleOwner.set(this, (context as AppCompatActivity))
         setViewCompositionStrategy(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )

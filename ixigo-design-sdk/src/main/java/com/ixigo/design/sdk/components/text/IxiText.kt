@@ -11,11 +11,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.AbstractComposeView
+import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.TextStyle
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
 import com.ixigo.design.sdk.components.inputfields.IxiOutlinedInputField
 import com.ixigo.design.sdk.components.styles.IxiTypography
@@ -72,7 +73,7 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
  */
 class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : AbstractComposeView(context, attrs, defStyleAttr) {
+) : BaseComponent(context, attrs, defStyleAttr) {
 
     private var textColorRes: Int
     private val state = mutableStateOf(
@@ -173,6 +174,9 @@ class IxiText @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
+        setViewCompositionStrategy(
+            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+        )
         if (state.value.text != null) {
             TypographyText(
                 text = state.value.text!!,
