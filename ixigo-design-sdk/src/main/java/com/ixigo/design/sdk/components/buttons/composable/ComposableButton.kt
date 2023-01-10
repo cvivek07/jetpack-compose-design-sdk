@@ -34,6 +34,7 @@ import com.ixigo.design.sdk.components.styles.IxiFamily
 internal fun ComposableButton(
     text: String = "",
     colors: IxiColor,
+    modifier: Modifier = Modifier,
     shapes: ButtonShape,
     size: ButtonSize,
     isEnabled: Boolean = true,
@@ -52,7 +53,7 @@ internal fun ComposableButton(
 
     Button(
         onClick = onClick,
-        modifier = Modifier
+        modifier = modifier
             .height(size.height)
             .wrapContentWidth(),
         enabled = isEnabled,

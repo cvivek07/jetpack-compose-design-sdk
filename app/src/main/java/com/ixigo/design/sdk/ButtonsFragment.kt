@@ -13,7 +13,7 @@ import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class ButtonsFragment : Fragment() {
+class ButtonsFragment : BaseFragment() {
 
     private var _binding: FragmentButtonsBinding? = null
 

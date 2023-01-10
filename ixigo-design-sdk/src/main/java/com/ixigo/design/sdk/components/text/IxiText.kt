@@ -2,14 +2,12 @@ package com.ixigo.design.sdk.components.text
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.AbstractComposeView
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.sp
-import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -29,20 +27,8 @@ class IxiText @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        Text(
-            text = state.value.text,
-            fontSize = state.value.textStyle.fontSize,
-            fontWeight = state.value.textStyle.fontWeight,
-            fontFamily = IxiFamily,
-            letterSpacing = 0.sp,
-            color = state.value.textStyle.color,
-            textDecoration = state.value.textStyle.textDecoration,
-            fontStyle = state.value.textStyle.fontStyle,
-            lineHeight = state.value.textStyle.lineHeight
-        )
-
+        TypographyText(text=state.value.text, textStyle = state.value.textStyle)
     }
-
 }
 
 data class TextState(val text: String, val textStyle: TextStyle)

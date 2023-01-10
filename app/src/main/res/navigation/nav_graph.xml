@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_componentFragment_to_progressStepFragment"
             app:destination="@id/progressStepFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_topAppBarFragment"
+            app:destination="@id/topAppBarFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -57,5 +60,12 @@
         android:name="com.ixigo.design.sdk.ProgressStepFragment"
         android:label="@string/progress_step"
         tools:layout="@layout/fragment_progress_step">
+    </fragment>
+
+    <fragment
+        android:id="@+id/topAppBarFragment"
+        android:name="com.ixigo.design.sdk.TopAppBarFragment"
+        android:label="@string/top_app_bar"
+        tools:layout="@layout/fragment_top_app_bar">
     </fragment>
 </navigation>
