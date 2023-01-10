@@ -12,7 +12,7 @@ import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.tabs.base.TabType
-import com.ixigo.design.sdk.components.topappbar.TabItem
+import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 abstract class BaseTopAppBar @JvmOverloads constructor(
@@ -57,9 +57,9 @@ data class AppBarState(
     val elevation: Dp = 10.dp,
     val menuProvider: IxiMenuProvider? = null,
     val srpData: SrpModel? = null,
-    val tabbedData: List<TabItem>? = null,
+    val tabbedData: List<TabDataItem>? = null,
     val viewPager: ViewPager2? = null,
     val adapter: FragmentStateAdapter? = null,
-    val tabType: TabType = TabType.LINED,
+    val tabType: TabType = TabType.LINE,
     val tabbedSelectionListener: (selectedItemIndex: Int) -> Unit = {}
 )

@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_componentFragment_to_topAppBarFragment"
             app:destination="@id/topAppBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_tabBarFragment"
+            app:destination="@id/tabBarFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -67,5 +70,12 @@
         android:name="com.ixigo.design.sdk.TopAppBarFragment"
         android:label="@string/top_app_bar"
         tools:layout="@layout/fragment_top_app_bar">
+    </fragment>
+
+    <fragment
+        android:id="@+id/tabBarFragment"
+        android:name="com.ixigo.design.sdk.TabBarFragment"
+        android:label="@string/tab_bar"
+        tools:layout="@layout/fragment_tab_bar">
     </fragment>
 </navigation>

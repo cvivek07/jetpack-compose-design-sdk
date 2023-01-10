@@ -22,6 +22,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
+import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.topappbar.IxiAppBar
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
@@ -48,14 +50,6 @@ class TopAppBarFragment : BaseFragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
-
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        _binding = FragmentTopAppBarBinding.inflate(inflater, container, false)
-//        return binding.root
-//    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,10 +78,9 @@ class TopAppBarFragment : BaseFragment() {
                             updateToolBar(index)
                         }),
                 ) {
-                    Text(
+                    TypographyText(
                         text = componentList[index],
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp
+                        textStyle = IxiTypography.Heading.H6.regular
                     )
                 }
                 Divider(color = Color.Black)
@@ -127,132 +120,6 @@ class TopAppBarFragment : BaseFragment() {
             }
 
         }
-    }
-
-    private fun toolbarWithSubTitleAndOneIconAndActionText() {
-
-
-        val appBar = IxiAppBar(context = requireContext())
-        appBar.setTitle(title)
-        appBar.addMenuProvider(object : IxiMenuProvider {
-            override fun provideMenu(): List<IxiMenu> {
-                return listOf(
-                    IxiMenu(0, "Send"),
-                )
-            }
-
-            override fun onMenuItemClick(id: Int) {
-//                TODO("Not yet implemented")
-            }
-        })
-
-        (activity as AppCompatActivity).supportActionBar?.title = title
-        (activity as AppCompatActivity).supportActionBar?.subtitle = subTitle
-        (activity as AppCompatActivity).supportActionBar?.customView = appBar
-//        activity?.addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menu.clear()
-//                listOf(
-//                    MenuBuilder(0, "Send"),
-//                ).addMenuItems(menu)
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                when (menuItem.itemId) {
-//                    0 -> {
-//                        return true
-//                    }
-//                    else -> {
-//                        return false
-//                    }
-//
-//                }
-//
-//            }
-//        })
-
-    }
-
-    private fun toolbarWithSubTitleAndTwoIcons() {
-        (activity as AppCompatActivity).supportActionBar?.title = title
-        (activity as AppCompatActivity).supportActionBar?.subtitle = subTitle
-
-        activity?.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menu.clear()
-                listOf(
-                    MenuBuilder(0, null, R.drawable.ic_filter_24),
-                    MenuBuilder(1, null, R.drawable.ic_baseline_share_24),
-                ).addMenuItems(menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when (menuItem.itemId) {
-
-                    0 -> {
-                        return true
-                    }
-                    else -> {
-                        return false
-                    }
-
-                }
-
-            }
-        })
-    }
-
-    private fun basicToolBar() {
-        startActivity(Intent(context, ToolBarActivity::class.java))
-//        (activity as AppCompatActivity).supportActionBar?.title = title
-//        (activity as AppCompatActivity).supportActionBar?.subtitle = null
-//        (activity as AppCompatActivity).supportActionBar?.elevation = context?.dpToPx(10) ?: 0F
-//        activity?.addMenuProvider(object : MenuProvider {
-//            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-//                menu.clear()
-//                listOf(
-//                    MenuBuilder(0, null, R.drawable.ic_baseline_cancel_24),
-//                    MenuBuilder(3, "Done")
-//                ).addMenuItems(menu)
-//            }
-//
-//            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-//                when (menuItem.itemId) {
-//                    0 -> {
-//                        return true
-//                    }
-//
-//                }
-//                return false
-//
-//            }
-//        })
-    }
-
-    private fun basicToolBar1() {
-        (activity as AppCompatActivity).supportActionBar?.title = title
-        (activity as AppCompatActivity).supportActionBar?.subtitle = null
-        (activity as AppCompatActivity).supportActionBar?.elevation = context?.dpToPx(10) ?: 0F
-        activity?.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menu.clear()
-                listOf(
-                    MenuBuilder(0, null, R.drawable.ic_baseline_cancel_24),
-                    MenuBuilder(3, "Done")
-                ).addMenuItems(menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                when (menuItem.itemId) {
-                    0 -> {
-                        return true
-                    }
-
-                }
-                return false
-
-            }
-        })
     }
 
 }

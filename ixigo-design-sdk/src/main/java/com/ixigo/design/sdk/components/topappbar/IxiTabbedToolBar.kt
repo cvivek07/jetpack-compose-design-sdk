@@ -16,7 +16,7 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseTopAppBar(context, attrs, defStyleAttr) {
 
-    fun setData(data: List<TabItem>) {
+    fun setData(data: List<TabDataItem>) {
         val initState = state.value
         state.value = initState.copy(tabbedData = data)
     }
@@ -24,11 +24,6 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     fun setTabType(tabType: TabType) {
         val initState = state.value
         state.value = initState.copy(tabType = tabType)
-    }
-
-    fun setItemSelectedListener(listener: (selectedItemIndex: Int) -> Unit) {
-        val initState = state.value
-        state.value = initState.copy(tabbedSelectionListener = listener)
     }
 
     fun setupViewPager(viewPager: ViewPager2, adapter: FragmentStateAdapter) {
@@ -49,7 +44,6 @@ class IxiTabbedToolBar @JvmOverloads constructor(
                         elevation = elevation,
                         menuProvider = menuProvider,
                         data = it,
-                        onItemSelection = this.tabbedSelectionListener,
                         viewPager = it1,
                         adapter = adapter,
                         tabType = tabType
@@ -60,4 +54,4 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     }
 }
 
-data class TabItem(val title: String?, val startIcon: Int, val endIcon: Int)
+data class TabDataItem(val title: String?, val startIcon: Int, val endIcon: Int)

@@ -23,4 +23,9 @@
         <attr name="actionImage" format="reference" />
         <attr name="drawableTintColor" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="IxiText">
+        <attr name="android:text" format="string" />
+        <attr name="android:textColor"  format="color|reference"/>
+    </declare-styleable>
 </resources>

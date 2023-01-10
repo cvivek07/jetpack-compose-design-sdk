@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentStatePagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
@@ -199,10 +198,10 @@ class ToolBarActivity : AppCompatActivity() {
 
     fun tabbedToolbar() {
         val listTabsName = listOf(
-            TabItem("Buttons", R.drawable.ic_search,0),
-            TabItem("InputField",0, R.drawable.ic_search),
-            TabItem("Progress Steps", 0, 0),
-            TabItem("Typography", R.drawable.ic_search, R.drawable.ic_baseline_cancel_24)
+            TabDataItem("Buttons", R.drawable.ic_search,0),
+            TabDataItem("InputField",0, R.drawable.ic_search),
+            TabDataItem("Progress Steps", 0, 0),
+            TabDataItem("Typography", R.drawable.ic_search, R.drawable.ic_baseline_cancel_24)
         )
         val fragmentList = listOf(
             ButtonsFragment(),
@@ -213,7 +212,7 @@ class ToolBarActivity : AppCompatActivity() {
         val toolbar = IxiTabbedToolBar(context = this)
         toolbar.setData(listTabsName)
         toolbar.setTabType(TabType.PILL)
-        val adapter = DemoAdapter(supportFragmentManager, lifecycle, fragmentList)
+        val adapter = PagerAdapter(supportFragmentManager, lifecycle, fragmentList)
         toolbar.setupViewPager(binding.viewPager, adapter)
 
         toolbar.addMenuProvider(object : IxiMenuProvider {
@@ -244,7 +243,7 @@ class ToolBarActivity : AppCompatActivity() {
 
 }
 
-class DemoAdapter(
+class PagerAdapter(
     fm: FragmentManager,
     lifecycle: Lifecycle,
     private val contents: List<Fragment>

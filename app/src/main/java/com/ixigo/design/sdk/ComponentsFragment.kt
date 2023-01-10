@@ -9,18 +9,17 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ComposeView
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -33,6 +32,7 @@ class ComponentsFragment : Fragment() {
         Pair("Typography", R.id.action_componentFragment_to_typographyFragment),
         Pair("Progress Step", R.id.action_componentFragment_to_progressStepFragment),
         Pair("TopAppBar", R.id.action_componentFragment_to_topAppBarFragment),
+        Pair("TabBar", R.id.action_componentFragment_to_tabBarFragment),
     )
 
     override fun onCreateView(
@@ -83,10 +83,9 @@ class ComponentsFragment : Fragment() {
                         .height(60.dp)
                         .clickable(onClick = { findNavController().navigate(it.second) }),
                 ) {
-                    Text(
+                    TypographyText(
                         text = it.first,
-                        textAlign = TextAlign.Center,
-                        fontSize = 20.sp
+                        textStyle = IxiTypography.Heading.H6.regular,
                     )
                 }
                 Divider(color = Color.Black)
