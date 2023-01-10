@@ -42,6 +42,11 @@ android {
 dependencies {
     implementation project(path: ':ixigo-design-sdk')
 
+    // Compose Material Design
+    implementation 'androidx.compose.material:material:1.3.1'
+    // Tooling support (Previews, etc.)
+    implementation 'androidx.compose.ui:ui-tooling:1.3.2'
+
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
