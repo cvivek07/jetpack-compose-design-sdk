@@ -1,4 +1,3 @@
-
 # Installation
 
 ## Add dependency
@@ -7,15 +6,15 @@ Inside **root/build.gradle**
 
 ```groovy
 buildscript {
-  repositories {
-    maven { url 'https://nexus.ixigo.com/nexus/content/repositories/androidshared' }
-  }
+    repositories {
+        maven { url 'https://nexus.ixigo.com/nexus/content/repositories/androidshared' }
+    }
 }
 
 ```
 
-Alternatively we can add Special Maven repository in *dependencyResolutionManagement* 
-in **root/settings.gradle**.
+Alternatively we can add Special Maven repository in *dependencyResolutionManagement*
+in **root/settings.gradle**, in case your **root/build.gradle** does not have option.
 
 ```groovy
 dependencyResolutionManagement {
@@ -23,18 +22,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url 'https://nexus.ixigo.com/nexus/content/repositories/androidshared'
-            metadataSources {
-                mavenPom()
-                // Allows fetching `aar` files that don't have a pom file
-                artifact()
-            }}
+        maven { url 'https://nexus.ixigo.com/nexus/content/repositories/androidshared' }
     }
 }
 ```
-
-In case your **root/build.gradle**
 
 Inside **app/build.gradle**
 
@@ -45,11 +36,11 @@ dependencies {
 
 ```
 
-Inside **app/build.gradle**,  Add Following Dependencies in Your project along with Design Sdk.
+Inside **app/build.gradle**, Add Following Dependencies in Your project along with Design Sdk.
 
 ```groovy
 dependencies {
-   
+
 // Compose Material Design
     implementation 'androidx.compose.material:material:1.3.1'
 // Tooling support (Previews, etc.)
