@@ -33,7 +33,7 @@ Inside **app/build.gradle**
 
 ```groovy
 dependencies {
-    implementation "com.ixigo.sdk:ixigo-design-sdk:1.0.0_alpha1"
+    implementation "com.ixigo.sdk:ixigo-design-sdk:1.0.0-alpha1"
 }
 
 ```
