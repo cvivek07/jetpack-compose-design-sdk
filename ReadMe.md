@@ -14,6 +14,28 @@ buildscript {
 
 ```
 
+Alternatively we can add Special Maven repository in *dependencyResolutionManagement* 
+in **root/settings.gradle**.
+
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url 'https://nexus.ixigo.com/nexus/content/repositories/androidshared'
+            metadataSources {
+                mavenPom()
+                // Allows fetching `aar` files that don't have a pom file
+                artifact()
+            }}
+    }
+}
+```
+
+In case your **root/build.gradle**
+
 Inside **app/build.gradle**
 
 ```groovy
