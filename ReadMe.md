@@ -1,5 +1,7 @@
 # Installation
 
+Follow following Steps to Add this library into your project.
+
 ## Add dependency
 
 Inside **root/build.gradle**
