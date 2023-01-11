@@ -1,12 +1,11 @@
-package com.ixigo.design.sdk.components.tabs.base
+package com.ixigo.design.sdk.components.tabs
 
 import android.content.Context
 import android.util.AttributeSet
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.ixigo.design.sdk.components.tabs.IxiLineTabItems
-import com.ixigo.design.sdk.components.tabs.IxiPillTabItem
+import com.ixigo.design.sdk.components.tabs.base.BaseTabItem
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.utils.DimensionUtils.toPx
 
@@ -32,7 +31,7 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toPx
  * You can  add [IxiTabLayout] in your layout file. An example usage is like so:
  *
  * ```
- * <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
+ * <com.ixigo.design.sdk.components.tabs.IxiTabLayout
  *  android:id="@+id/tabLayout"
  *  android:layout_width="match_parent"
  *  android:layout_height="wrap_content" />
@@ -50,7 +49,7 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toPx
  *   android:layout_height="wrap_content"
  *   android:orientation="vertical">
  *
- *      <com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
+ *      <com.ixigo.design.sdk.components.tabs.IxiTabLayout
  *      android:id="@+id/tabLayout"
  *      android:layout_width="match_parent"
  *      android:layout_height="wrap_content" />
@@ -116,6 +115,7 @@ class IxiTabLayout @JvmOverloads constructor(
         val tabPadding = (tabPaddingInDp.toPx)
         tabItem.setEndDrawable(dataItem.endIcon)
         tabItem.setStartDrawable(dataItem.startIcon)
+        tabItem.setTopDrawable(dataItem.topIcon)
         tabItem.setTitle(dataItem.title ?: "")
         tab.view.setPadding(tabPadding, 0, 0, 0)
         tab.customView = tabItem

@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.ixigo.design.sdk.components.tabs.base.TabType
+import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.base.BaseTopAppBar
 import com.ixigo.design.sdk.components.topappbar.composable.TabbedBar
 
@@ -54,4 +54,4 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     }
 }
 
-data class TabDataItem(val title: String?, val startIcon: Int, val endIcon: Int)
+data class TabDataItem(val title: String?, val startIcon: Int, val endIcon: Int, val topIcon: Int)
