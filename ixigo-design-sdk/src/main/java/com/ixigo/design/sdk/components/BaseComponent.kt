@@ -6,6 +6,7 @@ import androidx.compose.ui.platform.AbstractComposeView
 import com.ixigo.design.sdk.Project
 import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.utils.setupEditMode
 
 abstract class BaseComponent @JvmOverloads constructor(
     context: Context,
@@ -25,6 +26,9 @@ abstract class BaseComponent @JvmOverloads constructor(
     protected var preferredWidth: Int = 0
 
     override fun onAttachedToWindow() {
+        if (isInEditMode) {
+            setupEditMode()
+        }
         super.onAttachedToWindow()
 
         preferredWidth = layoutParams.width
