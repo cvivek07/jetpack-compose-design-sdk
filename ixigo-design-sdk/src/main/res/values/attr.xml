@@ -28,4 +28,49 @@
         <attr name="android:text" format="string" />
         <attr name="android:textColor"  format="color|reference"/>
     </declare-styleable>
+
+    <declare-styleable name="BaseChip">
+        <attr name="android:text" format="string" />
+        <attr name="chipDrawableEnd" format="reference" />
+        <attr name="chipDrawableStart" format="reference" />
+        <attr name="drawableStartSize" format="dimension" />
+        <attr name="drawableEndSize" format="dimension" />
+        <attr name="size" format="dimension"/>
+        <attr name="chipType" format="enum">
+            <enum name="large" value="0"/>
+            <enum name="small" value="1"/>
+            <enum name="xsmall" value="2"/>
+            <enum name="notification" value="3"/>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="IxiPrimaryChip">
+        <attr name="android:background" format="color"/>
+        <attr name="android:drawableTint" format="color"/>
+        <attr name="android:textColor" format="color|reference"/>
+        <attr name="android:enabled" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="IxiSecondaryChip">
+        <attr name="android:strokeColor" format="color"/>
+        <attr name="android:background" format="color"/>
+        <attr name="android:drawableTint" format="color"/>
+        <attr name="android:textColor" format="color|reference"/>
+        <attr name="android:enabled" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="IxiOutlinedChip">
+        <attr name="android:background" format="color"/>
+        <attr name="android:strokeColor" format="color"/>
+        <attr name="android:drawableTint" format="color"/>
+        <attr name="android:textColor" format="color|reference"/>
+        <attr name="android:enabled" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="IxiTextChip">
+        <attr name="android:background" format="color"/>
+        <attr name="android:drawableTint" format="color"/>
+        <attr name="android:textColor" format="color|reference"/>
+        <attr name="android:enabled" format="boolean"/>
+    </declare-styleable>
 </resources>
