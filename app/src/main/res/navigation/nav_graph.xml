@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_componentFragment_to_tabBarFragment"
             app:destination="@id/tabBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_chipFragment"
+            app:destination="@id/chipFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -77,5 +80,12 @@
         android:name="com.ixigo.design.sdk.TabBarFragment"
         android:label="@string/tab_bar"
         tools:layout="@layout/fragment_tab_bar">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chipFragment"
+        android:name="com.ixigo.design.sdk.ChipFragment"
+        android:label="@string/tab_bar"
+        tools:layout="@layout/fragment_chips">
     </fragment>
 </navigation>
