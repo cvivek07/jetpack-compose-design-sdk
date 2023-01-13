@@ -11,10 +11,12 @@
         android:orientation="vertical"
         >
         <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cg_master"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
+            app:singleSelection="true"
 
             android:padding="8dp">
             <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
@@ -23,21 +25,22 @@
                 android:layout_height="wrap_content"
                 android:text="Large"
                 app:chipType = "large"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
+                app:chipDrawableStart="@drawable/ic_call_24"
+                app:chipDrawableEnd="@drawable/baseline_remove_circle_24" />
+            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
                 android:id="@+id/master_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:chipType = "small"
                 android:text="Small"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
+                 />
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:checkable="true"
                 app:chipType = "xsmall"
                 android:text="XSmall" />
         </com.google.android.material.chip.ChipGroup>
@@ -47,6 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
+            app:singleSelection="true"
             android:padding="8dp">
 
             <com.ixigo.design.sdk.components.chip.IxiPrimaryChip

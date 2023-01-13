@@ -3,11 +3,13 @@ package com.ixigo.design.sdk.components.chip.base
 import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
+import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiChipColor
+import com.ixigo.design.sdk.components.styles.IxiChipColorState
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.utils.Utils
 
@@ -15,8 +17,12 @@ abstract class BaseChip @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : Chip(context, attrs, defStyleAttr)  {
     protected var color:IxiChipColor? = null
+    protected var colorState:IxiChipColorState? = null
     protected var horizontalPadding:Float = 8f
     protected var chipType:ChipType
+    protected var onClickListener:((View)->Unit)? = null
+    protected var drawableStart:Int? = null
+    protected var drawableEnd:Int? = null
     init {
         this.setTextAppearance(R.style.chipText)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
@@ -42,28 +48,25 @@ abstract class BaseChip @JvmOverloads constructor(
             }
             this.textAlignment = TEXT_ALIGNMENT_CENTER
             setText(text)
-            if(isChipEligible()) {
-                horizontalPadding = if(chipType==ChipType.SMALL) 4f else 8f
-                val drawableEnd =
-                    typedArray.getResourceId(R.styleable.BaseChip_chipDrawableEnd, 0)
-                val drawableStart =
-                    typedArray.getResourceId(R.styleable.BaseChip_chipDrawableStart, 0)
-                if (drawableStart != 0) {
-                    setStartDrawable(drawableStart)
-                }
-                if (drawableEnd != 0) {
-                    setEndDrawable(drawableEnd)
-                }
-                val iconSize =typedArray.getDimensionPixelSize(R.styleable.BaseChip_size, -1)
-                if(iconSize!=-1){
-                    setIconSize(iconSize.toFloat(), iconSize.toFloat())
-                } else{
-                    val drawableStartSize = typedArray.getDimensionPixelSize(R.styleable.BaseChip_drawableStartSize, 16)
-                    val drawableEndSize = typedArray.getDimensionPixelSize(R.styleable.BaseChip_drawableEndSize, 16)
-                    setIconSize(drawableStartSize.toFloat(), drawableEndSize.toFloat())
-                }
+            horizontalPadding = if (chipType == ChipType.SMALL) 4f else 8f
+            val drawableEnd =
+                typedArray.getResourceId(R.styleable.BaseChip_chipDrawableEnd, 0)
+            val drawableStart =
+                typedArray.getResourceId(R.styleable.BaseChip_chipDrawableStart, 0)
+            setStartDrawable(if(drawableStart!=0) drawableStart else null)
+            setEndDrawable(if(drawableEnd!=0) drawableEnd else null)
+            val iconSize = typedArray.getDimensionPixelSize(R.styleable.BaseChip_size, -1)
+            if (iconSize != -1) {
+                setIconSize(iconSize.toFloat(), iconSize.toFloat())
+            } else {
+                val drawableStartSize =
+                    typedArray.getDimensionPixelSize(R.styleable.BaseChip_drawableStartSize, 16)
+                val drawableEndSize =
+                    typedArray.getDimensionPixelSize(R.styleable.BaseChip_drawableEndSize, 16)
+                setIconSize(drawableStartSize.toFloat(), drawableEndSize.toFloat())
             }
-//            this.background = ContextCompat.getDrawable(context, R.drawable.bg_chip_thin)
+            this.isCheckable = true
+            setCheckedDrawable(null)
         } finally {
             typedArray.recycle()
         }
@@ -72,7 +75,67 @@ abstract class BaseChip @JvmOverloads constructor(
         this.isEnabled = boolean
     }
 
+    open fun setIxiChipColorState(colorState: IxiChipColorState) {
+        this.colorState = colorState
+        if(this.isChecked){
+            this.setIxiChipColor(colorState.selected)
+        } else{
+            this.setIxiChipColor(colorState.unselected)
+        }
+    }
+
+    open fun setOnCheckedChangeListener(@DrawableRes checkedIcon:Int?=null, onCheckedChange: (Boolean)->Unit){
+        if(onClickListener==null) {
+            this.setOnClickListener {}
+        }
+        this.setOnCheckedChangeListener { buttonView, isChecked ->
+            run {
+                onCheckedChange.invoke(isChecked)
+                if (isChecked) {
+                    checkedIcon?.let {
+                        this.setCheckedDrawableToStart(it)
+                    }
+                    colorState?.let {
+                        this.setIxiChipColor(it.selected)
+                    }
+                } else {
+                    if(checkedIcon!=null&&drawableStart==null) {
+                        this.setStartDrawable(null)
+                    }
+                    drawableStart?.let {
+                        this.setStartDrawable(drawableStart)
+                    }
+                    colorState?.let {
+                        this.setIxiChipColor(it.unselected)
+                    }
+                }
+            }
+        }
+    }
+
+    open fun setOnIxiChipClickListener(onClickListener:(View)->Unit){
+        this.onClickListener = onClickListener
+        this.setOnClickListener {
+            onClickListener.invoke(it)
+        }
+    }
+
     fun setStartDrawable(@DrawableRes drawable:Int?){
+        if(isChipEligible()) {
+            drawableStart = drawable
+            if (drawable != null) {
+                this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
+                this.chipIcon = ContextCompat.getDrawable(context, drawable)
+                this.chipIconTint = null
+            } else {
+                this.chipStartPadding = 0f
+                this.chipIcon = null
+            }
+            this.isChipIconVisible = drawable != null
+        }
+    }
+
+    private fun setCheckedDrawableToStart(@DrawableRes drawable:Int?){
         if(isChipEligible()) {
             if (drawable != null) {
                 this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
@@ -96,6 +159,18 @@ abstract class BaseChip @JvmOverloads constructor(
                 this.closeIcon = null
             }
             this.isCloseIconVisible = drawable != null
+        }
+    }
+
+    fun setCheckedDrawable(@DrawableRes drawable:Int?){
+        drawable?.let {
+            this.checkedIcon = ContextCompat.getDrawable(context, drawable)
+        }
+        this.isCheckedIconVisible = drawable != null
+        if(this.isChipIconVisible){
+            this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
+        } else{
+            this.chipStartPadding = 0f
         }
     }
 
@@ -128,6 +203,23 @@ abstract class BaseChip @JvmOverloads constructor(
         return ColorStateList(states.toTypedArray(), colors.toIntArray())
     }
 
+    //TODO: start drawable Click Listener
+    open fun onStartDrawableClickListener(onClick:(()->Unit)?){
+        if(onClick!=null){
+            this.chipIcon
+            this.setOnTouchListener { _, event ->
+                if (event.x <= this.totalPaddingLeft) {
+                    onClick.invoke()
+                } else{
+
+                }
+                return@setOnTouchListener true
+            }
+        } else{
+            this.setOnCloseIconClickListener(null)
+        }
+    }
+
     open fun onEndDrawableClickListener( onClick:(()->Unit)? ){
         if(onClick!=null){
             this.setOnCloseIconClickListener {
@@ -136,7 +228,6 @@ abstract class BaseChip @JvmOverloads constructor(
         } else{
             this.setOnCloseIconClickListener(null)
         }
-
     }
 
     private fun isChipEligible():Boolean{

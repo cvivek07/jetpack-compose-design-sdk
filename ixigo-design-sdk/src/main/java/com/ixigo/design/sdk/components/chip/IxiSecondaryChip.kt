@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.chip.base.BaseChip
 import com.ixigo.design.sdk.components.styles.IxiChipColor
+import com.ixigo.design.sdk.components.styles.IxiChipColorState
 
 class IxiSecondaryChip  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -50,7 +51,7 @@ class IxiSecondaryChip  @JvmOverloads constructor(
                 )
             )
         } else{
-            super.setIxiChipColor(IxiChipColor.SecondaryDisabled)
+            super.setIxiChipColor(IxiChipColorState.SecondaryDisabled)
         }
     }
 }

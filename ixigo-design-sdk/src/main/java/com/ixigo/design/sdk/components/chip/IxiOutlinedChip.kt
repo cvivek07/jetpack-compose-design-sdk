@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.chip.base.BaseChip
 import com.ixigo.design.sdk.components.styles.IxiChipColor
+import com.ixigo.design.sdk.components.styles.IxiChipColorState
 
 class IxiOutlinedChip@JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -43,13 +44,14 @@ class IxiOutlinedChip@JvmOverloads constructor(
             this.color = color
             super.setIxiChipColor(
                 IxiChipColor(
+                    backgroundColor = color.backgroundColor,
                     strokeColor = color.strokeColor,
                     textColor = color.textColor,
                     drawableTintColor = color.drawableTintColor,
                 )
             )
         } else{
-            super.setIxiChipColor(IxiChipColor.OutlinedDisabled)
+            super.setIxiChipColor(IxiChipColorState.OutlinedDisabled)
         }
     }
 }

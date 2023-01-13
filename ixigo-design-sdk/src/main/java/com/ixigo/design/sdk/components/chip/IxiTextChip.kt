@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.chip.base.BaseChip
 import com.ixigo.design.sdk.components.styles.IxiChipColor
+import com.ixigo.design.sdk.components.styles.IxiChipColorState
 
 class IxiTextChip  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -46,7 +47,7 @@ class IxiTextChip  @JvmOverloads constructor(
                 )
             )
         } else{
-            super.setIxiChipColor(IxiChipColor.TextDisabled)
+            super.setIxiChipColor(IxiChipColorState.TextDisabled)
         }
     }
 }

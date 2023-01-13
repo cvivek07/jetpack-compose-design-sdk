@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.chip.base.BaseChip
 import com.ixigo.design.sdk.components.styles.IxiChipColor
+import com.ixigo.design.sdk.components.styles.IxiChipColorState
 
 
 class IxiPrimaryChip @JvmOverloads constructor(
@@ -46,7 +47,7 @@ class IxiPrimaryChip @JvmOverloads constructor(
                drawableTintColor = color.drawableTintColor,
            ))
         } else{
-            super.setIxiChipColor(IxiChipColor.PrimaryDisabled)
+            super.setIxiChipColor(IxiChipColorState.PrimaryDisabled)
         }
     }
 }
