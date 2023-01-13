@@ -21,7 +21,7 @@
         <attr name="android:drawableEnd" format="reference" />
         <attr name="android:drawableStart" format="reference" />
         <attr name="actionImage" format="reference" />
-        <attr name="drawableTintColor" format="reference" />
+        <attr name="drawableTintColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="IxiText">
