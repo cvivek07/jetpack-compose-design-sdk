@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_componentFragment_to_tabBarFragment"
             app:destination="@id/tabBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_inlineAlertFragment"
+            app:destination="@id/inlineAlertFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -76,6 +79,12 @@
         android:id="@+id/tabBarFragment"
         android:name="com.ixigo.design.sdk.TabBarFragment"
         android:label="@string/tab_bar"
-        tools:layout="@layout/fragment_tab_bar">
+        tools:layout="@layout/fragment_tab_bar"/>
+
+    <fragment
+        android:id="@+id/inlineAlertFragment"
+        android:name="com.ixigo.design.sdk.InlineAlertFragment"
+        android:label="@string/inline_alert"
+        tools:layout="@layout/fragment_inline_alert">
     </fragment>
 </navigation>
