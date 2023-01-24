@@ -32,6 +32,9 @@
         <action
             android:id="@+id/action_componentFragment_to_tabBarFragment"
             app:destination="@id/tabBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_autoCompleterFragment"
+            app:destination="@id/autoCompleterFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -78,4 +81,9 @@
         android:label="@string/tab_bar"
         tools:layout="@layout/fragment_tab_bar">
     </fragment>
+    <fragment
+        android:id="@+id/autoCompleterFragment"
+        android:name="com.ixigo.design.sdk.AutoCompleterFragment"
+        tools:layout="@layout/fragment_auto_completer"
+        android:label="AutoCompleterFragment" />
 </navigation>

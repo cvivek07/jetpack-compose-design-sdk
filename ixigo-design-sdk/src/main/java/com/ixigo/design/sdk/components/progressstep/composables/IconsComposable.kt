@@ -1,4 +1,4 @@
-package com.ixigo.design.sdk.components.progress_step.composables
+package com.ixigo.design.sdk.components.progressstep.composables
 
 import android.graphics.Paint
 import androidx.compose.foundation.Canvas
@@ -18,9 +18,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.progress_step.base.ProgressState
-import com.ixigo.design.sdk.components.progress_step.base.ProgressStepMode
-import com.ixigo.design.sdk.components.progress_step.base.ProgressStepIconSize
+import com.ixigo.design.sdk.components.progressstep.base.ProgressState
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepMode
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepIconSize
 
 
 private val outerRadius = 10.dp

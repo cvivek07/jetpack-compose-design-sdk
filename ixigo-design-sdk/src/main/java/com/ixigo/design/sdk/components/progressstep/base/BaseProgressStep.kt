@@ -1,4 +1,4 @@
-package com.ixigo.design.sdk.components.progress_step.base
+package com.ixigo.design.sdk.components.progressstep.base
 
 import android.content.Context
 import android.util.AttributeSet

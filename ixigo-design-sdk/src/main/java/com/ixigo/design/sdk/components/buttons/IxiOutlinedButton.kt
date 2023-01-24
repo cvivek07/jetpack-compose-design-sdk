@@ -2,15 +2,13 @@ package com.ixigo.design.sdk.components.buttons
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import androidx.lifecycle.ViewTreeLifecycleOwner
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableOutlinedButton
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiShape
-import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 
 /**
  * A user interface element which has stroke and no background and  user can tap or click to perform

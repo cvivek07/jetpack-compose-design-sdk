@@ -33,6 +33,7 @@ class ComponentsFragment : Fragment() {
         Pair("Progress Step", R.id.action_componentFragment_to_progressStepFragment),
         Pair("TopAppBar", R.id.action_componentFragment_to_topAppBarFragment),
         Pair("TabBar", R.id.action_componentFragment_to_tabBarFragment),
+        Pair("AutoCompleter", R.id.action_componentFragment_to_autoCompleterFragment),
     )
 
     override fun onCreateView(
