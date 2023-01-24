@@ -10,12 +10,17 @@ abstract class BaseListItem @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
     protected var state =
-        mutableStateOf(AutoCompleterDataState(null, null, null, null, null, null, {}, {}, {}))
+        mutableStateOf(AutoCompleterDataState(null, null, null, null, null, null, null, {}, {}, {}))
 
 
     fun setTitle(title: String) {
         val inState = state.value
         state.value = inState.copy(title = title)
+    }
+
+    fun setIconCode(title: String?) {
+        val inState = state.value
+        state.value = inState.copy(code = title)
     }
 
     fun setSubTitle(subTitle: String?) {
@@ -73,6 +78,7 @@ data class AutoCompleterDataState(
     val from: String?,
     val to: String?,
     val subTitle: String?,
+    val code: String?,
     val endIconRes: Int?,
     val onItemClick: () -> Unit,
     val onEndIconClick: () -> Unit,

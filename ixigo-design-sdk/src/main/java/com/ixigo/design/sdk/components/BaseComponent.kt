@@ -14,7 +14,7 @@ abstract class BaseComponent @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : AbstractComposeView(context, attrs, defStyleAttr) {
-    protected val project = SdkManager.getConfig().project
+    protected val project =  Project.TRAIN
 
     protected val themeColor = when(project) {
         Project.TRAIN -> IxiColor.Blue

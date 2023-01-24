@@ -5,7 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.components.progress_step.base.ProgressStepData
+import com.ixigo.design.sdk.components.progressstep.base.ProgressState
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepData
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepMode
+import com.ixigo.design.sdk.components.progressstep.base.SelectionIndicator
 
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.databinding.FragmentProgressStepBinding

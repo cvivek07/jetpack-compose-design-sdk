@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.listitems.base.BaseListItem
-import com.ixigo.design.sdk.components.listitems.composables.AutoCompleterComposable
+import com.ixigo.design.sdk.components.listitems.composables.AutoCompleterRecentComposable
 
-class IxiAutoCompleter @JvmOverloads constructor(
+class IxiRecentAutoCompleter @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseListItem(context, attrs, defStyleAttr) {
 
@@ -16,13 +16,10 @@ class IxiAutoCompleter @JvmOverloads constructor(
         setViewCompositionStrategy(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
-        if (state.value.title == null && (state.value.from == null || state.value.to == null)) {
-            throw java.lang.RuntimeException("Either title or (To or from value) can be null. Both can not be null simultaneously ")
-        }
-        AutoCompleterComposable(
-            title = state.value.title,
+        AutoCompleterRecentComposable(
             subTitle = state.value.subTitle,
             startIcon = state.value.startIconRes,
+            code = state.value.code,
             endIcon = state.value.endIconRes,
             onEndIconClick = state.value.onEndIconClick,
             onStartIconClick = state.value.onStartIconClick,
@@ -31,5 +28,4 @@ class IxiAutoCompleter @JvmOverloads constructor(
             to = state.value.to
         )
     }
-
 }

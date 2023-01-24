@@ -1,15 +1,19 @@
 package com.ixigo.design.sdk
 
+// import androidx.recyclerview.widget.DividerItemDecoration
+// import androidx.recyclerview.widget.LinearLayoutManager
+// import androidx.recyclerview.widget.RecyclerView
+// import androidx.recyclerview.widget.RecyclerView.Adapter
+// import com.ixigo.design.sdk.components.listitems.IxiAutoCompleter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-//import androidx.recyclerview.widget.DividerItemDecoration
-//import androidx.recyclerview.widget.LinearLayoutManager
-//import androidx.recyclerview.widget.RecyclerView
-//import androidx.recyclerview.widget.RecyclerView.Adapter
-//import com.ixigo.design.sdk.components.listitems.IxiAutoCompleter
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.ixigo.design.sdk.components.listitems.base.BaseListItem
 import com.ixigo.design.sdk.databinding.FragmentAutoCompleterBinding
 
 class AutoCompleterFragment : BaseFragment() {
@@ -32,66 +36,119 @@ class AutoCompleterFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val list = listOf<AutoCompleterData>(
-            AutoCompleterData("Nearest Railway Station", null, R.drawable.ic_search, R.drawable.ic_search),
-            AutoCompleterData("Nearest Airport", null, R.drawable.ic_search, R.drawable.ic_search),
-            AutoCompleterData("Palam, Delhi, India", "Indra Gandhi International Airport", R.drawable.ic_search, R.drawable.ic_search),
-            AutoCompleterData("Delhi ➔ Mumbai", "Indra Gandhi International Airport", R.drawable.ic_search, R.drawable.ic_search),
+        val list = listOf(
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = "Airport complete name",
+                startIconRes = R.drawable.ic_search,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = null
+            ),
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = "Airport complete name",
+                startIconRes = null,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = "12111"
+            ),
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = null,
+                startIconRes = null,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = "12111"
+            ),
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = null,
+                startIconRes = null,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = "12111"
+            ),
         )
-//        binding.recyclerView.apply {
-//            layoutManager = LinearLayoutManager(context)
-//            adapter = RecyclerAdapter(context,list)
-//            addItemDecoration(
-//                DividerItemDecoration(
-//                    context,DividerItemDecoration.VERTICAL
-//                )
-//            )
-//        }
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context)
+            adapter = RecyclerAdapter(context, list)
+            addItemDecoration(
+                DividerItemDecoration(
+                    context, DividerItemDecoration.VERTICAL
+                )
+            )
+        }
     }
 }
 
-//class RecyclerAdapter(val context: Context, private val list: List<AutoCompleterData>) :
-//    Adapter<RecyclerAdapter.MyViewHolder>() {
-//
-//    class MyViewHolder(itemView: IxiAutoCompleter) : RecyclerView.ViewHolder(itemView) {
-//
-//        fun bind(data: AutoCompleterData) {
-//            (itemView as? IxiAutoCompleter)?.apply {
-//                setTitle(data.title)
-//                setSubTitle(data.subTitle)
-//                setEndIcon(R.drawable.ic_baseline_cancel_24)
-//                setIcon(R.drawable.ic_search)
-//                setOnClickListener {
-//                    "ItemClick".toToast(context)
-//                }
-//                onStartIconClick{
-//                    "Start".toToast(context)
-//                }
-//                onEndIconClick{
-//                    "End".toToast(context)
-//                }
-//            }
-//        }
-//    }
-//
-//    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
-//        val autoCompleter = IxiAutoCompleter(context = context)
-//        return MyViewHolder(autoCompleter)
-//    }
+class RecyclerAdapter(val context: Context, private val list: List<AutoCompleterData>) :
+    RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
-//    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-//        holder.bind(list[position])
-//    }
-//
-//    override fun getItemCount(): Int {
-//        return list.size
-//    }
-//}
+    class MyViewHolder(itemView: BaseListItem) : RecyclerView.ViewHolder(itemView) {
+
+        fun bind(data: AutoCompleterData) {
+            (itemView as? BaseListItem)?.apply {
+                data.title?.let { setTitle(it) }
+                setSubTitle(data.subTitle)
+                data.endIconRes?.let { setEndIcon(it) }
+                data.startIconRes?.let { setIcon(it) }
+                data.from?.let { setFromValue(it) }
+                data.to?.let { setToValue(it) }
+                setIconCode(data.code)
+                setOnClickListener {
+                    "ItemClick".toToast(context)
+                }
+                onStartIconClick {
+                    "Start".toToast(context)
+                }
+                onEndIconClick {
+                    "End".toToast(context)
+                }
+            }
+        }
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        val layoutInflater = LayoutInflater.from(parent.context)
+
+        val autoCompleter: BaseListItem = if (viewType % 3 == 0) {
+            layoutInflater.inflate(R.layout.station_or_airport, parent, false) as BaseListItem
+        } else if (viewType % 2 == 0) {
+            layoutInflater.inflate(R.layout.destination, parent, false) as BaseListItem
+
+        } else {
+            layoutInflater.inflate(R.layout.recent, parent, false) as BaseListItem
+
+        }
+        return MyViewHolder(autoCompleter)
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.bind(list[position])
+    }
+
+    override fun getItemCount(): Int {
+        return list.size
+    }
+}
 
 data class AutoCompleterData(
-    val title: String,
+    val startIconRes: Int?,
+    val title: String?,
+    val from: String?,
+    val to: String?,
     val subTitle: String?,
-    val startIcon: Int?,
-    val endIcon: Int?
+    val code: String?,
+    val endIconRes: Int?,
 )
 
