@@ -24,6 +24,7 @@ import com.ixigo.design.sdk.components.styles.IxiFamily
 fun TypographyText(
     text: String,
     modifier: Modifier = Modifier,
+    color: Color? = null,
     textStyle: TextStyle,
     overflow: TextOverflow = TextOverflow.Clip,
     softWrap: Boolean = true,
@@ -40,6 +41,7 @@ fun TypographyText(
         softWrap = softWrap,
         maxLines = maxLines,
         textAlign = textAlign,
+        color = color ?: textStyle.color
     )
 }
 

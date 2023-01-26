@@ -3,24 +3,90 @@ package com.ixigo.design.sdk.components.listitems.base
 import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 abstract class BaseListItem @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
     protected var state =
-        mutableStateOf(AutoCompleterDataState(null, null, null, null, null, null, null, {}, {}, {}))
+        mutableStateOf(
+            ListItemDataState(
+                PaddingValues(
+                    top = 10.dp,
+                    bottom = 10.dp,
+                    start = 4.dp,
+                    end = 4.dp
+                ), null, null, null, null, null, null, null
+            )
+        )
 
+
+    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
+        val inState = state.value
+        state.value = inState.copy(
+            paddingValues = PaddingValues(
+                top = top.dp,
+                bottom = bottom.dp,
+                start = left.dp,
+                end = right.dp
+            )
+        )
+        super.setPadding(left, top, right, bottom)
+    }
 
     fun setTitle(title: String) {
         val inState = state.value
         state.value = inState.copy(title = title)
     }
 
-    fun setIconCode(title: String?) {
+    fun setMetaText(title: String?) {
         val inState = state.value
-        state.value = inState.copy(code = title)
+        state.value = inState.copy(metaText = title)
+    }
+
+    fun setActionText(title: String?) {
+        val inState = state.value
+        state.value = inState.copy(endActionText = title)
+    }
+
+    fun setActionTextClickListener(clickAction: (() -> Unit)?) {
+        val inState = state.value
+        state.value = inState.copy(endActionClick = clickAction)
+    }
+
+    fun setStartCheckedValue(initialValue: Boolean) {
+        val inState = state.value
+        state.value = inState.copy(startCheckedValue = initialValue)
+    }
+
+    fun setStartCheckedChangeListener(checkChangeListener: (Boolean) -> Unit) {
+        val inState = state.value
+        state.value = inState.copy(startCheckChangeListener = checkChangeListener)
+    }
+
+    fun setEndCheckedValue(initialValue: Boolean) {
+        val inState = state.value
+        state.value = inState.copy(endCheckedValue = initialValue)
+    }
+
+    fun setEndCheckedChangeListener(checkChangeListener: (Boolean) -> Unit) {
+        val inState = state.value
+        state.value = inState.copy(endCheckChangeListener = checkChangeListener)
+    }
+
+    fun setSwitchCheckedValue(initialValue: Boolean) {
+        val inState = state.value
+        state.value = inState.copy(endSwitchValue = initialValue)
+    }
+
+    fun setSwitchCheckedChangeListener(checkChangeListener: (Boolean) -> Unit) {
+        val inState = state.value
+        state.value = inState.copy(endSwitchChangeListener = checkChangeListener)
     }
 
     fun setSubTitle(subTitle: String?) {
@@ -28,37 +94,37 @@ abstract class BaseListItem @JvmOverloads constructor(
         state.value = inState.copy(subTitle = subTitle)
     }
 
-    fun setIcon(@DrawableRes icon: Int) {
+    fun setStartIcon(@DrawableRes icon: Int) {
         val inState = state.value
-        state.value = inState.copy(startIconRes = icon)
+        state.value = inState.copy(startIcon = icon)
     }
 
     fun setEndIcon(@DrawableRes icon: Int) {
         val inState = state.value
-        state.value = inState.copy(endIconRes = icon)
+        state.value = inState.copy(endIcon = icon)
     }
 
-    fun onEndIconClick(onClick: () -> Unit) {
+    fun setAvatarUrl(avatar: String?) {
         val inState = state.value
-        state.value = inState.copy(onEndIconClick = onClick)
+        state.value = inState.copy(startAvatarUrl = avatar)
     }
 
-    fun onStartIconClick(onClick: () -> Unit) {
-        val inState = state.value
-        state.value = inState.copy(onStartIconClick = onClick)
-    }
-
-
-    fun setFromValue(value: String) {
-        val inState = state.value
-        state.value = inState.copy(from = value)
-    }
-
-    fun setToValue(value: String) {
-        val inState = state.value
-        state.value = inState.copy(to = value)
-    }
-
+    //    fun onStartIconClick(onClick: () -> Unit) {
+//        val inState = state.value
+//        state.value = inState.copy(onStartIconClick = onClick)
+//    }
+//
+//
+//    fun setFromValue(value: String) {
+//        val inState = state.value
+//        state.value = inState.copy(from = value)
+//    }
+//
+//    fun setToValue(value: String) {
+//        val inState = state.value
+//        state.value = inState.copy(to = value)
+//    }
+//
     private fun setItemClickListener(onClick: () -> Unit) {
         val inState = state.value
         state.value = inState.copy(onItemClick = onClick)
@@ -72,15 +138,37 @@ abstract class BaseListItem @JvmOverloads constructor(
     }
 }
 
-data class AutoCompleterDataState(
-    val startIconRes: Int?,
-    val title: String?,
-    val from: String?,
-    val to: String?,
-    val subTitle: String?,
-    val code: String?,
-    val endIconRes: Int?,
-    val onItemClick: () -> Unit,
-    val onEndIconClick: () -> Unit,
-    val onStartIconClick: () -> Unit,
+data class ListItemDataState(
+    val paddingValues: PaddingValues,
+    @DrawableRes val startIcon: Int?,
+    val startIconWidth: Dp? = 18.dp,
+    val startIconHeight: Dp? = 18.dp,
+    val startAvatarUrl: String? = null,
+    @DrawableRes val startAvatarPlaceHolder: Int? = null,
+    val startAvatarWidth: Dp? = 40.dp,
+    val startAvatarHeight: Dp? = 40.dp,
+    @DrawableRes val startLogo: Int? = null,
+    val startLogoUrl: String? = null,
+    val startLogoWidth: Dp? = 50.dp,
+    val startLogoHeight: Dp? = 50.dp,
+    val startCheckedValue: Boolean? = null,
+    val startCheckChangeListener: (Boolean) -> Unit = {},
+    val color: IxiColor = IxiColor.Orange,
+    val title: String = "",
+    val subTitle: String? = null,
+    val metaText: String? = null,
+    val endIcon: Int? = null,
+    val endIconWidth: Dp? = 18.dp,
+    val endIconHeight: Dp? = 18.dp,
+    val endLogo: Int? = null,
+    val endLogoUrl: String? = null,
+    val endLogoWidth: Dp? = 50.dp,
+    val endLogoHeight: Dp? = 50.dp,
+    val endCheckedValue: Boolean? = null,
+    val endCheckChangeListener: (Boolean) -> Unit = {},
+    val endSwitchValue: Boolean? = null,
+    val endSwitchChangeListener: (Boolean) -> Unit = {},
+    val endActionText: String? = null,
+    val endActionClick: (() -> Unit)? = null,
+    val onItemClick: (() -> Unit) = {}
 )

@@ -4,12 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
-import com.ixigo.design.sdk.components.listitems.base.BaseListItem
+import com.ixigo.design.sdk.components.listitems.base.BaseAutoCompleter
 import com.ixigo.design.sdk.components.listitems.composables.AutoCompleterRecentComposable
 
 class IxiRecentAutoCompleter @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : BaseListItem(context, attrs, defStyleAttr) {
+) : BaseAutoCompleter(context, attrs, defStyleAttr) {
 
     @Composable
     override fun Content() {

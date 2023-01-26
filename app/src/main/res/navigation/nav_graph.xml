@@ -35,6 +35,9 @@
         <action
             android:id="@+id/action_componentFragment_to_autoCompleterFragment"
             app:destination="@id/autoCompleterFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_listItemFragment"
+            app:destination="@id/listItemFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -85,5 +88,11 @@
         android:id="@+id/autoCompleterFragment"
         android:name="com.ixigo.design.sdk.AutoCompleterFragment"
         tools:layout="@layout/fragment_auto_completer"
-        android:label="AutoCompleterFragment" />
+        android:label="AutoCompleter" />
+
+    <fragment
+        android:id="@+id/listItemFragment"
+        android:name="com.ixigo.design.sdk.ListItemFragment"
+        tools:layout="@layout/fragment_list_item"
+        android:label="List Items" />
 </navigation>

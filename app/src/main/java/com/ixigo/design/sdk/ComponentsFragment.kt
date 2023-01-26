@@ -34,6 +34,7 @@ class ComponentsFragment : Fragment() {
         Pair("TopAppBar", R.id.action_componentFragment_to_topAppBarFragment),
         Pair("TabBar", R.id.action_componentFragment_to_tabBarFragment),
         Pair("AutoCompleter", R.id.action_componentFragment_to_autoCompleterFragment),
+        Pair("ListItem", R.id.action_componentFragment_to_listItemFragment),
     )
 
     override fun onCreateView(

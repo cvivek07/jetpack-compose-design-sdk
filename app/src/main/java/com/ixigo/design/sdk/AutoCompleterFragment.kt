@@ -1,10 +1,5 @@
 package com.ixigo.design.sdk
 
-// import androidx.recyclerview.widget.DividerItemDecoration
-// import androidx.recyclerview.widget.LinearLayoutManager
-// import androidx.recyclerview.widget.RecyclerView
-// import androidx.recyclerview.widget.RecyclerView.Adapter
-// import com.ixigo.design.sdk.components.listitems.IxiAutoCompleter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.ixigo.design.sdk.components.listitems.base.BaseListItem
+import com.ixigo.design.sdk.components.listitems.base.BaseAutoCompleter
 import com.ixigo.design.sdk.databinding.FragmentAutoCompleterBinding
 
 class AutoCompleterFragment : BaseFragment() {
@@ -89,10 +84,10 @@ class AutoCompleterFragment : BaseFragment() {
 class RecyclerAdapter(val context: Context, private val list: List<AutoCompleterData>) :
     RecyclerView.Adapter<RecyclerAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: BaseListItem) : RecyclerView.ViewHolder(itemView) {
+    class MyViewHolder(itemView: BaseAutoCompleter) : RecyclerView.ViewHolder(itemView) {
 
         fun bind(data: AutoCompleterData) {
-            (itemView as? BaseListItem)?.apply {
+            (itemView as? BaseAutoCompleter)?.apply {
                 data.title?.let { setTitle(it) }
                 setSubTitle(data.subTitle)
                 data.endIconRes?.let { setEndIcon(it) }
@@ -117,13 +112,13 @@ class RecyclerAdapter(val context: Context, private val list: List<AutoCompleter
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val autoCompleter: BaseListItem = if (viewType % 3 == 0) {
-            layoutInflater.inflate(R.layout.station_or_airport, parent, false) as BaseListItem
+        val autoCompleter: BaseAutoCompleter = if (viewType % 3 == 0) {
+            layoutInflater.inflate(R.layout.station_or_airport, parent, false) as BaseAutoCompleter
         } else if (viewType % 2 == 0) {
-            layoutInflater.inflate(R.layout.destination, parent, false) as BaseListItem
+            layoutInflater.inflate(R.layout.destination, parent, false) as BaseAutoCompleter
 
         } else {
-            layoutInflater.inflate(R.layout.recent, parent, false) as BaseListItem
+            layoutInflater.inflate(R.layout.recent, parent, false) as BaseAutoCompleter
 
         }
         return MyViewHolder(autoCompleter)
