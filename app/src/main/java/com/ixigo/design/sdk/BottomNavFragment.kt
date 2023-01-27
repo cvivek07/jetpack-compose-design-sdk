@@ -22,6 +22,11 @@ class BottomNavFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    val buttonFragment = ButtonsFragment()
+    val typographyFragment = TypographyFragment()
+    val editTextFragment = InputFieldsFragment()
+    val progressStepFragment = ProgressStepFragment()
+    val topAppBarFragment = TopAppBarFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,19 +82,25 @@ class BottomNavFragment : Fragment() {
                 override fun onNavigationItemSelected(item: IxiBottomNavItem): Boolean {
                     when (item.id) {
                         0 -> {
-                            setCurrentFragment(ButtonsFragment())
+                            setCurrentFragment(buttonFragment)
                         }
                         1 -> {
-                            setCurrentFragment(TypographyFragment())
+                            setCurrentFragment(typographyFragment)
                         }
                         2 -> {
                             binding.bottomNav.setBadge(0, BadgeType.SMALL)
+                            setCurrentFragment(editTextFragment)
+
                         }
                         3 -> {
                             binding.bottomNav.setBadge(0, BadgeType.LARGE, "8")
+                            setCurrentFragment(progressStepFragment)
+
                         }
                         4 -> {
                             binding.bottomNav.clearBadge(0)
+                            setCurrentFragment(topAppBarFragment)
+
                         }
                     }
                     return true
