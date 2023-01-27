@@ -29,7 +29,8 @@ sealed class IxiColor(
     internal object WarningSecondary : IxiColor(R.color.y100, R.color.y100, R.color.y700)
     internal object SuccessSecondary : IxiColor(R.color.g50, R.color.g50, R.color.g500)
     internal object ExtensionSecondary : IxiColor(R.color.p50, R.color.p50, R.color.p500)
-
+    internal object BlueBottomNavbar: IxiColor(R.color.b50, R.color.b100, R.color.b500)
+    internal object OrangeBottomNavbar: IxiColor(R.color.o50, R.color.o100, R.color.o800)
     internal object OrangeTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.o800)
 
