@@ -16,12 +16,14 @@ abstract class BaseListItem @JvmOverloads constructor(
     protected var state =
         mutableStateOf(
             ListItemDataState(
-                PaddingValues(
+                paddingValues = PaddingValues(
                     top = 10.dp,
                     bottom = 10.dp,
                     start = 4.dp,
                     end = 4.dp
-                ), null, null, null, null, null, null, null
+                ),
+                title = "",
+                color = themeColor
             )
         )
 
@@ -109,22 +111,12 @@ abstract class BaseListItem @JvmOverloads constructor(
         state.value = inState.copy(startAvatarUrl = avatar)
     }
 
-    //    fun onStartIconClick(onClick: () -> Unit) {
-//        val inState = state.value
-//        state.value = inState.copy(onStartIconClick = onClick)
-//    }
-//
-//
-//    fun setFromValue(value: String) {
-//        val inState = state.value
-//        state.value = inState.copy(from = value)
-//    }
-//
-//    fun setToValue(value: String) {
-//        val inState = state.value
-//        state.value = inState.copy(to = value)
-//    }
-//
+    fun setThemeColor(color: IxiColor) {
+        val inState = state.value
+
+        state.value = inState.copy(color = color)
+    }
+
     private fun setItemClickListener(onClick: () -> Unit) {
         val inState = state.value
         state.value = inState.copy(onItemClick = onClick)
@@ -140,7 +132,7 @@ abstract class BaseListItem @JvmOverloads constructor(
 
 data class ListItemDataState(
     val paddingValues: PaddingValues,
-    @DrawableRes val startIcon: Int?,
+    @DrawableRes val startIcon: Int? = null,
     val startIconWidth: Dp? = 18.dp,
     val startIconHeight: Dp? = 18.dp,
     val startAvatarUrl: String? = null,
@@ -153,8 +145,8 @@ data class ListItemDataState(
     val startLogoHeight: Dp? = 50.dp,
     val startCheckedValue: Boolean? = null,
     val startCheckChangeListener: (Boolean) -> Unit = {},
-    val color: IxiColor = IxiColor.Orange,
-    val title: String = "",
+    val color: IxiColor,
+    val title: String,
     val subTitle: String? = null,
     val metaText: String? = null,
     val endIcon: Int? = null,

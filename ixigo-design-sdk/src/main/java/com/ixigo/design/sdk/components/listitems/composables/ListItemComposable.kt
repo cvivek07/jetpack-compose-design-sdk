@@ -1,5 +1,6 @@
 package com.ixigo.design.sdk.components.listitems.composables
 
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -20,10 +21,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
@@ -71,7 +74,8 @@ fun ListItemComposable(
     endSwitchChangeListener: (Boolean) -> Unit,
     endActionText: String?,
     endActionClick: (() -> Unit)? = null,
-    onItemClick: (() -> Unit) = {}
+    onItemClick: (() -> Unit) = {},
+    @ColorRes itemBackGroundColor: Int = R.color.n0
 ) {
 
     Row(
@@ -79,6 +83,7 @@ fun ListItemComposable(
             .fillMaxWidth()
             .wrapContentHeight()
             .clickable(onClick = onItemClick)
+            .background(color = colorResource(id = itemBackGroundColor))
             .padding(padding),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -194,7 +199,8 @@ fun MiddleContent(title: String?, subTitle: String?, meta: String?, modifier: Mo
                     text = title,
                     Modifier.weight(1f),
                     textStyle = IxiTypography.Body.Medium.regular,
-                    maxLines = 1
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
             if (!meta.isNullOrBlank()) {
@@ -244,10 +250,6 @@ fun RightContent(
         Spacer(modifier = Modifier.width(10.dp))
     }
 
-    if (checkedValue != null) {
-        DrawCheckBox(color, checkedValue, checkChangeListener)
-    }
-
     if (logoUrl != null) {
         AsyncImageView(
             modifier = Modifier
@@ -262,6 +264,10 @@ fun RightContent(
         Spacer(modifier = Modifier.width(10.dp))
     }
 
+
+    if (checkedValue != null) {
+        DrawCheckBox(color, checkedValue, checkChangeListener)
+    }
 
     if (switchValue != null) {
         val switchState = remember { mutableStateOf(switchValue) }
@@ -284,7 +290,15 @@ fun RightContent(
     }
 
     if (!actionText.isNullOrBlank()) {
-        ComposableTextButton(color = color, size = ButtonSize.Small)
+        TextButton(onClick = actionClick ?: {}) {
+            TypographyText(
+                text = actionText, textStyle = IxiTypography.Button.Small.regular.copy(
+                    color = colorResource(
+                        id = color.bgColor
+                    )
+                )
+            )
+        }
         Spacer(modifier = Modifier.width(10.dp))
     }
 
