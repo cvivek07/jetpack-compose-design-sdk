@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.setPadding
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ixigo.design.sdk.components.listitems.IxiListItem
-import com.ixigo.design.sdk.components.listitems.base.BaseAutoCompleter
 import com.ixigo.design.sdk.components.listitems.base.BaseListItem
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.databinding.FragmentListItemBinding
@@ -53,7 +53,7 @@ class ListItemFragment : BaseFragment() {
                 subTitle = null,
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
-                leftCheckBox = false,
+                startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
@@ -62,7 +62,7 @@ class ListItemFragment : BaseFragment() {
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
                 meta = "Delhi",
-                rightCheckBox = false
+                endCheckBox = false
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -80,7 +80,7 @@ class ListItemFragment : BaseFragment() {
                 endIconRes = R.drawable.ic_search,
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -88,7 +88,7 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Orange,
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -102,8 +102,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Success,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -114,8 +114,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Warning,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -138,7 +138,7 @@ class ListItemFragment : BaseFragment() {
                 subTitle = null,
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
-                leftCheckBox = false,
+                startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
@@ -147,7 +147,7 @@ class ListItemFragment : BaseFragment() {
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
                 meta = "Delhi",
-                rightCheckBox = false
+                endCheckBox = false
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -165,7 +165,7 @@ class ListItemFragment : BaseFragment() {
                 endIconRes = R.drawable.ic_search,
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -173,7 +173,7 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Orange,
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -187,8 +187,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Success,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -199,8 +199,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Warning,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -223,7 +223,7 @@ class ListItemFragment : BaseFragment() {
                 subTitle = null,
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
-                leftCheckBox = false,
+                startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
@@ -232,7 +232,7 @@ class ListItemFragment : BaseFragment() {
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
                 meta = "Delhi",
-                rightCheckBox = false
+                endCheckBox = false
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -250,7 +250,7 @@ class ListItemFragment : BaseFragment() {
                 endIconRes = R.drawable.ic_search,
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -258,7 +258,7 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Orange,
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -272,8 +272,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Success,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -284,8 +284,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Warning,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -308,7 +308,7 @@ class ListItemFragment : BaseFragment() {
                 subTitle = null,
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
-                leftCheckBox = false,
+                startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
@@ -317,7 +317,7 @@ class ListItemFragment : BaseFragment() {
                 startIconRes = null,
                 endIconRes = R.drawable.ic_search,
                 meta = "Delhi",
-                rightCheckBox = false
+                endCheckBox = false
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -335,7 +335,10 @@ class ListItemFragment : BaseFragment() {
                 endIconRes = R.drawable.ic_search,
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
-                rightCheckBox = true
+                endCheckBox = true,
+                endCheckChangeListener = {
+                    context?.let { it1 -> "RightCheckAdded".toToast(it1) }
+                }
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -343,7 +346,7 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Orange,
-                rightCheckBox = true
+                endCheckBox = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -357,8 +360,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Success,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -369,8 +372,8 @@ class ListItemFragment : BaseFragment() {
                 textButton = "Action",
                 avatar = "https://pixlr.com/images/index/remove-bg.webp",
                 color = IxiColor.Warning,
-                rightCheckBox = true,
-                leftCheckBox = true,
+                endCheckBox = true,
+                startCheckBox = true,
                 switch = false,
                 startLogo = "https://pixlr.com/images/index/remove-bg.webp",
                 endLogo = "https://pixlr.com/images/index/remove-bg.webp"
@@ -400,8 +403,10 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
                 setAvatarUrl(data.avatar)
                 setMetaText(data.meta)
                 setActionText(data.textButton)
-                data.leftCheckBox?.let { setStartCheckedValue(it) }
-                data.rightCheckBox?.let { setEndCheckedValue(it) }
+                data.startCheckBox?.let { setStartCheckedValue(it) }
+                setStartCheckedChangeListener(data.startCheckChangeListener)
+                data.endCheckBox?.let { setEndCheckedValue(it) }
+                setEndCheckedChangeListener (data.endCheckChangeListener)
                 data.endIconRes?.let { setEndIcon(it) }
                 data.startIconRes?.let { setStartIcon(it) }
                 data.switch?.let {
@@ -409,6 +414,7 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
                     setSwitchCheckedChangeListener(data.switchChangeListener)
                 }
                 setThemeColor(data.color)
+                setPadding(20,20,20,20)
 
             }
         }
@@ -447,7 +453,9 @@ data class ListItemData(
     val endIconRes: Int? = null,
     val switch: Boolean? = null,
     val switchChangeListener: (Boolean) -> Unit = {},
-    val leftCheckBox: Boolean? = null,
-    val rightCheckBox: Boolean? = null,
+    val startCheckChangeListener: (Boolean) -> Unit = {},
+    val endCheckChangeListener: (Boolean) -> Unit = {},
+    val startCheckBox: Boolean? = null,
+    val endCheckBox: Boolean? = null,
     val color: IxiColor = IxiColor.Blue
 )

@@ -19,6 +19,7 @@ class IxiListItem @JvmOverloads constructor(
         )
 
         ListItemComposable(
+            padding = state.value.paddingValues,
             startIcon = state.value.startIcon,
             startIconWidth = state.value.startIconWidth,
             startIconHeight = state.value.startIconHeight,
@@ -39,7 +40,6 @@ class IxiListItem @JvmOverloads constructor(
             endIcon = state.value.endIcon,
             endIconWidth = state.value.endIconWidth,
             endIconHeight = state.value.endIconHeight,
-
             endLogo = state.value.endLogo,
             endLogoUrl = state.value.endLogoUrl,
             endLogoWidth = state.value.endLogoWidth,
@@ -50,8 +50,7 @@ class IxiListItem @JvmOverloads constructor(
             endSwitchChangeListener = state.value.endSwitchChangeListener,
             endActionText = state.value.endActionText,
             endActionClick = state.value.endActionClick,
-
-            onItemClick = state.value.onItemClick ?: {}
+            onItemClick = state.value.onItemClick
         )
     }
 }
