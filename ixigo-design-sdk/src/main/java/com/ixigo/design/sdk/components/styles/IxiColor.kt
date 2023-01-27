@@ -15,6 +15,11 @@ sealed class IxiColor(
     object Warning : IxiColor(R.color.y500, R.color.y500, R.color.n0)
     object Success : IxiColor(R.color.g500, R.color.g500, R.color.n0)
     object Extension : IxiColor(R.color.p500, R.color.p500, R.color.n0)
+    data class Extra(
+        @ColorRes val bg: Int,
+        @ColorRes val pressed: Int,
+        @ColorRes val text: Int,
+    ) : IxiColor(bg, pressed, text)
 
     internal object Disabled : IxiColor(R.color.n40, R.color.n40, R.color.n300)
 
