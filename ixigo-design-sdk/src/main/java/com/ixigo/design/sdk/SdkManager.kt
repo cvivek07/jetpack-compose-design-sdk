@@ -1,5 +1,7 @@
 package com.ixigo.design.sdk
 
+import com.ixigo.design.sdk.components.styles.IxiColor
+
 /**
  * Manages and Initialise the sdk.
  * Make entry in Application class of your App and initialise the sdk.
@@ -34,9 +36,10 @@ object SdkManager {
 data class DesignConfig(val project: Project)
 
 
-enum class Project {
-    TRAIN,
-    FLIGHT,
-    ABHIBUS,
-    CONFIRM_TICKET
+enum class Project(val color: IxiColor) {
+    TRAIN(IxiColor.Blue),
+    FLIGHT(IxiColor.Orange),
+    ABHIBUS(IxiColor.Blue),
+    CONFIRM_TICKET(IxiColor.Blue)
 }
+

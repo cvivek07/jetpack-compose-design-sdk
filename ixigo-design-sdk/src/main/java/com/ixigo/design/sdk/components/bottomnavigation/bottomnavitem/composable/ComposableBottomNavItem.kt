@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -20,12 +19,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.LARGE
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.SMALL
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 
@@ -58,7 +60,6 @@ fun ComposableBottomNavItem(
             .clickable(onClick = onClick)
             .fillMaxSize()
     ) {
-//        Utils.convertPixelsToDp(4f, context = context).toInt(),
         Spacer(modifier = Modifier.height(11.dp))
         IconWithBadge(
             icon = if (selected && selectedIcon != null) selectedIcon else icon,
@@ -155,7 +156,7 @@ fun NotificationBadge(
     modifier: Modifier = Modifier,
     badgeType: BadgeType,
     content: String? = null,
-    @ColorRes borderColor: Int? = R.color.white
+    @ColorRes borderColor: Int = R.color.white
 ) {
     if (badgeType == SMALL) {
        SmallBadge(modifier=modifier, borderColor = borderColor)
@@ -175,33 +176,34 @@ fun NotificationBadge(
 fun LargeBadge(
     modifier: Modifier = Modifier,
     content: String? = null,
-    @ColorRes borderColor: Int? = R.color.white
+    @ColorRes borderColor: Int = R.color.white
 ){
     Box(modifier = modifier.offset(y = (-2).dp)) {
         Box(
             modifier = modifier
                 .clipToBounds()
-                .then(
-                    if (borderColor != null) Modifier.border(
-                        border = BorderStroke(
-                            2.dp, color = colorResource(id = borderColor)
-                        ),
-                        shape = CircleShape
-                    ) else Modifier
+                .border(
+                    border = BorderStroke(
+                        2.dp, color = colorResource(id = borderColor)
+                    ),
+                    shape = IxiShape.PillShape.shape
                 )
                 .background(
                     color = colorResource(id = R.color.r400),
-                    shape = RoundedCornerShape(10.dp)
+                    shape = IxiShape.PillShape.shape,
                 )
         ) {
             content?.let {
-                Text(
+                TypographyText(
                     text = content,
-                    Modifier
-                        .padding(horizontal = 10.dp, vertical = 2.dp)
+                    modifier = Modifier
+                        .padding(horizontal = 11.dp, vertical = 4.dp)
                         .align(Alignment.Center),
-                    style = IxiTypography.Body.XSmall.regular,
-                    color = colorResource(id = R.color.white)
+                    textStyle = IxiTypography.Body.XSmall.regular.copy(
+                        color = colorResource(id = R.color.white)
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis
                 )
             }
         }
@@ -252,4 +254,13 @@ fun SmallBadge(
 enum class BadgeType {
     SMALL,
     LARGE
+}
+
+@Composable
+@Preview(showSystemUi = true)
+fun Badge(){
+    Column() {
+        Spacer(modifier = Modifier.height(100.dp))
+        LargeBadge(content="2000k")
+    }
 }

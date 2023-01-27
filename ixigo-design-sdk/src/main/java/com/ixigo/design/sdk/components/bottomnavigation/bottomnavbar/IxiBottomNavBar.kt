@@ -4,13 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.Menu
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationMenuView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.IxiBottomNavItem
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType
+import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.utils.Utils
 
 /**
@@ -26,7 +29,7 @@ class IxiBottomNavBar @JvmOverloads constructor(
      * A list of all [IxiBottomNavItem]s added to this view
      */
     private val bottomNavItemList: MutableList<IxiBottomNavItem> = mutableListOf()
-
+    private var color:IxiColor = SdkManager.getConfig().project.color
     private var ixiBottomNavItemProvider:IxiBottomNavItemProvider? = null
 
     /**
@@ -48,7 +51,37 @@ class IxiBottomNavBar @JvmOverloads constructor(
      */
     fun setIxiBottomNavItemProvider(ixiBottomNavItemProvider: IxiBottomNavItemProvider) {
         this.ixiBottomNavItemProvider = ixiBottomNavItemProvider
-        setNavigationItems(ixiBottomNavItemProvider.provideMenu())
+
+        setNavigationItems(getIxiBottomNavItems(ixiBottomNavItemProvider.provideMenu()))
+    }
+
+    fun setColor(color: IxiColor){
+        this.color = color
+    }
+
+    private fun getIxiBottomNavItems(list:List<IxiBottomNavItemModel>):List<IxiBottomNavItem>{
+        val items = mutableListOf<IxiBottomNavItem>()
+        list.forEach{model->
+            items.add(getIxiBottomNavItem(model))
+        }
+        return items
+    }
+    private fun getIxiBottomNavItem(
+        model: IxiBottomNavItemModel
+    ): IxiBottomNavItem {
+        val item = IxiBottomNavItem(context)
+        item.id = model.id
+        item.setLabel(model.label)
+        model.badgeType?.let {
+            item.setBadgeType(it)
+        }
+        model.badgeContent?.let {
+            item.setBadgeContent(it)
+        }
+        item.setIxiColor(color)
+        item.setIcon(model.icon)
+        item.setSelectedIcon(model.selectedIcon)
+        return item
     }
 
     /**
@@ -77,12 +110,10 @@ class IxiBottomNavBar @JvmOverloads constructor(
      * @param list A list of [IxiBottomNavItem]s to be added to this view
      */
     private fun setNavigationItems(list: List<IxiBottomNavItem>) {
-//        this.setPadding(
-//            0,
-//            Utils.convertPixelsToDp(4f, context = context).toInt(),
-//            0,
-//            Utils.convertPixelsToDp(14f, context = context).toInt()
-//        )
+        val distinctList  = list.distinctBy {it.id}
+        if(distinctList.size!=list.size) {
+            throw java.lang.IllegalArgumentException("Cannot have multiple items with same id")
+        }
         this.minimumHeight = Utils.convertPixelsToDp(78f, context = context).toInt()
         inflateIxiBottomNavBarMenu(list.size)
         val mbottomNavigationMenuView = this.getChildAt(0) as BottomNavigationMenuView
@@ -203,7 +234,7 @@ class IxiBottomNavBar @JvmOverloads constructor(
          *
          * @return list of [IxiBottomNavItem]s to be displayed in [IxiBottomNavBar].
          */
-        fun provideMenu(): List<IxiBottomNavItem>
+        fun provideMenu(): List<IxiBottomNavItemModel>
         /**
          * Called when an item in the navigation menu is selected.
          *
@@ -211,5 +242,15 @@ class IxiBottomNavBar @JvmOverloads constructor(
          */
         fun onIxiNavItemSelected(id: Int)
     }
+
+    data class IxiBottomNavItemModel(
+        val context: Context,
+        val label: String,
+        val badgeType: BadgeType? = null,
+        val badgeContent: String? = null,
+        @DrawableRes val icon: Int,
+        @DrawableRes val selectedIcon: Int,
+        val id: Int
+    )
 
 }
