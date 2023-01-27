@@ -24,19 +24,11 @@ class IxiSecondaryChip  @JvmOverloads constructor(
             val drawableTintColor = if (drawableTintColorVal != -1) drawableTintColorVal else android.R.color.transparent
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiSecondaryChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
-            isEnabled(typedArray.getBoolean(R.styleable.IxiSecondaryChip_android_enabled, true))
+            isEnabled = typedArray.getBoolean(R.styleable.IxiSecondaryChip_android_enabled, true)
             setIxiChipColor(IxiChipColor(backgroundColor = backgroundColor, textColor = textColor, drawableTintColor = drawableTintColor, strokeColor = strokeColor))
         } finally {
             typedArray.recycle()
         }
-    }
-    override fun isEnabled(boolean: Boolean) {
-        if(!boolean) {
-            setIxiChipColor(null)
-        } else{
-            setIxiChipColor(color)
-        }
-        super.isEnabled(boolean)
     }
 
     override fun setIxiChipColor(color: IxiChipColor?) {

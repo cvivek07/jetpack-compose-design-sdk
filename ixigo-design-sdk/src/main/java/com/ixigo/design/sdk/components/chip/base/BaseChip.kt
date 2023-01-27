@@ -56,9 +56,6 @@ abstract class BaseChip @JvmOverloads constructor(
             typedArray.recycle()
         }
     }
-    open fun isEnabled(boolean: Boolean){
-        this.isEnabled = boolean
-    }
 
     open fun setIxiChipColorState(colorState: IxiChipColorState) {
         this.colorState = colorState
@@ -69,12 +66,12 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    open fun setOnCheckedChangeListener(@DrawableRes checkedIcon:Int?=null, onCheckedChange: (Boolean)->Unit){
+    open fun setOnChipCheckedChangeListener(@DrawableRes checkedIcon:Int?=null, listener: OnCheckedChangeListener?){
         if(onClickListener==null) {
             this.setOnClickListener {}
         }
         this.setOnCheckedChangeListener { buttonView, isChecked ->
-                onCheckedChange.invoke(isChecked)
+                listener?.onCheckedChanged(buttonView, isChecked)
                 if (isChecked) {
                     checkedIcon?.let {
                         this.setCheckedDrawableToStart(it)
@@ -151,6 +148,15 @@ abstract class BaseChip @JvmOverloads constructor(
             }
             this.isCloseIconVisible = drawable != null
         }
+    }
+
+    override fun setEnabled(boolean: Boolean) {
+        if(!boolean) {
+            setIxiChipColor(null)
+        } else{
+            setIxiChipColor(color)
+        }
+        super.setEnabled(boolean)
     }
 
     fun setCheckedDrawable(@DrawableRes drawable:Int?){

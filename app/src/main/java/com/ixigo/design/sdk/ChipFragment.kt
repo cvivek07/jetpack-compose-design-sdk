@@ -53,12 +53,11 @@ class ChipFragment  : BaseFragment() {
             }
         }
         binding.masterChip1.setIxiChipColorState(IxiChipColorState.Primary.YELLOW)
-        binding.masterChip1.setOnCheckedChangeListener(R.drawable.baseline_remove_circle_24){}
+        binding.masterChip1.setOnChipCheckedChangeListener(R.drawable.baseline_remove_circle_24) { buttonView, isChecked -> {} }
         binding.masterChip2.setIxiChipColorState(IxiChipColorState.Secondary.BLUE)
-        binding.masterChip2.setOnCheckedChangeListener {}
+        binding.masterChip2.setOnChipCheckedChangeListener { buttonView, isChecked -> {} }
         binding.masterChip3.setIxiChipColorState(IxiChipColorState.Outlined.GREEN)
-        binding.masterChip3.setOnCheckedChangeListener {
-        }
+        binding.masterChip3.setOnChipCheckedChangeListener { buttonView, isChecked -> {} }
     }
 
     private fun setPurpleGroup() {
@@ -132,47 +131,47 @@ class ChipFragment  : BaseFragment() {
     }
 
     private fun setDisabledGroup() {
-        binding.primaryChipDisabled.isEnabled(false)
-        binding.secondaryChipDisabled.isEnabled(false)
-        binding.outlinedChipDisabled.isEnabled(false)
-        binding.textChipDisabled.isEnabled(false)
+        binding.primaryChipDisabled.isEnabled = false
+        binding.secondaryChipDisabled.isEnabled = false
+        binding.outlinedChipDisabled.isEnabled = false
+        binding.textChipDisabled.isEnabled = false
     }
 
     private fun setNeutralGroup() {
         binding.primaryChip1.setColor(false, IxiChipColorState.Primary.NEUTRAL)
         binding.primaryChip1.onEndDrawableClickListener {
-            binding.primaryChip1.isEnabled(false)
+            binding.primaryChip1.isEnabled = false
         }
         binding.primaryChip2.setColor(true, IxiChipColorState.Primary.NEUTRAL)
         binding.primaryChip2.setOnClickListener {
-            binding.primaryChip1.isEnabled(true)
+            binding.primaryChip1.isEnabled = true
         }
 
         binding.secondaryChip1.setColor(false, IxiChipColorState.Secondary.NEUTRAL)
         binding.secondaryChip1.onEndDrawableClickListener {
-            binding.secondaryChip1.isEnabled(false)
+            binding.secondaryChip1.isEnabled = false
         }
         binding.secondaryChip2.setColor(true, IxiChipColorState.Secondary.NEUTRAL)
         binding.secondaryChip2.setOnClickListener {
-            binding.secondaryChip1.isEnabled(true)
+            binding.secondaryChip1.isEnabled = true
         }
 
         binding.outlinedChip1.setColor(false, IxiChipColorState.Outlined.NEUTRAL)
         binding.outlinedChip1.onEndDrawableClickListener {
-            binding.outlinedChip1.isEnabled(false)
+            binding.outlinedChip1.isEnabled = false
         }
         binding.outlinedChip2.setColor(true, IxiChipColorState.Outlined.NEUTRAL)
         binding.outlinedChip2.setOnClickListener {
-            binding.outlinedChip1.isEnabled(true)
+            binding.outlinedChip1.isEnabled = true
         }
 
         binding.textChip1.setColor(false, IxiChipColorState.Text.NEUTRAL)
         binding.textChip1.onEndDrawableClickListener {
-            binding.textChip1.isEnabled(false)
+            binding.textChip1.isEnabled = false
         }
         binding.textChip2.setColor(true, IxiChipColorState.Text.NEUTRAL)
         binding.textChip2.setOnClickListener {
-            binding.textChip1.isEnabled(true)
+            binding.textChip1.isEnabled = true
         }
     }
 

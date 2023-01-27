@@ -21,19 +21,11 @@ class IxiTextChip  @JvmOverloads constructor(
             val drawableTintColor = if (drawableTintColorVal != -1) drawableTintColorVal else android.R.color.transparent
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiTextChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
-            isEnabled(typedArray.getBoolean(R.styleable.IxiTextChip_android_enabled, true))
+            isEnabled = typedArray.getBoolean(R.styleable.IxiTextChip_android_enabled, true)
             setIxiChipColor(IxiChipColor(textColor = textColor, drawableTintColor = drawableTintColor, backgroundColor = backgroundColor))
         } finally {
             typedArray.recycle()
         }
-    }
-    override fun isEnabled(boolean: Boolean) {
-        if(!boolean) {
-            setIxiChipColor(null)
-        } else{
-            setIxiChipColor(color)
-        }
-        super.isEnabled(boolean)
     }
 
     override fun setIxiChipColor(color: IxiChipColor?) {
