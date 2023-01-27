@@ -21,11 +21,24 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.LARGE
+import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.SMALL
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 
+/**
+ *A composable function that creates a bottom navigation item with an icon, a selected icon, a label, and a badge.
+ *
+ * @param icon The drawable resource ID for the icon to be displayed.
+ * @param selectedIcon The drawable resource ID for the icon to be displayed when the item is selected. If not provided, the regular icon will be used.
+ * @param label The label to be displayed beneath the icon.
+ * @param selected A boolean value indicating whether the item is currently selected.
+ * @param onClick A lambda function to be invoked when the item is clicked.
+ * @param badgeType The type of badge to be displayed.
+ * @param badgeContent The content of the badge.
+ */
 @Composable
 fun ComposableBottomNavItem(
     @DrawableRes icon: Int?,
@@ -35,45 +48,52 @@ fun ComposableBottomNavItem(
     onClick: () -> Unit,
     badgeType: BadgeType? = null,
     badgeContent: String? = null,
-    itemType: ItemType = ItemType.FILLED,
-    ixiColor: IxiColor = IxiColor.BlueBottomNavbarAndroid
+    ixiColor: IxiColor = IxiColor.BlueBottomNavbar
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable(onClick = onClick).fillMaxSize()
+        modifier = Modifier
+            .clickable(onClick = onClick)
+            .fillMaxSize()
     ) {
-        if (itemType == ItemType.LINED) {
-            LinedItem(color = ixiColor.textColor, selected)
-        } else {
-            Spacer(modifier = Modifier.height(4.dp))
-        }
-        Spacer(modifier = Modifier.height(3.dp))
+//        Utils.convertPixelsToDp(4f, context = context).toInt(),
+        Spacer(modifier = Modifier.height(11.dp))
         IconWithBadge(
             icon = if (selected && selectedIcon != null) selectedIcon else icon,
             badgeType = badgeType,
             badgeContent = badgeContent,
-            tint = if (itemType == ItemType.FILLED && selected) ixiColor.textColor
-            else if (itemType == ItemType.LINED && selected) R.color.black
+            tint = if (selected) ixiColor.textColor
             else null,
-            enableBackground = itemType == ItemType.FILLED && selected,
+            enableBackground = selected,
             ixiColor = ixiColor
         )
         Spacer(modifier = Modifier.height(2.dp))
         if (label != null) {
-            if (selected && itemType == ItemType.FILLED) {
+            if (selected) {
                 TypographyText(text = label, textStyle = IxiTypography.Body.XSmall.medium.copy(
                     color = colorResource(
                         id = ixiColor.textColor
                     )
                 ))
-
             } else {
                 TypographyText(text = label, textStyle = IxiTypography.Body.XSmall.medium)
             }
         }
+        Spacer(modifier = Modifier.height(14.dp))
+//        Utils.convertPixelsToDp(14f, context = context).toInt()
     }
 }
 
+/**
+ * A composable that displays an icon with a badge.
+ *
+ * @param icon The drawable resource ID for the icon.
+ * @param badgeType The type of badge to display (small or large).
+ * @param badgeContent The text content to display in the badge (if the badge type is set to large).
+ * @param tint The color resource ID to tint the icon with.
+ * @param enableBackground Whether to display a background behind the icon.
+ * @param ixiColor The color theme to use for the background and border of the badge.
+ */
 @Composable
 fun IconWithBadge(
     @DrawableRes icon: Int?,
@@ -118,18 +138,14 @@ fun IconWithBadge(
         }
     }
 }
-
-@Composable
-fun LinedItem(@ColorRes color: Int, enabled: Boolean) {
-    Box(
-        Modifier
-            .width(50.dp)
-            .height(4.dp)
-            .clip(RoundedCornerShape(bottomEnd = 4.dp, bottomStart = 4.dp))
-            .then(if (enabled) Modifier.background(colorResource(id = color)) else Modifier)
-    )
-}
-
+/**
+ * A composable that displays a notification badge.
+ *
+ * @param modifier The modifier to apply to the badge.
+ * @param badgeType The type of badge to display (small or large).
+ * @param content The text content to display in the badge (if the badge type is set to large).
+ * @param borderColor The color resource ID for the border of the badge.
+ */
 @Composable
 fun NotificationBadge(
     modifier: Modifier = Modifier,
@@ -137,68 +153,99 @@ fun NotificationBadge(
     content: String? = null,
     @ColorRes borderColor: Int? = R.color.white
 ) {
-    if (badgeType == BadgeType.SMALL) {
+    if (badgeType == SMALL) {
+       SmallBadge(modifier=modifier, borderColor = borderColor)
+    } else if (badgeType == LARGE) {
+        LargeBadge(modifier = modifier, content = content, borderColor = borderColor)
+    }
+}
+
+/**
+ * A composable function that renders a large badge.
+ *
+ * @param modifier The modifier to apply to the root box.
+ * @param content The text content of the badge.
+ * @param borderColor The color of the border. Defaults to R.color.white.
+**/
+@Composable
+fun LargeBadge(
+    modifier: Modifier = Modifier,
+    content: String? = null,
+    @ColorRes borderColor: Int? = R.color.white
+){
+    Box(modifier = modifier.offset(y = (-2).dp)) {
         Box(
             modifier = modifier
-                .offset(y = (-2).dp)
-                .padding(top = 4.dp, end = 16.dp)
+                .clipToBounds()
+                .then(
+                    if (borderColor != null) Modifier.border(
+                        border = BorderStroke(
+                            2.dp, color = colorResource(id = borderColor)
+                        ),
+                        shape = CircleShape
+                    ) else Modifier
+                )
+                .background(
+                    color = colorResource(id = R.color.r400),
+                    shape = RoundedCornerShape(10.dp)
+                )
         ) {
-            Box(
-                modifier = modifier
-                    .size(12.dp)
-                    .background(
-                        color = colorResource(id = R.color.r400), shape = CircleShape
-                    )
-                    .then(
-                        if (borderColor != null) Modifier.border(
-                            border = BorderStroke(
-                                2.dp, color = colorResource(id = borderColor)
-                            ),
-                            shape = CircleShape
-                        ) else Modifier
-                    )
-
-            )
-        }
-    } else if (badgeType == BadgeType.LARGE) {
-        Box(modifier = modifier.offset(y = (-2).dp)) {
-            Box(
-                modifier = modifier
-                    .clipToBounds()
-                    .then(
-                        if (borderColor != null) Modifier.border(
-                            border = BorderStroke(
-                                2.dp, color = colorResource(id = borderColor)
-                            ),
-                            shape = CircleShape
-                        ) else Modifier
-                    )
-                    .background(
-                        color = colorResource(id = R.color.r400),
-                        shape = RoundedCornerShape(10.dp)
-                    )
-            ) {
-                content?.let {
-                    Text(
-                        text = content,
-                        Modifier
-                            .padding(horizontal = 10.dp, vertical = 2.dp)
-                            .align(Alignment.Center),
-                        style = IxiTypography.Body.XSmall.regular,
-                        color = colorResource(id = R.color.white)
-                    )
-                }
+            content?.let {
+                Text(
+                    text = content,
+                    Modifier
+                        .padding(horizontal = 10.dp, vertical = 2.dp)
+                        .align(Alignment.Center),
+                    style = IxiTypography.Body.XSmall.regular,
+                    color = colorResource(id = R.color.white)
+                )
             }
         }
     }
 }
 
+/**
+ * A composable function that renders a small badge.
+ *
+ * @param modifier The modifier to apply to the root box.
+ * @param borderColor The color of the border. Defaults to R.color.white.
+ */
+@Composable
+fun SmallBadge(
+    modifier: Modifier = Modifier,
+    @ColorRes borderColor: Int? = R.color.white
+){
+    Box(
+        modifier = modifier
+            .offset(y = (-2).dp)
+            .padding(top = 4.dp, end = 16.dp)
+    ) {
+        Box(
+            modifier = modifier
+                .size(12.dp)
+                .background(
+                    color = colorResource(id = R.color.r400), shape = CircleShape
+                )
+                .then(
+                    if (borderColor != null) Modifier.border(
+                        border = BorderStroke(
+                            2.dp, color = colorResource(id = borderColor)
+                        ),
+                        shape = CircleShape
+                    ) else Modifier
+                )
+
+        )
+    }
+}
+
+/**
+ * An enum class for representing badge types.
+ *
+ * @property SMALL the small badge type
+ * @property LARGE the large badge type
+ */
 enum class BadgeType {
     SMALL,
     LARGE
-}
-
-enum class ItemType {
-    LINED,
-    FILLED
 }

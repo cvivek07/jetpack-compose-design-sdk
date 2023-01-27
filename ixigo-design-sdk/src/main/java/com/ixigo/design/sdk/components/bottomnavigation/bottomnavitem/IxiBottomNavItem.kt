@@ -7,12 +7,25 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.base.BaseBottomNavItem
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.ComposableBottomNavItem
 
+/**
+ * IxiBottomNavItem is a class that extends [BaseBottomNavItem].
+ * It overrides the [Content] function to set the view composition strategy to [ViewCompositionStrategy.DisposeOnDetachedFromWindow]
+ * and render the [ComposableBottomNavItem]
+ *
+ * @constructor Creates a new instance of IxiBottomNavItem
+ * @param context The context of the application
+ * @param attrs The attribute set for the view
+ * @param defStyleAttr The default style attribute
+ */
 class IxiBottomNavItem @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : BaseBottomNavItem(context, attrs, defStyleAttr) {
 
+    /**
+     * Overrides the [Content] function to set the view composition strategy to [ViewCompositionStrategy.DisposeOnDetachedFromWindow] and render the [ComposableBottomNavItem]
+     */
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
@@ -26,9 +39,7 @@ class IxiBottomNavItem @JvmOverloads constructor(
             onClick = state.value.onClick,
             badgeType = state.value.badgeType,
             badgeContent = state.value.badgeContent,
-            itemType = state.value.itemType,
             ixiColor = state.value.ixiColor
         )
     }
-
 }

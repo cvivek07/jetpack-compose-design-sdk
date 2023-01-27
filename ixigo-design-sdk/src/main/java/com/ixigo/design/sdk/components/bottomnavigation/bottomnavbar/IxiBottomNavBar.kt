@@ -13,12 +13,27 @@ import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.IxiBottomN
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType
 import com.ixigo.design.sdk.utils.Utils
 
+/**
+ * Custom BottomNavigationView class that allows for custom items to be added
+ *
+ * @param context The context in which the view is running
+ * @param attrs The attributes of the XML tag that is inflating the view
+ */
 class IxiBottomNavBar @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null
 ) : BottomNavigationView(context, attrs) {
-    val bottomNavItemList: MutableList<IxiBottomNavItem> = mutableListOf()
-    private var onIxiItemSelectedListener: OnIxiItemSelectedListener? = null
+    /**
+     * A list of all [IxiBottomNavItem]s added to this view
+     */
+    private val bottomNavItemList: MutableList<IxiBottomNavItem> = mutableListOf()
 
+    private var ixiBottomNavItemProvider:IxiBottomNavItemProvider? = null
+
+    /**
+     * Inflates the menu for the [IxiBottomNavBar] with the specified number of items
+     *
+     * @param items The number of items to inflate the menu with
+     */
     private fun inflateIxiBottomNavBarMenu(items: Int) {
         this.menu.clear()
         for (i in 0 until items) {
@@ -26,10 +41,23 @@ class IxiBottomNavBar @JvmOverloads constructor(
         }
     }
 
-    fun setOnIxiItemSelectedListener(onIxiItemSelectedListener: OnIxiItemSelectedListener) {
-        this.onIxiItemSelectedListener = onIxiItemSelectedListener
+    /**
+     * Set the [IxiBottomNavItemProvider] for [IxiBottomNavBar].
+     *
+     * @param ixiBottomNavItemProvider the provider for [IxiBottomNavItem]s
+     */
+    fun setIxiBottomNavItemProvider(ixiBottomNavItemProvider: IxiBottomNavItemProvider) {
+        this.ixiBottomNavItemProvider = ixiBottomNavItemProvider
+        setNavigationItems(ixiBottomNavItemProvider.provideMenu())
     }
 
+    /**
+     * Updates the selected state of the [IxiBottomNavItem] with the specified id
+     *
+     * @param id The id of the [IxiBottomNavItem] to update
+     * @param selected The new selected state of the [IxiBottomNavItem]
+     * @return `true` if the item was successfully updated, `false` otherwise
+     */
     fun updatedSelectedIxiItem(id: Int, selected: Boolean): Boolean {
         if (bottomNavItemList.isEmpty()) {
             throw IllegalStateException(ERROR)
@@ -38,18 +66,24 @@ class IxiBottomNavBar @JvmOverloads constructor(
         clearAllPreviousSelectedItems()
         item.setItemSelected(selected)
         if (selected) {
-            onIxiItemSelectedListener?.onNavigationItemSelected(item)
+            ixiBottomNavItemProvider?.onIxiNavItemSelected(item.id)
         }
         return true
     }
 
-    fun setNavigationItems(list: List<IxiBottomNavItem>) {
-        this.setPadding(
-            0,
-            Utils.convertPixelsToDp(4f, context = context).toInt(),
-            0,
-            Utils.convertPixelsToDp(14f, context = context).toInt()
-        )
+    /**
+     * Sets the navigation items for the bottom navigation bar.
+     *
+     * @param list A list of [IxiBottomNavItem]s to be added to this view
+     */
+    private fun setNavigationItems(list: List<IxiBottomNavItem>) {
+//        this.setPadding(
+//            0,
+//            Utils.convertPixelsToDp(4f, context = context).toInt(),
+//            0,
+//            Utils.convertPixelsToDp(14f, context = context).toInt()
+//        )
+        this.minimumHeight = Utils.convertPixelsToDp(78f, context = context).toInt()
         inflateIxiBottomNavBarMenu(list.size)
         val mbottomNavigationMenuView = this.getChildAt(0) as BottomNavigationMenuView
         list.forEachIndexed { index, bottomNavigationItemView ->
@@ -90,14 +124,11 @@ class IxiBottomNavBar @JvmOverloads constructor(
                 getIxiColor().let {
                     defaultBottomNavigationItemView.setIxiColor(it)
                 }
-                defaultBottomNavigationItemView.setItemType(getItemType())
                 defaultBottomNavigationItemView.onClick {
                     clearAllPreviousSelectedItems()
                     defaultBottomNavigationItemView.setItemSelected(!defaultBottomNavigationItemView.isItemSelected())
                     bottomNavigationItemView.getOnCLick().invoke()
-                    onIxiItemSelectedListener?.onNavigationItemSelected(
-                        defaultBottomNavigationItemView
-                    )
+                    ixiBottomNavItemProvider?.onIxiNavItemSelected(defaultBottomNavigationItemView.id)
                 }
                 defaultBottomNavigationItemView.setItemSelected(isItemSelected())
             }
@@ -106,12 +137,22 @@ class IxiBottomNavBar @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Clears the selection of all previous bottom navigation items.
+     */
     private fun clearAllPreviousSelectedItems() {
         bottomNavItemList.forEach {
             it.setItemSelected(false)
         }
     }
 
+    /**
+     * Clears the badge of the bottom navigation item with the specified ID.
+     *
+     * @param id The ID of the bottom navigation item.
+     * @return true if the badge is cleared successfully, false if the item with the specified ID is not found.
+     * @throws IllegalStateException if there are no bottom navigation items set.
+     */
     fun clearBadge(id: Int): Boolean {
         if (bottomNavItemList.isEmpty()) {
             throw IllegalStateException(ERROR)
@@ -121,6 +162,15 @@ class IxiBottomNavBar @JvmOverloads constructor(
         return true
     }
 
+    /**
+     * Sets the badge for the bottom navigation item with the specified ID.
+     *
+     * @param id The ID of the bottom navigation item.
+     * @param badgeType The type of badge to set.
+     * @param badgeContent The content of the badge. Can be null.
+     * @return true if the badge is set successfully, false if the item with the specified ID is not found.
+     * @throws IllegalStateException if there are no bottom navigation items set.
+     */
     fun setBadge(id: Int, badgeType: BadgeType, badgeContent: String? = null): Boolean {
         if (bottomNavItemList.isEmpty()) {
             throw IllegalStateException(ERROR)
@@ -133,21 +183,33 @@ class IxiBottomNavBar @JvmOverloads constructor(
         return true
     }
 
-    interface OnIxiItemSelectedListener {
+    companion object {
+        /**
+         * Error message thrown when no bottom navigation items are found.
+         */
+        const val ERROR =
+            "No IxiBottomNavItem found, please set item using setIxiBottomNavItemProvider before calling this function"
+    }
+
+    /**
+     * Interface for providing [IxiBottomNavItem]s for [IxiBottomNavBar]
+     *
+     * Implement this interface activity or fragment and pass it to [IxiBottomNavBar]
+     * using [setIxiBottomNavItemProvider].
+     */
+    interface IxiBottomNavItemProvider {
+        /**
+         * Provide the list of [IxiBottomNavItem]s to be displayed in [IxiBottomNavBar].
+         *
+         * @return list of [IxiBottomNavItem]s to be displayed in [IxiBottomNavBar].
+         */
+        fun provideMenu(): List<IxiBottomNavItem>
         /**
          * Called when an item in the navigation menu is selected.
          *
-         * @param item The selected item
-         * @return true to display the item as the selected item and false if the item should not be
-         * selected. Consider setting non-selectable items as disabled preemptively to make them
-         * appear non-interactive.
+         * @param id the selected item id
          */
-        fun onNavigationItemSelected(item: IxiBottomNavItem): Boolean
-    }
-
-    companion object {
-        const val ERROR =
-            "No IxiBottomNavItem found, please set item using setNavigationItems(list: List<IxiBottomNavItem>) before calling this function"
+        fun onIxiNavItemSelected(id: Int)
     }
 
 }
