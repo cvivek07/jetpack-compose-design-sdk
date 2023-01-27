@@ -28,4 +28,11 @@
         <attr name="android:text" format="string" />
         <attr name="android:textColor"  format="color|reference"/>
     </declare-styleable>
+
+    <declare-styleable name="BaseBottomNavItem">
+        <attr name="android:icon" format="reference" />
+        <attr name="selectedIcon" format="reference" />
+        <attr name="itemLabel" format="string" />
+        <attr name="selected" format="boolean" />
+    </declare-styleable>
 </resources>
