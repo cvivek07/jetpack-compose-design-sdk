@@ -19,7 +19,7 @@ abstract class BaseChip @JvmOverloads constructor(
     protected var color:IxiChipColor? = null
     protected var colorState:IxiChipColorState? = null
     protected var horizontalPadding:Float = 8f
-    protected var chipType:ChipType
+    protected var ixiChipSize:IxiChipSize
     protected var onClickListener:((View)->Unit)? = null
     protected var drawableStart:Int? = null
     protected var drawableEnd:Int? = null
@@ -27,28 +27,13 @@ abstract class BaseChip @JvmOverloads constructor(
         this.setTextAppearance(R.style.chipText)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
         try {
-            chipType = mapChipTypeToEnum(typedArray.getInt(R.styleable.BaseChip_chipType, 0))
+            ixiChipSize = mapChipTypeToEnum(typedArray.getInt(R.styleable.BaseChip_chipType, 0))
             val text = typedArray.getString(R.styleable.BaseChip_android_text) ?: ""
-            when(chipType){
-                ChipType.LARGE -> {
-                    this.textSize = 14f
-                    this.chipMinHeight = Utils.convertDpToPixel(30f, context)
-                }
-                ChipType.SMALL -> {
-                    this.textSize = 12f
-                    this.chipMinHeight = Utils.convertDpToPixel(20f, context)
-                }
-                ChipType.XSMALL -> {
-                    this.textSize = 10f
-                    this.chipMinHeight = Utils.convertDpToPixel(15f, context)
-                }
-                ChipType.NOTIFICATION -> {
-                    //TODO: Doubt
-                }
-            }
+            this.textSize = ixiChipSize.textSize
+            this.chipMinHeight = Utils.convertDpToPixel(ixiChipSize.height, context)
             this.textAlignment = TEXT_ALIGNMENT_CENTER
             setText(text)
-            horizontalPadding = if (chipType == ChipType.SMALL) 4f else 8f
+            horizontalPadding = if (ixiChipSize == IxiChipSize.SMALL) 4f else 8f
             val drawableEnd =
                 typedArray.getResourceId(R.styleable.BaseChip_chipDrawableEnd, 0)
             val drawableStart =
@@ -89,7 +74,6 @@ abstract class BaseChip @JvmOverloads constructor(
             this.setOnClickListener {}
         }
         this.setOnCheckedChangeListener { buttonView, isChecked ->
-            run {
                 onCheckedChange.invoke(isChecked)
                 if (isChecked) {
                     checkedIcon?.let {
@@ -109,7 +93,14 @@ abstract class BaseChip @JvmOverloads constructor(
                         this.setIxiChipColor(it.unselected)
                     }
                 }
-            }
+        }
+    }
+
+    open fun setColor(selected:Boolean, chipColor: IxiChipColorState){
+        if(selected){
+            setIxiChipColor(chipColor.selected)
+        } else{
+            setIxiChipColor(chipColor.unselected)
         }
     }
 
@@ -203,22 +194,6 @@ abstract class BaseChip @JvmOverloads constructor(
         return ColorStateList(states.toTypedArray(), colors.toIntArray())
     }
 
-    //TODO: start drawable Click Listener
-    open fun onStartDrawableClickListener(onClick:(()->Unit)?){
-        if(onClick!=null){
-            this.chipIcon
-            this.setOnTouchListener { _, event ->
-                if (event.x <= this.totalPaddingLeft) {
-                    onClick.invoke()
-                } else{
-
-                }
-                return@setOnTouchListener true
-            }
-        } else{
-            this.setOnCloseIconClickListener(null)
-        }
-    }
 
     open fun onEndDrawableClickListener( onClick:(()->Unit)? ){
         if(onClick!=null){
@@ -231,7 +206,7 @@ abstract class BaseChip @JvmOverloads constructor(
     }
 
     private fun isChipEligible():Boolean{
-        return chipType==ChipType.LARGE || chipType==ChipType.SMALL
+        return ixiChipSize==IxiChipSize.LARGE || ixiChipSize==IxiChipSize.SMALL
     }
 
     fun setIconSize(startSize: Float = 16f, endSize: Float = 16f){
@@ -240,26 +215,26 @@ abstract class BaseChip @JvmOverloads constructor(
     }
 
     protected fun setText(text:String) {
-        if(chipType!=ChipType.NOTIFICATION) {
+        if(ixiChipSize!=IxiChipSize.NOTIFICATION) {
             this.text = text
         }
     }
 
-    private fun mapChipTypeToEnum(int:Int):ChipType{
+    private fun mapChipTypeToEnum(int:Int):IxiChipSize{
         return when(int){
-            0-> ChipType.LARGE
-            1-> ChipType.SMALL
-            2-> ChipType.XSMALL
-            3-> ChipType.NOTIFICATION
-            else-> ChipType.LARGE
+            0-> IxiChipSize.LARGE
+            1-> IxiChipSize.SMALL
+            2-> IxiChipSize.XSMALL
+            3-> IxiChipSize.NOTIFICATION
+            else-> IxiChipSize.LARGE
         }
     }
 
-    enum class ChipType {
-        LARGE,
-        SMALL,
-        XSMALL,
-        NOTIFICATION
+    enum class IxiChipSize(val textSize:Float,val height:Float) {
+        LARGE(14f, 30f),
+        SMALL(12f, 20f),
+        XSMALL(10f, 15f),
+        NOTIFICATION(0f, 2f);
     }
 }
 

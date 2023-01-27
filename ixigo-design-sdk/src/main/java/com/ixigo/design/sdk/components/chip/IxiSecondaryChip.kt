@@ -39,7 +39,7 @@ class IxiSecondaryChip  @JvmOverloads constructor(
         super.isEnabled(boolean)
     }
 
-    public override fun setIxiChipColor(color: IxiChipColor?) {
+    override fun setIxiChipColor(color: IxiChipColor?) {
         if(color!=null){
             this.color = color
             super.setIxiChipColor(
@@ -53,5 +53,9 @@ class IxiSecondaryChip  @JvmOverloads constructor(
         } else{
             super.setIxiChipColor(IxiChipColorState.SecondaryDisabled)
         }
+    }
+
+    override fun setColor(selected: Boolean, chipColor: IxiChipColorState) {
+        super.setColor(selected, chipColor)
     }
 }

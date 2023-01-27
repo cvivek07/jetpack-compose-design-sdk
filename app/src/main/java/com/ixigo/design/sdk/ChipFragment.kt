@@ -42,7 +42,6 @@ class ChipFragment  : BaseFragment() {
     }
     private fun setMasterGroup() {
         binding.cgMaster.setOnCheckedStateChangeListener { group, checkedIds ->
-//            group.clearCheck()
             for (i in 0 until group.childCount){
                     val chip = group.getChildAt(i) as BaseChip
                     chip.isChecked = false
@@ -63,73 +62,73 @@ class ChipFragment  : BaseFragment() {
     }
 
     private fun setPurpleGroup() {
-        binding.pPrimaryChip1.setIxiChipColor(IxiChipColorState.Primary.PURPLE.unselected)
-        binding.pPrimaryChip2.setIxiChipColor(IxiChipColorState.Primary.PURPLE.selected)
+        binding.pPrimaryChip1.setColor(false, IxiChipColorState.Primary.PURPLE)
+        binding.pPrimaryChip2.setColor(true, IxiChipColorState.Primary.PURPLE)
 
-        binding.pSecondaryChip1.setIxiChipColor(IxiChipColorState.Secondary.PURPLE.unselected)
-        binding.pSecondaryChip2.setIxiChipColor(IxiChipColorState.Secondary.PURPLE.selected)
+        binding.pSecondaryChip1.setColor(false, IxiChipColorState.Secondary.PURPLE)
+        binding.pSecondaryChip2.setColor(true, IxiChipColorState.Secondary.PURPLE)
 
-        binding.pOutlinedChip1.setIxiChipColor(IxiChipColorState.Outlined.PURPLE.unselected)
-        binding.pOutlinedChip2.setIxiChipColor(IxiChipColorState.Outlined.PURPLE.selected)
+        binding.pOutlinedChip1.setColor(false, IxiChipColorState.Outlined.PURPLE)
+        binding.pOutlinedChip2.setColor(true, IxiChipColorState.Outlined.PURPLE)
 
-        binding.pTextChip1.setIxiChipColor(IxiChipColorState.Text.PURPLE.unselected)
-        binding.pTextChip2.setIxiChipColor(IxiChipColorState.Text.PURPLE.selected)
+        binding.pTextChip1.setColor(false, IxiChipColorState.Text.PURPLE)
+        binding.pTextChip2.setColor(true, IxiChipColorState.Text.PURPLE)
     }
 
     private fun setYellowGroup() {
-        binding.yPrimaryChip1.setIxiChipColor(IxiChipColorState.Primary.YELLOW.unselected)
-        binding.yPrimaryChip2.setIxiChipColor(IxiChipColorState.Primary.YELLOW.selected)
+        binding.yPrimaryChip1.setColor(false, IxiChipColorState.Primary.YELLOW)
+        binding.yPrimaryChip2.setColor(true, IxiChipColorState.Primary.YELLOW)
 
-        binding.ySecondaryChip1.setIxiChipColor(IxiChipColorState.Secondary.YELLOW.unselected)
-        binding.ySecondaryChip2.setIxiChipColor(IxiChipColorState.Secondary.YELLOW.selected)
+        binding.ySecondaryChip1.setColor(false, IxiChipColorState.Secondary.YELLOW)
+        binding.ySecondaryChip2.setColor(true, IxiChipColorState.Secondary.YELLOW)
 
-        binding.yOutlinedChip1.setIxiChipColor(IxiChipColorState.Outlined.YELLOW.unselected)
-        binding.yOutlinedChip2.setIxiChipColor(IxiChipColorState.Outlined.YELLOW.selected)
+        binding.yOutlinedChip1.setColor(false, IxiChipColorState.Outlined.YELLOW)
+        binding.yOutlinedChip2.setColor(true, IxiChipColorState.Outlined.YELLOW)
 
-        binding.yTextChip1.setIxiChipColor(IxiChipColorState.Text.YELLOW.unselected)
-        binding.yTextChip2.setIxiChipColor(IxiChipColorState.Text.YELLOW.selected)
+        binding.yTextChip1.setColor(false, IxiChipColorState.Text.YELLOW)
+        binding.yTextChip2.setColor(true, IxiChipColorState.Text.YELLOW)
     }
 
     private fun setRedGroup() {
-        binding.rPrimaryChip1.setIxiChipColor(IxiChipColorState.Primary.RED.unselected)
-        binding.rPrimaryChip2.setIxiChipColor(IxiChipColorState.Primary.RED.selected)
+        binding.rPrimaryChip1.setColor(false, IxiChipColorState.Primary.RED)
+        binding.rPrimaryChip2.setColor(true, IxiChipColorState.Primary.RED)
 
-        binding.rSecondaryChip1.setIxiChipColor(IxiChipColorState.Secondary.RED.unselected)
-        binding.rSecondaryChip2.setIxiChipColor(IxiChipColorState.Secondary.RED.selected)
+        binding.rSecondaryChip1.setColor(false, IxiChipColorState.Secondary.RED)
+        binding.rSecondaryChip2.setColor(true, IxiChipColorState.Secondary.RED)
 
-        binding.rOutlinedChip1.setIxiChipColor(IxiChipColorState.Outlined.RED.unselected)
-        binding.rOutlinedChip2.setIxiChipColor(IxiChipColorState.Outlined.RED.selected)
+        binding.rOutlinedChip1.setColor(false, IxiChipColorState.Outlined.RED)
+        binding.rOutlinedChip2.setColor(true, IxiChipColorState.Outlined.RED)
 
-        binding.rTextChip1.setIxiChipColor(IxiChipColorState.Text.RED.unselected)
-        binding.rTextChip2.setIxiChipColor(IxiChipColorState.Text.RED.selected)
+        binding.rTextChip1.setColor(false, IxiChipColorState.Text.RED)
+        binding.rTextChip2.setColor(true, IxiChipColorState.Text.RED)
     }
 
     private fun setGreenGroup() {
-        binding.gPrimaryChip1.setIxiChipColor(IxiChipColorState.Primary.GREEN.unselected)
-        binding.gPrimaryChip2.setIxiChipColor(IxiChipColorState.Primary.GREEN.selected)
+        binding.gPrimaryChip1.setColor(false, IxiChipColorState.Primary.GREEN)
+        binding.gPrimaryChip2.setColor(true, IxiChipColorState.Primary.GREEN)
 
-        binding.gSecondaryChip1.setIxiChipColor(IxiChipColorState.Secondary.GREEN.unselected)
-        binding.gSecondaryChip2.setIxiChipColor(IxiChipColorState.Secondary.GREEN.selected)
+        binding.gSecondaryChip1.setColor(false, IxiChipColorState.Secondary.GREEN)
+        binding.gSecondaryChip2.setColor(true, IxiChipColorState.Secondary.GREEN)
 
-        binding.gOutlinedChip1.setIxiChipColor(IxiChipColorState.Outlined.GREEN.unselected)
-        binding.gOutlinedChip2.setIxiChipColor(IxiChipColorState.Outlined.GREEN.selected)
+        binding.gOutlinedChip1.setColor(false, IxiChipColorState.Outlined.GREEN)
+        binding.gOutlinedChip2.setColor(true, IxiChipColorState.Outlined.GREEN)
 
-        binding.gTextChip1.setIxiChipColor(IxiChipColorState.Text.GREEN.unselected)
-        binding.gTextChip2.setIxiChipColor(IxiChipColorState.Text.GREEN.selected)
+        binding.gTextChip1.setColor(false, IxiChipColorState.Text.GREEN)
+        binding.gTextChip2.setColor(true, IxiChipColorState.Text.GREEN)
     }
 
     private fun setBlueGroup() {
-        binding.bPrimaryChip1.setIxiChipColor(IxiChipColorState.Primary.BLUE.selected)
-        binding.bPrimaryChip2.setIxiChipColor(IxiChipColorState.Primary.BLUE.unselected)
+        binding.bPrimaryChip1.setColor(false, IxiChipColorState.Primary.BLUE)
+        binding.bPrimaryChip2.setColor(true, IxiChipColorState.Primary.BLUE)
 
-        binding.bSecondaryChip1.setIxiChipColor(IxiChipColorState.Secondary.BLUE.unselected)
-        binding.bSecondaryChip2.setIxiChipColor(IxiChipColorState.Secondary.BLUE.selected)
+        binding.bSecondaryChip1.setColor(false, IxiChipColorState.Secondary.BLUE)
+        binding.bSecondaryChip2.setColor(true, IxiChipColorState.Secondary.BLUE)
 
-        binding.bOutlinedChip1.setIxiChipColor(IxiChipColorState.Outlined.BLUE.unselected)
-        binding.bOutlinedChip2.setIxiChipColor(IxiChipColorState.Outlined.BLUE.selected)
+        binding.bOutlinedChip1.setColor(false, IxiChipColorState.Outlined.BLUE)
+        binding.bOutlinedChip2.setColor(true, IxiChipColorState.Outlined.BLUE)
 
-        binding.bTextChip1.setIxiChipColor(IxiChipColorState.Text.BLUE.unselected)
-        binding.bTextChip2.setIxiChipColor(IxiChipColorState.Text.BLUE.selected)
+        binding.bTextChip1.setColor(false, IxiChipColorState.Text.BLUE)
+        binding.bTextChip2.setColor(true, IxiChipColorState.Text.BLUE)
     }
 
     private fun setDisabledGroup() {
@@ -140,38 +139,38 @@ class ChipFragment  : BaseFragment() {
     }
 
     private fun setNeutralGroup() {
-        binding.primaryChip1.setIxiChipColor(IxiChipColorState.Primary.NEUTRAL.unselected)
+        binding.primaryChip1.setColor(false, IxiChipColorState.Primary.NEUTRAL)
         binding.primaryChip1.onEndDrawableClickListener {
             binding.primaryChip1.isEnabled(false)
         }
-        binding.primaryChip2.setIxiChipColor(IxiChipColorState.Primary.NEUTRAL.selected)
+        binding.primaryChip2.setColor(true, IxiChipColorState.Primary.NEUTRAL)
         binding.primaryChip2.setOnClickListener {
             binding.primaryChip1.isEnabled(true)
         }
 
-        binding.secondaryChip1.setIxiChipColor(IxiChipColorState.Secondary.NEUTRAL.unselected)
+        binding.secondaryChip1.setColor(false, IxiChipColorState.Secondary.NEUTRAL)
         binding.secondaryChip1.onEndDrawableClickListener {
             binding.secondaryChip1.isEnabled(false)
         }
-        binding.secondaryChip2.setIxiChipColor(IxiChipColorState.Secondary.NEUTRAL.selected)
+        binding.secondaryChip2.setColor(true, IxiChipColorState.Secondary.NEUTRAL)
         binding.secondaryChip2.setOnClickListener {
             binding.secondaryChip1.isEnabled(true)
         }
 
-        binding.outlinedChip1.setIxiChipColor(IxiChipColorState.Outlined.NEUTRAL.unselected)
+        binding.outlinedChip1.setColor(false, IxiChipColorState.Outlined.NEUTRAL)
         binding.outlinedChip1.onEndDrawableClickListener {
             binding.outlinedChip1.isEnabled(false)
         }
-        binding.outlinedChip2.setIxiChipColor(IxiChipColorState.Outlined.NEUTRAL.selected)
+        binding.outlinedChip2.setColor(true, IxiChipColorState.Outlined.NEUTRAL)
         binding.outlinedChip2.setOnClickListener {
             binding.outlinedChip1.isEnabled(true)
         }
 
-        binding.textChip1.setIxiChipColor(IxiChipColorState.Text.NEUTRAL.unselected)
+        binding.textChip1.setColor(false, IxiChipColorState.Text.NEUTRAL)
         binding.textChip1.onEndDrawableClickListener {
             binding.textChip1.isEnabled(false)
         }
-        binding.textChip2.setIxiChipColor(IxiChipColorState.Text.NEUTRAL.selected)
+        binding.textChip2.setColor(true, IxiChipColorState.Text.NEUTRAL)
         binding.textChip2.setOnClickListener {
             binding.textChip1.isEnabled(true)
         }
