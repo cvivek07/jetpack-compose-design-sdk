@@ -25,7 +25,7 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
-    protected var state = mutableStateOf(BottomNavItemState())
+    protected var state = mutableStateOf(BottomNavItemState(ixiColor = mapColor(themeColor)))
 
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseBottomNavItem)
@@ -186,7 +186,7 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
      */
     fun setIxiColor(ixiColor: IxiColor) {
         val inState = state.value
-        state.value = inState.copy(ixiColor = mapStyle(ixiColor))
+        state.value = inState.copy(ixiColor = mapColor(ixiColor))
     }
 
     /**
@@ -196,6 +196,12 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
      */
     fun getIxiColor(): IxiColor {
         return state.value.ixiColor
+    }
+
+    private fun mapColor(colors: IxiColor) = when (colors) {
+        IxiColor.Blue -> IxiColor.BlueBottomNavbar
+        IxiColor.Orange -> IxiColor.OrangeBottomNavbar
+        else -> colors
     }
 
 
@@ -221,11 +227,5 @@ data class BottomNavItemState(
     val onClick: (() -> Unit) = {},
     val badgeType: BadgeType? = null,
     val badgeContent: String? = null,
-    val ixiColor: IxiColor = IxiColor.Blue
+    val ixiColor: IxiColor
 )
-
-private fun mapStyle(colors: IxiColor) = when (colors) {
-    IxiColor.Blue -> IxiColor.BlueBottomNavbar
-    IxiColor.Orange -> IxiColor.OrangeBottomNavbar
-    else -> IxiColor.OrangeBottomNavbar
-}
