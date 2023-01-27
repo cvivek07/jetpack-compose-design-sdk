@@ -36,14 +36,14 @@ class BottomNavFragment : Fragment() {
                     getIxiBottomNavItem(
                         id = 0,
                         context = it,
-                        label = "Test1",
+                        label = "Home",
                         icon = R.drawable.ic_home,
                         selectedIcon = R.drawable.ic_home_filled
                     ),
                     getIxiBottomNavItem(
                         id = 1,
                         context = it,
-                        label = "Test2",
+                        label = "Ixigomoney",
                         icon = R.drawable.ic_iximoney,
                         selectedIcon = R.drawable.ic_iximoney_filled,
                         badgeType = BadgeType.LARGE,
@@ -52,21 +52,21 @@ class BottomNavFragment : Fragment() {
                     getIxiBottomNavItem(
                         id = 2,
                         context = it,
-                        label = "Test3",
+                        label = "My Trips",
                         icon = R.drawable.ic_trips,
                         selectedIcon = R.drawable.ic_trips_filled
                     ),
                     getIxiBottomNavItem(
                         id = 3,
                         context = it,
-                        label = "Test4",
+                        label = "Contact us",
                         icon = R.drawable.ic_contact,
                         selectedIcon = R.drawable.ic_contact_filled
                     ),
                     getIxiBottomNavItem(
                         id = 4,
                         context = it,
-                        label = "Test5",
+                        label = "More",
                         icon = R.drawable.ic_more,
                         selectedIcon = R.drawable.ic_more_filled,
                         badgeType = BadgeType.SMALL

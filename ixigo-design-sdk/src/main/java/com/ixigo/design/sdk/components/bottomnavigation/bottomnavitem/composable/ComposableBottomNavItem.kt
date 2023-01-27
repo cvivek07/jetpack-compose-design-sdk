@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 
 @Composable
@@ -39,7 +40,7 @@ fun ComposableBottomNavItem(
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.clickable(onClick = onClick)
+        modifier = Modifier.clickable(onClick = onClick).fillMaxSize()
     ) {
         if (itemType == ItemType.LINED) {
             LinedItem(color = ixiColor.textColor, selected)
@@ -60,15 +61,14 @@ fun ComposableBottomNavItem(
         Spacer(modifier = Modifier.height(2.dp))
         if (label != null) {
             if (selected && itemType == ItemType.FILLED) {
-                Text(
-                    label, style = IxiTypography.Body.XSmall.medium.copy(
-                        color = colorResource(
-                            id = ixiColor.textColor
-                        )
+                TypographyText(text = label, textStyle = IxiTypography.Body.XSmall.medium.copy(
+                    color = colorResource(
+                        id = ixiColor.textColor
                     )
-                )
+                ))
+
             } else {
-                Text(label, style = IxiTypography.Body.XSmall.medium)
+                TypographyText(text = label, textStyle = IxiTypography.Body.XSmall.medium)
             }
         }
     }
