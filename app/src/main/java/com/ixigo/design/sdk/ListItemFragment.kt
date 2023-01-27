@@ -414,7 +414,6 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
                     setSwitchCheckedChangeListener(data.switchChangeListener)
                 }
                 setThemeColor(data.color)
-                setPadding(20,20,20,20)
 
             }
         }
