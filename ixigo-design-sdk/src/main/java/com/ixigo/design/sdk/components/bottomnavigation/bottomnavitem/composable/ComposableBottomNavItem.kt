@@ -19,7 +19,9 @@ import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.LARGE
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.SMALL
@@ -70,17 +72,19 @@ fun ComposableBottomNavItem(
         Spacer(modifier = Modifier.height(2.dp))
         if (label != null) {
             if (selected) {
-                TypographyText(text = label, textStyle = IxiTypography.Body.XSmall.medium.copy(
+                TypographyText(text = label, maxLines = 2, textAlign = TextAlign.Center, textStyle = IxiTypography.Body.XSmall.medium.copy(
                     color = colorResource(
                         id = ixiColor.textColor
-                    )
+                    ),
+                    lineHeight = 16.8.sp
                 ))
             } else {
-                TypographyText(text = label, textStyle = IxiTypography.Body.XSmall.medium)
+                TypographyText(text = label, maxLines = 2, textAlign = TextAlign.Center, textStyle = IxiTypography.Body.XSmall.medium.copy(
+                    lineHeight = 16.8.sp
+                ))
             }
         }
         Spacer(modifier = Modifier.height(14.dp))
-//        Utils.convertPixelsToDp(14f, context = context).toInt()
     }
 }
 
