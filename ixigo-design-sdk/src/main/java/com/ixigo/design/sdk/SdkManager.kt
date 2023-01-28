@@ -23,7 +23,7 @@ object SdkManager {
      *
      * @return [DesignConfig] with which sdk is initialised.
      */
-    internal fun getConfig() = config  ?: Project.TRAIN
+    internal fun getConfig() = config  ?: DesignConfig(Project.TRAIN)
        // ?: throw IllegalStateException("SDK is not initialised. PLease initialise sdk using initSdk() in SdkManager")
 }
 

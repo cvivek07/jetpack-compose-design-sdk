@@ -29,6 +29,7 @@ class IxiBottomNavBar @JvmOverloads constructor(
      * A list of all [IxiBottomNavItem]s added to this view
      */
     private val bottomNavItemList: MutableList<IxiBottomNavItem> = mutableListOf()
+
     private var color:IxiColor = SdkManager.getConfig().project.color
     private var ixiBottomNavItemProvider:IxiBottomNavItemProvider? = null
 
