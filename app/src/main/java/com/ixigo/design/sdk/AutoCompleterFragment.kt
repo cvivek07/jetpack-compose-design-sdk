@@ -1,10 +1,5 @@
 package com.ixigo.design.sdk
 
-// import androidx.recyclerview.widget.DividerItemDecoration
-// import androidx.recyclerview.widget.LinearLayoutManager
-// import androidx.recyclerview.widget.RecyclerView
-// import androidx.recyclerview.widget.RecyclerView.Adapter
-// import com.ixigo.design.sdk.components.listitems.IxiAutoCompleter
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
