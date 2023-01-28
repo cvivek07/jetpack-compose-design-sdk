@@ -13,47 +13,82 @@ abstract class BaseListItem @JvmOverloads constructor(
         mutableStateOf(AutoCompleterDataState(null, null, null, null, null, null, null, {}, {}, {}))
 
 
+    /**
+     * Set the title for the auto completer item
+     * @param title title to be set
+     */
     fun setTitle(title: String) {
         val inState = state.value
         state.value = inState.copy(title = title)
     }
 
-    fun setIconCode(title: String?) {
+    /**
+     * Set the code inside the bordered box
+     * @param code value to be set
+     */
+    fun setIconCode(code: String?) {
         val inState = state.value
-        state.value = inState.copy(code = title)
+        state.value = inState.copy(code = code)
     }
 
+    /**
+     * Set the sub title for the item
+     * @param subTitle value to be set
+     */
     fun setSubTitle(subTitle: String?) {
         val inState = state.value
         state.value = inState.copy(subTitle = subTitle)
     }
 
+    /**
+     * Set the drawable resource inside the bordered box
+     * @param icon drawable resource to be set
+     */
     fun setIcon(@DrawableRes icon: Int) {
         val inState = state.value
         state.value = inState.copy(startIconRes = icon)
     }
 
+    /**
+     * Set the drawable resource at the right side of the item
+     * @param icon drawable resource to be set
+     */
     fun setEndIcon(@DrawableRes icon: Int) {
         val inState = state.value
         state.value = inState.copy(endIconRes = icon)
     }
 
+    /**
+     * Set the click event on the icon at right side of item
+     * @param onClick event to be set
+     */
     fun onEndIconClick(onClick: () -> Unit) {
         val inState = state.value
         state.value = inState.copy(onEndIconClick = onClick)
     }
 
+    /**
+     * Set the click event on the icon at left side of item
+     * @param onClick event to be set
+     */
     fun onStartIconClick(onClick: () -> Unit) {
         val inState = state.value
         state.value = inState.copy(onStartIconClick = onClick)
     }
 
-
+    /**
+     * Set the from value for the item
+     * @param value value to be set
+     */
     fun setFromValue(value: String) {
         val inState = state.value
         state.value = inState.copy(from = value)
     }
 
+    /**
+     * Set the to value for the item
+     * @param value value to be set
+     */
     fun setToValue(value: String) {
         val inState = state.value
         state.value = inState.copy(to = value)
