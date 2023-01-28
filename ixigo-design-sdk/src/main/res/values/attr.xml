@@ -21,11 +21,18 @@
         <attr name="android:drawableEnd" format="reference" />
         <attr name="android:drawableStart" format="reference" />
         <attr name="actionImage" format="reference" />
-        <attr name="drawableTintColor" format="reference" />
+        <attr name="drawableTintColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="IxiText">
         <attr name="android:text" format="string" />
         <attr name="android:textColor"  format="color|reference"/>
+    </declare-styleable>
+
+    <declare-styleable name="BaseBottomNavItem">
+        <attr name="android:icon" format="reference" />
+        <attr name="selectedIcon" format="reference" />
+        <attr name="itemLabel" format="string" />
+        <attr name="selected" format="boolean" />
     </declare-styleable>
 </resources>
