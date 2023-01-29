@@ -244,7 +244,6 @@ class IxiBottomNavBar @JvmOverloads constructor(
     }
 
     data class IxiBottomNavItemModel(
-        val context: Context,
         val label: String,
         val badgeType: BadgeType? = null,
         val badgeContent: String? = null,

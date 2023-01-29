@@ -39,14 +39,12 @@ class BottomNavFragment : Fragment() {
                     return mutableListOf(
                         IxiBottomNavBar.IxiBottomNavItemModel(
                             id = 0,
-                            context = it,
                             label = "Home",
                             icon = R.drawable.ic_home,
                             selectedIcon = R.drawable.ic_home_filled
                         ),
                         IxiBottomNavBar.IxiBottomNavItemModel(
                             id = 1,
-                            context = it,
                             label = "Ixigomoney",
                             icon = R.drawable.ic_iximoney,
                             selectedIcon = R.drawable.ic_iximoney_filled,
@@ -55,21 +53,18 @@ class BottomNavFragment : Fragment() {
                         ),
                         IxiBottomNavBar.IxiBottomNavItemModel(
                             id = 2,
-                            context = it,
                             label = "My Trips",
                             icon = R.drawable.ic_trips,
                             selectedIcon = R.drawable.ic_trips_filled
                         ),
                         IxiBottomNavBar.IxiBottomNavItemModel(
                             id = 3,
-                            context = it,
                             label = "Contact us",
                             icon = R.drawable.ic_contact,
                             selectedIcon = R.drawable.ic_contact_filled
                         ),
                         IxiBottomNavBar.IxiBottomNavItemModel(
                             id = 4,
-                            context = it,
                             label = "More",
                             icon = R.drawable.ic_more,
                             selectedIcon = R.drawable.ic_more_filled,
