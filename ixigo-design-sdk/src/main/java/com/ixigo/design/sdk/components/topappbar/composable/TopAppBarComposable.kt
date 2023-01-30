@@ -34,8 +34,8 @@ import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedCont
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.styles.IxiTypography
-import com.ixigo.design.sdk.components.tabs.base.IxiTabLayout
-import com.ixigo.design.sdk.components.tabs.base.TabType
+import com.ixigo.design.sdk.components.tabs.IxiTabLayout
+import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider

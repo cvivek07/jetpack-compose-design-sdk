@@ -23,6 +23,11 @@ abstract class BaseTabItem @JvmOverloads constructor(
         state.value = initState.copy(endDrawable = endDrawable)
     }
 
+    fun setTopDrawable( @DrawableRes  topDrawable: Int) {
+        val initState = state.value
+        state.value = initState.copy(topDrawable = topDrawable)
+    }
+
     fun setTitle (title: String) {
         val initState = state.value
         state.value = initState.copy(title = title)
@@ -38,6 +43,7 @@ abstract class BaseTabItem @JvmOverloads constructor(
 data class TabItemState(
     @DrawableRes val startDrawable: Int = 0,
     @DrawableRes val endDrawable: Int = 0,
+    @DrawableRes val topDrawable: Int = 0,
     val title: String? = null,
     val isSelected: Boolean = false
 )

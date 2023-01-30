@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
-import com.ixigo.design.sdk.components.tabs.base.TabType
+import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.*
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
@@ -198,10 +198,10 @@ class ToolBarActivity : AppCompatActivity() {
 
     fun tabbedToolbar() {
         val listTabsName = listOf(
-            TabDataItem("Buttons", R.drawable.ic_search,0),
-            TabDataItem("InputField",0, R.drawable.ic_search),
-            TabDataItem("Progress Steps", 0, 0),
-            TabDataItem("Typography", R.drawable.ic_search, R.drawable.ic_baseline_cancel_24)
+            TabDataItem("Buttons", R.drawable.ic_search,0, 0),
+            TabDataItem("InputField",0, R.drawable.ic_search, 0),
+            TabDataItem("Progress Steps", 0, 0, 0),
+            TabDataItem("Typography", R.drawable.ic_search, R.drawable.ic_baseline_cancel_24, 0)
         )
         val fragmentList = listOf(
             ButtonsFragment(),

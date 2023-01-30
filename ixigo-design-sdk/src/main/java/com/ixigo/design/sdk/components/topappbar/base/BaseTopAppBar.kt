@@ -11,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
-import com.ixigo.design.sdk.components.tabs.base.TabType
+import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 

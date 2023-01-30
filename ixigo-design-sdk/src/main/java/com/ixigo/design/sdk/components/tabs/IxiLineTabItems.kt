@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.tabs.base.BaseTabItem
 import com.ixigo.design.sdk.components.tabs.composables.LineTabComposable
 
-class IxiLineTabItems  @JvmOverloads constructor(
+class IxiLineTabItems @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -21,6 +21,7 @@ class IxiLineTabItems  @JvmOverloads constructor(
             LineTabComposable(
                 startIcon = startDrawable,
                 endIcon = endDrawable,
+                topIcon = topDrawable,
                 text = title,
                 isSelected = isSelected
             )
