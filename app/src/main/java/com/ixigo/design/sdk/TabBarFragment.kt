@@ -31,8 +31,8 @@ class TabBarFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val fragments = listOf(TypographyFragment(), ButtonsFragment())
         val dataList = listOf(
-            TabDataItem("Typo", 0, R.drawable.ic_baseline_cancel_24,0),
-            TabDataItem("Buttons", 0, R.drawable.ic_baseline_cancel_24,0)
+            TabDataItem("Typo", 0, 0, R.drawable.ic_baseline_cancel_24,),
+            TabDataItem("Buttons", 0, 0,R.drawable.ic_baseline_cancel_24,)
         )
 
         binding.viewPager.adapter = PagerAdapter(parentFragmentManager, lifecycle, fragments)

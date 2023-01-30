@@ -5,6 +5,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -153,7 +154,8 @@ fun LineTabComposable(
                         } else {
                             android.R.color.transparent
                         }
-                    )
+                    ),
+                    shape = RoundedCornerShape(50)
                 ),
         )
 
