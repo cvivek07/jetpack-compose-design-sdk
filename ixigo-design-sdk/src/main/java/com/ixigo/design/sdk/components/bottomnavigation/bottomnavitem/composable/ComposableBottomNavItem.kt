@@ -124,14 +124,16 @@ fun IconWithBadge(
                     .align(Alignment.Center)
                     .then(if (enableBackground) Modifier.background(colorResource(id = ixiColor.pressedColor)) else Modifier)
             ) {
-                Icon(
-                    painter = if(icon.drawable!=null) DrawablePainter(icon.drawable) else painterResource(id = icon.resourceId),
-                    contentDescription = null,
-                    tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .size(24.dp)
-                )
+                icon.resourceId?.let {
+                    Icon(
+                        painter = if(icon.drawable!=null) DrawablePainter(icon.drawable) else painterResource(id = icon.resourceId),
+                        contentDescription = null,
+                        tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(24.dp)
+                    )
+                }
             }
         }
         badgeType?.let {
@@ -163,7 +165,7 @@ fun NotificationBadge(
     if (badgeType == SMALL) {
        SmallBadge(modifier=modifier, borderColor = borderColor)
     } else if (badgeType == LARGE) {
-        LargeBadge(modifier = modifier.defaultMinSize(minWidth = 32.dp, minHeight = 20.dp), content = content, borderColor = borderColor)
+        LargeBadge(modifier = modifier.height(20.dp).defaultMinSize(minWidth = 32.dp), content = content, borderColor = borderColor)
     }
 }
 
@@ -267,4 +269,4 @@ fun Badge(){
     }
 }
 
-data class CompatImage(@DrawableRes val resourceId: Int = 0, val drawable: Drawable?)
+data class CompatImage(@DrawableRes val resourceId: Int?, val drawable: Drawable?)

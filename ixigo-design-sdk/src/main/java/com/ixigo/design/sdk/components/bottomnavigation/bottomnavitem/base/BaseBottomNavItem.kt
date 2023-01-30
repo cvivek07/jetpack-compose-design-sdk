@@ -31,8 +31,14 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseBottomNavItem)
         try {
-            setIcon(typedArray.getResourceId(R.styleable.BaseBottomNavItem_android_icon, 0))
-            setSelectedIcon(typedArray.getResourceId(R.styleable.BaseBottomNavItem_selectedIcon, 0))
+            val icon = typedArray.getResourceId(R.styleable.BaseBottomNavItem_android_icon, -1)
+            if(icon !=-1){
+                setIcon(icon)
+            }
+            val selectedIcon = typedArray.getResourceId(R.styleable.BaseBottomNavItem_selectedIcon, -1)
+            if(selectedIcon!=-1) {
+                setSelectedIcon(selectedIcon)
+            }
             typedArray.getString(R.styleable.BaseBottomNavItem_itemLabel)?.let {
                 setLabel(it)
             }
