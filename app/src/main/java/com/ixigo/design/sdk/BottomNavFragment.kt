@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavbar.IxiBottomNavBar
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType
@@ -90,11 +91,17 @@ class BottomNavFragment : Fragment() {
                         3 -> {
                             binding.bottomNav.setBadge(0, BadgeType.LARGE, "8")
                             setCurrentFragment(progressStepFragment)
+                            ResourcesCompat.getDrawable(resources, R.drawable.ic_search, null)?.let {
+                                binding.bottomNav.setDrawableAtPosition(2, it)
+                            }
 
                         }
                         4 -> {
                             binding.bottomNav.clearBadge(0)
                             setCurrentFragment(topAppBarFragment)
+                            ResourcesCompat.getDrawable(resources, R.drawable.ic_search, null)?.let {
+                                binding.bottomNav.setSelectedDrawableAtPosition(2, it)
+                            }
                         }
                     }
                 }

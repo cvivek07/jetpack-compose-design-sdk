@@ -1,6 +1,7 @@
 package com.ixigo.design.sdk.components.bottomnavigation.bottomnavbar
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.Menu
@@ -212,6 +213,20 @@ class IxiBottomNavBar @JvmOverloads constructor(
             item.setBadgeContent(badgeContent)
         }
         return true
+    }
+
+    fun setResourceAtPosition(position:Int, @DrawableRes res: Int){
+        bottomNavItemList[position].setIcon(res)
+    }
+    fun setDrawableAtPosition(position:Int, res: Drawable){
+        bottomNavItemList[position].setIconDrawable(res)
+    }
+    fun setSelectedResourceAtPosition(position:Int, @DrawableRes res: Int){
+        bottomNavItemList[position].setSelectedIcon(res)
+    }
+
+    fun setSelectedDrawableAtPosition(position:Int,  res: Drawable){
+        bottomNavItemList[position].setSelectedIconDrawable(res)
     }
 
     companion object {
