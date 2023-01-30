@@ -79,6 +79,7 @@ class BottomNavFragment : Fragment() {
                     when (id) {
                         0 -> {
                             setCurrentFragment(buttonFragment)
+                            binding.bottomNav.setResourceAtPosition(2, R.drawable.ic_trips, R.drawable.ic_trips_filled)
                         }
                         1 -> {
                             setCurrentFragment(typographyFragment)
@@ -91,17 +92,13 @@ class BottomNavFragment : Fragment() {
                         3 -> {
                             binding.bottomNav.setBadge(0, BadgeType.LARGE, "8")
                             setCurrentFragment(progressStepFragment)
-                            ResourcesCompat.getDrawable(resources, R.drawable.ic_search, null)?.let {
-                                binding.bottomNav.setDrawableAtPosition(2, it)
-                            }
-
+                            val icon = ResourcesCompat.getDrawable(resources, R.drawable.ic_search, null)
+                            val selectedIcon = ResourcesCompat.getDrawable(resources, R.drawable.ic_search, null)
+                            binding.bottomNav.setDrawableAtPosition(2,icon!!, selectedIcon!!)
                         }
                         4 -> {
                             binding.bottomNav.clearBadge(0)
                             setCurrentFragment(topAppBarFragment)
-                            ResourcesCompat.getDrawable(resources, R.drawable.ic_search, null)?.let {
-                                binding.bottomNav.setSelectedDrawableAtPosition(2, it)
-                            }
                         }
                     }
                 }

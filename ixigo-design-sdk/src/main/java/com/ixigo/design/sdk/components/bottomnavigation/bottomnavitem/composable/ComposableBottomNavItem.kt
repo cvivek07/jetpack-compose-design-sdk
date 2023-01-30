@@ -163,7 +163,7 @@ fun NotificationBadge(
     if (badgeType == SMALL) {
        SmallBadge(modifier=modifier, borderColor = borderColor)
     } else if (badgeType == LARGE) {
-        LargeBadge(modifier = modifier, content = content, borderColor = borderColor)
+        LargeBadge(modifier = modifier.defaultMinSize(minWidth = 32.dp, minHeight = 20.dp), content = content, borderColor = borderColor)
     }
 }
 

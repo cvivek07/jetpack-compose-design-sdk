@@ -58,12 +58,12 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
      */
     fun setIcon(@DrawableRes icon: Int) {
         val inState = state.value
-        state.value = inState.copy(icon = icon)
+        state.value = inState.copy(icon = icon, iconDrawable = null)
     }
 
     fun setIconDrawable(icon: Drawable) {
         val inState = state.value
-        state.value = inState.copy(iconDrawable = icon)
+        state.value = inState.copy(iconDrawable = icon, icon = null)
     }
 
     /**
@@ -80,12 +80,12 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
      */
     fun setSelectedIcon(@DrawableRes icon: Int) {
         val inState = state.value
-        state.value = inState.copy(selectedIcon = icon)
+        state.value = inState.copy(selectedIcon = icon, selectedIconDrawable = null)
     }
 
     fun setSelectedIconDrawable(icon: Drawable) {
         val inState = state.value
-        state.value = inState.copy(selectedIconDrawable = icon)
+        state.value = inState.copy(selectedIconDrawable = icon, selectedIcon = null)
     }
 
     /**
