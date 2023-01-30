@@ -63,9 +63,7 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toPx
  * @since 1.0
  */
 class IxiTabLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : TabLayout(context, attrs, defStyleAttr) {
 
     /**
@@ -111,6 +109,33 @@ class IxiTabLayout @JvmOverloads constructor(
         }.attach()
     }
 
+
+    fun addTab(tabData: TabDataItem) {
+        // Removing default TabIndicator
+        setSelectedTabIndicator(null)
+        val tab = newTab()
+        val tabView = if (tabType == TabType.PILL) {
+            IxiPillTabItem(context)
+        } else {
+            IxiLineTabItems(context)
+        }
+        drawTab(tab, tabView, tabData)
+        addTab(tab)
+    }
+
+
+    fun addTab(tabData: TabDataItem, position: Int) {
+        // Removing default TabIndicator
+        setSelectedTabIndicator(null)
+        val tab = newTab()
+        val tabView = if (tabType == TabType.PILL) {
+            IxiPillTabItem(context)
+        } else {
+            IxiLineTabItems(context)
+        }
+        drawTab(tab, tabView, tabData)
+        addTab(tab, position)
+    }
     private fun drawTab(tab: Tab, tabItem: BaseTabItem, dataItem: TabDataItem) {
         val tabPadding = (tabPaddingInDp.toPx)
         tabItem.setEndDrawable(dataItem.endIcon)
@@ -123,6 +148,5 @@ class IxiTabLayout @JvmOverloads constructor(
 }
 
 enum class TabType {
-    PILL,
-    LINE
+    PILL, LINE
 }
