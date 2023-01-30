@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
@@ -33,6 +36,7 @@ class ComponentsFragment : Fragment() {
         Pair("Progress Step", R.id.action_componentFragment_to_progressStepFragment),
         Pair("TopAppBar", R.id.action_componentFragment_to_topAppBarFragment),
         Pair("TabBar", R.id.action_componentFragment_to_tabBarFragment),
+        Pair("Bottom Navigation", R.id.action_componentFragment_to_bottom_nav_fragment),
     )
 
     override fun onCreateView(
