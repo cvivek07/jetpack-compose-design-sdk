@@ -1,6 +1,7 @@
 package com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.base
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -57,7 +58,16 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
      */
     fun setIcon(@DrawableRes icon: Int) {
         val inState = state.value
-        state.value = inState.copy(icon = icon)
+        state.value = inState.copy(icon = icon, iconDrawable = null)
+    }
+
+    /**
+     * setIcon sets the drawable for the bottom navigation item.
+     * @param icon: The drawable to be set
+     */
+    fun setIconDrawable(icon: Drawable) {
+        val inState = state.value
+        state.value = inState.copy(iconDrawable = icon, icon = null)
     }
 
     /**
@@ -74,7 +84,16 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
      */
     fun setSelectedIcon(@DrawableRes icon: Int) {
         val inState = state.value
-        state.value = inState.copy(selectedIcon = icon)
+        state.value = inState.copy(selectedIcon = icon, selectedIconDrawable = null)
+    }
+
+    /**
+     * setSelectedIcon sets the selected drawable for the bottom navigation item.
+     * @param icon: The drawable of the selected icon
+     */
+    fun setSelectedIconDrawable(icon: Drawable) {
+        val inState = state.value
+        state.value = inState.copy(selectedIconDrawable = icon, selectedIcon = null)
     }
 
     /**
@@ -222,6 +241,8 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
 data class BottomNavItemState(
     @DrawableRes val icon: Int? = null,
     @DrawableRes val selectedIcon: Int? = null,
+    val iconDrawable: Drawable? = null,
+    val selectedIconDrawable: Drawable? = null,
     val label: String? = null,
     val selected: Boolean = false,
     val onClick: (() -> Unit) = {},
