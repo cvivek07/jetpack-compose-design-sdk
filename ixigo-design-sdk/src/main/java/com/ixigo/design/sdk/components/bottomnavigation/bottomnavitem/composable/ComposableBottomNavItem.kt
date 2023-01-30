@@ -125,7 +125,7 @@ fun IconWithBadge(
                     .then(if (enableBackground) Modifier.background(colorResource(id = ixiColor.pressedColor)) else Modifier)
             ) {
                 Icon(
-                    painter = if(icon.drawable!=null) DrawablePainter(icon.drawable) else painterResource(id = icon.identifier),
+                    painter = if(icon.drawable!=null) DrawablePainter(icon.drawable) else painterResource(id = icon.resourceId),
                     contentDescription = null,
                     tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
                     modifier = Modifier
@@ -267,4 +267,4 @@ fun Badge(){
     }
 }
 
-data class CompatImage(@DrawableRes val identifier: Int = 0, val drawable: Drawable?)
+data class CompatImage(@DrawableRes val resourceId: Int = 0, val drawable: Drawable?)

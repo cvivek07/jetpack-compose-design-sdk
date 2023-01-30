@@ -61,6 +61,10 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
         state.value = inState.copy(icon = icon, iconDrawable = null)
     }
 
+    /**
+     * setIcon sets the drawable for the bottom navigation item.
+     * @param icon: The drawable to be set
+     */
     fun setIconDrawable(icon: Drawable) {
         val inState = state.value
         state.value = inState.copy(iconDrawable = icon, icon = null)
@@ -83,6 +87,10 @@ abstract class BaseBottomNavItem @JvmOverloads constructor(
         state.value = inState.copy(selectedIcon = icon, selectedIconDrawable = null)
     }
 
+    /**
+     * setSelectedIcon sets the selected drawable for the bottom navigation item.
+     * @param icon: The drawable of the selected icon
+     */
     fun setSelectedIconDrawable(icon: Drawable) {
         val inState = state.value
         state.value = inState.copy(selectedIconDrawable = icon, selectedIcon = null)
