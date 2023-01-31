@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.chip.base
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -10,14 +11,11 @@ import com.google.android.material.chip.Chip
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.components.styles.IxiChipColorState
-import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.utils.Utils
 
 abstract class BaseChip @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : Chip(context, attrs, defStyleAttr)  {
-    protected var color:IxiChipColor? = null
-    protected var colorState:IxiChipColorState? = null
     protected var horizontalPadding:Float = 8f
     protected var ixiChipSize:IxiChipSize
     protected var onClickListener:((View)->Unit)? = null
@@ -57,13 +55,12 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    open fun setIxiChipColorState(colorState: IxiChipColorState) {
-        this.colorState = colorState
-        if(this.isChecked){
-            this.setIxiChipColor(colorState.selected)
-        } else{
-            this.setIxiChipColor(colorState.unselected)
-        }
+    abstract fun getColorState(color:IxiChipColor): IxiChipColorState
+    abstract fun getDisabledColor(): IxiChipColor
+
+    override fun setOnCheckedChangeListener(listener: OnCheckedChangeListener?) {
+
+        super.setOnCheckedChangeListener(listener)
     }
 
     open fun setOnChipCheckedChangeListener(@DrawableRes checkedIcon:Int?=null, listener: OnCheckedChangeListener?){
@@ -76,9 +73,6 @@ abstract class BaseChip @JvmOverloads constructor(
                     checkedIcon?.let {
                         this.setCheckedDrawableToStart(it)
                     }
-                    colorState?.let {
-                        this.setIxiChipColor(it.selected)
-                    }
                 } else {
                     if(checkedIcon!=null&&drawableStart==null) {
                         this.setStartDrawable(null)
@@ -86,20 +80,10 @@ abstract class BaseChip @JvmOverloads constructor(
                     drawableStart?.let {
                         this.setStartDrawable(drawableStart)
                     }
-                    colorState?.let {
-                        this.setIxiChipColor(it.unselected)
-                    }
                 }
         }
     }
 
-    open fun setColor(selected:Boolean, chipColor: IxiChipColorState){
-        if(selected){
-            setIxiChipColor(chipColor.selected)
-        } else{
-            setIxiChipColor(chipColor.unselected)
-        }
-    }
 
     open fun setOnIxiChipClickListener(onClickListener:(View)->Unit){
         this.onClickListener = onClickListener
@@ -108,13 +92,18 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    override fun setChipIcon(chipIcon: Drawable?) {
+        this.chipIconTint = null
+        super.setChipIcon(chipIcon)
+    }
+
     fun setStartDrawable(@DrawableRes drawable:Int?){
         if(isChipEligible()) {
             drawableStart = drawable
             if (drawable != null) {
                 this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
                 this.chipIcon = ContextCompat.getDrawable(context, drawable)
-                this.chipIconTint = null
+
             } else {
                 this.chipStartPadding = 0f
                 this.chipIcon = null
@@ -150,15 +139,6 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    override fun setEnabled(boolean: Boolean) {
-        if(!boolean) {
-            setIxiChipColor(null)
-        } else{
-            setIxiChipColor(color)
-        }
-        super.setEnabled(boolean)
-    }
-
     fun setCheckedDrawable(@DrawableRes drawable:Int?){
         drawable?.let {
             this.checkedIcon = ContextCompat.getDrawable(context, drawable)
@@ -171,44 +151,104 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    protected open fun setIxiChipColor(color: IxiChipColor?) {
+    fun setColor(color: IxiChipColor) {
+        setIxiChipColorState(getColorState(color))
+    }
+
+    internal open fun setIxiChipColorState(colorState: IxiChipColorState?) {
         this.chipIconTint = null
         this.closeIconTint = null
-        color?.let {
-            this.chipBackgroundColor = getColorStateList(it)
-            it.drawableTintColor?.let{tintColor->
-                this.setChipIconTintResource(tintColor)
-                this.setCloseIconTintResource(tintColor)
-            }
-            this.setTextColor(ContextCompat.getColor(context,color.textColor))
-            color.strokeColor?.let {strokeColor->
-                this.setChipStrokeColorResource(strokeColor)
-                this.chipStrokeWidth = Utils.convertDpToPixel(1f, context)
-            }
+        colorState?.let {
+            this.chipBackgroundColor = getBackgroundColorStateList(context, colorState)
+            this.setTextColor(getTextColorStateList(context, it))
+            this.chipIconTint = getDrawableColorStateList(context, colorState)
+            this.closeIconTint = getDrawableColorStateList(context, colorState)
+            this.chipStrokeColor = getStrokeColorStateList(context, colorState)
         }
     }
 
-    protected fun getColorStateList(ixiChipColor: IxiChipColor):ColorStateList{
+    private fun getBackgroundColorStateList(context: Context, colorState: IxiChipColorState): ColorStateList {
         val states:MutableList<IntArray> = mutableListOf()
         val colors:MutableList<Int> = mutableListOf()
-        states.add(intArrayOf(android.R.attr.state_enabled))
-        colors.add(ContextCompat.getColor(context, ixiChipColor.backgroundColor))
-        states.add(intArrayOf(-android.R.attr.state_checked))
-        colors.add(ContextCompat.getColor(context, ixiChipColor.backgroundColor))
         states.add(intArrayOf(-android.R.attr.state_enabled))
-        colors.add(ContextCompat.getColor(context, IxiColor.Disabled.bgColor))
+        colors.add(ContextCompat.getColor(context, getDisabledColor().backgroundColor))
+        colorState.unselected?.backgroundColor?.let {
+            states.add(intArrayOf(-android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context,it))
+            states.add(intArrayOf(-android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        colorState.selected?.backgroundColor?.let {
+            states.add(intArrayOf(android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context, it))
+            states.add(intArrayOf(android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
         return ColorStateList(states.toTypedArray(), colors.toIntArray())
     }
 
-
-    open fun onEndDrawableClickListener( onClick:(()->Unit)? ){
-        if(onClick!=null){
-            this.setOnCloseIconClickListener {
-                onClick.invoke()
-            }
-        } else{
-            this.setOnCloseIconClickListener(null)
+    private fun getTextColorStateList(context: Context, colorState: IxiChipColorState): ColorStateList {
+        val states:MutableList<IntArray> = mutableListOf()
+        val colors:MutableList<Int> = mutableListOf()
+        states.add(intArrayOf(-android.R.attr.state_enabled))
+        colors.add(ContextCompat.getColor(context, getDisabledColor().textColor))
+        colorState.unselected?.textColor?.let {
+            states.add(intArrayOf(-android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context,it))
+            states.add(intArrayOf(-android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
         }
+        colorState.selected?.textColor?.let {
+            states.add(intArrayOf(android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context, it))
+            states.add(intArrayOf(android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        return ColorStateList(states.toTypedArray(), colors.toIntArray())
+    }
+
+    private fun getDrawableColorStateList(context: Context, colorState: IxiChipColorState): ColorStateList {
+        val states:MutableList<IntArray> = mutableListOf()
+        val colors:MutableList<Int> = mutableListOf()
+        getDisabledColor().drawableTintColor?.let {
+            states.add(intArrayOf(-android.R.attr.state_enabled))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        colorState.unselected?.textColor?.let {
+            states.add(intArrayOf(-android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context,it))
+            states.add(intArrayOf(-android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        colorState.selected?.textColor?.let {
+            states.add(intArrayOf(android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context, it))
+            states.add(intArrayOf(android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        return ColorStateList(states.toTypedArray(), colors.toIntArray())
+    }
+
+    private fun getStrokeColorStateList(context: Context, colorState: IxiChipColorState): ColorStateList {
+        val states:MutableList<IntArray> = mutableListOf()
+        val colors:MutableList<Int> = mutableListOf()
+        getDisabledColor().strokeColor?.let {
+            states.add(intArrayOf(-android.R.attr.state_enabled))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        colorState.unselected?.strokeColor?.let {
+            states.add(intArrayOf(-android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context,it))
+            states.add(intArrayOf(-android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        colorState.selected?.strokeColor?.let {
+            states.add(intArrayOf(android.R.attr.state_checked))
+            colors.add(ContextCompat.getColor(context, it))
+            states.add(intArrayOf(android.R.attr.state_selected))
+            colors.add(ContextCompat.getColor(context, it))
+        }
+        return ColorStateList(states.toTypedArray(), colors.toIntArray())
     }
 
     private fun isChipEligible():Boolean{

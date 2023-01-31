@@ -23,27 +23,27 @@ class IxiPrimaryChip @JvmOverloads constructor(
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiPrimaryChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
             isEnabled = typedArray.getBoolean(R.styleable.IxiPrimaryChip_android_enabled, true)
-            setIxiChipColor(IxiChipColor(backgroundColor = backgroundColor, textColor = textColor, drawableTintColor = drawableTintColor))
+            setColor(IxiChipColor(backgroundColor = backgroundColor, textColor = textColor, drawableTintColor = drawableTintColor))
         } finally {
             typedArray.recycle()
         }
     }
 
-
-    override fun setColor(selected: Boolean, chipColor: IxiChipColorState) {
-        super.setColor(selected, chipColor)
-    }
-
-     override fun setIxiChipColor(color: IxiChipColor?) {
-        if(color!=null) {
-            this.color = color
-           super.setIxiChipColor(IxiChipColor(
-               backgroundColor = color.backgroundColor,
-               textColor = color.textColor,
-               drawableTintColor = color.drawableTintColor,
-           ))
-        } else{
-            super.setIxiChipColor(IxiChipColorState.PrimaryDisabled)
+    override fun getColorState(color:IxiChipColor): IxiChipColorState{
+        return when(color){
+            IxiChipColor.NEUTRAL -> IxiChipColorState.Primary.NEUTRAL
+            IxiChipColor.BLUE -> IxiChipColorState.Primary.BLUE
+            IxiChipColor.GREEN -> IxiChipColorState.Primary.GREEN
+            IxiChipColor.PURPLE -> IxiChipColorState.Primary.PURPLE
+            IxiChipColor.RED -> IxiChipColorState.Primary.RED
+            IxiChipColor.YELLOW -> IxiChipColorState.Primary.YELLOW
+            else -> {
+                IxiChipColorState(color,color)
+            }
         }
     }
+    override fun getDisabledColor(): IxiChipColor {
+        return IxiChipColorState.PrimaryDisabled
+    }
+
 }

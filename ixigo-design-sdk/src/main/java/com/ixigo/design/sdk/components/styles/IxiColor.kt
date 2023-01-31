@@ -54,7 +54,14 @@ open class IxiChipColor(
     @ColorRes val strokeColor: Int? = null,
     @ColorRes val textColor: Int = R.color.n800,
     @ColorRes val drawableTintColor: Int? = null,
-)
+){
+    object NEUTRAL : IxiChipColor()
+    object BLUE : IxiChipColor()
+    object GREEN : IxiChipColor()
+    object RED : IxiChipColor()
+    object YELLOW : IxiChipColor()
+    object PURPLE : IxiChipColor()
+}
 open class IxiChipColorState(
     val selected: IxiChipColor?,
     val unselected: IxiChipColor?
@@ -84,6 +91,7 @@ open class IxiChipColorState(
         textColor = R.color.n300,
         drawableTintColor = R.color.n300
     )
+
     object Primary{
         val NEUTRAL = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.n800, textColor = R.color.white),

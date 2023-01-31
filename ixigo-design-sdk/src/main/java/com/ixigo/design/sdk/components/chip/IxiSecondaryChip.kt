@@ -6,6 +6,7 @@ import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.chip.base.BaseChip
 import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.components.styles.IxiChipColorState
+import com.ixigo.design.sdk.utils.Utils
 
 class IxiSecondaryChip  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -25,29 +26,29 @@ class IxiSecondaryChip  @JvmOverloads constructor(
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiSecondaryChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
             isEnabled = typedArray.getBoolean(R.styleable.IxiSecondaryChip_android_enabled, true)
-            setIxiChipColor(IxiChipColor(backgroundColor = backgroundColor, textColor = textColor, drawableTintColor = drawableTintColor, strokeColor = strokeColor))
+            setColor(IxiChipColor(backgroundColor = backgroundColor, textColor = textColor, drawableTintColor = drawableTintColor, strokeColor = strokeColor))
+            this.chipStrokeWidth = Utils.convertDpToPixel(1f, context)
         } finally {
             typedArray.recycle()
         }
     }
 
-    override fun setIxiChipColor(color: IxiChipColor?) {
-        if(color!=null){
-            this.color = color
-            super.setIxiChipColor(
-                IxiChipColor(
-                    backgroundColor = color.backgroundColor,
-                    strokeColor = color.strokeColor,
-                    textColor = color.textColor,
-                    drawableTintColor = color.drawableTintColor
-                )
-            )
-        } else{
-            super.setIxiChipColor(IxiChipColorState.SecondaryDisabled)
+    override fun getColorState(color: IxiChipColor): IxiChipColorState {
+        return when(color){
+            IxiChipColor.NEUTRAL -> IxiChipColorState.Secondary.NEUTRAL
+            IxiChipColor.BLUE -> IxiChipColorState.Secondary.BLUE
+            IxiChipColor.GREEN -> IxiChipColorState.Secondary.GREEN
+            IxiChipColor.PURPLE -> IxiChipColorState.Secondary.PURPLE
+            IxiChipColor.RED -> IxiChipColorState.Secondary.RED
+            IxiChipColor.YELLOW -> IxiChipColorState.Secondary.YELLOW
+            else -> {
+                IxiChipColorState(color,color)
+            }
         }
     }
 
-    override fun setColor(selected: Boolean, chipColor: IxiChipColorState) {
-        super.setColor(selected, chipColor)
+    override fun getDisabledColor(): IxiChipColor {
+        return IxiChipColorState.SecondaryDisabled
     }
+
 }
