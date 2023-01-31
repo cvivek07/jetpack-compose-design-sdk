@@ -7,7 +7,7 @@ import com.ixigo.design.sdk.components.chip.base.BaseChip
 import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.components.styles.IxiChipColorState
 
-class IxiTextChip  @JvmOverloads constructor(
+internal class IxiTextChip  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseChip(context, attrs, defStyleAttr)  {
     init {

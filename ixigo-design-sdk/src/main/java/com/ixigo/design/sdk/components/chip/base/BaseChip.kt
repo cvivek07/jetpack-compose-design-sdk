@@ -21,6 +21,7 @@ abstract class BaseChip @JvmOverloads constructor(
     protected var onClickListener:((View)->Unit)? = null
     protected var drawableStart:Int? = null
     protected var drawableEnd:Int? = null
+    protected  var ixiChipColor =  IxiChipColor()
     init {
         this.setTextAppearance(R.style.chipText)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
@@ -58,11 +59,6 @@ abstract class BaseChip @JvmOverloads constructor(
     abstract fun getColorState(color:IxiChipColor): IxiChipColorState
     abstract fun getDisabledColor(): IxiChipColor
 
-    override fun setOnCheckedChangeListener(listener: OnCheckedChangeListener?) {
-
-        super.setOnCheckedChangeListener(listener)
-    }
-
     open fun setOnChipCheckedChangeListener(@DrawableRes checkedIcon:Int?=null, listener: OnCheckedChangeListener?){
         if(onClickListener==null) {
             this.setOnClickListener {}
@@ -93,8 +89,19 @@ abstract class BaseChip @JvmOverloads constructor(
     }
 
     override fun setChipIcon(chipIcon: Drawable?) {
-        this.chipIconTint = null
         super.setChipIcon(chipIcon)
+    }
+
+    override fun setSelected(selected: Boolean) {
+        super.setSelected(selected)
+    }
+
+    override fun setChecked(checked: Boolean) {
+        super.setChecked(checked)
+        if(ixiChipColor==null){
+            ixiChipColor = IxiChipColor()
+        }
+        this.chipIconTint =  getDrawableColorStateList(context, getColorState(ixiChipColor))
     }
 
     fun setStartDrawable(@DrawableRes drawable:Int?){
@@ -117,7 +124,6 @@ abstract class BaseChip @JvmOverloads constructor(
             if (drawable != null) {
                 this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
                 this.chipIcon = ContextCompat.getDrawable(context, drawable)
-                this.chipIconTint = null
             } else {
                 this.chipStartPadding = 0f
                 this.chipIcon = null
@@ -126,7 +132,14 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    fun setEndDrawable(@DrawableRes drawable:Int?){
+    override fun setCloseIconResource(id: Int) {
+        if(isChipEligible()) {
+            this.chipEndPadding = Utils.convertDpToPixel(horizontalPadding, context)
+        }
+        super.setCloseIconResource(id)
+    }
+
+    private fun setEndDrawable(@DrawableRes drawable:Int?){
         if(isChipEligible()) {
             if (drawable != null) {
                 this.chipEndPadding = Utils.convertDpToPixel(horizontalPadding, context)
@@ -152,12 +165,11 @@ abstract class BaseChip @JvmOverloads constructor(
     }
 
     fun setColor(color: IxiChipColor) {
+        this.ixiChipColor = color
         setIxiChipColorState(getColorState(color))
     }
 
     internal open fun setIxiChipColorState(colorState: IxiChipColorState?) {
-        this.chipIconTint = null
-        this.closeIconTint = null
         colorState?.let {
             this.chipBackgroundColor = getBackgroundColorStateList(context, colorState)
             this.setTextColor(getTextColorStateList(context, it))
@@ -214,17 +226,31 @@ abstract class BaseChip @JvmOverloads constructor(
             states.add(intArrayOf(-android.R.attr.state_enabled))
             colors.add(ContextCompat.getColor(context, it))
         }
-        colorState.unselected?.textColor?.let {
+        if(colorState.unselected?.drawableTintColor!=null) {
             states.add(intArrayOf(-android.R.attr.state_checked))
-            colors.add(ContextCompat.getColor(context,it))
+            colors.add(ContextCompat.getColor(context, colorState.unselected.drawableTintColor))
             states.add(intArrayOf(-android.R.attr.state_selected))
-            colors.add(ContextCompat.getColor(context, it))
+            colors.add(ContextCompat.getColor(context, colorState.unselected.drawableTintColor))
+        } else{
+            colorState.unselected?.textColor?.let {
+                states.add(intArrayOf(-android.R.attr.state_checked))
+                colors.add(ContextCompat.getColor(context, colorState.unselected.textColor))
+                states.add(intArrayOf(-android.R.attr.state_selected))
+                colors.add(ContextCompat.getColor(context, colorState.unselected.textColor))
+            }
         }
-        colorState.selected?.textColor?.let {
+        if(colorState.selected?.drawableTintColor!=null) {
             states.add(intArrayOf(android.R.attr.state_checked))
-            colors.add(ContextCompat.getColor(context, it))
+            colors.add(ContextCompat.getColor(context, colorState.selected.drawableTintColor))
             states.add(intArrayOf(android.R.attr.state_selected))
-            colors.add(ContextCompat.getColor(context, it))
+            colors.add(ContextCompat.getColor(context, colorState.selected.drawableTintColor))
+        } else{
+            colorState.selected?.textColor?.let {
+                states.add(intArrayOf(android.R.attr.state_checked))
+                colors.add(ContextCompat.getColor(context, colorState.selected.textColor))
+                states.add(intArrayOf(android.R.attr.state_selected))
+                colors.add(ContextCompat.getColor(context, colorState.selected.textColor))
+            }
         }
         return ColorStateList(states.toTypedArray(), colors.toIntArray())
     }

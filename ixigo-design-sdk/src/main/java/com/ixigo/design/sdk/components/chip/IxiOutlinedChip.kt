@@ -22,7 +22,7 @@ class IxiOutlinedChip @JvmOverloads constructor(
             val strokeColor = if (strokeColorVal != -1) strokeColorVal else null
             val drawableTintColorVal: Int =
                 typedArray.getResourceId(R.styleable.IxiOutlinedChip_android_drawableTint, -1)
-            val drawableTintColor = if (drawableTintColorVal != -1) drawableTintColorVal else android.R.color.transparent
+            val drawableTintColor = if (drawableTintColorVal != -1) drawableTintColorVal else null
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiOutlinedChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
             isEnabled = typedArray.getBoolean(R.styleable.IxiOutlinedChip_android_enabled, true)

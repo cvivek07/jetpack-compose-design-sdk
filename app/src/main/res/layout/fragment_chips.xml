@@ -19,7 +19,7 @@
             app:singleSelection="true"
 
             android:padding="8dp">
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 app:chipType = "large"
                 app:chipDrawableStart="@drawable/ic_call_24"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24" />
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -52,38 +52,6 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/primary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/primary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/secondary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/secondary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/outlined_chip1"
                 android:layout_width="wrap_content"
@@ -100,22 +68,6 @@
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/text_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/text_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
         </com.google.android.material.chip.ChipGroup>
         <com.google.android.material.chip.ChipGroup
             android:layout_width="match_parent"
@@ -123,22 +75,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/primary_chip_disabled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary Disabled"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/secondary_chip_disabled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary Disabled"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/outlined_chip_disabled"
@@ -148,14 +84,6 @@
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/text_chip_disabled"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text Disabled"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -164,38 +92,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/b_primary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/b_primary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/b_secondary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/b_secondary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/b_outlined_chip1"
@@ -212,22 +108,6 @@
                 android:text="Outlined B"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/b_text_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/b_text_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -236,38 +116,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/g_primary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/g_primary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/g_secondary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/g_secondary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/g_outlined_chip1"
@@ -284,22 +132,6 @@
                 android:text="Outlined B"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/g_text_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/g_text_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -308,38 +140,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/r_primary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/r_primary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/r_secondary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/r_secondary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/r_outlined_chip1"
@@ -356,22 +156,6 @@
                 android:text="Outlined B"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/r_text_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/r_text_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -380,38 +164,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/y_primary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/y_primary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/y_secondary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/y_secondary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/y_outlined_chip1"
@@ -428,22 +180,6 @@
                 android:text="Outlined B"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/y_text_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/y_text_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -452,38 +188,6 @@
             android:layout_gravity="center"
             android:orientation="horizontal"
             android:padding="8dp">
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/p_primary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiPrimaryChip
-                android:id="@+id/p_primary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Primary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/p_secondary_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiSecondaryChip
-                android:id="@+id/p_secondary_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Secondary B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/p_outlined_chip1"
@@ -498,22 +202,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/p_text_chip1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text A"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
-
-            <com.ixigo.design.sdk.components.chip.IxiTextChip
-                android:id="@+id/p_text_chip2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Text B"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>

@@ -8,7 +8,7 @@ import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.components.styles.IxiChipColorState
 import com.ixigo.design.sdk.utils.Utils
 
-class IxiSecondaryChip  @JvmOverloads constructor(
+internal class IxiSecondaryChip  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseChip(context, attrs, defStyleAttr)  {
     init {
