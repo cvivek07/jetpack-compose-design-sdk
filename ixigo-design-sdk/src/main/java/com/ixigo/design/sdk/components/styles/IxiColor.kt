@@ -29,8 +29,8 @@ sealed class IxiColor(
     internal object WarningSecondary : IxiColor(R.color.y100, R.color.y100, R.color.y700)
     internal object SuccessSecondary : IxiColor(R.color.g50, R.color.g50, R.color.g500)
     internal object ExtensionSecondary : IxiColor(R.color.p50, R.color.p50, R.color.p500)
-    internal object BlueBottomNavbar: IxiColor(R.color.b50, R.color.b100, R.color.b500)
-    internal object OrangeBottomNavbar: IxiColor(R.color.o50, R.color.o100, R.color.o800)
+    internal object BlueBottomNavbar : IxiColor(R.color.b50, R.color.b100, R.color.b500)
+    internal object OrangeBottomNavbar : IxiColor(R.color.o50, R.color.o100, R.color.o800)
     internal object OrangeTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.o800)
 
@@ -49,23 +49,71 @@ sealed class IxiColor(
     internal object ExtensionTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.p500)
 }
+
 open class IxiChipColor(
     @ColorRes val backgroundColor: Int = android.R.color.transparent,
-    @ColorRes val strokeColor: Int? = null,
+    @ColorRes val unselectedBackgroundColor: Int = android.R.color.transparent,
+    @ColorRes val strokeColor: Int = R.color.n800,
     @ColorRes val textColor: Int = R.color.n800,
-    @ColorRes val drawableTintColor: Int? = null,
-){
-    object NEUTRAL : IxiChipColor()
-    object BLUE : IxiChipColor()
-    object GREEN : IxiChipColor()
-    object RED : IxiChipColor()
-    object YELLOW : IxiChipColor()
-    object PURPLE : IxiChipColor()
+    @ColorRes val unSelectedTextColor: Int = R.color.n800,
+    @ColorRes val drawableTintColor: Int = R.color.n0,
+) {
+    object NEUTRAL : IxiChipColor(
+        backgroundColor = R.color.n800,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.n800,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.n800,
+    )
+
+    object BLUE : IxiChipColor(
+        backgroundColor = R.color.b400,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.b400,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.b400,
+    )
+    object GREEN : IxiChipColor(
+        backgroundColor = R.color.g400,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.g400,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.b400,
+    )
+    object RED : IxiChipColor(
+        backgroundColor = R.color.r400,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.white,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.r400,
+    )
+    object YELLOW : IxiChipColor(
+        backgroundColor = R.color.y400,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.y400,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.y400,
+    )
+    object PURPLE : IxiChipColor(
+        backgroundColor = R.color.p400,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.p400,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.p400,
+    )
+
 }
+
 open class IxiChipColorState(
     val selected: IxiChipColor?,
     val unselected: IxiChipColor?
-){
+) {
     object PrimaryDisabled : IxiChipColor(
         backgroundColor = R.color.n40,
         textColor = R.color.n300,
@@ -92,109 +140,157 @@ open class IxiChipColorState(
         drawableTintColor = R.color.n300
     )
 
-    object Primary{
+    object Primary {
         val NEUTRAL = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.n800, textColor = R.color.white),
-            unselected =IxiChipColor(backgroundColor = R.color.n900, textColor = R.color.white)
+            unselected = IxiChipColor(backgroundColor = R.color.n900, textColor = R.color.white)
         )
-        val BLUE =IxiChipColorState(
-        selected = IxiChipColor(backgroundColor = R.color.b400, textColor = R.color.white),
-        unselected =IxiChipColor(backgroundColor = R.color.b500, textColor = R.color.white)
+        val BLUE = IxiChipColorState(
+            selected = IxiChipColor(backgroundColor = R.color.b400, textColor = R.color.white),
+            unselected = IxiChipColor(backgroundColor = R.color.b500, textColor = R.color.white)
         )
         val GREEN = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.g400, textColor = R.color.white),
-            unselected =IxiChipColor(backgroundColor = R.color.g500, textColor = R.color.white)
+            unselected = IxiChipColor(backgroundColor = R.color.g500, textColor = R.color.white)
         )
-        val RED= IxiChipColorState(
-        selected = IxiChipColor(backgroundColor = R.color.r400, textColor = R.color.white),
-        unselected =IxiChipColor(backgroundColor = R.color.r500, textColor = R.color.white)
+        val RED = IxiChipColorState(
+            selected = IxiChipColor(backgroundColor = R.color.r400, textColor = R.color.white),
+            unselected = IxiChipColor(backgroundColor = R.color.r500, textColor = R.color.white)
         )
         val YELLOW = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.y400, textColor = R.color.white),
-            unselected =IxiChipColor(backgroundColor = R.color.y500, textColor = R.color.white)
+            unselected = IxiChipColor(backgroundColor = R.color.y500, textColor = R.color.white)
         )
-        val PURPLE =  IxiChipColorState(
-        selected = IxiChipColor(backgroundColor = R.color.p400, textColor = R.color.white),
-        unselected = IxiChipColor(backgroundColor = R.color.p500, textColor = R.color.white)
+        val PURPLE = IxiChipColorState(
+            selected = IxiChipColor(backgroundColor = R.color.p400, textColor = R.color.white),
+            unselected = IxiChipColor(backgroundColor = R.color.p500, textColor = R.color.white)
         )
     }
 
-    object Secondary{
+    object Secondary {
         val NEUTRAL = IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.n80, strokeColor = R.color.n100, textColor = R.color.n800),
-            unselected =IxiChipColor(backgroundColor = R.color.n40, strokeColor = R.color.n100,  textColor = R.color.n800)
+            selected = IxiChipColor(
+                backgroundColor = R.color.n80,
+                strokeColor = R.color.n100,
+                textColor = R.color.n800
+            ),
+            unselected = IxiChipColor(
+                backgroundColor = R.color.n40,
+                strokeColor = R.color.n100,
+                textColor = R.color.n800
+            )
         )
-        val BLUE =IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.b100, strokeColor = R.color.b100, textColor = R.color.b500),
-            unselected =IxiChipColor(backgroundColor = R.color.b50, strokeColor = R.color.b100,  textColor = R.color.b500)
+        val BLUE = IxiChipColorState(
+            selected = IxiChipColor(
+                backgroundColor = R.color.b100,
+                strokeColor = R.color.b100,
+                textColor = R.color.b500
+            ),
+            unselected = IxiChipColor(
+                backgroundColor = R.color.b50,
+                strokeColor = R.color.b100,
+                textColor = R.color.b500
+            )
         )
         val GREEN = IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.g100, strokeColor = R.color.g100, textColor = R.color.g500),
-            unselected =IxiChipColor(backgroundColor = R.color.g50, strokeColor = R.color.g100,  textColor = R.color.g500)
+            selected = IxiChipColor(
+                backgroundColor = R.color.g100,
+                strokeColor = R.color.g100,
+                textColor = R.color.g500
+            ),
+            unselected = IxiChipColor(
+                backgroundColor = R.color.g50,
+                strokeColor = R.color.g100,
+                textColor = R.color.g500
+            )
         )
-        val RED= IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.r100, strokeColor = R.color.r100, textColor = R.color.r500),
-            unselected =IxiChipColor(backgroundColor = R.color.r50, strokeColor = R.color.r100,  textColor = R.color.r500)
+        val RED = IxiChipColorState(
+            selected = IxiChipColor(
+                backgroundColor = R.color.r100,
+                strokeColor = R.color.r100,
+                textColor = R.color.r500
+            ),
+            unselected = IxiChipColor(
+                backgroundColor = R.color.r50,
+                strokeColor = R.color.r100,
+                textColor = R.color.r500
+            )
         )
         val YELLOW = IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.y100, strokeColor = R.color.y100, textColor = R.color.y500),
-            unselected =IxiChipColor(backgroundColor = R.color.y50, strokeColor = R.color.y100,  textColor = R.color.y500)
+            selected = IxiChipColor(
+                backgroundColor = R.color.y100,
+                strokeColor = R.color.y100,
+                textColor = R.color.y500
+            ),
+            unselected = IxiChipColor(
+                backgroundColor = R.color.y50,
+                strokeColor = R.color.y100,
+                textColor = R.color.y500
+            )
         )
-        val PURPLE =  IxiChipColorState(
-            selected =IxiChipColor(backgroundColor = R.color.p100, strokeColor = R.color.p100, textColor = R.color.p500),
-            unselected = IxiChipColor(backgroundColor = R.color.p50, strokeColor = R.color.p100,  textColor = R.color.p500)
+        val PURPLE = IxiChipColorState(
+            selected = IxiChipColor(
+                backgroundColor = R.color.p100,
+                strokeColor = R.color.p100,
+                textColor = R.color.p500
+            ),
+            unselected = IxiChipColor(
+                backgroundColor = R.color.p50,
+                strokeColor = R.color.p100,
+                textColor = R.color.p500
+            )
         )
     }
 
-    object Outlined{
+    object Outlined {
         val NEUTRAL = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.n800, textColor = R.color.white),
-            unselected = IxiChipColor(strokeColor = R.color.n300,  textColor = R.color.n800)
+            unselected = IxiChipColor(strokeColor = R.color.n300, textColor = R.color.n800)
         )
-        val BLUE =IxiChipColorState(
+        val BLUE = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.b400, textColor = R.color.white),
-            unselected =IxiChipColor(strokeColor = R.color.b300,  textColor = R.color.b500)
+            unselected = IxiChipColor(strokeColor = R.color.b300, textColor = R.color.b500)
         )
         val GREEN = IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.g400, textColor = R.color.white,),
-            unselected =IxiChipColor(strokeColor = R.color.g300,  textColor = R.color.g500)
+            selected = IxiChipColor(backgroundColor = R.color.g400, textColor = R.color.white),
+            unselected = IxiChipColor(strokeColor = R.color.g300, textColor = R.color.g500)
         )
-        val RED= IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.r400, textColor = R.color.white,),
-            unselected =IxiChipColor(strokeColor = R.color.r300,  textColor = R.color.r500)
+        val RED = IxiChipColorState(
+            selected = IxiChipColor(backgroundColor = R.color.r400, textColor = R.color.white),
+            unselected = IxiChipColor(strokeColor = R.color.r300, textColor = R.color.r500)
         )
         val YELLOW = IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.y400, textColor = R.color.white,),
-            unselected =IxiChipColor(strokeColor = R.color.y300,  textColor = R.color.y500)
+            selected = IxiChipColor(backgroundColor = R.color.y400, textColor = R.color.white),
+            unselected = IxiChipColor(strokeColor = R.color.y300, textColor = R.color.y500)
         )
-        val PURPLE =  IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.p400, textColor = R.color.white,),
-            unselected =IxiChipColor(strokeColor = R.color.p300,  textColor = R.color.p500)
+        val PURPLE = IxiChipColorState(
+            selected = IxiChipColor(backgroundColor = R.color.p400, textColor = R.color.white),
+            unselected = IxiChipColor(strokeColor = R.color.p300, textColor = R.color.p500)
         )
     }
 
-    object Text{
+    object Text {
         val NEUTRAL = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.n40, textColor = R.color.n800),
             unselected = IxiChipColor(textColor = R.color.n800)
         )
-        val BLUE =IxiChipColorState(
+        val BLUE = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.b50, textColor = R.color.b500),
-            unselected =IxiChipColor(textColor = R.color.b500)
+            unselected = IxiChipColor(textColor = R.color.b500)
         )
         val GREEN = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.g50, textColor = R.color.g500),
-            unselected =IxiChipColor(textColor = R.color.g500)
+            unselected = IxiChipColor(textColor = R.color.g500)
         )
-        val RED= IxiChipColorState(
+        val RED = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.r50, textColor = R.color.r500),
-            unselected =IxiChipColor(textColor = R.color.r500)
+            unselected = IxiChipColor(textColor = R.color.r500)
         )
         val YELLOW = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.y50, textColor = R.color.y500),
-            unselected =IxiChipColor(textColor = R.color.y500)
+            unselected = IxiChipColor(textColor = R.color.y500)
         )
-        val PURPLE =  IxiChipColorState(
+        val PURPLE = IxiChipColorState(
             selected = IxiChipColor(backgroundColor = R.color.p50, textColor = R.color.p500),
             unselected = IxiChipColor(textColor = R.color.p500)
         )

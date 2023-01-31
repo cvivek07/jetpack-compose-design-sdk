@@ -16,7 +16,7 @@ internal class IxiSecondaryChip  @JvmOverloads constructor(
         try {
             val strokeColorVal: Int =
                 typedArray.getResourceId(R.styleable.IxiSecondaryChip_android_strokeColor, -1)
-            val strokeColor = if (strokeColorVal != -1) strokeColorVal else null
+            val strokeColor = if (strokeColorVal != -1) strokeColorVal else android.R.color.transparent
             val backgroundColorVal: Int =
                 typedArray.getResourceId(R.styleable.IxiSecondaryChip_android_background, -1)
             val backgroundColor = if (backgroundColorVal != -1) backgroundColorVal else android.R.color.transparent

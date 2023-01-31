@@ -9,7 +9,7 @@ import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.databinding.FragmentChipsBinding
 
 
-class ChipFragment  : BaseFragment() {
+class ChipFragment : BaseFragment() {
 
     private var _binding: FragmentChipsBinding? = null
     var lastCheckedId = View.NO_ID
@@ -40,37 +40,40 @@ class ChipFragment  : BaseFragment() {
         setPurpleGroup()
 
     }
+
     private fun setMasterGroup() {
-        binding.cgMaster.setOnCheckedStateChangeListener { group, checkedIds ->
-            for (i in 0 until group.childCount){
-                    val chip = group.getChildAt(i) as BaseChip
-                    chip.isChecked = false
-            }
-            for (id in checkedIds) {
-                lastCheckedId = id
-                val chip: BaseChip = group.findViewById(id)
-                chip.isChecked = true
-            }
-        }
         binding.masterChip1.setColor(IxiChipColor.YELLOW)
-        binding.masterChip1.setOnChipCheckedChangeListener(R.drawable.baseline_remove_circle_24) { buttonView, isChecked -> {} }
+        binding.masterChip1.setChipIconResource(R.drawable.baseline_remove_circle_24)
+        binding.masterChip1.setCloseIconResource(R.drawable.baseline_remove_circle_24)
+
+        binding.masterChip1.setOnClickListener {
+            binding.masterChip1.isSelected = !binding.masterChip1.isSelected
+        }
+//        binding.masterChip1.setSe(R.drawable.baseline_remove_circle_24) { buttonView, isChecked -> {} }
+//        binding.masterChip1.setOnChipCheckedChangeListener(R.drawable.baseline_remove_circle_24) { buttonView, isChecked -> {} }
         binding.masterChip2.setColor(IxiChipColor.BLUE)
-        binding.masterChip2.setOnChipCheckedChangeListener { buttonView, isChecked -> {} }
+        binding.masterChip2.setChipIconResource(R.drawable.baseline_remove_circle_24)
+        binding.masterChip2.setCloseIconResource(R.drawable.baseline_remove_circle_24)
+//        binding.masterChip2.setOnChipCheckedChangeListener { buttonView, isChecked -> {} }
         binding.masterChip3.setColor(IxiChipColor.GREEN)
-        binding.masterChip3.setOnChipCheckedChangeListener { buttonView, isChecked -> {} }
+        binding.masterChip3.setChipIconResource(R.drawable.baseline_remove_circle_24)
+//        binding.masterChip3.setOnChipCheckedChangeListener { buttonView, isChecked -> {} }
     }
 
     private fun setPurpleGroup() {
         binding.pOutlinedChip1.setColor(IxiChipColor.PURPLE)
         binding.pOutlinedChip1.isChecked = true
-        binding.pOutlinedChip1.setOnClickListener {
-            binding.pOutlinedChip1.text.toString().toToast(context!!)
-        }
+        binding.pOutlinedChip1.setChipIconResource(R.drawable.baseline_remove_circle_24)
+//        binding.pOutlinedChip1.setOnClickListener {
+//            binding.pOutlinedChip1.text.toString().toToast(context!!)
+//        }
         binding.pOutlinedChip2.setColor(IxiChipColor.PURPLE)
         binding.pOutlinedChip2.isChecked = false
-        binding.pOutlinedChip2.setOnClickListener {
-            binding.pOutlinedChip1.text.toString().toToast(context!!)
-        }
+        binding.pOutlinedChip2.setChipIconResource(R.drawable.baseline_remove_circle_24)
+
+//        binding.pOutlinedChip2.setOnClickListener {
+//            binding.pOutlinedChip1.text.toString().toToast(context!!)
+//        }
     }
 
     private fun setYellowGroup() {
@@ -96,10 +99,14 @@ class ChipFragment  : BaseFragment() {
 
     private fun setBlueGroup() {
 
-        binding.bOutlinedChip1.isChecked = true
         binding.bOutlinedChip1.setColor(IxiChipColor.BLUE)
+        binding.bOutlinedChip1.setCheckedIconResource( R.drawable.ic_baseline_cancel_24)
+        binding.bOutlinedChip1.setOnClickListener {
+            binding.bOutlinedChip1.isSelected = !binding.bOutlinedChip1.isSelected
+        }
 
         binding.bOutlinedChip2.setColor(IxiChipColor.BLUE)
+        binding.bOutlinedChip2.setCheckedIconResource( R.drawable.ic_baseline_cancel_24)
         binding.bOutlinedChip2.isChecked = false
     }
 
@@ -116,6 +123,7 @@ class ChipFragment  : BaseFragment() {
         }
 
         binding.outlinedChip2.setColor(IxiChipColor.NEUTRAL)
+        binding.outlinedChip2.setChipIconResource(0)
         binding.outlinedChip2.setOnClickListener {
             binding.outlinedChip1.isEnabled = true
         }
