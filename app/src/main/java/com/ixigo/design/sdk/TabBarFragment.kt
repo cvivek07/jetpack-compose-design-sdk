@@ -35,10 +35,16 @@ class TabBarFragment : Fragment() {
         binding.tabLayout.tabMode = MODE_FIXED
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: Tab) {
-                val fragment =  when (tab.position) {
-                    0->{TypographyFragment()}
-                    1->{ButtonsFragment()}
-                    else->{TypographyFragment()}
+                val fragment = when (tab.position) {
+                    0 -> {
+                        TypographyFragment()
+                    }
+                    1 -> {
+                        ButtonsFragment()
+                    }
+                    else -> {
+                        TypographyFragment()
+                    }
                 }
                 val fm: FragmentManager = childFragmentManager
                 val ft: FragmentTransaction = fm.beginTransaction()
@@ -53,14 +59,50 @@ class TabBarFragment : Fragment() {
 
             override fun onTabReselected(tab: Tab) {}
         })
-        binding.tabLayout.addTab(TabDataItem("Typo", 0, 0, R.drawable.ic_baseline_cancel_24))
-        binding.tabLayout.addTab(TabDataItem("Buttons", 0, 0, R.drawable.ic_baseline_cancel_24))
+        binding.tabLayout.addTab(
+            TabDataItem(
+                "Typo",
+                0,
+                0,
+                0,
+                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
+            )
+        )
+        binding.tabLayout.addTab(
+            TabDataItem(
+                "Buttons",
+                0,
+                0,
+                0,
+                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
+            )
+        )
+
+        binding.tabLayout.addTab(
+            TabDataItem(
+                "Buttons",
+                0,
+                0,
+                0,
+                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
+            )
+        )
+
+        binding.tabLayout.addTab(
+            TabDataItem(
+                "Buttons",
+                0,
+                0,
+                0,
+                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
+            )
+        )
 //        binding.tabLayout.setupWithViewPager2(binding.viewPager, dataList)
 
         val fragments2 = listOf(ProgressStepFragment(), InputFieldsFragment())
         val dataList2 = listOf(
-            TabDataItem("Progress Step", 0, 0, 0),
-            TabDataItem("Buttons", 0, 0, R.drawable.ic_baseline_cancel_24)
+            TabDataItem("Progress Step", 0, 0, 0, null),
+            TabDataItem("Buttons", 0, 0, R.drawable.ic_baseline_cancel_24, null)
         )
 
 

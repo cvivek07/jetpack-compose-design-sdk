@@ -76,6 +76,7 @@ class IxiTabLayout @JvmOverloads constructor(
      */
     var tabPaddingInDp: Int = 5
 
+
     /**
      * Set up the [IxiTabLayout] wit [ViewPager2]
      *
@@ -92,8 +93,6 @@ class IxiTabLayout @JvmOverloads constructor(
             throw IllegalStateException("TabItems Count does not match with ViewPager fragment count")
         }
 
-        tabMode = MODE_SCROLLABLE
-        tabGravity = GRAVITY_FILL
         setSelectedTabIndicator(null)
         tabRippleColor = null
 
@@ -111,20 +110,15 @@ class IxiTabLayout @JvmOverloads constructor(
 
 
     fun addTab(tabData: TabDataItem) {
-        // Removing default TabIndicator
-        setSelectedTabIndicator(null)
-        val tab = newTab()
-        val tabView = if (tabType == TabType.PILL) {
-            IxiPillTabItem(context)
-        } else {
-            IxiLineTabItems(context)
-        }
-        drawTab(tab, tabView, tabData)
-        addTab(tab)
+        addTabInternal(tabData)
     }
 
 
     fun addTab(tabData: TabDataItem, position: Int) {
+        addTabInternal(tabData, position)
+    }
+
+    private fun addTabInternal(tabData: TabDataItem, position: Int = -1) {
         // Removing default TabIndicator
         setSelectedTabIndicator(null)
         val tab = newTab()
@@ -134,15 +128,27 @@ class IxiTabLayout @JvmOverloads constructor(
             IxiLineTabItems(context)
         }
         drawTab(tab, tabView, tabData)
-        addTab(tab, position)
+
+        if (position >= 0) {
+            addTab(tab, position)
+        } else {
+            addTab(tab)
+        }
     }
+
     private fun drawTab(tab: Tab, tabItem: BaseTabItem, dataItem: TabDataItem) {
-        val tabPadding = (tabPaddingInDp.toPx)
+
         tabItem.setEndDrawable(dataItem.endIcon)
         tabItem.setStartDrawable(dataItem.startIcon)
         tabItem.setTopDrawable(dataItem.topIcon)
         tabItem.setTitle(dataItem.title ?: "")
-        tab.view.setPadding(tabPadding, 0, 0, 0)
+        dataItem.topUrl?.let { tabItem.setTopDrawable(it) }
+//        val tabPadding = (tabPaddingInDp.toPx)
+//        tab.view.setPadding(tabPadding, 0, tabPadding, 0)
+//        if (tabMode == MODE_SCROLLABLE) {
+//            val tabPadding = (tabPaddingInDp.toPx)
+//            tab.view.setPadding(tabPadding, 0, tabPadding, 0)
+//        }
         tab.customView = tabItem
     }
 }

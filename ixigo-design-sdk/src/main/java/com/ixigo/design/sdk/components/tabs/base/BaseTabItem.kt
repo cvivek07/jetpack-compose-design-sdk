@@ -13,27 +13,32 @@ abstract class BaseTabItem @JvmOverloads constructor(
 ) : BaseComponent(context, attrs, defStyleAttr) {
     protected var state = mutableStateOf(TabItemState())
 
-    fun setStartDrawable( @DrawableRes  startDrawable: Int) {
+    fun setStartDrawable(@DrawableRes startDrawable: Int) {
         val initState = state.value
         state.value = initState.copy(startDrawable = startDrawable)
     }
 
-    fun setEndDrawable( @DrawableRes  endDrawable: Int) {
+    fun setEndDrawable(@DrawableRes endDrawable: Int) {
         val initState = state.value
         state.value = initState.copy(endDrawable = endDrawable)
     }
 
-    fun setTopDrawable( @DrawableRes  topDrawable: Int) {
+    fun setTopDrawable(@DrawableRes topDrawable: Int) {
         val initState = state.value
-        state.value = initState.copy(topDrawable = topDrawable)
+        state.value = initState.copy(topDrawable = topDrawable, topUrl = null)
     }
 
-    fun setTitle (title: String) {
+    fun setTopDrawable(topUrl: String) {
+        val initState = state.value
+        state.value = initState.copy(topDrawable = 0, topUrl = topUrl)
+    }
+
+    fun setTitle(title: String) {
         val initState = state.value
         state.value = initState.copy(title = title)
     }
 
-    override fun setSelected (isSelected: Boolean) {
+    override fun setSelected(isSelected: Boolean) {
         val initState = state.value
         state.value = initState.copy(isSelected = isSelected)
     }
@@ -44,6 +49,7 @@ data class TabItemState(
     @DrawableRes val startDrawable: Int = 0,
     @DrawableRes val endDrawable: Int = 0,
     @DrawableRes val topDrawable: Int = 0,
+    val topUrl: String? = null,
     val title: String? = null,
     val isSelected: Boolean = false
 )

@@ -14,7 +14,14 @@
         <com.ixigo.design.sdk.components.tabs.IxiTabLayout
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="80dp"
+            app:tabIndicatorHeight="3dp"
+            app:tabIndicatorFullWidth="false"
+            app:tabPaddingStart="20dp"
+            app:tabRippleColor="@android:color/transparent"
+            app:tabPaddingEnd="20dp"
+            app:tabMode="fixed"
+            app:tabGravity="fill"/>
 
         <FrameLayout
             android:id="@+id/viewPager"

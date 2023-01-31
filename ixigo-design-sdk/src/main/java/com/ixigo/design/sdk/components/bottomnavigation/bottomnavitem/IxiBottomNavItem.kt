@@ -33,8 +33,8 @@ class IxiBottomNavItem @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
         ComposableBottomNavItem(
-            icon = CompatImage(identifier = state.value.icon?:0, drawable = state.value.iconDrawable),
-            selectedIcon = CompatImage(identifier = state.value.selectedIcon?:0, drawable = state.value.selectedIconDrawable),
+            icon = CompatImage(resourceId = state.value.icon?:0, drawable = state.value.iconDrawable),
+            selectedIcon = CompatImage(resourceId = state.value.selectedIcon?:0, drawable = state.value.selectedIconDrawable),
             label = state.value.label,
             selected = state.value.selected,
             onClick = state.value.onClick,

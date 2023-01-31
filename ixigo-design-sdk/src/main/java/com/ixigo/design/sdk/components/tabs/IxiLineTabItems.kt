@@ -23,7 +23,8 @@ class IxiLineTabItems @JvmOverloads constructor(
                 endIcon = endDrawable,
                 topIcon = topDrawable,
                 text = title,
-                isSelected = isSelected
+                isSelected = isSelected,
+                topUrl = topUrl
             )
         }
     }
