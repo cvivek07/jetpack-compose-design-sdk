@@ -23,7 +23,15 @@ internal class IxiPrimaryChip @JvmOverloads constructor(
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiPrimaryChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
             isEnabled = typedArray.getBoolean(R.styleable.IxiPrimaryChip_android_enabled, true)
-            setColor(IxiChipColor(backgroundColor = backgroundColor, textColor = textColor, drawableTintColor = drawableTintColor))
+            if (ixiChipColor == null) {
+                setColor(
+                    IxiChipColor(
+                        backgroundColor = backgroundColor,
+                        textColor = textColor,
+                        drawableTintColor = drawableTintColor
+                    )
+                )
+            }
         } finally {
             typedArray.recycle()
         }

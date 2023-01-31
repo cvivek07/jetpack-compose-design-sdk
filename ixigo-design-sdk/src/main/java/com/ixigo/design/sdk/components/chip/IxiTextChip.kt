@@ -22,7 +22,15 @@ internal class IxiTextChip  @JvmOverloads constructor(
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiTextChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
             isEnabled = typedArray.getBoolean(R.styleable.IxiTextChip_android_enabled, true)
-            setColor(IxiChipColor(textColor = textColor, drawableTintColor = drawableTintColor, backgroundColor = backgroundColor))
+            if (ixiChipColor == null) {
+                setColor(
+                    IxiChipColor(
+                        textColor = textColor,
+                        drawableTintColor = drawableTintColor,
+                        backgroundColor = backgroundColor
+                    )
+                )
+            }
         } finally {
             typedArray.recycle()
         }

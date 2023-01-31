@@ -26,7 +26,16 @@ class IxiOutlinedChip @JvmOverloads constructor(
             val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiOutlinedChip_android_textColor, -1)
             val textColor = if (textColorVal != -1) textColorVal else R.color.black
             isEnabled = typedArray.getBoolean(R.styleable.IxiOutlinedChip_android_enabled, true)
-            setColor(IxiChipColor(textColor = textColor, drawableTintColor = drawableTintColor, strokeColor = strokeColor, backgroundColor = backgroundColor))
+            if(ixiChipColor==null) {
+                setColor(
+                    IxiChipColor(
+                        textColor = textColor,
+                        drawableTintColor = drawableTintColor,
+                        strokeColor = strokeColor,
+                        backgroundColor = backgroundColor
+                    )
+                )
+            }
             this.chipStrokeWidth = Utils.convertDpToPixel(1f, context)
         } finally {
             typedArray.recycle()
