@@ -13,6 +13,13 @@ import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.components.styles.IxiChipColorState
 import com.ixigo.design.sdk.utils.Utils
 
+/**
+ * Base class for creating IxiChips.
+ *
+ * @param context Context to inflate the Chip
+ * @param attrs AttributeSet for the Chip
+ * @param defStyleAttr The default style for the Chip
+ */
 abstract class BaseChip @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : Chip(context, attrs, defStyleAttr)  {
@@ -23,6 +30,7 @@ abstract class BaseChip @JvmOverloads constructor(
     protected var drawableStart:Int? = null
     protected var drawableEnd:Int? = null
     protected var ixiChipColor:IxiChipColor? = null
+
     init {
         this.setTextAppearance(R.style.chipText)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
@@ -64,9 +72,27 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Abstract method to get the state of the color of the chip.
+     *
+     * @param color the color of the chip.
+     * @return the state of the color of the chip.
+     */
     abstract fun getColorState(color:IxiChipColor): IxiChipColorState
+
+    /**
+     * Abstract method to get the disabled color of the chip.
+     *
+     * @return the disabled color of the chip.
+     */
     abstract fun getDisabledColor(): IxiChipColor
 
+    /**
+     * Open method to set a listener for changes in the checked state of the chip.
+     *
+     * @param checkedIcon the drawable resource for the checked icon.
+     * @param listener the listener for changes in the checked state of the chip.
+     */
     open fun setOnChipCheckedChangeListener(@DrawableRes checkedIcon:Int?=null, listener: OnCheckedChangeListener?){
         if(onClickListener==null) {
             this.setOnClickListener {}
@@ -104,6 +130,11 @@ abstract class BaseChip @JvmOverloads constructor(
         super.setSelected(selected)
     }
 
+    /**
+     * Overridden method to set the checked state of the chip.
+     *
+     * @param checked the checked state of the chip.
+     */
     override fun setChecked(checked: Boolean) {
         super.setChecked(checked)
         if(ixiChipColor==null){
@@ -112,6 +143,11 @@ abstract class BaseChip @JvmOverloads constructor(
         this.chipIconTint =  getDrawableColorStateList(context, getColorState(ixiChipColor!!))
     }
 
+    /**
+     * Method to set the start drawable for the chip.
+     *
+     * @param drawable the drawable resource for the start drawable.
+     */
     fun setStartDrawable(@DrawableRes drawable:Int?){
         if(isChipEligible()) {
             drawableStart = drawable
@@ -127,6 +163,11 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Sets the checked drawable to the start of the chip.
+     *
+     * @param drawable The drawable to set at the start of the chip.
+     */
     private fun setCheckedDrawableToStart(@DrawableRes drawable:Int?){
         if(isChipEligible()) {
             if (drawable != null) {
@@ -140,6 +181,12 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+
+    /**
+     * Sets the close icon resource for the chip.
+     *
+     * @param id The id of the resource to set as the close icon.
+     */
     override fun setCloseIconResource(id: Int) {
         if(isChipEligible()) {
             this.chipEndPadding = Utils.convertDpToPixel(horizontalPadding, context)
@@ -147,6 +194,11 @@ abstract class BaseChip @JvmOverloads constructor(
         super.setCloseIconResource(id)
     }
 
+    /**
+     * Sets the end drawable for the chip.
+     *
+     * @param drawable The drawable to set at the end of the chip.
+     */
     private fun setEndDrawable(@DrawableRes drawable:Int?){
         if(isChipEligible()) {
             if (drawable != null) {
@@ -161,6 +213,10 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Sets the drawable for the checked state of the Chip.
+     * @param drawable The drawable resource to be set as the checked state drawable.
+     */
     fun setCheckedDrawable(@DrawableRes drawable:Int?){
         drawable?.let {
             this.checkedIcon = ContextCompat.getDrawable(context, drawable)
@@ -175,6 +231,10 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Sets the color of the Chip.
+     * @param color The color to be set for the Chip.
+     */
     fun setColor(color: IxiChipColor) {
         this.ixiChipColor = color
         setIxiChipColorState(getColorState(color))
