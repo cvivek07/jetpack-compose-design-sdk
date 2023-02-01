@@ -111,33 +111,14 @@ class ChipFragment : BaseFragment() {
         context?.let {
             binding.chipGroup.isSingleSelection = true
             binding.chipGroup.setOnCheckedStateChangeListener() { group, checkedIds ->
-                checkedIds.forEach { group.check(it) }
-            }
-//            binding.sampleOutline1.isChecked = true
 
-            binding.sampleOutline2.setOnCheckedChangeListener {view,isCheked->
-                binding.sampleOutline2.isChecked = isCheked
             }
-//            binding.sampleOutline3.setOnChipCheckedChangeListener { buttonView, isChecked ->
-//                binding.sampleOutline3.text.toString().toToast(it)
-//            }
-//            binding.sampleOutline4.setOnChipCheckedChangeListener { buttonView, isChecked ->
-//                binding.sampleOutline4.text.toString().toToast(it)
-//            }
-//            binding.sampleOutline5.setOnChipCheckedChangeListener { buttonView, isChecked ->
-//                binding.sampleOutline5.text.toString().toToast(it)
-//            }
-//            binding.sampleOutline6.setOnChipCheckedChangeListener { buttonView, isChecked ->
-//                binding.sampleOutline6.text.toString().toToast(it)
-//            }
-//            binding.sampleOutline7.setOnClickListener {
 
             binding.outlinedChip2.setColor(IxiChipColor.NEUTRAL)
             binding.outlinedChip2.setChipIconResource(0)
             binding.outlinedChip2.setOnClickListener {
                 context?.let { "Chip Clicked".toToast(it) }
             }
-//            }
         }
     }
 

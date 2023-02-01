@@ -89,7 +89,6 @@ abstract class BaseChip @JvmOverloads constructor(
      */
     abstract fun getDisabledColor(): IxiChipColor
 
-
     override fun setChecked(checked: Boolean) {
         super.setChecked(checked)
         if (ixiChipColor != null)
