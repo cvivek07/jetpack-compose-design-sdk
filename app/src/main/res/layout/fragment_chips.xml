@@ -7,7 +7,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_master"
@@ -18,26 +19,24 @@
             android:padding="8dp"
             app:singleSelection="true">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/master_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Large"
+                app:closeIcon="@drawable/baseline_keyboard_arrow_down_24"
                 app:chipColor="yellow"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/ic_call_24"
                 app:chipType="large" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/master_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Small"
                 app:chipColor="blue"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipType="small" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/master_chip3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -58,23 +57,23 @@
             app:checkedChip="@+id/outlined_chip1"
             app:singleSelection="true">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
                 app:chipColor="neutral"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
-                app:chipColor="purple"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:chipColor="neutral"
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -85,14 +84,15 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/outlined_chip_disabled"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined Disabled"
                 app:chipColor="green"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                android:enabled="false"
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
         </com.google.android.material.chip.ChipGroup>
 
@@ -103,23 +103,23 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/b_outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
                 app:chipColor="blue"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/b_outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
                 app:chipColor="blue"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -129,23 +129,23 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/g_outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
                 app:chipColor="green"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/g_outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
                 app:chipColor="green"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -155,23 +155,23 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/r_outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
                 app:chipColor="red"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/r_outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
                 app:chipColor="red"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -181,23 +181,23 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/y_outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
                 app:chipColor="yellow"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:chipIcon="@drawable/baseline_remove_circle_24"
+                app:closeIcon="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/y_outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
                 app:chipColor="yellow"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -207,23 +207,23 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/p_outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
                 app:chipColor="purple"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/p_outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
                 app:chipColor="purple"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
 
         <HorizontalScrollView
@@ -232,7 +232,7 @@
             android:scrollbars="none">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+                android:id="@+id/sample_chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"
@@ -241,7 +241,7 @@
                 app:checkedChip="@id/sample_outline_1"
                 android:paddingHorizontal="8dp">
 
-                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                <com.ixigo.design.sdk.components.chip.IxiChip
                     android:id="@+id/sample_outline_1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -250,7 +250,7 @@
                     android:text="ixigo Flex"
                     app:chipColor="neutral" />
 
-                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                <com.ixigo.design.sdk.components.chip.IxiChip
                     android:id="@+id/sample_outline_2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -258,7 +258,7 @@
                     android:text="ixigo Assured"
                     app:chipColor="neutral" />
 
-                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                <com.ixigo.design.sdk.components.chip.IxiChip
                     android:id="@+id/sample_outline_3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -266,7 +266,7 @@
                     android:text="Feature"
                     app:chipColor="neutral" />
 
-                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                <com.ixigo.design.sdk.components.chip.IxiChip
                     android:id="@+id/sample_outline_4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                     android:text="Feature"
                     app:chipColor="neutral" />
 
-                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                <com.ixigo.design.sdk.components.chip.IxiChip
                     android:id="@+id/sample_outline_5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -282,7 +282,7 @@
                     android:text="Feature"
                     app:chipColor="neutral" />
 
-                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                <com.ixigo.design.sdk.components.chip.IxiChip
                     android:id="@+id/sample_outline_6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -292,7 +292,7 @@
             </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
-        <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+        <com.ixigo.design.sdk.components.chip.IxiChip
             android:id="@+id/sample_outline_7"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -300,7 +300,18 @@
             android:checkable="false"
             android:text="Delhi"
             app:chipColor="neutral"
-            app:chipDrawableEnd="@drawable/baseline_keyboard_arrow_down_24"
+            app:closeIcon="@drawable/baseline_keyboard_arrow_down_24"
+            app:size="8dp" />
+        <com.ixigo.design.sdk.components.chip.IxiChip
+            android:id="@+id/sample_outline_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Custom Chip"
+            app:chipColor="yellow"
+            app:ixiChipBackgroundColor="@color/r500"
+            app:ixiChipDrawableTintColor="@color/b400"
+            app:closeIcon="@drawable/baseline_keyboard_arrow_down_24"
             app:size="8dp" />
     </LinearLayout>
 </ScrollView>

@@ -39,9 +39,16 @@
     <declare-styleable name="BaseChip">
         <attr name="android:text" format="string" />
         <attr name="android:checkable" format="boolean" />
-        <attr name="chipDrawableEnd" format="reference" />
-        <attr name="chipDrawableStart" format="reference" />
+        <attr name="closeIcon" format="reference" />
+        <attr name="android:enabled" format="boolean"/>
+        <attr name="chipIcon" format="reference" />
         <attr name="drawableStartSize" format="dimension" />
+        <attr name="ixiChipDrawableTintColor" format="reference" />
+        <attr name="ixiChipBackgroundColor" format="reference" />
+        <attr name="ixiChipUnselectedBackgroundColor" format="reference" />
+        <attr name="ixiChipTextColor" format="reference" />
+        <attr name="ixiChipUnSelectedTextColor" format="reference" />
+        <attr name="ixiChipStrokeColor" format="reference" />
         <attr name="drawableEndSize" format="dimension" />
         <attr name="size" format="dimension"/>
         <attr name="chipType" format="enum">
@@ -59,34 +66,4 @@
             <enum name="yellow" value="5"/>
         </attr>
     </declare-styleable>
-
-<!--    <declare-styleable name="IxiPrimaryChip">-->
-<!--        <attr name="android:background" format="color"/>-->
-<!--        <attr name="android:drawableTint" format="color"/>-->
-<!--        <attr name="android:textColor" format="color|reference"/>-->
-<!--        <attr name="android:enabled" format="boolean"/>-->
-<!--    </declare-styleable>-->
-
-<!--    <declare-styleable name="IxiSecondaryChip">-->
-<!--        <attr name="android:strokeColor" format="color"/>-->
-<!--        <attr name="android:background" format="color"/>-->
-<!--        <attr name="android:drawableTint" format="color"/>-->
-<!--        <attr name="android:textColor" format="color|reference"/>-->
-<!--        <attr name="android:enabled" format="boolean"/>-->
-<!--    </declare-styleable>-->
-
-<!--    <declare-styleable name="IxiOutlinedChip">-->
-<!--        <attr name="android:background" format="color"/>-->
-<!--        <attr name="android:strokeColor" format="color"/>-->
-<!--        <attr name="android:drawableTint" format="color"/>-->
-<!--        <attr name="android:textColor" format="color|reference"/>-->
-<!--        <attr name="android:enabled" format="boolean"/>-->
-<!--    </declare-styleable>-->
-
-<!--    <declare-styleable name="IxiTextChip">-->
-<!--        <attr name="android:background" format="color"/>-->
-<!--        <attr name="android:drawableTint" format="color"/>-->
-<!--        <attr name="android:textColor" format="color|reference"/>-->
-<!--        <attr name="android:enabled" format="boolean"/>-->
-<!--    </declare-styleable>-->
 </resources>

@@ -2,17 +2,16 @@ package com.ixigo.design.sdk.components.chip.base
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.View
 import androidx.annotation.DrawableRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiChipColor
-import com.ixigo.design.sdk.components.styles.IxiChipColorState
 import com.ixigo.design.sdk.utils.Utils
 
 
@@ -26,6 +25,7 @@ import com.ixigo.design.sdk.utils.Utils
 abstract class BaseChip @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : Chip(context, attrs, defStyleAttr) {
+    protected var iconPadding:Float = 5f
     protected var horizontalPadding: Float = 8f
     protected var ixiChipSize: IxiChipSize
     protected var drawableStart: Int? = null
@@ -36,9 +36,7 @@ abstract class BaseChip @JvmOverloads constructor(
         this.setTextAppearance(R.style.chipText)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
         try {
-            val colorAttrVal = typedArray.getInt(R.styleable.BaseChip_chipColor, 0)
-            setColor(getColorFromAttribute(colorAttrVal))
-
+            setColor(setUserDefinedOrStandardColor(typedArray))
             ixiChipSize = mapChipTypeToEnum(typedArray.getInt(R.styleable.BaseChip_chipType, 0))
             val text = typedArray.getString(R.styleable.BaseChip_android_text) ?: ""
             this.textSize = ixiChipSize.textSize
@@ -46,13 +44,14 @@ abstract class BaseChip @JvmOverloads constructor(
             this.textAlignment = TEXT_ALIGNMENT_CENTER
             setText(text)
             horizontalPadding = if (ixiChipSize == IxiChipSize.SMALL) 4f else 8f
+            this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
+            this.chipEndPadding = Utils.convertDpToPixel(horizontalPadding, context)
             val drawableEnd =
-                typedArray.getResourceId(R.styleable.BaseChip_chipDrawableEnd, 0)
+                typedArray.getResourceId(R.styleable.BaseChip_closeIcon, 0)
             setCloseIconResource(drawableEnd)
             val drawableStart =
-                typedArray.getResourceId(R.styleable.BaseChip_chipDrawableStart, 0)
+                typedArray.getResourceId(R.styleable.BaseChip_chipIcon, 0)
             setChipIconResource(drawableStart)
-
             this.chipStrokeWidth = Utils.convertDpToPixel(1f, context)
             val iconSize = typedArray.getDimensionPixelSize(R.styleable.BaseChip_size, -1)
             if (iconSize != -1) {
@@ -65,8 +64,7 @@ abstract class BaseChip @JvmOverloads constructor(
                 setIconSize(drawableStartSize.toFloat(), drawableEndSize.toFloat())
             }
             this.isCheckable = typedArray.getBoolean(R.styleable.BaseChip_android_checkable, true)
-
-
+            this.isEnabled = typedArray.getBoolean(R.styleable.BaseChip_android_enabled, true)
             // adding this to make it selectable. Without onclickListener chip-group selection is not working
             this.setOnClickListener { }
         } finally {
@@ -74,20 +72,53 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    /**
-     * Abstract method to get the state of the color of the chip.
-     *
-     * @param color the color of the chip.
-     * @return the state of the color of the chip.
-     */
-    abstract fun getColorState(color: IxiChipColor): IxiChipColorState
+    private fun setUserDefinedOrStandardColor(typedArray: TypedArray): IxiChipColor {
+        val drawableTintColorVal =
+            typedArray.getResourceId(R.styleable.BaseChip_ixiChipDrawableTintColor, -1)
+        val backgroundColorVal =
+            typedArray.getResourceId(R.styleable.BaseChip_ixiChipBackgroundColor, -1)
+        val unselectedBackgroundColorVal =
+            typedArray.getResourceId(R.styleable.BaseChip_ixiChipUnselectedBackgroundColor, -1)
+        val textColorVal = typedArray.getResourceId(R.styleable.BaseChip_ixiChipTextColor, -1)
+        val unSelectedTextColorVal =
+            typedArray.getResourceId(R.styleable.BaseChip_ixiChipUnSelectedTextColor, -1)
+        val strokeColorVal = typedArray.getResourceId(R.styleable.BaseChip_ixiChipStrokeColor, -1)
+        var drawableTintColor: Int? = null
+        var backgroundColor: Int? = null
+        var unselectedBackgroundColor: Int? = null
+        var textColor: Int? = null
+        var unSelectedTextColor: Int? = null
+        var strokeColor: Int? = null
+        if (drawableTintColorVal != -1) {
+            drawableTintColor = drawableTintColorVal
+        }
+        if (backgroundColorVal != -1) {
+            backgroundColor = backgroundColorVal
+        }
+        if (unselectedBackgroundColorVal != -1) {
+            unselectedBackgroundColor = unselectedBackgroundColorVal
+        }
+        if (unSelectedTextColorVal != -1) {
+            unSelectedTextColor = unSelectedTextColorVal
+        }
+        if (strokeColorVal != -1) {
+            strokeColor = strokeColorVal
+        }
+        if (textColorVal != -1) {
+            textColor = textColorVal
+        }
+        val attrIxiColor =
+            getColorFromAttribute(typedArray.getInt(R.styleable.BaseChip_chipColor, -1))
+        return IxiChipColor(
+            backgroundColor ?: attrIxiColor.backgroundColor,
+            unselectedBackgroundColor ?: attrIxiColor.unselectedBackgroundColor,
+            strokeColor ?: attrIxiColor.strokeColor,
+            textColor ?: attrIxiColor.textColor,
+            unSelectedTextColor ?: attrIxiColor.unSelectedTextColor,
+            drawableTintColor ?: attrIxiColor.drawableTintColor
+        )
 
-    /**
-     * Abstract method to get the disabled color of the chip.
-     *
-     * @return the disabled color of the chip.
-     */
-    abstract fun getDisabledColor(): IxiChipColor
+    }
 
     override fun setChecked(checked: Boolean) {
         super.setChecked(checked)
@@ -97,10 +128,7 @@ abstract class BaseChip @JvmOverloads constructor(
 
     override fun setCheckedIcon(checkedIcon: Drawable?) {
         if (checkedIcon != null) {
-            this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
-
-        } else {
-            this.chipStartPadding = 0f
+            this.iconEndPadding = Utils.convertDpToPixel(-iconPadding, context)
         }
         this.isChipIconVisible = chipIcon != null
         super.setCheckedIcon(checkedIcon)
@@ -115,10 +143,7 @@ abstract class BaseChip @JvmOverloads constructor(
 
     override fun setChipIcon(chipIcon: Drawable?) {
         if (chipIcon != null) {
-            this.chipStartPadding = Utils.convertDpToPixel(horizontalPadding, context)
-
-        } else {
-            this.chipStartPadding = 0f
+            chipIconTint = iconTintSelector(ixiChipColor)
         }
         this.isChipIconVisible = chipIcon != null
         super.setChipIcon(chipIcon)
@@ -126,7 +151,6 @@ abstract class BaseChip @JvmOverloads constructor(
 
     final override fun setChipIconResource(@DrawableRes id: Int) {
         val drawable = if (id == 0) null else AppCompatResources.getDrawable(context, id)
-        chipIconTint = iconTintSelector(ixiChipColor)
         chipIcon = drawable
         checkedIcon = drawable
     }
@@ -134,16 +158,13 @@ abstract class BaseChip @JvmOverloads constructor(
 
     final override fun setCloseIconResource(id: Int) {
         val drawable = if (id == 0) null else AppCompatResources.getDrawable(context, id)
-        closeIconTint = iconTintSelector(ixiChipColor)
+        this.closeIconStartPadding = Utils.convertDpToPixel(-iconPadding+2f, context)
         closeIcon = drawable
     }
 
     override fun setCloseIcon(closeIcon: Drawable?) {
         if (closeIcon != null) {
-            this.chipEndPadding = Utils.convertDpToPixel(horizontalPadding, context)
-
-        } else {
-            this.chipEndPadding = 0f
+            closeIconTint = iconTintSelector(ixiChipColor)
         }
         this.isCloseIconVisible = closeIcon != null
         super.setCloseIcon(closeIcon)
@@ -161,33 +182,47 @@ abstract class BaseChip @JvmOverloads constructor(
         closeIconTint = iconTintSelector(color)
         chipBackgroundColor = backgroundSelector(color)
         setTextColor(textSelector(color))
-        chipStrokeColor = textSelector(color)
+        chipStrokeColor = strokeColorSelector(color)
     }
 
 
     private fun backgroundSelector(color: IxiChipColor): ColorStateList {
         return makeSelector(
             ContextCompat.getColor(context, color.backgroundColor),
-            Color.TRANSPARENT
+            Color.TRANSPARENT,
+            ContextCompat.getColor(context, IxiChipColor.DISABLED.backgroundColor)
         )
     }
 
     private fun textSelector(color: IxiChipColor): ColorStateList {
         return makeSelector(
             ContextCompat.getColor(context, color.textColor),
-            ContextCompat.getColor(context, color.backgroundColor)
+            ContextCompat.getColor(context, color.backgroundColor),
+            ContextCompat.getColor(context, IxiChipColor.DISABLED.textColor)
+        )
+    }
+
+    private fun strokeColorSelector(color: IxiChipColor): ColorStateList {
+        return makeSelector(
+            ContextCompat.getColor(context, color.strokeColor),
+            ContextCompat.getColor(context, color.strokeColor),
+            ContextCompat.getColor(context, IxiChipColor.DISABLED.strokeColor)
         )
     }
 
     private fun iconTintSelector(color: IxiChipColor): ColorStateList {
         return makeSelector(
             ContextCompat.getColor(context, color.drawableTintColor),
-            ContextCompat.getColor(context, color.backgroundColor)
+            ContextCompat.getColor(context, color.backgroundColor),
+            ContextCompat.getColor(context, IxiChipColor.DISABLED.drawableTintColor)
         )
     }
 
-    open fun makeSelector(selectedColor: Int, unselectedColor: Int): ColorStateList {
+    open fun makeSelector(selectedColor: Int, unselectedColor: Int, disabledColor: Int): ColorStateList {
         val states = arrayOf(
+            intArrayOf(
+                -android.R.attr.state_enabled
+            ),
             intArrayOf(
                 -android.R.attr.state_checked,
                 -android.R.attr.state_selected
@@ -195,9 +230,9 @@ abstract class BaseChip @JvmOverloads constructor(
             intArrayOf(
                 android.R.attr.state_checked,
                 android.R.attr.state_selected
-            )
+            ),
         )
-        val colors = intArrayOf(unselectedColor, selectedColor)
+        val colors = intArrayOf(disabledColor, unselectedColor, selectedColor)
 
         return ColorStateList(states, colors)
     }
@@ -232,6 +267,7 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    // iconsize
     enum class IxiChipSize(val textSize: Float, val height: Float) {
         LARGE(14f, 30f),
         SMALL(12f, 20f),
