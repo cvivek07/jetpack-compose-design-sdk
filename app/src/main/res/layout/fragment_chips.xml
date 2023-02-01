@@ -26,6 +26,7 @@
                 android:text="Large"
                 app:chipType = "large"
                 app:chipDrawableStart="@drawable/ic_call_24"
+                app:chipColor="yellow"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24" />
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip2"
@@ -33,6 +34,7 @@
                 android:layout_height="wrap_content"
                 app:chipType = "small"
                 android:text="Small"
+                app:chipColor="blue"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                  />
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
@@ -41,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:checkable="true"
+                app:chipColor="green"
                 app:chipType = "xsmall"
                 android:text="XSmall" />
         </com.google.android.material.chip.ChipGroup>
@@ -57,6 +60,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
+                app:chipColor="neutral"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -65,6 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
+                app:chipColor="neutral"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -81,6 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined Disabled"
+                app:chipColor="green"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -98,6 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
+                app:chipColor="blue"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -106,6 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
+                app:chipColor="blue"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
@@ -122,6 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
+                app:chipColor="green"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -130,6 +139,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
+                app:chipColor="green"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
@@ -146,6 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
+                app:chipColor="red"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -154,6 +165,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
+                app:chipColor="red"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
@@ -170,6 +182,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
+                app:chipColor="yellow"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -178,6 +191,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
+                app:chipColor="yellow"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
@@ -194,6 +208,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
+                app:chipColor="purple"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
@@ -202,8 +217,82 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
+                app:chipColor="purple"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
         </com.google.android.material.chip.ChipGroup>
+
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            >
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            android:clipToPadding="false"
+            android:paddingHorizontal="8dp"
+            >
+
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                android:id="@+id/sample_outline_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ixigo Flex"
+                app:chipColor="neutral"
+                android:paddingHorizontal="10dp"
+                />
+
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                android:id="@+id/sample_outline_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="ixigo Assured"
+                app:chipColor="neutral"
+                />
+
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                android:id="@+id/sample_outline_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feature"
+                app:chipColor="neutral"
+                />
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                android:id="@+id/sample_outline_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feature"
+                app:chipColor="neutral"
+                />
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                android:id="@+id/sample_outline_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feature"
+                app:chipColor="neutral"
+                />
+            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                android:id="@+id/sample_outline_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Feature"
+                app:chipColor="neutral"
+                />
+        </com.google.android.material.chip.ChipGroup>
+        </HorizontalScrollView>
+
+        <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+            android:id="@+id/sample_outline_7"
+            android:layout_margin="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delhi"
+            android:checkable="false"
+            app:chipColor="neutral"
+            app:size="8dp"
+            app:chipDrawableEnd="@drawable/baseline_keyboard_arrow_down_24"
+            />
     </LinearLayout>
 </ScrollView>

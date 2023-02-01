@@ -16,6 +16,13 @@ import com.ixigo.design.sdk.components.styles.IxiChipColorState
 import com.ixigo.design.sdk.utils.Utils
 
 
+/**
+ * Base class for creating IxiChips.
+ *
+ * @param context Context to inflate the Chip
+ * @param attrs AttributeSet for the Chip
+ * @param defStyleAttr The default style for the Chip
+ */
 abstract class BaseChip @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : Chip(context, attrs, defStyleAttr) {
@@ -55,12 +62,31 @@ abstract class BaseChip @JvmOverloads constructor(
                 setIconSize(drawableStartSize.toFloat(), drawableEndSize.toFloat())
             }
             this.isCheckable = true
+            this.isCheckable = typedArray.getBoolean(R.styleable.BaseChip_android_checkable, true)
+            setCheckedDrawable(null)
+            val colorAttrVal = typedArray.getInt(R.styleable.BaseChip_chipColor, -1)
+            val colorAttr = if (colorAttrVal != -1) getColorFromAttribute(colorAttrVal) else null
+            colorAttr?.let {
+                setColor(colorAttr)
+            }
         } finally {
             typedArray.recycle()
         }
     }
 
-    abstract fun getColorState(color: IxiChipColor): IxiChipColorState
+    /**
+     * Abstract method to get the state of the color of the chip.
+     *
+     * @param color the color of the chip.
+     * @return the state of the color of the chip.
+     */
+    abstract fun getColorState(color:IxiChipColor): IxiChipColorState
+
+    /**
+     * Abstract method to get the disabled color of the chip.
+     *
+     * @return the disabled color of the chip.
+     */
     abstract fun getDisabledColor(): IxiChipColor
 
 
@@ -119,6 +145,10 @@ abstract class BaseChip @JvmOverloads constructor(
     }
 
 
+    /**
+     * Sets the color of the Chip.
+     * @param color The color to be set for the Chip.
+     */
     fun setColor(color: IxiChipColor) {
         this.ixiChipColor = color
         chipBackgroundColor = backgroundSelector(color)
@@ -181,6 +211,21 @@ abstract class BaseChip @JvmOverloads constructor(
     }
 
     enum class IxiChipSize(val textSize: Float, val height: Float) {
+    private fun getColorFromAttribute(int: Int): IxiChipColor {
+        return when(int){
+            0-> IxiChipColor.NEUTRAL
+            1-> IxiChipColor.BLUE
+            2-> IxiChipColor.GREEN
+            3-> IxiChipColor.PURPLE
+            4-> IxiChipColor.RED
+            5-> IxiChipColor.YELLOW
+            else -> {
+                IxiChipColor()
+            }
+        }
+    }
+
+    enum class IxiChipSize(val textSize:Float,val height:Float) {
         LARGE(14f, 30f),
         SMALL(12f, 20f),
         XSMALL(10f, 15f),
