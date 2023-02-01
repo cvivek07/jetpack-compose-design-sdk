@@ -37,6 +37,7 @@ class ComponentsFragment : Fragment() {
         Pair("TopAppBar", R.id.action_componentFragment_to_topAppBarFragment),
         Pair("TabBar", R.id.action_componentFragment_to_tabBarFragment),
         Pair("Bottom Navigation", R.id.action_componentFragment_to_bottom_nav_fragment),
+        Pair("Chips", R.id.action_componentFragment_to_chipFragment),
     )
 
     override fun onCreateView(

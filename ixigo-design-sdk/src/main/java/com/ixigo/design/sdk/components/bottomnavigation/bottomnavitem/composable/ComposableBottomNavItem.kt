@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -124,14 +125,24 @@ fun IconWithBadge(
                     .align(Alignment.Center)
                     .then(if (enableBackground) Modifier.background(colorResource(id = ixiColor.pressedColor)) else Modifier)
             ) {
-                Icon(
-                    painter = if(icon.drawable!=null) DrawablePainter(icon.drawable) else painterResource(id = icon.resourceId),
-                    contentDescription = null,
-                    tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .size(24.dp)
-                )
+                val painter: Painter? =
+                    if (icon.drawable != null) {
+                        DrawablePainter(icon.drawable)
+                    } else if (icon.resourceId != null) {
+                        painterResource(id = icon.resourceId)
+                    } else {
+                        null
+                    }
+                painter?.let {
+                    Icon(
+                        painter = painter,
+                        contentDescription = null,
+                        tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(24.dp)
+                    )
+                }
             }
         }
         badgeType?.let {
@@ -163,7 +174,9 @@ fun NotificationBadge(
     if (badgeType == SMALL) {
        SmallBadge(modifier=modifier, borderColor = borderColor)
     } else if (badgeType == LARGE) {
-        LargeBadge(modifier = modifier.defaultMinSize(minWidth = 32.dp, minHeight = 20.dp), content = content, borderColor = borderColor)
+        LargeBadge(modifier = modifier
+            .height(20.dp)
+            .defaultMinSize(minWidth = 32.dp), content = content, borderColor = borderColor)
     }
 }
 
@@ -267,4 +280,4 @@ fun Badge(){
     }
 }
 
-data class CompatImage(@DrawableRes val resourceId: Int = 0, val drawable: Drawable?)
+data class CompatImage(@DrawableRes val resourceId: Int?, val drawable: Drawable?)
