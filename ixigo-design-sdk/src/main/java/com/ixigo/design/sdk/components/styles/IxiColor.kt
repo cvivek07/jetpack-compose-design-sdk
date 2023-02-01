@@ -259,16 +259,16 @@ open class IxiChipColorState(
             ),
             unselected = IxiChipColor(strokeColor = R.color.b300, textColor = R.color.b500)
         )
-        val GREEN = IxiChipColorState(
-            selected = IxiChipColor(backgroundColor = R.color.g400, textColor = R.color.white),
-            unselected = IxiChipColor(strokeColor = R.color.g300, textColor = R.color.g500)
-            selected = IxiChipColor(
-                backgroundColor = R.color.g400,
-                textColor = R.color.white,
-                strokeColor = R.color.g400
-            ),
-            unselected = IxiChipColor(strokeColor = R.color.g300, textColor = R.color.g500)
-        )
+//        val GREEN = IxiChipColorState(
+//            selected = IxiChipColor(backgroundColor = R.color.g400, textColor = R.color.white),
+//            unselected = IxiChipColor(strokeColor = R.color.g300, textColor = R.color.g500)
+//            selected = IxiChipColor(
+//                backgroundColor = R.color.g400,
+//                textColor = R.color.white,
+//                strokeColor = R.color.g400
+//            ),
+//            unselected = IxiChipColor(strokeColor = R.color.g300, textColor = R.color.g500)
+//        )
         val RED = IxiChipColorState(
             selected = IxiChipColor(
                 backgroundColor = R.color.r400,

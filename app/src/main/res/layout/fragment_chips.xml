@@ -2,50 +2,50 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_master"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            app:singleSelection="true"
+            android:padding="8dp"
+            app:singleSelection="true">
 
-            android:padding="8dp">
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Large"
-                app:chipType = "large"
-                app:chipDrawableStart="@drawable/ic_call_24"
                 app:chipColor="yellow"
-                app:chipDrawableEnd="@drawable/baseline_remove_circle_24" />
+                app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
+                app:chipDrawableStart="@drawable/ic_call_24"
+                app:chipType="large" />
+
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:chipType = "small"
                 android:text="Small"
                 app:chipColor="blue"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
-                 />
+                app:chipType="small" />
+
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/master_chip3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:checkable="true"
+                android:gravity="center"
+                android:text="XSmall"
                 app:chipColor="green"
-                app:chipType = "xsmall"
-                android:text="XSmall" />
+                app:chipType="xsmall" />
         </com.google.android.material.chip.ChipGroup>
 
         <com.google.android.material.chip.ChipGroup
@@ -53,7 +53,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            app:singleSelection="true">
 
             <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
                 android:id="@+id/outlined_chip1"
@@ -69,11 +70,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
-                app:chipColor="neutral"
+                app:chipColor="purple"
                 app:chipDrawableEnd="@drawable/baseline_remove_circle_24"
                 app:chipDrawableStart="@drawable/baseline_remove_circle_24" />
 
         </com.google.android.material.chip.ChipGroup>
+
         <com.google.android.material.chip.ChipGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -225,74 +227,75 @@
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none"
-            >
-        <com.google.android.material.chip.ChipGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:singleSelection="true"
-            android:clipToPadding="false"
-            android:paddingHorizontal="8dp"
-            >
+            android:scrollbars="none">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
-                android:id="@+id/sample_outline_1"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ixigo Flex"
-                app:chipColor="neutral"
-                android:paddingHorizontal="10dp"
-                />
+                android:clipToPadding="false"
+                android:paddingHorizontal="8dp">
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
-                android:id="@+id/sample_outline_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ixigo Assured"
-                app:chipColor="neutral"
-                />
+                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                    android:id="@+id/sample_outline_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:paddingHorizontal="10dp"
+                    android:text="ixigo Flex"
+                    app:chipColor="neutral" />
 
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
-                android:id="@+id/sample_outline_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Feature"
-                app:chipColor="neutral"
-                />
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
-                android:id="@+id/sample_outline_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Feature"
-                app:chipColor="neutral"
-                />
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
-                android:id="@+id/sample_outline_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Feature"
-                app:chipColor="neutral"
-                />
-            <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
-                android:id="@+id/sample_outline_6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Feature"
-                app:chipColor="neutral"
-                />
-        </com.google.android.material.chip.ChipGroup>
+                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                    android:id="@+id/sample_outline_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="ixigo Assured"
+                    app:chipColor="neutral" />
+
+                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                    android:id="@+id/sample_outline_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="Feature"
+                    app:chipColor="neutral" />
+
+                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                    android:id="@+id/sample_outline_4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="Feature"
+                    app:chipColor="neutral" />
+
+                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                    android:id="@+id/sample_outline_5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="Feature"
+                    app:chipColor="neutral" />
+
+                <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
+                    android:id="@+id/sample_outline_6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checkable="true"
+                    android:text="Feature"
+                    app:chipColor="neutral" />
+            </com.google.android.material.chip.ChipGroup>
         </HorizontalScrollView>
 
         <com.ixigo.design.sdk.components.chip.IxiOutlinedChip
             android:id="@+id/sample_outline_7"
-            android:layout_margin="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Delhi"
+            android:layout_margin="8dp"
             android:checkable="false"
+            android:text="Delhi"
             app:chipColor="neutral"
-            app:size="8dp"
             app:chipDrawableEnd="@drawable/baseline_keyboard_arrow_down_24"
-            />
+            app:size="8dp" />
     </LinearLayout>
 </ScrollView>

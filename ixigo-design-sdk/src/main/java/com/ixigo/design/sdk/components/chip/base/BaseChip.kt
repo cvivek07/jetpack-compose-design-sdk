@@ -28,7 +28,6 @@ abstract class BaseChip @JvmOverloads constructor(
 ) : Chip(context, attrs, defStyleAttr) {
     protected var horizontalPadding: Float = 8f
     protected var ixiChipSize: IxiChipSize
-    protected var onClickListener: ((View) -> Unit)? = null
     protected var drawableStart: Int? = null
     protected var drawableEnd: Int? = null
     protected var ixiChipColor: IxiChipColor = IxiChipColor.BLUE
@@ -37,6 +36,9 @@ abstract class BaseChip @JvmOverloads constructor(
         this.setTextAppearance(R.style.chipText)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
         try {
+            val colorAttrVal = typedArray.getInt(R.styleable.BaseChip_chipColor, 0)
+            setColor(getColorFromAttribute(colorAttrVal))
+
             ixiChipSize = mapChipTypeToEnum(typedArray.getInt(R.styleable.BaseChip_chipType, 0))
             val text = typedArray.getString(R.styleable.BaseChip_android_text) ?: ""
             this.textSize = ixiChipSize.textSize
@@ -50,7 +52,8 @@ abstract class BaseChip @JvmOverloads constructor(
             val drawableStart =
                 typedArray.getResourceId(R.styleable.BaseChip_chipDrawableStart, 0)
             setChipIconResource(drawableStart)
-//
+
+            this.chipStrokeWidth = Utils.convertDpToPixel(1f, context)
             val iconSize = typedArray.getDimensionPixelSize(R.styleable.BaseChip_size, -1)
             if (iconSize != -1) {
                 setIconSize(iconSize.toFloat(), iconSize.toFloat())
@@ -61,14 +64,11 @@ abstract class BaseChip @JvmOverloads constructor(
                     typedArray.getDimensionPixelSize(R.styleable.BaseChip_drawableEndSize, 16)
                 setIconSize(drawableStartSize.toFloat(), drawableEndSize.toFloat())
             }
-            this.isCheckable = true
             this.isCheckable = typedArray.getBoolean(R.styleable.BaseChip_android_checkable, true)
-            setCheckedDrawable(null)
-            val colorAttrVal = typedArray.getInt(R.styleable.BaseChip_chipColor, -1)
-            val colorAttr = if (colorAttrVal != -1) getColorFromAttribute(colorAttrVal) else null
-            colorAttr?.let {
-                setColor(colorAttr)
-            }
+
+
+            // adding this to make it selectable. Without onclickListener chip-group selection is not working
+            this.setOnClickListener { }
         } finally {
             typedArray.recycle()
         }
@@ -80,7 +80,7 @@ abstract class BaseChip @JvmOverloads constructor(
      * @param color the color of the chip.
      * @return the state of the color of the chip.
      */
-    abstract fun getColorState(color:IxiChipColor): IxiChipColorState
+    abstract fun getColorState(color: IxiChipColor): IxiChipColorState
 
     /**
      * Abstract method to get the disabled color of the chip.
@@ -89,6 +89,12 @@ abstract class BaseChip @JvmOverloads constructor(
      */
     abstract fun getDisabledColor(): IxiChipColor
 
+
+    override fun setChecked(checked: Boolean) {
+        super.setChecked(checked)
+        if (ixiChipColor != null)
+            setColor(ixiChipColor)
+    }
 
     override fun setCheckedIcon(checkedIcon: Drawable?) {
         if (checkedIcon != null) {
@@ -151,6 +157,9 @@ abstract class BaseChip @JvmOverloads constructor(
      */
     fun setColor(color: IxiChipColor) {
         this.ixiChipColor = color
+        chipIconTint = iconTintSelector(color)
+        checkedIconTint = iconTintSelector(color)
+        closeIconTint = iconTintSelector(color)
         chipBackgroundColor = backgroundSelector(color)
         setTextColor(textSelector(color))
         chipStrokeColor = textSelector(color)
@@ -210,22 +219,21 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
-    enum class IxiChipSize(val textSize: Float, val height: Float) {
     private fun getColorFromAttribute(int: Int): IxiChipColor {
-        return when(int){
-            0-> IxiChipColor.NEUTRAL
-            1-> IxiChipColor.BLUE
-            2-> IxiChipColor.GREEN
-            3-> IxiChipColor.PURPLE
-            4-> IxiChipColor.RED
-            5-> IxiChipColor.YELLOW
+        return when (int) {
+            0 -> IxiChipColor.NEUTRAL
+            1 -> IxiChipColor.BLUE
+            2 -> IxiChipColor.GREEN
+            3 -> IxiChipColor.PURPLE
+            4 -> IxiChipColor.RED
+            5 -> IxiChipColor.YELLOW
             else -> {
                 IxiChipColor()
             }
         }
     }
 
-    enum class IxiChipSize(val textSize:Float,val height:Float) {
+    enum class IxiChipSize(val textSize: Float, val height: Float) {
         LARGE(14f, 30f),
         SMALL(12f, 20f),
         XSMALL(10f, 15f),

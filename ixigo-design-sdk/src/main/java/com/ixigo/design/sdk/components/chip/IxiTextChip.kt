@@ -10,31 +10,31 @@ import com.ixigo.design.sdk.components.styles.IxiChipColorState
 internal class IxiTextChip  @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseChip(context, attrs, defStyleAttr)  {
-    init {
-        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.IxiTextChip)
-        try {
-            val backgroundColorVal: Int =
-                typedArray.getResourceId(R.styleable.IxiTextChip_android_background, -1)
-            val backgroundColor = if (backgroundColorVal != -1) backgroundColorVal else android.R.color.transparent
-            val drawableTintColorVal: Int =
-                typedArray.getResourceId(R.styleable.IxiTextChip_android_drawableTint, -1)
-            val drawableTintColor = if (drawableTintColorVal != -1) drawableTintColorVal else android.R.color.transparent
-            val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiTextChip_android_textColor, -1)
-            val textColor = if (textColorVal != -1) textColorVal else R.color.black
-            isEnabled = typedArray.getBoolean(R.styleable.IxiTextChip_android_enabled, true)
-            if (ixiChipColor == null) {
-                setColor(
-                    IxiChipColor(
-                        textColor = textColor,
-                        drawableTintColor = drawableTintColor,
-                        backgroundColor = backgroundColor
-                    )
-                )
-            }
-        } finally {
-            typedArray.recycle()
-        }
-    }
+//    init {
+//        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.IxiTextChip)
+//        try {
+//            val backgroundColorVal: Int =
+//                typedArray.getResourceId(R.styleable.IxiTextChip_android_background, -1)
+//            val backgroundColor = if (backgroundColorVal != -1) backgroundColorVal else android.R.color.transparent
+//            val drawableTintColorVal: Int =
+//                typedArray.getResourceId(R.styleable.IxiTextChip_android_drawableTint, -1)
+//            val drawableTintColor = if (drawableTintColorVal != -1) drawableTintColorVal else android.R.color.transparent
+//            val textColorVal: Int = typedArray.getResourceId(R.styleable.IxiTextChip_android_textColor, -1)
+//            val textColor = if (textColorVal != -1) textColorVal else R.color.black
+//            isEnabled = typedArray.getBoolean(R.styleable.IxiTextChip_android_enabled, true)
+//            if (ixiChipColor == null) {
+//                setColor(
+//                    IxiChipColor(
+//                        textColor = textColor,
+//                        drawableTintColor = drawableTintColor,
+//                        backgroundColor = backgroundColor
+//                    )
+//                )
+//            }
+//        } finally {
+//            typedArray.recycle()
+//        }
+//    }
 
     override fun getColorState(color: IxiChipColor): IxiChipColorState {
         return when(color){

@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.chip.Chip
 import com.ixigo.design.sdk.components.chip.base.BaseChip
+import com.ixigo.design.sdk.components.styles.IxiChipColor
 import com.ixigo.design.sdk.databinding.FragmentChipsBinding
 
 
@@ -41,13 +43,9 @@ class ChipFragment : BaseFragment() {
     }
 
     private fun setMasterGroup() {
-        binding.masterChip1.setColor(IxiChipColor.YELLOW)
         binding.masterChip1.setChipIconResource(R.drawable.baseline_remove_circle_24)
         binding.masterChip1.setCloseIconResource(R.drawable.baseline_remove_circle_24)
 
-        binding.masterChip1.setOnClickListener {
-            binding.masterChip1.isSelected = !binding.masterChip1.isSelected
-        }
 //        binding.masterChip1.setSe(R.drawable.baseline_remove_circle_24) { buttonView, isChecked -> {} }
 //        binding.masterChip1.setOnChipCheckedChangeListener(R.drawable.baseline_remove_circle_24) { buttonView, isChecked -> {} }
         binding.masterChip2.setColor(IxiChipColor.BLUE)
@@ -91,13 +89,13 @@ class ChipFragment : BaseFragment() {
     private fun setBlueGroup() {
 
         binding.bOutlinedChip1.setColor(IxiChipColor.BLUE)
-        binding.bOutlinedChip1.setCheckedIconResource( R.drawable.ic_baseline_cancel_24)
+        binding.bOutlinedChip1.setCheckedIconResource(R.drawable.ic_baseline_cancel_24)
         binding.bOutlinedChip1.setOnClickListener {
             binding.bOutlinedChip1.isSelected = !binding.bOutlinedChip1.isSelected
         }
 
         binding.bOutlinedChip2.setColor(IxiChipColor.BLUE)
-        binding.bOutlinedChip2.setCheckedIconResource( R.drawable.ic_baseline_cancel_24)
+        binding.bOutlinedChip2.setCheckedIconResource(R.drawable.ic_baseline_cancel_24)
         binding.bOutlinedChip2.isChecked = false
     }
 
@@ -109,33 +107,37 @@ class ChipFragment : BaseFragment() {
         binding.outlinedChip1.isChecked = true
     }
 
-    private fun sampleGroup(){
+    private fun sampleGroup() {
         context?.let {
-            binding.sampleOutline1.isChecked = true
-            binding.sampleOutline1.setOnChipCheckedChangeListener{buttonView, isChecked ->
-                binding.sampleOutline1.text.toString().toToast(it)
+            binding.chipGroup.isSingleSelection = true
+            binding.chipGroup.setOnCheckedStateChangeListener() { group, checkedIds ->
+                checkedIds.forEach { group.check(it) }
             }
-            binding.sampleOutline2.setOnChipCheckedChangeListener{buttonView, isChecked ->
-                binding.sampleOutline2.text.toString().toToast(it)
-            }
-            binding.sampleOutline3.setOnChipCheckedChangeListener{buttonView, isChecked ->
-                binding.sampleOutline3.text.toString().toToast(it)
-            }
-            binding.sampleOutline4.setOnChipCheckedChangeListener{buttonView, isChecked ->
-                binding.sampleOutline4.text.toString().toToast(it)
-            }
-            binding.sampleOutline5.setOnChipCheckedChangeListener{buttonView, isChecked ->
-                binding.sampleOutline5.text.toString().toToast(it)
-            }
-            binding.sampleOutline6.setOnChipCheckedChangeListener{buttonView, isChecked ->
-                binding.sampleOutline6.text.toString().toToast(it)
-            }
-            binding.sampleOutline7.setOnClickListener {
+//            binding.sampleOutline1.isChecked = true
 
-        binding.outlinedChip2.setColor(IxiChipColor.NEUTRAL)
-        binding.outlinedChip2.setChipIconResource(0)
-        binding.outlinedChip2.setOnClickListener {
-            binding.outlinedChip1.isEnabled = true
+            binding.sampleOutline2.setOnCheckedChangeListener {view,isCheked->
+                binding.sampleOutline2.isChecked = isCheked
+            }
+//            binding.sampleOutline3.setOnChipCheckedChangeListener { buttonView, isChecked ->
+//                binding.sampleOutline3.text.toString().toToast(it)
+//            }
+//            binding.sampleOutline4.setOnChipCheckedChangeListener { buttonView, isChecked ->
+//                binding.sampleOutline4.text.toString().toToast(it)
+//            }
+//            binding.sampleOutline5.setOnChipCheckedChangeListener { buttonView, isChecked ->
+//                binding.sampleOutline5.text.toString().toToast(it)
+//            }
+//            binding.sampleOutline6.setOnChipCheckedChangeListener { buttonView, isChecked ->
+//                binding.sampleOutline6.text.toString().toToast(it)
+//            }
+//            binding.sampleOutline7.setOnClickListener {
+
+            binding.outlinedChip2.setColor(IxiChipColor.NEUTRAL)
+            binding.outlinedChip2.setChipIconResource(0)
+            binding.outlinedChip2.setOnClickListener {
+                context?.let { "Chip Clicked".toToast(it) }
+            }
+//            }
         }
     }
 
@@ -144,3 +146,4 @@ class ChipFragment : BaseFragment() {
         _binding = null
     }
 }
+

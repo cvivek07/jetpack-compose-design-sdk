@@ -60,33 +60,33 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="IxiPrimaryChip">
-        <attr name="android:background" format="color"/>
-        <attr name="android:drawableTint" format="color"/>
-        <attr name="android:textColor" format="color|reference"/>
-        <attr name="android:enabled" format="boolean"/>
-    </declare-styleable>
+<!--    <declare-styleable name="IxiPrimaryChip">-->
+<!--        <attr name="android:background" format="color"/>-->
+<!--        <attr name="android:drawableTint" format="color"/>-->
+<!--        <attr name="android:textColor" format="color|reference"/>-->
+<!--        <attr name="android:enabled" format="boolean"/>-->
+<!--    </declare-styleable>-->
 
-    <declare-styleable name="IxiSecondaryChip">
-        <attr name="android:strokeColor" format="color"/>
-        <attr name="android:background" format="color"/>
-        <attr name="android:drawableTint" format="color"/>
-        <attr name="android:textColor" format="color|reference"/>
-        <attr name="android:enabled" format="boolean"/>
-    </declare-styleable>
+<!--    <declare-styleable name="IxiSecondaryChip">-->
+<!--        <attr name="android:strokeColor" format="color"/>-->
+<!--        <attr name="android:background" format="color"/>-->
+<!--        <attr name="android:drawableTint" format="color"/>-->
+<!--        <attr name="android:textColor" format="color|reference"/>-->
+<!--        <attr name="android:enabled" format="boolean"/>-->
+<!--    </declare-styleable>-->
 
-    <declare-styleable name="IxiOutlinedChip">
-        <attr name="android:background" format="color"/>
-        <attr name="android:strokeColor" format="color"/>
-        <attr name="android:drawableTint" format="color"/>
-        <attr name="android:textColor" format="color|reference"/>
-        <attr name="android:enabled" format="boolean"/>
-    </declare-styleable>
+<!--    <declare-styleable name="IxiOutlinedChip">-->
+<!--        <attr name="android:background" format="color"/>-->
+<!--        <attr name="android:strokeColor" format="color"/>-->
+<!--        <attr name="android:drawableTint" format="color"/>-->
+<!--        <attr name="android:textColor" format="color|reference"/>-->
+<!--        <attr name="android:enabled" format="boolean"/>-->
+<!--    </declare-styleable>-->
 
-    <declare-styleable name="IxiTextChip">
-        <attr name="android:background" format="color"/>
-        <attr name="android:drawableTint" format="color"/>
-        <attr name="android:textColor" format="color|reference"/>
-        <attr name="android:enabled" format="boolean"/>
-    </declare-styleable>
+<!--    <declare-styleable name="IxiTextChip">-->
+<!--        <attr name="android:background" format="color"/>-->
+<!--        <attr name="android:drawableTint" format="color"/>-->
+<!--        <attr name="android:textColor" format="color|reference"/>-->
+<!--        <attr name="android:enabled" format="boolean"/>-->
+<!--    </declare-styleable>-->
 </resources>
