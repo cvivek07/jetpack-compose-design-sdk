@@ -7,7 +7,7 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.tabs.base.BaseTabItem
 import com.ixigo.design.sdk.components.tabs.composables.PillTabComposable
 
-class IxiPillTabItem @JvmOverloads constructor(
+internal class IxiPillTabItem @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
