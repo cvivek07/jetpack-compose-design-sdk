@@ -7,7 +7,8 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <com.ixigo.design.sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.IxiSeparator
+        android:id="@+id/separator1"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         />
@@ -15,23 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <com.ixigo.design.sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.IxiSeparator
+        android:id="@+id/separator2"
         android:paddingHorizontal="30dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:background="@color/r800"
         />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
 
-    <com.ixigo.design.sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.IxiSeparator
         android:layout_width="match_parent"
         android:layout_height="10dp"
         />
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
-    <com.ixigo.design.sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.IxiSeparator
         android:layout_width="1dp"
         android:layout_gravity="center"
         android:layout_height="100dp"
@@ -39,7 +42,7 @@
     <Space
         android:layout_width="match_parent"
         android:layout_height="20dp"/>
-    <com.ixigo.design.sdk.components.separator.Separator
+    <com.ixigo.design.sdk.components.separator.IxiSeparator
         android:layout_gravity="center"
         android:layout_width="5dp"
         android:layout_height="300dp"

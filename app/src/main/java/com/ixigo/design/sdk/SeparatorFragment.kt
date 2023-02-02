@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.databinding.FragmentSeparatorBinding
 
@@ -21,5 +22,10 @@ class SeparatorFragment:Fragment() {
     ): View {
         _binding = FragmentSeparatorBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.separator1.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.g300))
     }
 }
