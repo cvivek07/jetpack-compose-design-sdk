@@ -18,12 +18,29 @@
         <action
             android:id="@+id/action_ComponentFragment_to_inputFieldFragment"
             app:destination="@id/inputFieldsFragment" />
+
         <action
             android:id="@+id/action_componentFragment_to_typographyFragment"
             app:destination="@id/typographyFragment" />
         <action
             android:id="@+id/action_componentFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment" />
+
+        <action
+            android:id="@+id/action_componentFragment_to_progressStepFragment"
+            app:destination="@id/progressStepFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_topAppBarFragment"
+            app:destination="@id/topAppBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_tabBarFragment"
+            app:destination="@id/tabBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_bottom_nav_fragment"
+            app:destination="@id/bottom_nav_fragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_chipFragment"
+            app:destination="@id/chipFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -48,6 +65,41 @@
         android:name="com.ixigo.design.sdk.TypographyFragment"
         android:label="@string/typography"
         tools:layout="@layout/fragment_typography">
+    </fragment>
+
+    <fragment
+        android:id="@+id/progressStepFragment"
+        android:name="com.ixigo.design.sdk.ProgressStepFragment"
+        android:label="@string/progress_step"
+        tools:layout="@layout/fragment_progress_step">
+    </fragment>
+
+    <fragment
+        android:id="@+id/topAppBarFragment"
+        android:name="com.ixigo.design.sdk.TopAppBarFragment"
+        android:label="@string/top_app_bar"
+        tools:layout="@layout/fragment_top_app_bar">
+    </fragment>
+
+    <fragment
+        android:id="@+id/tabBarFragment"
+        android:name="com.ixigo.design.sdk.TabBarFragment"
+        android:label="@string/tab_bar"
+        tools:layout="@layout/fragment_tab_bar">
+    </fragment>
+
+    <fragment
+        android:id="@+id/chipFragment"
+        android:name="com.ixigo.design.sdk.ChipFragment"
+        android:label="@string/tab_bar"
+        tools:layout="@layout/fragment_chips">
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottom_nav_fragment"
+        android:name="com.ixigo.design.sdk.BottomNavFragment"
+        android:label="@string/bottom_nav"
+        tools:layout="@layout/fragment_bottom_nav">
     </fragment>
 
     <fragment
