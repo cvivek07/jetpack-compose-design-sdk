@@ -4,19 +4,27 @@ import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.ripple.LocalRippleTheme
+import androidx.compose.material.ripple.RippleAlpha
+import androidx.compose.material.ripple.RippleTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.imageutils.AsyncImageView
 import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
@@ -73,31 +81,20 @@ fun LineTabComposable(
     modifier: Modifier = Modifier,
     @DrawableRes startIcon: Int = 0,
     @DrawableRes endIcon: Int = 0,
-    @DrawableRes topIcon: Int = 0,
     text: String?,
     isSelected: Boolean = false
 ) {
     val textColor =
         if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
 
-    ConstraintLayout(modifier = modifier
-        .wrapContentHeight()
-        .wrapContentWidth()) {
+    ConstraintLayout(
+        modifier = modifier
+            .wrapContentHeight()
+            .wrapContentWidth()
+    ) {
 
-        val (leftIcon, textView, rightIcon, topImage, line) = createRefs()
+        val (leftIcon, textView, rightIcon, line) = createRefs()
 
-        if (topIcon != 0) {
-            Icon(
-                modifier = Modifier.constrainAs(topImage) {
-                    top.linkTo(parent.top)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-                    bottom.linkTo(textView.top)
-                },
-                painter = painterResource(id = topIcon),
-                contentDescription = ""
-            )
-        }
 
         if (startIcon != 0) {
             Icon(
@@ -114,11 +111,7 @@ fun LineTabComposable(
         TypographyText(
             modifier = Modifier.constrainAs(textView) {
                 start.linkTo(leftIcon.end, margin = 8.dp)
-                if (topIcon != 0) {
-                    top.linkTo(topImage.bottom)
-                }
-                bottom.linkTo(line.top)
-
+                top.linkTo(parent.top)
             },
             text = text ?: "",
             textStyle = IxiTypography.Body.Medium.regular.copy(color = textColor),
@@ -142,34 +135,16 @@ fun LineTabComposable(
                 .constrainAs(line) {
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
-                    bottom.linkTo(parent.bottom)
+                    top.linkTo(textView.bottom)
                     width = Dimension.fillToConstraints
                 }
                 .width(0.dp)
                 .height(3.dp)
                 .background(
-                    color = colorResource(
-                        id = if (isSelected) {
-                            R.color.b500
-                        } else {
-                            android.R.color.transparent
-                        }
-                    ),
-                    shape = RoundedCornerShape(50)
+                    color = colorResource(id = if (isSelected) R.color.b500 else android.R.color.transparent),
+                    shape = IxiShape.PillShape.shape
                 ),
         )
 
     }
-}
-
-@Preview(showSystemUi = true)
-@Composable
-fun previewData() {
-    LineTabComposable(
-        startIcon = R.drawable.ic_baseline_cancel_24,
-        endIcon = R.drawable.ic_baseline_cancel_24,
-        topIcon = R.drawable.ic_baseline_cancel_24,
-        text = "title",
-        isSelected = true
-    )
 }
