@@ -40,13 +40,6 @@ class TabBarFragment : Fragment() {
                         TypographyFragment()
                     }
                     1 -> {
-                        binding.tabLayout.addTab(
-                            TabDataItem(
-                                "Progress",
-                                0,
-                                0,
-                            ),3
-                        )
                         ButtonsFragment()
                     }
                     2 -> {
