@@ -198,15 +198,14 @@ class ToolBarActivity : AppCompatActivity() {
 
     fun tabbedToolbar() {
         val listTabsName = listOf(
-            TabDataItem("Buttons", R.drawable.ic_search, 0, 0, null),
-            TabDataItem("InputField", 0, R.drawable.ic_search, 0, null),
-            TabDataItem("Progress Steps", 0, 0, 0, null),
+            TabDataItem("Buttons", R.drawable.ic_search, 0, ),
+            TabDataItem("InputField", 0, R.drawable.ic_search, ),
+            TabDataItem("Progress Steps", 0, 0, ),
             TabDataItem(
                 "Typography",
                 R.drawable.ic_search,
                 R.drawable.ic_baseline_cancel_24,
-                0,
-                null
+
             )
         )
         val fragmentList = listOf(

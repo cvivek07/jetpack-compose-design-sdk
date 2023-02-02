@@ -54,4 +54,4 @@ class IxiTabbedToolBar @JvmOverloads constructor(
     }
 }
 
-data class TabDataItem(val title: String?, val startIcon: Int, val endIcon: Int, val topIcon: Int, val topUrl: String?)
+data class TabDataItem(val title: String?, val startIcon: Int, val endIcon: Int,)

@@ -76,133 +76,75 @@ fun PillTabComposable(
     }
 }
 
-private object NoRippleTheme : RippleTheme {
-    @Composable
-    override fun defaultColor() = Color.Unspecified
-
-    @Composable
-    override fun rippleAlpha(): RippleAlpha = RippleAlpha(0.0f, 0.0f, 0.0f, 0.0f)
-}
-
 @Composable
 fun LineTabComposable(
     modifier: Modifier = Modifier,
     @DrawableRes startIcon: Int = 0,
     @DrawableRes endIcon: Int = 0,
-    @DrawableRes topIcon: Int = 0,
-    topUrl: String? = null,
-    topIconWidth: Dp = 40.dp,
-    topIconHeight: Dp = 40.dp,
     text: String?,
     isSelected: Boolean = false
 ) {
-    val interactionSource = MutableInteractionSource()
     val textColor =
         if (isSelected) colorResource(id = R.color.b500) else IxiTypography.Body.Medium.regular.color
-    CompositionLocalProvider(LocalRippleTheme provides NoRippleTheme) {
-        ConstraintLayout(
-            modifier = modifier
-                .wrapContentHeight()
-                .wrapContentWidth()
-        ) {
 
-            val (leftIcon, textView, rightIcon, topImage, line) = createRefs()
+    ConstraintLayout(
+        modifier = modifier
+            .wrapContentHeight()
+            .wrapContentWidth()
+    ) {
 
-            val topModifier = Modifier
-                .constrainAs(topImage) {
-                    top.linkTo(parent.top, margin = 6.dp, goneMargin = 2.dp)
-                    start.linkTo(parent.start)
-                    end.linkTo(parent.end)
-//                bottom.linkTo(textView.top, margin = 4.dp)
-                }
-                .width(topIconWidth)
-                .height(topIconHeight)
-            if (topIcon != 0) {
-                Icon(
-                    modifier = topModifier,
-                    painter = painterResource(id = topIcon),
-                    contentDescription = ""
-                )
-            } else if (!topUrl.isNullOrBlank()) {
-                AsyncImageView(
-                    placeholder = R.drawable.ic_top_tab_pplace_holder,
-                    url = topUrl,
-                    modifier = topModifier,
-                    contentDes = R.string.hello_world
-                )
-            }
+        val (leftIcon, textView, rightIcon, line) = createRefs()
 
-            if (startIcon != 0) {
-                Icon(
-                    modifier = Modifier.constrainAs(leftIcon) {
-                        end.linkTo(textView.start)
-                        top.linkTo(textView.top)
-                        bottom.linkTo(textView.bottom)
-                    },
-                    painter = painterResource(id = startIcon),
-                    contentDescription = ""
-                )
-            }
 
-            TypographyText(
-                modifier = Modifier.constrainAs(textView) {
-                    start.linkTo(leftIcon.end, margin = 8.dp)
-                    if (topIcon != 0 || !topUrl.isNullOrBlank()) {
-                        top.linkTo(topImage.bottom, margin = 6.dp)
-                    }
-                    bottom.linkTo(line.top, margin = 8.dp)
+        if (startIcon != 0) {
+            Icon(
+                modifier = Modifier.constrainAs(leftIcon) {
+                    end.linkTo(textView.start)
+                    top.linkTo(textView.top)
+                    bottom.linkTo(textView.bottom)
                 },
-                text = text ?: "",
-                textStyle = IxiTypography.Body.Medium.regular.copy(color = textColor),
-            )
-
-            if (endIcon != 0) {
-                Icon(
-                    modifier = Modifier.constrainAs(rightIcon) {
-                        start.linkTo(textView.end, margin = 8.dp)
-                        top.linkTo(textView.top)
-                        bottom.linkTo(textView.bottom)
-                    },
-                    painter = painterResource(id = endIcon),
-                    contentDescription = ""
-                )
-            }
-
-            Box(
-                modifier = Modifier
-
-                    .constrainAs(line) {
-                        start.linkTo(parent.start)
-                        end.linkTo(parent.end)
-                        top.linkTo(textView.bottom)
-                        bottom.linkTo(parent.bottom)
-                        width = Dimension.fillToConstraints
-                    }
-                    .width(0.dp)
-                    .height(3.dp)
-                    .background(
-                        color = colorResource(
-                            id = if (isSelected) {
-                                R.color.b500
-                            } else {
-                                android.R.color.transparent
-                            }
-                        ),
-                        shape = RoundedCornerShape(50)
-                    ),
+                painter = painterResource(id = startIcon),
+                contentDescription = ""
             )
         }
-    }
-}
 
-@Preview(showSystemUi = true)
-@Composable
-fun previewData() {
-    LineTabComposable(
-        startIcon = R.drawable.ic_baseline_cancel_24,
-        endIcon = R.drawable.ic_baseline_cancel_24,
-        topIcon = R.drawable.ic_baseline_cancel_24,
-        text = "title",
-        isSelected = true
-    )
+        TypographyText(
+            modifier = Modifier.constrainAs(textView) {
+                start.linkTo(leftIcon.end, margin = 8.dp)
+                top.linkTo(parent.top)
+            },
+            text = text ?: "",
+            textStyle = IxiTypography.Body.Medium.regular.copy(color = textColor),
+        )
+
+        if (endIcon != 0) {
+            Icon(
+                modifier = Modifier.constrainAs(rightIcon) {
+                    start.linkTo(textView.end, margin = 8.dp)
+                    top.linkTo(textView.top)
+                    bottom.linkTo(textView.bottom)
+                },
+                painter = painterResource(id = endIcon),
+                contentDescription = ""
+            )
+        }
+
+        Box(
+            modifier = Modifier
+                .padding(top = 6.dp)
+                .constrainAs(line) {
+                    start.linkTo(parent.start)
+                    end.linkTo(parent.end)
+                    top.linkTo(textView.bottom)
+                    width = Dimension.fillToConstraints
+                }
+                .width(0.dp)
+                .height(3.dp)
+                .background(
+                    color = colorResource(id = if (isSelected) R.color.b500 else android.R.color.transparent),
+                    shape = IxiShape.PillShape.shape
+                ),
+        )
+
+    }
 }

@@ -31,8 +31,8 @@ class TabBarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tabLayout.tabType = TabType.LINE
         binding.tabLayout.tabMode = MODE_FIXED
+
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: Tab) {
                 val fragment = when (tab.position) {
@@ -40,7 +40,20 @@ class TabBarFragment : Fragment() {
                         TypographyFragment()
                     }
                     1 -> {
+                        binding.tabLayout.addTab(
+                            TabDataItem(
+                                "Progress",
+                                0,
+                                0,
+                            ),3
+                        )
                         ButtonsFragment()
+                    }
+                    2 -> {
+                        ProgressStepFragment()
+                    }
+                    3 -> {
+                        InputFieldsFragment()
                     }
                     else -> {
                         TypographyFragment()
@@ -61,11 +74,9 @@ class TabBarFragment : Fragment() {
         })
         binding.tabLayout.addTab(
             TabDataItem(
-                "Typo",
+                "Typography",
                 0,
                 0,
-                0,
-                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
             )
         )
         binding.tabLayout.addTab(
@@ -73,38 +84,29 @@ class TabBarFragment : Fragment() {
                 "Buttons",
                 0,
                 0,
-                0,
-                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
             )
         )
 
         binding.tabLayout.addTab(
             TabDataItem(
-                "Buttons",
+                "Progress Step",
                 0,
                 0,
-                0,
-                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
             )
         )
 
         binding.tabLayout.addTab(
             TabDataItem(
-                "Buttons",
+                "Input Field",
                 0,
                 0,
-                0,
-                "https://images.ixigo.com/image/upload/trains/trains/3a119ed404adccad00186612bd3bd495-oufsv.png"
             )
         )
-//        binding.tabLayout.setupWithViewPager2(binding.viewPager, dataList)
-
         val fragments2 = listOf(ProgressStepFragment(), InputFieldsFragment())
         val dataList2 = listOf(
-            TabDataItem("Progress Step", 0, 0, 0, null),
-            TabDataItem("Buttons", 0, 0, R.drawable.ic_baseline_cancel_24, null)
+            TabDataItem("Progress Step", 0, 0),
+            TabDataItem("Buttons", 0, 0)
         )
-
 
         binding.viewPager2.adapter = PagerAdapter(parentFragmentManager, lifecycle, fragments2)
         binding.linedTabLayout.tabType = TabType.PILL
