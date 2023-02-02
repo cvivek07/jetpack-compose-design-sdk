@@ -37,9 +37,14 @@ import com.ixigo.design.sdk.components.topappbar.TabDataItem
  *  android:layout_height="wrap_content" />
  *```
  *
+ * You can add tab item using
+ * ```
+ * tabLayout.addTab(TabDataItem("Typography",R.drawable.start_drawable,R.drawable.end_drawable))
+ * ```
+ *
  * <h3>ViewPager integration</h3>
  *
- * You must use [IxiTabLayout]  together with [ViewPager2] only. You
+ * You should use [IxiTabLayout]  together with [ViewPager2]. You
  * can call ```setupWithViewPager(ViewPager2)``` to link the two together. This layout will be
  * automatically populated from the [PagerAdapter]'s page titles.
  *
@@ -59,6 +64,9 @@ import com.ixigo.design.sdk.components.topappbar.TabDataItem
  *      android:layout_width="match_parent"
  *      android:layout_height="match_parent" />
  * </LinearLayout>
+ * ```
+ * In case you want to use it with [ViewPager], You can call you can call
+ * ```setupWithViewPager(ViewPager)``` to link the two together.
  *
  * @since 1.0
  */

@@ -75,4 +75,10 @@
         <attr name="tabPaddingStart" format="dimension" />
         <attr name="tabPaddingEnd" format="dimension" />
     </declare-styleable>
+
+    <declare-styleable name="BaseTabItem">
+        <attr name="android:text" format="string" />
+        <attr name="android:drawableEnd" format="reference" />
+        <attr name="android:drawableStart" format="reference" />
+    </declare-styleable>
 </resources>

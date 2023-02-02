@@ -66,35 +66,20 @@ class TabBarFragment : Fragment() {
             override fun onTabReselected(tab: Tab) {}
         })
         binding.tabLayout.addTab(
-            TabDataItem(
-                "Typography",
-                0,
-                0,
-            )
+            TabDataItem("Typography", 0, 0)
         )
         binding.tabLayout.addTab(
-            TabDataItem(
-                "Buttons",
-                0,
-                0,
-            )
+            TabDataItem("Buttons", 0, 0)
         )
 
         binding.tabLayout.addTab(
-            TabDataItem(
-                "Progress Step",
-                0,
-                0,
-            )
+            TabDataItem("Progress Step", 0, 0)
         )
 
         binding.tabLayout.addTab(
-            TabDataItem(
-                "Input Field",
-                0,
-                0,
-            )
+            TabDataItem("Input Field", 0, 0)
         )
+
         val fragments2 = listOf(ProgressStepFragment(), InputFieldsFragment())
         val dataList2 = listOf(
             TabDataItem("Progress Step", 0, 0),

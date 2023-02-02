@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 
 abstract class BaseTabItem @JvmOverloads constructor(
@@ -12,6 +13,22 @@ abstract class BaseTabItem @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
     protected var state = mutableStateOf(TabItemState())
+
+    init {
+        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseButton)
+        try {
+            val text = typedArray.getString(R.styleable.BaseButton_android_text) ?: ""
+            setTitle(text)
+            val drawableEnd =
+                typedArray.getResourceId(R.styleable.BaseButton_android_drawableEnd, 0)
+            val drawableStart =
+                typedArray.getResourceId(R.styleable.BaseButton_android_drawableStart, 0)
+            setStartDrawable(drawableStart)
+            setEndDrawable(drawableEnd)
+        } finally {
+            typedArray.recycle()
+        }
+    }
 
     fun setStartDrawable(@DrawableRes startDrawable: Int) {
         val initState = state.value
