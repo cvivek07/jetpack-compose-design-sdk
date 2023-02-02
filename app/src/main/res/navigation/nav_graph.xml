@@ -9,7 +9,7 @@
         android:id="@+id/componentFragment"
         android:name="com.ixigo.design.sdk.ComponentsFragment"
         android:label="@string/components_fragments"
-        tools:layout="@layout/fragment_components">
+        >
 
         <action
             android:id="@+id/action_ComponentFragment_to_ButtonsFragment"
