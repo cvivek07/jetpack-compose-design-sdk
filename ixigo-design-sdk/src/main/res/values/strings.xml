@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">ixigo-design-sdk</string>
     <string name="outlined_input_drawable_end_des">Image</string>
+    <string name="hello_world"><Html>Hello <b><u>World</u></b>. This <i><strike>text</strike> sentence</i> is form<b>att<u>ed</u></b> in simple html. <a href="https://github.com/ch4rl3x/HtmlText">HtmlText</a></Html></string>
 </resources>

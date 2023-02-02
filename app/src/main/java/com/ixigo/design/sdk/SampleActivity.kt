@@ -21,20 +21,20 @@ class SampleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbar)
-
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         val navController = findNavController(R.id.nav_host_fragment_content_sample)
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_sample)
         return navController.navigateUp(appBarConfiguration)
                 || super.onSupportNavigateUp()
+    }
+
+    fun updateToolbar(boolean: Boolean = false) {
+        binding.toolbar.setElevated(boolean)
     }
 }

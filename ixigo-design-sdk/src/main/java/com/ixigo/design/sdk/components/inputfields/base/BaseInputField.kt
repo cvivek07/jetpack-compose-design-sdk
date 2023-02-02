@@ -13,6 +13,9 @@ abstract class BaseInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
+    private var textValue: String? = null
+    lateinit var textChangeListener: TextChangeListener
+
     protected val state = mutableStateOf(
         InputFieldState(
             actionImage = 0,
@@ -29,12 +32,14 @@ abstract class BaseInputField @JvmOverloads constructor(
             onClickActionText = {},
             onClickDrawableEnd = {},
             onClickDrawableStart = {},
-            onTextChange = {},
+            onTextChange = if (::textChangeListener.isInitialized) textChangeListener::onTextChange else null,
             color = IxiColor.Orange
         )
     )
 
+
     fun setText(text: String) {
+        textValue = text
         val initState = state.value.copy(text = text)
         state.value = initState
     }
@@ -112,7 +117,12 @@ abstract class BaseInputField @JvmOverloads constructor(
             setHelperText(typedArray.getString(R.styleable.BaseInputField_helperText) ?: "")
             setActionText(typedArray.getString(R.styleable.BaseInputField_actionText) ?: "")
             setLabel(typedArray.getString(R.styleable.BaseInputField_label) ?: "")
-            setMaxCharCount(typedArray.getInt(R.styleable.BaseInputField_maxCharCount, Int.MAX_VALUE))
+            setMaxCharCount(
+                typedArray.getInt(
+                    R.styleable.BaseInputField_maxCharCount,
+                    Int.MAX_VALUE
+                )
+            )
             setActualCharCountText(
                 typedArray.getString(R.styleable.BaseInputField_actualCharCounter) ?: ""
             )
@@ -146,5 +156,10 @@ data class InputFieldState(
     val onClickActionIcon: () -> Unit,
     val onClickDrawableStart: () -> Unit,
     val onClickDrawableEnd: () -> Unit,
-    val onTextChange: (String) -> Unit,
+    val onTextChange: ((String) -> Unit)?,
 )
+
+
+interface TextChangeListener {
+    fun onTextChange(newText: String)
+}
