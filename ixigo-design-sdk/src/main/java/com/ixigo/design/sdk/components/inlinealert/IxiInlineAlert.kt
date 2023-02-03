@@ -15,6 +15,10 @@ class IxiInlineAlert @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseInlineAlert(context, attrs, defStyleAttr)  {
 
+    /**
+     * Sets the color type of chip among [InlineAlertType]
+     * can also be directly used from xml as app:inlineAlertType="neutral"
+     */
     fun setType(type: InlineAlertType){
         super.setColor(mapTypeToColor(type))
     }

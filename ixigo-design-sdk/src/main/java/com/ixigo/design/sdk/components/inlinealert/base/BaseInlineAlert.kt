@@ -12,6 +12,16 @@ import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.styles.IxiColor
 
+/**
+ * Abstract class for a custom Inline Alert View in Android
+ *
+ * @param context The Context the view is running in, through which it can
+ * access the current theme, resources, etc.
+ * @param attrs The attributes of the XML tag that is inflating the view.
+ * @param defStyleAttr An attribute in the current theme that contains a
+ * reference to a style resource that supplies default values for
+ * the view. Can be 0 to not look for defaults.
+ */
 abstract class BaseInlineAlert @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
@@ -60,36 +70,72 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
 
     }
 
+    /**
+     * Set the logo of the inline alert view
+     *
+     * @param logo The drawable resource id of the logo
+     */
     fun setLogo(@DrawableRes logo: Int){
         val initState = state.value
         state.value = initState.copy(logo = logo)
     }
 
+    /**
+     * Set the heading of the inline alert view
+     *
+     * @param heading The heading text
+     */
     fun setHeading(heading:String){
         val initState = state.value
         state.value = initState.copy(heading = heading)
     }
 
+    /**
+     * Set the text of the inline alert view
+     *
+     * @param text The text
+     */
     fun setText(text:String){
         val initState = state.value
         state.value = initState.copy(text = text)
     }
 
+    /**
+     * Set the right icon of the inline alert view
+     *
+     * @param icon The drawable resource id of the right icon
+     */
     fun setRightIcon(@DrawableRes icon: Int){
         val initState = state.value
         state.value = initState.copy(rightIcon = icon)
     }
 
+    /**
+     * Set the click listener for the right icon of the inline alert view
+     *
+     * @param clickListener The click listener for the right icon
+     */
     open fun setRightIconClickListener(clickListener:(()->Unit)?){
         val initState = state.value
         state.value = initState.copy(onRightIconClickListener = clickListener)
     }
 
+
+    /**
+     * Set the text of the right button of the inline alert view
+     *
+     * @param text The text of the right button
+     */
     fun setRightButtonText(text:String){
         val initState = state.value
         state.value = initState.copy(rightButtonText = text)
     }
 
+    /**
+     * Set the text of the left button of the inline alert view
+     *
+     * @param text The text of the left button
+     */
     fun setLeftButtonText(text:String){
         val initState = state.value
         state.value = initState.copy(leftButtonText = text)
@@ -110,11 +156,23 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
         state.value = initState.copy(ixiColor = ixiColor)
     }
 
+    /**
+     * Sets the alignment
+     * value can be either
+     * ALIGN_NORMAL, ALIGN_OPPOSITE, ALIGN_CENTER
+     * @param alignment alignment of header text
+     */
     fun headingAlignment(alignment: Alignment){
         val initState = state.value
         state.value = initState.copy(headingAlignment = alignment)
     }
 
+    /**
+     * Sets the alignment
+     * value can be either
+     * ALIGN_NORMAL, ALIGN_OPPOSITE, ALIGN_CENTER
+     * @param alignment alignment of text
+     */
     fun textAlignment(alignment: Alignment){
         val initState = state.value
         state.value = initState.copy(textAlignment = alignment)
