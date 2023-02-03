@@ -21,7 +21,7 @@
         app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertColor="neutral"
+        app:ixiColor="neutral"
         app:buttonColor="@color/o800"
         />
 
@@ -36,7 +36,7 @@
         app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertColor="blue"
+        app:ixiColor="blue"
         />
 
     <include layout="@layout/divider"/>
@@ -50,7 +50,7 @@
         app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertColor="green"
+        app:ixiColor="success"
         />
     <include layout="@layout/divider"/>
 
@@ -63,7 +63,7 @@
         app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertColor="red"
+        app:ixiColor="error"
         />
     <include layout="@layout/divider"/>
 
@@ -76,7 +76,7 @@
         app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertColor="purple"
+        app:ixiColor="extension"
         />
     <include layout="@layout/divider"/>
 
@@ -89,14 +89,23 @@
         app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertColor="yellow"
+        app:ixiColor="warning"
         />
     <include layout="@layout/divider"/>
     <com.ixigo.design.sdk.components.inlinealert.IxiInlineAlert
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        app:inlineAlertColor="neutral"
+        app:ixiColor="neutral"
+        app:contentAlignment="center"
+        android:textAlignment="center"
+        />
+    <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.inlinealert.IxiInlineAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur"
+        app:ixiColor="orange"
         app:contentAlignment="center"
         android:textAlignment="center"
         />

@@ -57,7 +57,7 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
             if(leftButtonText!=null){
                 setLeftButtonText(leftButtonText)
             }
-            val colorEnum = typedArray.getInt(R.styleable.BaseInlineAlert_inlineAlertColor, -1)
+            val colorEnum = typedArray.getInt(R.styleable.BaseInlineAlert_ixiColor, -1)
             if(colorEnum!=-1){
                 this.setColor(mapTypeToColor(colorEnum))
             }
@@ -202,6 +202,7 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
            3 -> IxiColor.Extra(bg = R.color.g50, text = R.color.g500, pressed = R.color.g400)
            4 -> IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
            5 -> IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
+           6 -> IxiColor.Extra(bg = R.color.o50, text = R.color.o600, pressed = R.color.o800)
            else -> {
                IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
            }
