@@ -230,7 +230,7 @@ internal fun ComposableTextButton(
     text: String = "",
     color: IxiColor,
     size: ButtonSize,
-    width: Int,
+    width: Int = -2,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -391,7 +391,8 @@ private fun DrawComponents(
                     width = Dimension.preferredWrapContent
                 },
 
-            textStyle = size.typography.copy(color = colorResource(id = textColor)),
+            textStyle = size.typography,
+            color = colorResource(id = textColor)
         )
         if (endDrawableRes != 0) {
             Image(
