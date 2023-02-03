@@ -25,11 +25,14 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 imageBackgroundColor = imageBackgroundColor,
                 bodyText = bodyText,
                 masterTitleText = toolbarText,
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton,
+                primaryButtonText = primaryButtonText,
+                secondaryButtonText = secondaryButtonText,
+                primaryActionListener = primaryActionListener,
+                secondaryActionListener = secondaryActionListener,
                 closeActionListener = onClose,
-                isToolbarCentered = isToolbarCentered,
-                iconSize = Util.convertDimensionToDp(px = iconSize?:80f)
+                iconSize = Util.convertDimensionToDp(px = iconSize?:80f),
+                view = view,
+                enablePointer = enablePointer
             )
         }
     }

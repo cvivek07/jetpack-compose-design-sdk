@@ -1,12 +1,12 @@
 package com.ixigo.design.sdk.components.bottomsheets.composable
 
+import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
@@ -25,9 +25,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
-import com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
+import com.ixigo.design.sdk.SdkManager
+import com.ixigo.design.sdk.components.buttons.composable.ComposablePrimaryButton
+import com.ixigo.design.sdk.components.buttons.composable.ComposableSecondaryButton
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 @Composable
 fun BaseBottomSheetComposable(
@@ -38,28 +42,27 @@ fun BaseBottomSheetComposable(
     bodyText: String? = null,
     bodyStyle: TextStyle = IxiTypography.Body.Medium.regular,
     masterTitleText: String? = null,
-    primaryButton: IxiPrimaryButton? = null,
-    secondaryButton: IxiSecondaryButton? = null,
+    primaryButtonText: String? = null,
+    secondaryButtonText: String? = null,
     closeActionListener: (() -> Unit)? = null,
-    isToolbarCentered:Boolean? = false,
-    iconSize: Dp? = 80.dp
+    iconSize: Dp? = 80.dp,
+    secondaryActionListener: (() -> Unit)? = null,
+    primaryActionListener: (() -> Unit)? = null,
+    view: View? = null,
+    enablePointer: Boolean = false
 ) {
+    val scrollState = rememberScrollState()
     Box(modifier = Modifier
         .clip(RoundedCornerShape(30.dp, 30.dp, 0.dp, 0.dp))) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.background(colorResource(id = R.color.white))) {
-            Box {
+            Box() {
                 Column {
                     masterTitleText?.let {
-                        if(isToolbarCentered == true){
-                            MasterTitle(modifier = Modifier.padding(top = 21.dp), text = masterTitleText, closeActionListener = closeActionListener, alignment = Alignment.Center)
-                        } else if(isToolbarCentered == false){
-                            MasterTitle(modifier = Modifier.padding(top = 21.dp), text = masterTitleText, closeActionListener = closeActionListener, alignment = Alignment.TopStart)
-                        }
-                        Spacer(modifier = Modifier.height(16.dp))
+                        MasterTitle(modifier = Modifier.padding(top = 21.dp), text = masterTitleText, closeActionListener = closeActionListener, alignment = Alignment.Center)
                     }
                     image?.let {
                         if(imageBackgroundColor==null && masterTitleText==null){
-                            Spacer(modifier = Modifier.height(45.dp))
+                            Spacer(modifier = Modifier.height(26.dp))
                         }
                         BannerImage(
                             logo = it,
@@ -68,26 +71,48 @@ fun BaseBottomSheetComposable(
                         )
                     }
                 }
-                Box(modifier = Modifier.fillMaxWidth()) {
-                    Pointer(modifier = Modifier
-                        .padding(vertical = 10.dp)
-                        .align(Alignment.Center))
+                if(enablePointer) {
+                    Box(modifier = Modifier.fillMaxWidth()) {
+                        Pointer(
+                            modifier = Modifier
+                                .padding(vertical = 10.dp)
+                                .align(Alignment.Center)
+                        )
+                    }
                 }
             }
-            Spacer(modifier = Modifier.height(30.dp))
-            BottomSheetContent(
-                modifier = Modifier.padding(horizontal = 20.dp),
-                heading = { BottomSheetTextComposable(titleText, style = titleStyle) },
-                subtitle = { BottomSheetTextComposable(text = bodyText, style = bodyStyle) }
-            )
-            Spacer(modifier = Modifier.height(30.dp))
-            BottomSheetButtons(
-                primaryButton = primaryButton,
-                secondaryButton = secondaryButton
-            ) {
-
+            Box(modifier = Modifier
+                .verticalScroll(scrollState)
+                .weight(1f, false)
+                .padding(top = 30.dp, bottom = 15.dp)) {
+                if(view!=null){
+                    AndroidView(
+                        factory = {
+                            view
+                        }, modifier = Modifier
+                            .fillMaxWidth())
+                } else {
+                    BottomSheetContent(
+                        modifier = Modifier.padding(horizontal = 20.dp),
+                        heading = { BottomSheetTextComposable(titleText, style = titleStyle) },
+                        subtitle = { BottomSheetTextComposable(text = bodyText, style = bodyStyle) }
+                    )
+                }
             }
-            Spacer(modifier = Modifier.height(30.dp))
+            if(masterTitleText!=null){
+                Divider(modifier = Modifier.fillMaxWidth(),thickness = 1.dp, color = colorResource(id = R.color.n100))
+            }
+            Spacer(modifier = Modifier.height(15.dp))
+            Box() {
+                BottomSheetButtons(
+                    primaryButtonText = primaryButtonText,
+                    secondaryButtonText = secondaryButtonText,
+                    primaryActionListener = primaryActionListener,
+                    secondaryActionListener = secondaryActionListener,
+                    spacedButtons = masterTitleText!=null
+                )
+            }
+            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }
@@ -95,8 +120,8 @@ fun BaseBottomSheetComposable(
 @Composable
 private fun BottomSheetTextComposable(text: String?, style: TextStyle) {
     if (text != null) {
-        Text(
-            text = text, style = style, textAlign = TextAlign.Center
+        TypographyText(
+            text = text, textStyle = style, textAlign = TextAlign.Center
         )
     }
 }
@@ -165,43 +190,56 @@ private fun BottomSheetContent(
 
 @Composable
 private fun BottomSheetButtons(
-    secondaryButton: IxiSecondaryButton? = null,
+    secondaryButtonText: String? = null,
     secondaryActionListener: (() -> Unit)? = null,
-    primaryButton: IxiPrimaryButton? = null,
-    primaryActionListener: (() -> Unit)? = null
+    primaryButtonText: String? = null,
+    primaryActionListener: (() -> Unit)? = null,
+    spacedButtons: Boolean = false
 ) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        secondaryButton?.let {
-            Box(modifier = Modifier
-                .weight(1f)
-                .padding(start = 20.dp)) {
-                AndroidView(
-                    factory = {
-                        secondaryButton.apply {
-                            setOnClickListener {
-                                secondaryActionListener?.invoke()
-                            }
-                        }
-                    }, modifier = Modifier.align(Alignment.TopEnd)
-                )
+    Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+        secondaryButtonText?.let {
+            Box(
+                modifier = Modifier
+                    .then(if (spacedButtons) Modifier else Modifier.weight(1f))
+                    .padding(start = 20.dp)
+            ) {
+                Box(
+                    modifier = if (primaryButtonText == null) Modifier.align(Alignment.Center) else Modifier.align(
+                        Alignment.TopEnd
+                    )
+                ) {
+                    ComposableSecondaryButton(
+                        text = secondaryButtonText,
+                        color = SdkManager.getConfig().project.color,
+                        shape = IxiShape.RegularShape,
+                        size = ButtonSize.Large,
+                        width = -2,
+                        onClick = secondaryActionListener ?: {})
+                }
             }
             Spacer(modifier = Modifier.width(30.dp))
         }
-        primaryButton?.let {
+        primaryButtonText?.let {
             Box(
                 modifier = Modifier
-                    .weight(1f)
+                    .then(if (spacedButtons) Modifier else Modifier.weight(1f))
                     .padding(end = 20.dp)
             ) {
-                AndroidView(
-                    factory = {
-                        primaryButton.apply {
-                            setOnClickListener {
-                                primaryActionListener?.invoke()
-                            }
-                        }
-                    }, modifier = Modifier.then(if(secondaryButton==null) Modifier.align(Alignment.Center) else Modifier.align(Alignment.TopStart))
-                )
+                Box(
+                    modifier = Modifier.then(
+                        if (secondaryButtonText == null) Modifier.align(
+                            Alignment.Center
+                        ) else Modifier.align(Alignment.TopStart)
+                    )
+                ) {
+                    ComposablePrimaryButton(
+                        text = primaryButtonText,
+                        color = SdkManager.getConfig().project.color,
+                        shape = IxiShape.RegularShape,
+                        size = ButtonSize.Large,
+                        width = -2,
+                        onClick = primaryActionListener ?: {})
+                }
             }
         }
     }
@@ -209,18 +247,22 @@ private fun BottomSheetButtons(
 
 @Composable
 private fun MasterTitle(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, closeActionListener: (() -> Unit)? = null){
-    Box(modifier = modifier.fillMaxWidth(), contentAlignment = alignment){
-        Text(text = text, textAlign = TextAlign.Center, style = IxiTypography.Heading.H6.regular, modifier = Modifier.padding(horizontal = 20.dp))
-        closeActionListener?.let {
-            Box(modifier = Modifier
-                .align(Alignment.CenterEnd)
-                .padding(end = 8.dp)
-                .clickable {
-                    closeActionListener.invoke()
-                }){
-                Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(22.dp))
+    Column {
+        Box(modifier = modifier.fillMaxWidth(), contentAlignment = alignment){
+            Text(text = text, textAlign = TextAlign.Center, style = IxiTypography.Heading.H6.regular, modifier = Modifier.padding(horizontal = 20.dp))
+            closeActionListener?.let {
+                Box(modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .padding(end = 8.dp)
+                    .clickable {
+                        closeActionListener.invoke()
+                    }){
+                    Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(22.dp))
+                }
             }
         }
+        Spacer(modifier = Modifier.height(16.dp))
+        Divider(modifier = Modifier.height(1.dp), color = colorResource(id = R.color.n100))
     }
 }
 
