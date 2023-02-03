@@ -374,7 +374,8 @@ object IxiTypography {
         object Small {
             val regular = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 19.6.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 4.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -433,7 +434,8 @@ object IxiTypography {
         object XSmall {
             val regular = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 16.sp,
+                lineHeight = 19.sp,
+                letterSpacing = 3.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
