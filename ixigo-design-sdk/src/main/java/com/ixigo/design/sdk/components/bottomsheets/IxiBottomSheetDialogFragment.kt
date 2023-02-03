@@ -69,7 +69,7 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
             _binding.ixiBottomSheet.setPrimaryButton(it, uiState.primaryButtonAction?:{})
         }
         uiState.secondaryButtonText?.let {
-            _binding.ixiBottomSheet.setSecondaryButton(it, uiState.primaryButtonAction?:{})
+            _binding.ixiBottomSheet.setSecondaryButton(it, uiState.secondaryButtonAction?:{})
         }
         _binding.ixiBottomSheet.setCloseActionListener{
             this.dismiss()
