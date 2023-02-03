@@ -18,7 +18,7 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design.sdk.components.progress_step.VerticalProgressStep
+        <com.ixigo.design.sdk.components.progressstep.VerticalProgressStep
             android:id="@+id/vProgressStep"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -50,7 +50,7 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design.sdk.components.progress_step.VerticalProgressStep
+        <com.ixigo.design.sdk.components.progressstep.VerticalProgressStep
             android:id="@+id/vProgressStep2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -82,7 +82,7 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design.sdk.components.progress_step.HorizontalProgressStep
+        <com.ixigo.design.sdk.components.progressstep.HorizontalProgressStep
             android:id="@+id/hProgressStep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -115,7 +115,7 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design.sdk.components.progress_step.HorizontalProgressStep
+        <com.ixigo.design.sdk.components.progressstep.HorizontalProgressStep
             android:id="@+id/hProgressStepNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
@@ -154,7 +154,7 @@
             android:background="@color/b700"
             android:orientation="vertical">
 
-            <com.ixigo.design.sdk.components.progress_step.HorizontalInlineProgressStep
+            <com.ixigo.design.sdk.components.progressstep.HorizontalInlineProgressStep
                 android:id="@+id/hProgressInlineStep"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,7 +182,7 @@
 
         <include layout="@layout/divider" />
 
-        <com.ixigo.design.sdk.components.progress_step.HorizontalInlineProgressStep
+        <com.ixigo.design.sdk.components.progressstep.HorizontalInlineProgressStep
             android:id="@+id/hProgressInlineStepDark"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
