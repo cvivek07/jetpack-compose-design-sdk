@@ -18,10 +18,11 @@
         android:logo="@drawable/logo"
         app:heading="A short heading can be multiple liners"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        android:drawableEnd="@drawable/ic_baseline_cancel_24"
+        app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertType="neutral"
+        app:inlineAlertColor="neutral"
+        app:buttonColor="@color/o900"
         />
 
     <include layout="@layout/divider"/>
@@ -32,10 +33,10 @@
         android:logo="@drawable/logo"
         app:heading="A short heading can be multiple liners"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        android:drawableEnd="@drawable/ic_baseline_cancel_24"
+        app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertType="blue"
+        app:inlineAlertColor="blue"
         />
 
     <include layout="@layout/divider"/>
@@ -46,10 +47,10 @@
         android:logo="@drawable/logo"
         app:heading="A short heading can be multiple liners"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        android:drawableEnd="@drawable/ic_baseline_cancel_24"
+        app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertType="green"
+        app:inlineAlertColor="green"
         />
     <include layout="@layout/divider"/>
 
@@ -59,10 +60,10 @@
         android:logo="@drawable/logo"
         app:heading="A short heading can be multiple liners"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        android:drawableEnd="@drawable/ic_baseline_cancel_24"
+        app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertType="red"
+        app:inlineAlertColor="red"
         />
     <include layout="@layout/divider"/>
 
@@ -72,10 +73,10 @@
         android:logo="@drawable/logo"
         app:heading="A short heading can be multiple liners"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        android:drawableEnd="@drawable/ic_baseline_cancel_24"
+        app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertType="purple"
+        app:inlineAlertColor="purple"
         />
     <include layout="@layout/divider"/>
 
@@ -85,17 +86,17 @@
         android:logo="@drawable/logo"
         app:heading="A short heading can be multiple liners"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        android:drawableEnd="@drawable/ic_baseline_cancel_24"
+        app:actionIcon="@drawable/ic_baseline_cancel_24"
         app:rightButtonText="Button"
         app:leftButtonText="Button"
-        app:inlineAlertType="yellow"
+        app:inlineAlertColor="yellow"
         />
     <include layout="@layout/divider"/>
     <com.ixigo.design.sdk.components.inlinealert.IxiInlineAlert
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Lorem ipsum dolor sit amet, consectetur"
-        app:inlineAlertType="neutral"
+        app:inlineAlertColor="neutral"
         app:contentAlignment="center"
         android:textAlignment="center"
         />

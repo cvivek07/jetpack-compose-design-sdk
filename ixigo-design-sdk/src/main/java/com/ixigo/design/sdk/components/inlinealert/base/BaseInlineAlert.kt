@@ -5,6 +5,7 @@ import android.content.Context
 import android.text.Layout.Alignment
 import android.util.AttributeSet
 import android.view.ViewGroup
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
@@ -44,9 +45,9 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
             if(text!=null){
                 setText(text)
             }
-            val rightIcon = typedArray.getResourceId(R.styleable.BaseInlineAlert_android_drawableEnd, -1)
-            if(rightIcon!=-1){
-                setRightIcon(rightIcon)
+            val actionIcon = typedArray.getResourceId(R.styleable.BaseInlineAlert_actionIcon, -1)
+            if(actionIcon!=-1){
+                setActionIcon(actionIcon)
             }
             val rightButtonText = typedArray.getString(R.styleable.BaseInlineAlert_rightButtonText)
             if(rightButtonText!=null){
@@ -56,11 +57,13 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
             if(leftButtonText!=null){
                 setLeftButtonText(leftButtonText)
             }
-            val colorEnum = typedArray.getInt(R.styleable.BaseInlineAlert_inlineAlertType, -1)
+            val colorEnum = typedArray.getInt(R.styleable.BaseInlineAlert_inlineAlertColor, -1)
             if(colorEnum!=-1){
-                InlineAlertType.fromId(colorEnum)?.let {
-                    setColor(mapTypeToColor(it))
-                }
+                this.setColor(mapTypeToColor(colorEnum))
+            }
+            val buttonColor = typedArray.getResourceId(R.styleable.BaseInlineAlert_buttonColor, -1)
+            if(buttonColor!=-1){
+                setButtonColor(buttonColor)
             }
             textAlignment(mapAlignment(typedArray.getInt(R.styleable.BaseInlineAlert_contentAlignment, 0)))
             headingAlignment(mapAlignment(typedArray.getInt(R.styleable.BaseInlineAlert_contentAlignment, 0)))
@@ -105,9 +108,9 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
      *
      * @param icon The drawable resource id of the right icon
      */
-    fun setRightIcon(@DrawableRes icon: Int){
+    fun setActionIcon(@DrawableRes icon: Int){
         val initState = state.value
-        state.value = initState.copy(rightIcon = icon)
+        state.value = initState.copy(actionIcon = icon)
     }
 
     /**
@@ -115,9 +118,9 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
      *
      * @param clickListener The click listener for the right icon
      */
-    open fun setRightIconClickListener(clickListener:(()->Unit)?){
+    open fun setActionIconClickListener(clickListener:(()->Unit)?){
         val initState = state.value
-        state.value = initState.copy(onRightIconClickListener = clickListener)
+        state.value = initState.copy(onActionIconClickListener = clickListener)
     }
 
 
@@ -151,6 +154,10 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
         state.value = initState.copy(leftButtonClickListener = onClick)
     }
 
+    /**
+     * Sets the color type of chip among [IxiColor]
+     * can also be directly used from xml as app:inlineAlertType="neutral"
+     */
     open fun setColor(ixiColor: IxiColor){
         val initState = state.value
         state.value = initState.copy(ixiColor = ixiColor)
@@ -178,15 +185,27 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
         state.value = initState.copy(textAlignment = alignment)
     }
 
-    protected fun mapTypeToColor(inlineAlertType:InlineAlertType):IxiColor{
-       return when(inlineAlertType){
-            InlineAlertType.YELLOW -> IxiColor.Extra(bg = R.color.y50, text = R.color.y700, pressed = R.color.y700)
-            InlineAlertType.PURPLE -> IxiColor.Extra(bg = R.color.p50, text = R.color.p500, pressed = R.color.p400)
-            InlineAlertType.RED -> IxiColor.Extra(bg = R.color.r50, text = R.color.r500, pressed = R.color.r400)
-            InlineAlertType.GREEN -> IxiColor.Extra(bg = R.color.g50, text = R.color.g500, pressed = R.color.g400)
-            InlineAlertType.BLUE -> IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
-            InlineAlertType.NEUTRAL -> IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
-        }
+    /**
+     * Sets the button color
+     * @param [@ColorRes] int
+     */
+    fun setButtonColor(@ColorRes ixiColor: Int){
+        val initState = state.value
+        state.value = initState.copy(buttonColor = ixiColor)
+    }
+
+    private fun mapTypeToColor(int:Int):IxiColor{
+       return when(int){
+           0 -> IxiColor.Extra(bg = R.color.y50, text = R.color.y700, pressed = R.color.y700)
+           1 -> IxiColor.Extra(bg = R.color.p50, text = R.color.p500, pressed = R.color.p400)
+           2 -> IxiColor.Extra(bg = R.color.r50, text = R.color.r500, pressed = R.color.r400)
+           3 -> IxiColor.Extra(bg = R.color.g50, text = R.color.g500, pressed = R.color.g400)
+           4 -> IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
+           5 -> IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
+           else -> {
+               IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
+           }
+       }
     }
 
     protected fun mapAlignment(int: Int): Alignment{
@@ -212,30 +231,18 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
 
 }
 
-enum class InlineAlertType(val identifier:Int){
-    YELLOW(0),
-    PURPLE(1),
-    RED(2),
-    GREEN(3),
-    BLUE(4),
-    NEUTRAL(5);
-    companion object {
-        fun fromId(int: Int):InlineAlertType? = values().find { it.identifier == int }
-    }
-
-}
-
 data class InlineAlertState(
     @DrawableRes val logo: Int? = null,
     val heading:String? = null,
     val text:String = "",
-    @DrawableRes val rightIcon:Int? = null,
-    val onRightIconClickListener: (()->Unit)? = null,
+    @DrawableRes val actionIcon:Int? = null,
+    val onActionIconClickListener: (()->Unit)? = null,
     val ixiColor: IxiColor = SdkManager.getConfig().project.color,
     val leftButtonText:String? = null,
     val leftButtonClickListener:() -> Unit = {},
     val rightButtonText:String? = null,
     val rightButtonClickListener:() -> Unit = {},
     val headingAlignment: Alignment = Alignment.ALIGN_NORMAL,
-    val textAlignment: Alignment = Alignment.ALIGN_NORMAL
+    val textAlignment: Alignment = Alignment.ALIGN_NORMAL,
+    @ColorRes val buttonColor: Int? = null,
 )

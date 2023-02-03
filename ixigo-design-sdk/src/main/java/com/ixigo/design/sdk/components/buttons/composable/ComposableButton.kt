@@ -441,7 +441,7 @@ private fun mapTertiaryStyle(colors: IxiColor) = when (colors) {
     IxiColor.Orange -> IxiColor.OrangeTertiary
     IxiColor.Success -> IxiColor.SuccessTertiary
     IxiColor.Warning -> IxiColor.WarningTertiary
-    else -> IxiColor.OrangeTertiary
+    else -> colors
 }
 
 fun Modifier.updateWidth(width: Int) = when (width) {

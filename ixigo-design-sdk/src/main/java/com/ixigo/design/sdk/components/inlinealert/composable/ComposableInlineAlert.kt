@@ -1,5 +1,6 @@
 package com.ixigo.design.sdk.components.inlinealert.composable
 
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,7 +17,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -28,7 +28,7 @@ fun ComposableInlineAlert(
     @DrawableRes logo: Int? = null,
     heading:String? = null,
     text:String,
-    @DrawableRes rightIcon:Int? = null,
+    @DrawableRes actionIcon:Int? = null,
     leftButtonText:String? = null,
     leftButtonClickListener:() -> Unit = {},
     rightButtonText:String? = null,
@@ -36,7 +36,8 @@ fun ComposableInlineAlert(
     onRightIconClickListener: (()->Unit)? = null,
     ixiColor: IxiColor = IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400),
     headingAlignment: TextAlign = TextAlign.Start,
-    textAlignment: TextAlign = TextAlign.Start
+    textAlignment: TextAlign = TextAlign.Start,
+    buttonColor:Int? = null
 ) {
     Box(
         modifier = Modifier
@@ -62,18 +63,19 @@ fun ComposableInlineAlert(
                         rightButtonClickListener = rightButtonClickListener,
                         ixiColor = ixiColor,
                         headingAlignment = headingAlignment,
-                        textAlignment = textAlignment
+                        textAlignment = textAlignment,
+                        buttonColor = buttonColor
                     )
                 }
             }
-            rightIcon?.let {
+            actionIcon?.let {
             Box(modifier = Modifier.weight(0.5f)) {
                     Icon(modifier = Modifier
                         .size(15.dp)
                         .align(Alignment.TopEnd)
                         .clickable {
                             onRightIconClickListener?.invoke()
-                        }, painter = painterResource(id = rightIcon), contentDescription = null)
+                        }, painter = painterResource(id = actionIcon), contentDescription = null)
                 }
             }
         }
@@ -92,7 +94,8 @@ fun InlineAlertContent(
     rightButtonClickListener:() -> Unit = {},
     ixiColor: IxiColor,
     headingAlignment: TextAlign = TextAlign.Start,
-    textAlignment: TextAlign = TextAlign.Start
+    textAlignment: TextAlign = TextAlign.Start,
+    @ColorRes buttonColor:Int?
 ){
     Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
         heading?.let {
@@ -107,6 +110,8 @@ fun InlineAlertContent(
                 leftButtonClickListener,
                 rightButtonText,
                 rightButtonClickListener,
+                ixiColor,
+                buttonColor
             )
         }
     }
@@ -119,14 +124,20 @@ fun InlineAlertButtonContainer(
     leftButtonClickListener:() -> Unit = {},
     rightButtonText:String? = null,
     rightButtonClickListener:() -> Unit = {},
+    ixiColor: IxiColor,
+    @ColorRes buttonColor:Int?
 ){
+    var buttonIxiColor:IxiColor?  =null
+    buttonColor?.let {
+        buttonIxiColor = IxiColor.Extra(R.color.n900,R.color.n900, buttonColor)
+    }
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.offset(x = (-10).dp)) {
         leftButtonText?.let {
-            ComposableTextButton(text = it, color = SdkManager.getConfig().project.color, size = ButtonSize.Small, width = -2, onClick = leftButtonClickListener)
+            ComposableTextButton(text = it, color =buttonIxiColor?:ixiColor, size = ButtonSize.Small, width = -2, onClick = leftButtonClickListener)
             Spacer(modifier = Modifier.width(8.dp))
         }
         rightButtonText?.let {
-            ComposableTextButton(text = it, color = SdkManager.getConfig().project.color, size = ButtonSize.Small, width = -2, onClick = rightButtonClickListener)
+            ComposableTextButton(text = it, color = buttonIxiColor?:ixiColor, size = ButtonSize.Small, width = -2, onClick = rightButtonClickListener)
         }
     }
 
@@ -140,7 +151,7 @@ fun PreviewComposable(){
         logo = R.drawable.ic_call_24,
         heading = "A short heading can be multiple liness this could also go into rwo lines",
         text = "Lorem ipsum dolor sit amet, consecteturds jdsjd sjkdks dk skds jkd skj",
-        rightIcon = R.drawable.ic_search,
+        actionIcon = R.drawable.ic_search,
     )
 }
 

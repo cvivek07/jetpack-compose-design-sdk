@@ -28,7 +28,7 @@ class InlineAlertFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let {
-            binding.neutralAlert.setRightIconClickListener{
+            binding.neutralAlert.setActionIconClickListener{
                 "Close Icon".toToast(it)
                 binding.neutralAlert.dismiss()
             }

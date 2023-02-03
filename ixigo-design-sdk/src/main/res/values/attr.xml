@@ -100,10 +100,11 @@
             <enum name="textEnd" value="1" />
             <enum name="center" value="2" />
         </attr>
-        <attr name="android:drawableEnd"  format="reference"/>
+        <attr name="actionIcon"  format="reference"/>
         <attr name="rightButtonText"  format="string"/>
         <attr name="leftButtonText"  format="string"/>
-        <attr name="inlineAlertType"  format="enum">
+        <attr name="buttonColor"  format="reference"/>
+        <attr name="inlineAlertColor"  format="enum">
             <enum name="yellow" value="0"/>
             <enum name="purple" value="1"/>
             <enum name="red" value="2"/>
