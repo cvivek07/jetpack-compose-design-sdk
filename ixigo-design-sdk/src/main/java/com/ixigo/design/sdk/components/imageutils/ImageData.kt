@@ -18,7 +18,27 @@ data class ImageData(
     val url: String?,
     val height: Dp?,
     val width: Dp?
-)
+) {
+    companion object {
+        fun createFromRes(drawableRes: Int, height: Dp? = null, width: Dp? = null) = ImageData(
+            drawableRes, null, null, null, height, width
+        )
+
+        fun createFromDrawable(drawable: Drawable?, height: Dp? = null, width: Dp? = null) =
+            ImageData(
+                null, drawable, null, null, height, width
+            )
+
+        fun createFromUrl(url: String, height: Dp? = null, width: Dp? = null) = ImageData(
+            null, null, null, url, height, width
+        )
+
+        fun createFromBitmap(bitmap: Bitmap, height: Dp? = null, width: Dp? = null) = ImageData(
+            null, null, bitmap, null, height, width
+        )
+
+    }
+}
 
 @Composable
 fun ImageData.getPainterForImage(): Painter? {

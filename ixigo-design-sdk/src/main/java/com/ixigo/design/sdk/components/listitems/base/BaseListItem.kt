@@ -8,6 +8,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.styles.IxiColor
 
 abstract class BaseListItem @JvmOverloads constructor(
@@ -43,42 +44,18 @@ abstract class BaseListItem @JvmOverloads constructor(
      * Sets the start icon for the ListItem.
      * @param icon The drawable resource ID of the start icon.
      */
-    fun setStartIcon(@DrawableRes icon: Int) {
+    fun setStartIcon(icon: ImageData?) {
         val inState = state.value
         state.value = inState.copy(startIcon = icon)
-    }
-
-    /**
-     * Set the title for the auto completer item
-     * @param title title to be set
-     */
-    /**
-     * Set the size of the start icon.
-     * @param widthInDp The width of the start icon in dp.
-     * @param heightInDp The height of the start icon in dp.
-     */
-    fun setStartIconSize(widthInDp: Int, heightInDp: Int) {
-        val inState = state.value
-        state.value = inState.copy(startIconWidth = widthInDp.dp, startIconHeight = heightInDp.dp)
     }
 
     /**
      * Set the end icon.
      * @param icon The drawable resource id of the end icon.
      */
-    fun setEndIcon(@DrawableRes icon: Int) {
+    fun setEndIcon(icon: ImageData?) {
         val inState = state.value
         state.value = inState.copy(endIcon = icon)
-    }
-
-    /**
-     * Set the size of the end icon.
-     * @param widthInDp The width of the end icon in dp.
-     * @param heightInDp The height of the end icon in dp.
-     */
-    fun setEndIconSize(widthInDp: Int, heightInDp: Int) {
-        val inState = state.value
-        state.value = inState.copy(endIconWidth = widthInDp.dp, endIconHeight = heightInDp.dp)
     }
 
 
@@ -86,60 +63,19 @@ abstract class BaseListItem @JvmOverloads constructor(
      * Set the avatar URL.
      * @param avatar The URL of the avatar.
      */
-    fun setAvatarUrl(avatar: String?) {
+    fun setAvatar(avatar: ImageData?) {
         val inState = state.value
-        state.value = inState.copy(startAvatarUrl = avatar)
-    }
-
-
-    /**
-     * Set the avatar place holder.
-     * @param icon The drawable resource id of the avatar place holder.
-     */
-    fun setAvatarPlaceHolder(@DrawableRes icon: Int) {
-        val inState = state.value
-        state.value = inState.copy(startAvatarPlaceHolder = icon)
-    }
-
-    /**
-     * Set the size of the avatar.
-     * @param widthInDp The width of the avatar in dp.
-     * @param heightInDp The height of the avatar in dp.
-     */
-    fun setAvatarSize(widthInDp: Int, heightInDp: Int) {
-        val inState = state.value
-        state.value =
-            inState.copy(startAvatarWidth = widthInDp.dp, startAvatarHeight = heightInDp.dp)
+        state.value = inState.copy(startAvatar = avatar)
     }
 
     /**
      * Set the start logo URL.
      * @param logoUrl The URL of the start logo.
      */
-    fun setStartLogoUrl(logoUrl: String?) {
+    fun setStartLogo(logoUrl: ImageData?) {
         val inState = state.value
-        state.value = inState.copy(startLogoUrl = logoUrl)
+        state.value = inState.copy(startLogo = logoUrl)
     }
-
-    /**
-     * Set the start logo icon.
-     * @param icon The drawable resource id of the start logo icon.
-     */
-    fun setStartLogoIcon(@DrawableRes icon: Int) {
-        val inState = state.value
-        state.value = inState.copy(startLogo = icon)
-    }
-
-    /**
-     * Set the size of the start logo.
-     * @param widthInDp The width of the start logo in dp.
-     * @param heightInDp The height of the start logo in dp.
-     */
-    fun setStartLogoSize(widthInDp: Int, heightInDp: Int) {
-        val inState = state.value
-        state.value = inState.copy(startLogoWidth = widthInDp.dp, startLogoHeight = heightInDp.dp)
-    }
-
 
     /**
      * set the initial state of the start checkbox. Providing this will make the checkbox visible.
@@ -201,29 +137,11 @@ abstract class BaseListItem @JvmOverloads constructor(
      * Set the end logo URL.
      * @param logoUrl The URL of the end logo.
      */
-    fun setEndLogoUrl(logoUrl: String?) {
+    fun setEndLogoUrl(logoUrl: ImageData?) {
         val inState = state.value
-        state.value = inState.copy(endLogoUrl = logoUrl)
+        state.value = inState.copy(endLogo = logoUrl)
     }
 
-    /**
-     * Sets the end icon for the list item.
-     * @param icon The drawable resource ID of the end icon.
-     */
-    fun setEndLogoIcon(@DrawableRes icon: Int) {
-        val inState = state.value
-        state.value = inState.copy(endLogo = icon)
-    }
-
-    /**
-     * Set the size of the end icon.
-     * @param widthInDp The width of the end icon in dp.
-     * @param heightInDp The height of the end icon in dp.
-     */
-    fun setEndLogoSize(widthInDp: Int, heightInDp: Int) {
-        val inState = state.value
-        state.value = inState.copy(endLogoWidth = widthInDp.dp, endLogoHeight = heightInDp.dp)
-    }
 
     /**
      * set the initial state of the end checkbox. Providing this will make the checkbox visible.
@@ -296,30 +214,17 @@ abstract class BaseListItem @JvmOverloads constructor(
 
 data class ListItemDataState(
     val paddingValues: PaddingValues,
-    @DrawableRes val startIcon: Int? = null,
-    val startIconWidth: Dp? = 18.dp,
-    val startIconHeight: Dp? = 18.dp,
-    val startAvatarUrl: String? = null,
-    @DrawableRes val startAvatarPlaceHolder: Int? = null,
-    val startAvatarWidth: Dp? = 40.dp,
-    val startAvatarHeight: Dp? = 40.dp,
-    @DrawableRes val startLogo: Int? = null,
-    val startLogoUrl: String? = null,
-    val startLogoWidth: Dp? = 50.dp,
-    val startLogoHeight: Dp? = 50.dp,
+    val startIcon: ImageData? = null,
+    val startAvatar: ImageData? = null,
+    val startLogo: ImageData? = null,
     val startCheckedValue: Boolean? = null,
     val startCheckChangeListener: (Boolean) -> Unit = {},
     val color: IxiColor,
     val title: String,
     val subTitle: String? = null,
     val metaText: String? = null,
-    val endIcon: Int? = null,
-    val endIconWidth: Dp? = 18.dp,
-    val endIconHeight: Dp? = 18.dp,
-    val endLogo: Int? = null,
-    val endLogoUrl: String? = null,
-    val endLogoWidth: Dp? = 50.dp,
-    val endLogoHeight: Dp? = 50.dp,
+    val endIcon: ImageData? = null,
+    val endLogo: ImageData? = null,
     val endCheckedValue: Boolean? = null,
     val endCheckChangeListener: (Boolean) -> Unit = {},
     val endSwitchValue: Boolean? = null,
