@@ -9,7 +9,7 @@
         android:id="@+id/componentFragment"
         android:name="com.ixigo.design.sdk.ComponentsFragment"
         android:label="@string/components_fragments"
-        tools:layout="@layout/fragment_components">
+        >
 
         <action
             android:id="@+id/action_ComponentFragment_to_ButtonsFragment"
@@ -23,6 +23,9 @@
             android:id="@+id/action_componentFragment_to_typographyFragment"
             app:destination="@id/typographyFragment" />
         <action
+            android:id="@+id/action_componentFragment_to_separatorFragment"
+            app:destination="@id/separatorFragment" />
+        <action
             android:id="@+id/action_componentFragment_to_bottomSheetFragment"
             app:destination="@id/bottomSheetFragment" />
 
@@ -35,6 +38,13 @@
         <action
             android:id="@+id/action_componentFragment_to_tabBarFragment"
             app:destination="@id/tabBarFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_autoCompleterFragment"
+            app:destination="@id/autoCompleterFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_listItemFragment"
+            app:destination="@id/listItemFragment" />
+
         <action
             android:id="@+id/action_componentFragment_to_bottom_nav_fragment"
             app:destination="@id/bottom_nav_fragment" />
@@ -57,49 +67,62 @@
         android:id="@+id/inputFieldsFragment"
         android:name="com.ixigo.design.sdk.InputFieldsFragment"
         android:label="@string/input_fields"
-        tools:layout="@layout/fragment_input_fields">
-    </fragment>
+        tools:layout="@layout/fragment_input_fields"/>
 
     <fragment
         android:id="@+id/typographyFragment"
         android:name="com.ixigo.design.sdk.TypographyFragment"
         android:label="@string/typography"
-        tools:layout="@layout/fragment_typography">
-    </fragment>
+        tools:layout="@layout/fragment_typography"/>
 
     <fragment
         android:id="@+id/progressStepFragment"
         android:name="com.ixigo.design.sdk.ProgressStepFragment"
         android:label="@string/progress_step"
-        tools:layout="@layout/fragment_progress_step">
-    </fragment>
+        tools:layout="@layout/fragment_progress_step"/>
 
     <fragment
         android:id="@+id/topAppBarFragment"
         android:name="com.ixigo.design.sdk.TopAppBarFragment"
         android:label="@string/top_app_bar"
-        tools:layout="@layout/fragment_top_app_bar">
-    </fragment>
+        tools:layout="@layout/fragment_top_app_bar"/>
 
     <fragment
         android:id="@+id/tabBarFragment"
         android:name="com.ixigo.design.sdk.TabBarFragment"
         android:label="@string/tab_bar"
-        tools:layout="@layout/fragment_tab_bar">
-    </fragment>
+        tools:layout="@layout/fragment_tab_bar"/>
 
     <fragment
         android:id="@+id/chipFragment"
         android:name="com.ixigo.design.sdk.ChipFragment"
         android:label="@string/tab_bar"
-        tools:layout="@layout/fragment_chips">
-    </fragment>
+        tools:layout="@layout/fragment_chips"/>
+
 
     <fragment
         android:id="@+id/bottom_nav_fragment"
         android:name="com.ixigo.design.sdk.BottomNavFragment"
         android:label="@string/bottom_nav"
-        tools:layout="@layout/fragment_bottom_nav">
+        tools:layout="@layout/fragment_bottom_nav"/>
+    <fragment
+        android:id="@+id/autoCompleterFragment"
+        android:name="com.ixigo.design.sdk.AutoCompleterFragment"
+        tools:layout="@layout/fragment_auto_completer"
+        android:label="AutoCompleter" />
+
+    <fragment
+        android:id="@+id/listItemFragment"
+        android:name="com.ixigo.design.sdk.ListItemFragment"
+        tools:layout="@layout/fragment_list_item"
+        android:label="List Items" />
+
+
+    <fragment
+        android:id="@+id/separatorFragment"
+        android:name="com.ixigo.design.sdk.SeparatorFragment"
+        android:label="@string/separator"
+        tools:layout="@layout/fragment_separator">
     </fragment>
 
     <fragment

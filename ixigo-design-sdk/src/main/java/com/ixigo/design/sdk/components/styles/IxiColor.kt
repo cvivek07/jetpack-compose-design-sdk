@@ -48,6 +48,34 @@ sealed class IxiColor(
 
     internal object ExtensionTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.p500)
+
+    internal fun getSecondaryColor(): IxiColor {
+        return when (this) {
+            Blue -> BlueSecondary
+            Error -> ErrorSecondary
+            Extension -> ExtensionSecondary
+            Orange -> OrangeSecondary
+            Success -> SuccessSecondary
+            Warning -> WarningSecondary
+            else -> {
+                BlueSecondary
+            }
+        }
+    }
+
+    internal fun getTertiaryColor(): IxiColor {
+        return when (this) {
+            Blue -> BlueTertiary
+            Error -> ErrorTertiary
+            Extension -> ExtensionTertiary
+            Orange -> OrangeTertiary
+            Success -> SuccessTertiary
+            Warning -> WarningTertiary
+            else -> {
+                BlueSecondary
+            }
+        }
+    }
 }
 
 open class IxiChipColor(
