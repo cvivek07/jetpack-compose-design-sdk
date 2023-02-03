@@ -49,6 +49,10 @@ abstract class BaseListItem @JvmOverloads constructor(
     }
 
     /**
+     * Set the title for the auto completer item
+     * @param title title to be set
+     */
+    /**
      * Set the size of the start icon.
      * @param widthInDp The width of the start icon in dp.
      * @param heightInDp The height of the start icon in dp.

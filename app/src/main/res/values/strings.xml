@@ -15,6 +15,8 @@
     <string name="progress_step">Progress Step</string>
     <string name="top_app_bar">Top App Bar</string>
     <string name="tab_bar">Tab Bar</string>
+    <string name="display">Display</string>
     <string name="bottom_nav">Bottom Navigation</string>
     <string name="display">Display</string>
+    <string name="separator">Separator</string>
 </resources>

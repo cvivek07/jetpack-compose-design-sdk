@@ -1,5 +1,6 @@
 package com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable
 
+import android.graphics.drawable.Drawable
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
@@ -16,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
@@ -30,6 +32,7 @@ import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
+import com.ixigo.design.sdk.utils.DrawablePainter
 
 
 /**
@@ -45,8 +48,8 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
  */
 @Composable
 fun ComposableBottomNavItem(
-    @DrawableRes icon: Int?,
-    @DrawableRes selectedIcon: Int? = null,
+    icon: CompatImage?,
+    selectedIcon: CompatImage? = null,
     label: String?,
     selected: Boolean = false,
     onClick: () -> Unit,
@@ -101,7 +104,7 @@ fun ComposableBottomNavItem(
  */
 @Composable
 fun IconWithBadge(
-    @DrawableRes icon: Int?,
+    icon: CompatImage?,
     badgeType: BadgeType? = null,
     badgeContent: String? = null,
     @ColorRes tint: Int? = null,
@@ -122,14 +125,24 @@ fun IconWithBadge(
                     .align(Alignment.Center)
                     .then(if (enableBackground) Modifier.background(colorResource(id = ixiColor.pressedColor)) else Modifier)
             ) {
-                Icon(
-                    painter = painterResource(id = icon),
-                    contentDescription = null,
-                    tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
-                    modifier = Modifier
-                        .align(Alignment.Center)
-                        .size(24.dp)
-                )
+                val painter: Painter? =
+                    if (icon.drawable != null) {
+                        DrawablePainter(icon.drawable)
+                    } else if (icon.resourceId != null) {
+                        painterResource(id = icon.resourceId)
+                    } else {
+                        null
+                    }
+                painter?.let {
+                    Icon(
+                        painter = painter,
+                        contentDescription = null,
+                        tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
+                        modifier = Modifier
+                            .align(Alignment.Center)
+                            .size(24.dp)
+                    )
+                }
             }
         }
         badgeType?.let {
@@ -161,7 +174,9 @@ fun NotificationBadge(
     if (badgeType == SMALL) {
        SmallBadge(modifier=modifier, borderColor = borderColor)
     } else if (badgeType == LARGE) {
-        LargeBadge(modifier = modifier, content = content, borderColor = borderColor)
+        LargeBadge(modifier = modifier
+            .height(20.dp)
+            .defaultMinSize(minWidth = 32.dp), content = content, borderColor = borderColor)
     }
 }
 
@@ -264,3 +279,5 @@ fun Badge(){
         LargeBadge(content="2000k")
     }
 }
+
+data class CompatImage(@DrawableRes val resourceId: Int?, val drawable: Drawable?)

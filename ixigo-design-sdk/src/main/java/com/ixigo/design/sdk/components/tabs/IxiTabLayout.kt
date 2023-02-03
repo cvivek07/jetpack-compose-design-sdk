@@ -5,9 +5,9 @@ import android.util.AttributeSet
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.tabs.base.BaseTabItem
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
-import com.ixigo.design.sdk.utils.DimensionUtils.toPx
 
 /**
  * IxiTabLayout provides a horizontal layout to display tabs.
@@ -37,9 +37,14 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toPx
  *  android:layout_height="wrap_content" />
  *```
  *
+ * You can add tab item using
+ * ```
+ * tabLayout.addTab(TabDataItem("Typography",R.drawable.start_drawable,R.drawable.end_drawable))
+ * ```
+ *
  * <h3>ViewPager integration</h3>
  *
- * You must use [IxiTabLayout]  together with [ViewPager2] only. You
+ * You should use [IxiTabLayout]  together with [ViewPager2]. You
  * can call ```setupWithViewPager(ViewPager2)``` to link the two together. This layout will be
  * automatically populated from the [PagerAdapter]'s page titles.
  *
@@ -59,13 +64,14 @@ import com.ixigo.design.sdk.utils.DimensionUtils.toPx
  *      android:layout_width="match_parent"
  *      android:layout_height="match_parent" />
  * </LinearLayout>
+ * ```
+ * In case you want to use it with [ViewPager], You can call you can call
+ * ```setupWithViewPager(ViewPager)``` to link the two together.
  *
  * @since 1.0
  */
 class IxiTabLayout @JvmOverloads constructor(
-    context: Context,
-    attrs: AttributeSet? = null,
-    defStyleAttr: Int = 0
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : TabLayout(context, attrs, defStyleAttr) {
 
     /**
@@ -73,10 +79,36 @@ class IxiTabLayout @JvmOverloads constructor(
      */
     var tabType: TabType = TabType.LINE
 
+    private val defaultPadding = resources.getDimensionPixelSize(R.dimen.dp_8)
+
     /**
-     * padding values to be set between two tabs items
+     * Start padding value of each TabItem
      */
-    var tabPaddingInDp: Int = 5
+    var tabPaddingStart: Int? = defaultPadding
+
+    /**
+     * End padding value of each TabItem
+     */
+    var tabPaddingEnd: Int? = defaultPadding
+
+
+    init {
+        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.IxiTabLayout)
+        try {
+
+            tabPaddingStart = typedArray.getDimensionPixelSize(
+                R.styleable.IxiTabLayout_tabPaddingStart,
+                defaultPadding
+            )
+            tabPaddingEnd = typedArray.getDimensionPixelSize(
+                R.styleable.IxiTabLayout_tabPaddingEnd,
+                defaultPadding
+            )
+            tabType = TabType.values()[typedArray.getInt(R.styleable.IxiTabLayout_tabType, 1)]
+        } finally {
+            typedArray.recycle()
+        }
+    }
 
     /**
      * Set up the [IxiTabLayout] wit [ViewPager2]
@@ -94,8 +126,6 @@ class IxiTabLayout @JvmOverloads constructor(
             throw IllegalStateException("TabItems Count does not match with ViewPager fragment count")
         }
 
-        tabMode = MODE_SCROLLABLE
-        tabGravity = GRAVITY_FILL
         setSelectedTabIndicator(null)
         tabRippleColor = null
 
@@ -111,13 +141,60 @@ class IxiTabLayout @JvmOverloads constructor(
         }.attach()
     }
 
+
+    /**
+     *  Add tab Item in Lined or Pill Shape. In case no tab type is provided it will create Lined
+     *  tab .
+     *
+     *  If this is the first tab to be added it will become the selected tab.
+     *
+     *  @param tabData Details rewuired to create the Tab
+     */
+    fun addTab(tabData: TabDataItem) {
+        addTabInternal(tabData)
+    }
+
+    /**
+     *  Add tab Item in Lined or Pill Shape at particular position. In case no tab type is
+     *  provided it will create Lined tab.
+     *
+     *  In case position is not valid, tab will be added at end.
+     *  Fore Example if negative position is provided or position overflows the existing tab count,
+     *  it will add tab item in last.
+     *
+     *  If this is the first tab to be added it will become the selected tab.
+     *
+     *  @param tabData Details rewuired to create the Tab
+     */
+    fun addTab(tabData: TabDataItem, position: Int) {
+        addTabInternal(tabData, position)
+    }
+
+    private fun addTabInternal(tabData: TabDataItem, position: Int = -1) {
+        // Removing default TabIndicator
+        setSelectedTabIndicator(null)
+
+        val tab = newTab()
+        val tabView = if (tabType == TabType.PILL) {
+            IxiPillTabItem(context)
+        } else {
+            IxiLineTabItems(context)
+        }
+        drawTab(tab, tabView, tabData)
+
+
+        if (position in 0 until tabCount) {
+            addTab(tab, position)
+        } else {
+            addTab(tab)
+        }
+    }
+
     private fun drawTab(tab: Tab, tabItem: BaseTabItem, dataItem: TabDataItem) {
-        val tabPadding = (tabPaddingInDp.toPx)
         tabItem.setEndDrawable(dataItem.endIcon)
         tabItem.setStartDrawable(dataItem.startIcon)
-        tabItem.setTopDrawable(dataItem.topIcon)
         tabItem.setTitle(dataItem.title ?: "")
-        tab.view.setPadding(tabPadding, 0, 0, 0)
+        tab.view.setPadding(tabPaddingStart ?: 0, 0, tabPaddingEnd ?: 0, 0)
         tab.customView = tabItem
     }
 }

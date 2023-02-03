@@ -9,7 +9,7 @@
         android:id="@+id/componentFragment"
         android:name="com.ixigo.design.sdk.ComponentsFragment"
         android:label="@string/components_fragments"
-        tools:layout="@layout/fragment_components">
+        >
 
         <action
             android:id="@+id/action_ComponentFragment_to_ButtonsFragment"
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_componentFragment_to_typographyFragment"
             app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_separatorFragment"
+            app:destination="@id/separatorFragment" />
 
         <action
             android:id="@+id/action_componentFragment_to_progressStepFragment"
@@ -39,8 +42,12 @@
             android:id="@+id/action_componentFragment_to_listItemFragment"
             app:destination="@id/listItemFragment" />
         <action
+        <action
             android:id="@+id/action_componentFragment_to_bottom_nav_fragment"
             app:destination="@id/bottom_nav_fragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_chipFragment"
+            app:destination="@id/chipFragment" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -89,6 +96,13 @@
     </fragment>
 
     <fragment
+        android:id="@+id/chipFragment"
+        android:name="com.ixigo.design.sdk.ChipFragment"
+        android:label="@string/tab_bar"
+        tools:layout="@layout/fragment_chips">
+    </fragment>
+
+    <fragment
         android:id="@+id/bottom_nav_fragment"
         android:name="com.ixigo.design.sdk.BottomNavFragment"
         android:label="@string/bottom_nav"
@@ -105,4 +119,16 @@
         android:name="com.ixigo.design.sdk.ListItemFragment"
         tools:layout="@layout/fragment_list_item"
         android:label="List Items" />
+    <fragment
+        android:id="@+id/autoCompleterFragment"
+        android:name="com.ixigo.design.sdk.AutoCompleterFragment"
+        tools:layout="@layout/fragment_auto_completer"
+        android:label="AutoCompleterFragment" />
+
+    <fragment
+        android:id="@+id/separatorFragment"
+        android:name="com.ixigo.design.sdk.SeparatorFragment"
+        android:label="@string/separator"
+        tools:layout="@layout/fragment_separator">
+    </fragment>
 </navigation>

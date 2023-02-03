@@ -1,6 +1,7 @@
 package com.ixigo.design.sdk.components.bottomnavigation.bottomnavbar
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.Menu
@@ -215,6 +216,78 @@ class IxiBottomNavBar @JvmOverloads constructor(
         return true
     }
 
+    /**
+     * Sets the unselected resource for the item at the given position.
+     *
+     * @param position The position of the item to be modified
+     * @param res The resource ID of the drawable to be used as the icon
+     */
+    fun setUnselectedResourceAtPosition(position:Int, @DrawableRes res: Int){
+        bottomNavItemList[position].setIcon(res)
+    }
+
+    /**
+     * Sets the unselected drawable for the item at the given position.
+     *
+     * @param position The position of the item to be modified
+     * @param res The drawable to be used as the icon
+     */
+    fun setUnselectedDrawableAtPosition(position:Int, res: Drawable){
+        bottomNavItemList[position].setIconDrawable(res)
+    }
+
+    /**
+     * Sets the selected resource for the item at the given position.
+     *
+     * @param position The position of the item to be modified
+     * @param res The resource ID of the drawable to be used as the selected icon
+     */
+    fun setSelectedResourceAtPosition(position:Int, @DrawableRes res: Int){
+        bottomNavItemList[position].setSelectedIcon(res)
+    }
+
+    /**
+     * Sets the selected drawable for the item at the given position.
+     *
+     * @param position The position of the item to be modified
+     * @param res The drawable to be used as the selected icon
+     */
+    fun setSelectedDrawableAtPosition(position:Int,  res: Drawable){
+        bottomNavItemList[position].setSelectedIconDrawable(res)
+    }
+
+    /**
+     * Sets both the unselected and selected resources for the item at the given position.
+     *
+     * @param position The position of the item to be modified
+     * @param icon The resource ID of the drawable to be used as the unselected icon (optional)
+     * @param selectedIcon The resource ID of the drawable to be used as the selected icon (optional)
+     */
+    fun setResourceAtPosition(position:Int, @DrawableRes icon: Int? = null,  @DrawableRes selectedIcon: Int? =null){
+        icon?.let {
+            setUnselectedResourceAtPosition(position = position, icon)
+        }
+        selectedIcon?.let {
+            setSelectedResourceAtPosition(position = position, selectedIcon)
+        }
+    }
+
+    /**
+     * Sets both the unselected and selected drawables for the item at the given position.
+     *
+     * @param position The position of the item to be modified
+     * @param icon The drawable to be used as the unselected icon (optional)
+     * @param selectedIcon The drawable to be used as the selected icon (optional)
+     */
+    fun setDrawableAtPosition(position:Int, icon: Drawable? = null, selectedIcon: Drawable? =null){
+        icon?.let {
+            setUnselectedDrawableAtPosition(position = position, icon)
+        }
+        selectedIcon?.let {
+            setSelectedDrawableAtPosition(position = position, selectedIcon)
+        }
+    }
+
     companion object {
         /**
          * Error message thrown when no bottom navigation items are found.
@@ -245,7 +318,6 @@ class IxiBottomNavBar @JvmOverloads constructor(
     }
 
     data class IxiBottomNavItemModel(
-        val context: Context,
         val label: String,
         val badgeType: BadgeType? = null,
         val badgeContent: String? = null,
