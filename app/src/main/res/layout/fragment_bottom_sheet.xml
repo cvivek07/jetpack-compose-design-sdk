@@ -23,7 +23,7 @@
         android:layout_marginTop="16dp"
         android:layout_gravity="center"
         android:id="@+id/third"
-        android:text="No Image Bottomsheet"
+        android:text="No Icon Bottomsheet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
