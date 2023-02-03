@@ -33,7 +33,7 @@ class BottomSheetFragment: Fragment() {
 
         //variant 1
         binding.first.setClickListener {
-            IxiBottomSheetHelper().showImageBottomSheet(
+            IxiBottomSheetHelper.showImageBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -50,7 +50,7 @@ class BottomSheetFragment: Fragment() {
 
 //        //variant 2
         binding.second.setClickListener {
-            IxiBottomSheetHelper().showFeatureIconBottomSheet(
+            IxiBottomSheetHelper.showFeatureIconBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -65,7 +65,7 @@ class BottomSheetFragment: Fragment() {
 
         //variant 3
         binding.third.setClickListener {
-            IxiBottomSheetHelper().showNoIconBottomSheet(
+            IxiBottomSheetHelper.showNoIconBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -79,7 +79,7 @@ class BottomSheetFragment: Fragment() {
 
 //        //variant 4
         binding.fourth.setClickListener {
-            IxiBottomSheetHelper().showBlankBottomSheet(
+            IxiBottomSheetHelper.showBlankBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     view = sampleBinding?.root,

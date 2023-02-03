@@ -6,7 +6,7 @@ import androidx.annotation.DrawableRes
 import androidx.fragment.app.FragmentManager
 import com.ixigo.design.sdk.components.bottomsheets.fragment.BottomSheetImplementation
 
-class IxiBottomSheetHelper {
+object IxiBottomSheetHelper {
     fun showImageBottomSheet(ixiBottomSheetUiModel: IxiBottomSheetUiModel, fragmentManager: FragmentManager){
         val fragment = BottomSheetImplementation.newInstance()
         fragment.setTitleText(ixiBottomSheetUiModel.titleText)
