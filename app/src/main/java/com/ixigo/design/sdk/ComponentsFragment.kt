@@ -40,7 +40,7 @@ class ComponentsFragment : Fragment() {
         Pair("ListItem", R.id.action_componentFragment_to_listItemFragment),
         Pair("Bottom Navigation", R.id.action_componentFragment_to_bottom_nav_fragment),
         Pair("Chips", R.id.action_componentFragment_to_chipFragment),
-        Pair("Bottom Sheet", R.id.action_componentFragment_to_bottomSheetFragment)
+        Pair("Bottom Sheet", R.id.action_componentFragment_to_bottomSheetFragment),
         Pair("Separator", R.id.action_componentFragment_to_separatorFragment)
     )
 
