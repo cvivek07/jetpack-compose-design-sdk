@@ -21,8 +21,8 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.progress_step.base.*
-import com.ixigo.design.sdk.components.progress_step.composables.*
+import com.ixigo.design.sdk.components.progressstep.base.*
+import com.ixigo.design.sdk.components.progressstep.composables.*
 import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import kotlinx.coroutines.CoroutineScope
