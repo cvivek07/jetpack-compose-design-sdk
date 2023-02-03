@@ -1,13 +1,14 @@
 package com.ixigo.design.sdk.components.inlinealert.base
 
+import android.animation.LayoutTransition
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.BaseComponent
-import com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
-import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 
 abstract class BaseInlineAlert @JvmOverloads constructor(
@@ -16,15 +17,8 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
     protected var state = mutableStateOf(InlineAlertState())
-    protected var rightButton: IxiTertiaryButton
-    protected var leftButton: IxiTertiaryButton
 
     init {
-        rightButton = IxiTertiaryButton(context)
-        leftButton = IxiTertiaryButton(context)
-        rightButton.setSize(ButtonSize.Small)
-        leftButton.setSize(ButtonSize.Small)
-        rightButton.setColor(mapTypeToColor(InlineAlertType.BLUE))
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseInlineAlert)
         try {
             val logo = typedArray.getResourceId(R.styleable.BaseInlineAlert_android_logo, -1)
@@ -90,26 +84,22 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
 
     fun setRightButtonText(text:String){
         val initState = state.value
-        rightButton.setText(text)
-        state.value = initState.copy(rightButton = rightButton)
+        state.value = initState.copy(rightButtonText = text)
     }
 
     fun setLeftButtonText(text:String){
         val initState = state.value
-        leftButton.setText(text)
-        state.value = initState.copy(leftButton = leftButton)
+        state.value = initState.copy(leftButtonText = text)
     }
 
     open fun setRightButtonClickListener(onClick:()->Unit){
         val initState = state.value
-        rightButton.setClickListener(onClick)
-        state.value = initState.copy(rightButton = rightButton)
+        state.value = initState.copy(rightButtonClickListener = onClick)
     }
 
     open fun setLeftButtonClickListener(onClick:()->Unit){
         val initState = state.value
-        leftButton.setClickListener(onClick)
-        state.value = initState.copy(leftButton = leftButton)
+        state.value = initState.copy(leftButtonClickListener = onClick)
     }
 
     open fun setColor(ixiColor: IxiColor){
@@ -125,6 +115,17 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
             InlineAlertType.GREEN -> IxiColor.Extra(bg = R.color.g50, text = R.color.g500, pressed = R.color.g400)
             InlineAlertType.BLUE -> IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
             InlineAlertType.NEUTRAL -> IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
+        }
+    }
+
+    fun dismiss(){
+        (parent as? ViewGroup)?.let {
+            val prevTransition = it.layoutTransition
+            val lt = LayoutTransition()
+            lt.disableTransitionType(LayoutTransition.DISAPPEARING)
+            it.layoutTransition = lt
+            it.removeView(this)
+            it.layoutTransition = prevTransition
         }
     }
 
@@ -148,8 +149,10 @@ data class InlineAlertState(
     val heading:String? = null,
     val text:String = "",
     @DrawableRes val rightIcon:Int? = null,
-    val leftButton: IxiTertiaryButton? = null,
-    val rightButton: IxiTertiaryButton? = null,
     val onRightIconClickListener: (()->Unit)? = null,
-    val ixiColor: IxiColor = IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
+    val ixiColor: IxiColor = SdkManager.getConfig().project.color,
+    val leftButtonText:String? = null,
+    val leftButtonClickListener:() -> Unit = {},
+    val rightButtonText:String? = null,
+    val rightButtonClickListener:() -> Unit = {},
 )

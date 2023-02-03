@@ -28,11 +28,12 @@ class InlineAlertFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         context?.let {
-            binding.neutralAlert.setRightButtonClickListener{
-                "Right Button".toToast(it)
-            }
-            binding.neutralAlert.setRightIconClickListener {
+            binding.neutralAlert.setRightIconClickListener{
                 "Close Icon".toToast(it)
+                binding.neutralAlert.dismiss()
+            }
+            binding.neutralAlert.setRightButtonClickListener {
+                "Right Button".toToast(it)
             }
             binding.neutralAlert.setLeftButtonClickListener {
                 "Left Button".toToast(it)

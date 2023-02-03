@@ -29,11 +29,15 @@ class IxiInlineAlert @JvmOverloads constructor(
                 heading = state.value.heading,
                 text = state.value.text,
                 rightIcon = state.value.rightIcon,
-                leftButton = state.value.leftButton,
-                rightButton = state.value.rightButton,
+                leftButtonText = state.value.leftButtonText,
+                leftButtonClickListener = leftButtonClickListener,
+                rightButtonText = state.value.rightButtonText,
+                rightButtonClickListener = rightButtonClickListener,
                 onRightIconClickListener = state.value.onRightIconClickListener,
-                ixiColor = state.value.ixiColor
+                ixiColor = state.value.ixiColor,
             )
         }
     }
+
+
 }
