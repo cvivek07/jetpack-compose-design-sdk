@@ -31,14 +31,26 @@ class TabBarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.tabLayout.tabType = TabType.LINE
         binding.tabLayout.tabMode = MODE_FIXED
+
         binding.tabLayout.addOnTabSelectedListener(object : OnTabSelectedListener {
             override fun onTabSelected(tab: Tab) {
-                val fragment =  when (tab.position) {
-                    0->{TypographyFragment()}
-                    1->{ButtonsFragment()}
-                    else->{TypographyFragment()}
+                val fragment = when (tab.position) {
+                    0 -> {
+                        TypographyFragment()
+                    }
+                    1 -> {
+                        ButtonsFragment()
+                    }
+                    2 -> {
+                        ProgressStepFragment()
+                    }
+                    3 -> {
+                        InputFieldsFragment()
+                    }
+                    else -> {
+                        TypographyFragment()
+                    }
                 }
                 val fm: FragmentManager = childFragmentManager
                 val ft: FragmentTransaction = fm.beginTransaction()
@@ -53,16 +65,26 @@ class TabBarFragment : Fragment() {
 
             override fun onTabReselected(tab: Tab) {}
         })
-        binding.tabLayout.addTab(TabDataItem("Typo", 0, 0, R.drawable.ic_baseline_cancel_24))
-        binding.tabLayout.addTab(TabDataItem("Buttons", 0, 0, R.drawable.ic_baseline_cancel_24))
-//        binding.tabLayout.setupWithViewPager2(binding.viewPager, dataList)
+        binding.tabLayout.addTab(
+            TabDataItem("Typography", 0, 0)
+        )
+        binding.tabLayout.addTab(
+            TabDataItem("Buttons", 0, 0)
+        )
+
+        binding.tabLayout.addTab(
+            TabDataItem("Progress Step", 0, 0)
+        )
+
+        binding.tabLayout.addTab(
+            TabDataItem("Input Field", 0, 0)
+        )
 
         val fragments2 = listOf(ProgressStepFragment(), InputFieldsFragment())
         val dataList2 = listOf(
-            TabDataItem("Progress Step", 0, 0, 0),
-            TabDataItem("Buttons", 0, 0, R.drawable.ic_baseline_cancel_24)
+            TabDataItem("Progress Step", 0, 0),
+            TabDataItem("Buttons", 0, 0)
         )
-
 
         binding.viewPager2.adapter = PagerAdapter(parentFragmentManager, lifecycle, fragments2)
         binding.linedTabLayout.tabType = TabType.PILL

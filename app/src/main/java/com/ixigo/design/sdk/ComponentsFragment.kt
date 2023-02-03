@@ -39,6 +39,7 @@ class ComponentsFragment : Fragment() {
         Pair("Bottom Navigation", R.id.action_componentFragment_to_bottom_nav_fragment),
         Pair("Chips", R.id.action_componentFragment_to_chipFragment),
         Pair("Inline Alert", R.id.action_componentFragment_to_inlineAlertFragment),
+        Pair("Separator", R.id.action_componentFragment_to_separatorFragment)
     )
 
     override fun onCreateView(

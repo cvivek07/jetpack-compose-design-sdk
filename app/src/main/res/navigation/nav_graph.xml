@@ -9,7 +9,7 @@
         android:id="@+id/componentFragment"
         android:name="com.ixigo.design.sdk.ComponentsFragment"
         android:label="@string/components_fragments"
-        tools:layout="@layout/fragment_components">
+        >
 
         <action
             android:id="@+id/action_ComponentFragment_to_ButtonsFragment"
@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_componentFragment_to_typographyFragment"
             app:destination="@id/typographyFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_separatorFragment"
+            app:destination="@id/separatorFragment" />
 
         <action
             android:id="@+id/action_componentFragment_to_progressStepFragment"
@@ -106,5 +109,12 @@
         android:name="com.ixigo.design.sdk.BottomNavFragment"
         android:label="@string/bottom_nav"
         tools:layout="@layout/fragment_bottom_nav">
+    </fragment>
+
+    <fragment
+        android:id="@+id/separatorFragment"
+        android:name="com.ixigo.design.sdk.SeparatorFragment"
+        android:label="@string/separator"
+        tools:layout="@layout/fragment_separator">
     </fragment>
 </navigation>
