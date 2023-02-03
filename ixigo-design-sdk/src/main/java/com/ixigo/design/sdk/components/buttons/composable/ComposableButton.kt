@@ -429,6 +429,7 @@ private fun mapSecStyle(colors: IxiColor) = when (colors) {
     IxiColor.Extension -> IxiColor.ExtensionSecondary
     IxiColor.Orange -> IxiColor.OrangeSecondary
     IxiColor.Success -> IxiColor.SuccessSecondary
+    IxiColor.Neutral -> IxiColor.NeutralSecondary
     IxiColor.Warning -> IxiColor.WarningSecondary
     else -> IxiColor.OrangeSecondary
 }
@@ -441,6 +442,7 @@ private fun mapTertiaryStyle(colors: IxiColor) = when (colors) {
     IxiColor.Orange -> IxiColor.OrangeTertiary
     IxiColor.Success -> IxiColor.SuccessTertiary
     IxiColor.Warning -> IxiColor.WarningTertiary
+    IxiColor.Neutral -> IxiColor.NeutralTertiary
     else -> colors
 }
 

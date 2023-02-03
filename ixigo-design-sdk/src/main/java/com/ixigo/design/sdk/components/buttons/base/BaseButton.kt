@@ -6,9 +6,9 @@ import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
-import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiShape
 
 /**
  * Base class for all the buttons. Extend this class to create a new type of button
@@ -33,6 +33,10 @@ abstract class BaseButton @JvmOverloads constructor(
             val drawableStart =
                 typedArray.getResourceId(R.styleable.BaseButton_android_drawableStart, 0)
             setHorizontalDrawables(drawableStart, drawableEnd)
+            val ixiColorAttr = typedArray.getInt(R.styleable.BaseButton_ixiColor, -1)
+            if (ixiColorAttr!=-1) {
+                this.setColor(IxiColor.mapFromAttrEnum(ixiColorAttr))
+            }
         } finally {
             typedArray.recycle()
         }
