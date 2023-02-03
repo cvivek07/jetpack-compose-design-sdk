@@ -22,7 +22,7 @@
         app:rightButtonText="Button"
         app:leftButtonText="Button"
         app:inlineAlertColor="neutral"
-        app:buttonColor="@color/o900"
+        app:buttonColor="@color/o800"
         />
 
     <include layout="@layout/divider"/>
