@@ -77,7 +77,7 @@ class IxiText @JvmOverloads constructor(
 
     private var textColorRes: Int
     private val state = mutableStateOf(
-        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, {})
+        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, null)
     )
 
     init {
@@ -177,22 +177,25 @@ class IxiText @JvmOverloads constructor(
         setViewCompositionStrategy(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
+        val modifier = if (state.value.onClick != null) {
+            Modifier.clickable {
+                state.value.onClick!!.invoke()
+            }
+        } else {
+            Modifier
+        }
         if (state.value.text != null) {
             TypographyText(
                 text = state.value.text!!,
                 textStyle = state.value.textStyle,
-                modifier = Modifier.clickable {
-                    state.value.onClick()
-                }
+                modifier = modifier
             )
         }
         if (state.value.spannedString != null) {
             TypographyText(
                 spanned = state.value.spannedString!!,
                 textStyle = state.value.textStyle,
-                modifier = Modifier.clickable {
-                    state.value.onClick()
-                }
+                modifier = modifier
             )
         }
     }
@@ -203,5 +206,5 @@ data class TextState(
     val spannedString: Spanned? = null,
     val textStyle: TextStyle,
     @ColorInt val color: Int?,
-    val onClick: () -> Unit
+    val onClick: (() -> Unit)?
 )

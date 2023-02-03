@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.base.BaseBottomNavItem
+import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.CompatImage
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.ComposableBottomNavItem
 
 /**
@@ -17,7 +18,7 @@ import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable
  * @param attrs The attribute set for the view
  * @param defStyleAttr The default style attribute
  */
-class IxiBottomNavItem @JvmOverloads constructor(
+internal class IxiBottomNavItem @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
@@ -32,8 +33,8 @@ class IxiBottomNavItem @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
         ComposableBottomNavItem(
-            icon = state.value.icon,
-            selectedIcon = state.value.selectedIcon,
+            icon = CompatImage(resourceId = state.value.icon, drawable = state.value.iconDrawable),
+            selectedIcon = CompatImage(resourceId = state.value.selectedIcon, drawable = state.value.selectedIconDrawable),
             label = state.value.label,
             selected = state.value.selected,
             onClick = state.value.onClick,

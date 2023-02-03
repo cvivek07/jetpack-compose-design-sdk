@@ -19,7 +19,6 @@ abstract class BaseComponent @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         if (isInEditMode) {
-            SdkManager.initSdk(DesignConfig(Project.TRAIN))
             setupEditMode()
         }
         super.onAttachedToWindow()

@@ -38,6 +38,8 @@ class ComponentsFragment : Fragment() {
         Pair("TabBar", R.id.action_componentFragment_to_tabBarFragment),
         Pair("Bottom Navigation", R.id.action_componentFragment_to_bottom_nav_fragment),
         Pair("AutoCompleter", R.id.action_componentFragment_to_autoCompleterFragment),
+        Pair("Chips", R.id.action_componentFragment_to_chipFragment),
+        Pair("Separator", R.id.action_componentFragment_to_separatorFragment)
     )
 
     override fun onCreateView(
