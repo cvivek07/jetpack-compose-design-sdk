@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.base.BaseBottomNavItem
-import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.CompatImage
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.ComposableBottomNavItem
+import com.ixigo.design.sdk.components.imageutils.ImageData
 
 /**
  * IxiBottomNavItem is a class that extends [BaseBottomNavItem].
@@ -33,8 +33,22 @@ internal class IxiBottomNavItem @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindow
         )
         ComposableBottomNavItem(
-            icon = CompatImage(resourceId = state.value.icon, drawable = state.value.iconDrawable),
-            selectedIcon = CompatImage(resourceId = state.value.selectedIcon, drawable = state.value.selectedIconDrawable),
+            icon = ImageData(
+                drawableRes = state.value.icon,
+                drawable = state.value.iconDrawable,
+                drawableBitmap = null,
+                url = null,
+                height = null,
+                width = null
+            ),
+            selectedIcon = ImageData(
+                drawableRes = state.value.selectedIcon,
+                drawable = state.value.selectedIconDrawable,
+                drawableBitmap = null,
+                url = null,
+                height = null,
+                width = null
+            ),
             label = state.value.label,
             selected = state.value.selected,
             onClick = state.value.onClick,
