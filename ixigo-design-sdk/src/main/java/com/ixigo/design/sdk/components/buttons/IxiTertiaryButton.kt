@@ -6,9 +6,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
-import com.ixigo.design.sdk.components.styles.IxiColor
-import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 /**
  * A user interface element which has only text and no background and  user can tap or click to perform
@@ -62,17 +61,6 @@ class IxiTertiaryButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : BaseButton(context, attrs, defStyleAttr) {
 
-    private fun mapTertiaryStyle(colors: IxiColor) = when (colors) {
-        IxiColor.Blue -> IxiColor.BlueTertiary
-        IxiColor.Disabled -> IxiColor.Disabled
-        IxiColor.Error -> IxiColor.ErrorTertiary
-        IxiColor.Extension -> IxiColor.ExtensionTertiary
-        IxiColor.Orange -> IxiColor.OrangeTertiary
-        IxiColor.Success -> IxiColor.SuccessTertiary
-        IxiColor.Warning -> IxiColor.WarningTertiary
-        else -> IxiColor.OrangeTertiary
-    }
-
 
     public override fun setColor(color: IxiColor) {
         super.setColor(color)
@@ -90,7 +78,7 @@ class IxiTertiaryButton @JvmOverloads constructor(
         with(state.value) {
             ComposableTextButton(
                 text,
-                mapTertiaryStyle(colors),
+                colors,
                 sizes,
                 preferredWidth,
                 isEnabled,

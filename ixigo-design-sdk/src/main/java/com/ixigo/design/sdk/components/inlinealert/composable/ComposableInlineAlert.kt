@@ -7,12 +7,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
@@ -21,6 +21,7 @@ import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 @Composable
 fun ComposableInlineAlert(
@@ -33,7 +34,9 @@ fun ComposableInlineAlert(
     rightButtonText:String? = null,
     rightButtonClickListener:() -> Unit = {},
     onRightIconClickListener: (()->Unit)? = null,
-    ixiColor: IxiColor = IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
+    ixiColor: IxiColor = IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400),
+    headingAlignment: TextAlign = TextAlign.Start,
+    textAlignment: TextAlign = TextAlign.Start
 ) {
     Box(
         modifier = Modifier
@@ -45,7 +48,7 @@ fun ComposableInlineAlert(
     ) {
         Row(verticalAlignment = Alignment.Top, modifier = Modifier.padding(10.dp)) {
             Box(modifier = Modifier.weight(3f)){
-                Row(verticalAlignment = Alignment.Top) {
+                Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.Center) {
                     logo?.let {
                         Image(modifier = Modifier.size(40.dp),painter = painterResource(id = logo), contentDescription = null)
                         Spacer(modifier = Modifier.width(5.dp))
@@ -57,12 +60,14 @@ fun ComposableInlineAlert(
                         leftButtonClickListener = leftButtonClickListener,
                         rightButtonText = rightButtonText,
                         rightButtonClickListener = rightButtonClickListener,
-                        ixiColor = ixiColor
+                        ixiColor = ixiColor,
+                        headingAlignment = headingAlignment,
+                        textAlignment = textAlignment
                     )
                 }
             }
+            rightIcon?.let {
             Box(modifier = Modifier.weight(0.5f)) {
-                rightIcon?.let {
                     Icon(modifier = Modifier
                         .size(15.dp)
                         .align(Alignment.TopEnd)
@@ -85,14 +90,16 @@ fun InlineAlertContent(
     leftButtonClickListener:() -> Unit = {},
     rightButtonText:String? = null,
     rightButtonClickListener:() -> Unit = {},
-    ixiColor: IxiColor
+    ixiColor: IxiColor,
+    headingAlignment: TextAlign = TextAlign.Start,
+    textAlignment: TextAlign = TextAlign.Start
 ){
-    Column {
+    Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
         heading?.let {
-            Text(text = heading, style = IxiTypography.Body.Small.regular.copy(colorResource(id = ixiColor.textColor)))
+            TypographyText(modifier = Modifier.fillMaxWidth(), text = heading, textStyle = IxiTypography.Body.Small.regular.copy(colorResource(id = ixiColor.textColor)), textAlign = headingAlignment)
             Spacer(modifier = Modifier.height(6.dp))
         }
-        Text(text = text, style = IxiTypography.Body.XSmall.regular.copy(colorResource(id = ixiColor.pressedColor)))
+        TypographyText(modifier = Modifier.fillMaxWidth(), text = text, textStyle = IxiTypography.Body.XSmall.regular.copy(colorResource(id = ixiColor.pressedColor)), textAlign = textAlignment)
         if(leftButtonText!=null || rightButtonText!=null){
             Spacer(modifier = Modifier.height(8.dp))
             InlineAlertButtonContainer(

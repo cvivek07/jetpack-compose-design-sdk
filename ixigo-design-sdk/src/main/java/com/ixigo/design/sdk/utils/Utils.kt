@@ -1,9 +1,12 @@
 package com.ixigo.design.sdk.utils
 
 import android.content.Context
-import android.util.TypedValue
 import android.content.res.Resources
+import android.text.Layout
 import android.util.DisplayMetrics
+import android.util.TypedValue
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.style.TextAlign
 
 
 object Utils {
@@ -19,6 +22,15 @@ object Utils {
         val resources: Resources = context.resources
         val metrics: DisplayMetrics = resources.displayMetrics
         return dp * (metrics.densityDpi / 160f)
+    }
+
+    @Composable
+    fun mapLayoutAlignmentToComposeAlignment(alignment: Layout.Alignment): TextAlign{
+        return when(alignment){
+            Layout.Alignment.ALIGN_NORMAL -> TextAlign.Start
+            Layout.Alignment.ALIGN_OPPOSITE -> TextAlign.End
+            Layout.Alignment.ALIGN_CENTER -> TextAlign.Center
+        }
     }
 
 }

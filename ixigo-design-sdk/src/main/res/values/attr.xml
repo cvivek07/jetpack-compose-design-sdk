@@ -90,6 +90,16 @@
         <attr name="android:logo" format="reference" />
         <attr name="heading"  format="string"/>
         <attr name="android:text"  format="string"/>
+        <attr name="contentAlignment"  format="integer">
+            <enum name="textStart" value="0" />
+            <enum name="textEnd" value="1" />
+            <enum name="center" value="2" />
+        </attr>
+        <attr name="headingAlignment"  format="integer">
+            <enum name="textStart" value="0" />
+            <enum name="textEnd" value="1" />
+            <enum name="center" value="2" />
+        </attr>
         <attr name="android:drawableEnd"  format="reference"/>
         <attr name="rightButtonText"  format="string"/>
         <attr name="leftButtonText"  format="string"/>

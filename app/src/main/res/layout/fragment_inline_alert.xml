@@ -91,6 +91,15 @@
         app:inlineAlertType="yellow"
         />
     <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.inlinealert.IxiInlineAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Lorem ipsum dolor sit amet, consectetur"
+        app:inlineAlertType="neutral"
+        app:contentAlignment="center"
+        android:textAlignment="center"
+        />
+    <include layout="@layout/divider"/>
 
 </LinearLayout>
 </ScrollView>

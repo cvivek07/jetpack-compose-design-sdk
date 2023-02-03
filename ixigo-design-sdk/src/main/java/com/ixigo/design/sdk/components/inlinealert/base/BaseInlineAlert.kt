@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.inlinealert.base
 
 import android.animation.LayoutTransition
 import android.content.Context
+import android.text.Layout.Alignment
 import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
@@ -34,7 +35,7 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
                 setText(text)
             }
             val rightIcon = typedArray.getResourceId(R.styleable.BaseInlineAlert_android_drawableEnd, -1)
-            if(logo!=-1){
+            if(rightIcon!=-1){
                 setRightIcon(rightIcon)
             }
             val rightButtonText = typedArray.getString(R.styleable.BaseInlineAlert_rightButtonText)
@@ -51,6 +52,8 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
                     setColor(mapTypeToColor(it))
                 }
             }
+            textAlignment(mapAlignment(typedArray.getInt(R.styleable.BaseInlineAlert_contentAlignment, 0)))
+            headingAlignment(mapAlignment(typedArray.getInt(R.styleable.BaseInlineAlert_contentAlignment, 0)))
         } finally {
             typedArray.recycle()
         }
@@ -107,6 +110,16 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
         state.value = initState.copy(ixiColor = ixiColor)
     }
 
+    fun headingAlignment(alignment: Alignment){
+        val initState = state.value
+        state.value = initState.copy(headingAlignment = alignment)
+    }
+
+    fun textAlignment(alignment: Alignment){
+        val initState = state.value
+        state.value = initState.copy(textAlignment = alignment)
+    }
+
     protected fun mapTypeToColor(inlineAlertType:InlineAlertType):IxiColor{
        return when(inlineAlertType){
             InlineAlertType.YELLOW -> IxiColor.Extra(bg = R.color.y50, text = R.color.y700, pressed = R.color.y700)
@@ -116,6 +129,16 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
             InlineAlertType.BLUE -> IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
             InlineAlertType.NEUTRAL -> IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
         }
+    }
+
+    protected fun mapAlignment(int: Int): Alignment{
+        return when(int){
+            0-> Alignment.ALIGN_NORMAL
+            1-> Alignment.ALIGN_OPPOSITE
+            2-> Alignment.ALIGN_CENTER
+            else -> Alignment.ALIGN_NORMAL
+        }
+
     }
 
     fun dismiss(){
@@ -155,4 +178,6 @@ data class InlineAlertState(
     val leftButtonClickListener:() -> Unit = {},
     val rightButtonText:String? = null,
     val rightButtonClickListener:() -> Unit = {},
+    val headingAlignment: Alignment = Alignment.ALIGN_NORMAL,
+    val textAlignment: Alignment = Alignment.ALIGN_NORMAL
 )

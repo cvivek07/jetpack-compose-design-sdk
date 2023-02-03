@@ -7,7 +7,10 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
+import androidx.compose.material.OutlinedButton
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -23,10 +26,13 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.ixigo.design.sdk.components.buttons.*
-import com.ixigo.design.sdk.components.styles.IxiShape
+import com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
+import com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
+import com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
+import com.ixigo.design.sdk.components.buttons.IxiTertiaryButton
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.utils.DimensionUtils.toDp
 
@@ -236,7 +242,7 @@ internal fun ComposableTextButton(
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
 ) {
-    val textColor = if (isEnabled) color.textColor else IxiColor.Disabled.textColor
+    val textColor = if (isEnabled) mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
 
     TextButton(
         onClick = onClick,
@@ -425,6 +431,17 @@ private fun mapSecStyle(colors: IxiColor) = when (colors) {
     IxiColor.Success -> IxiColor.SuccessSecondary
     IxiColor.Warning -> IxiColor.WarningSecondary
     else -> IxiColor.OrangeSecondary
+}
+
+private fun mapTertiaryStyle(colors: IxiColor) = when (colors) {
+    IxiColor.Blue -> IxiColor.BlueTertiary
+    IxiColor.Disabled -> IxiColor.Disabled
+    IxiColor.Error -> IxiColor.ErrorTertiary
+    IxiColor.Extension -> IxiColor.ExtensionTertiary
+    IxiColor.Orange -> IxiColor.OrangeTertiary
+    IxiColor.Success -> IxiColor.SuccessTertiary
+    IxiColor.Warning -> IxiColor.WarningTertiary
+    else -> IxiColor.OrangeTertiary
 }
 
 fun Modifier.updateWidth(width: Int) = when (width) {
