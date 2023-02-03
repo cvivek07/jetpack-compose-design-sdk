@@ -2,9 +2,9 @@ package com.ixigo.design.sdk.components.listitems.base
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.imageutils.ImageData
 
 abstract class BaseAutoCompleter @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -23,7 +23,7 @@ abstract class BaseAutoCompleter @JvmOverloads constructor(
 
     /**
      * Set the code inside the bordered box
-     * @param code value to be set
+     * @param title value to be set
      */
     fun setIconCode(title: String?) {
         val inState = state.value
@@ -41,20 +41,22 @@ abstract class BaseAutoCompleter @JvmOverloads constructor(
 
     /**
      * Set the drawable resource inside the bordered box
-     * @param icon drawable resource to be set
+     * @param imageData [ImageData] object to set resource to be set. If [ImageData] contains both
+     * [ImageData.drawable] and [ImageData.drawableRes], [ImageData.drawable] will be used.
      */
-    fun setIcon(@DrawableRes icon: Int) {
+    fun setIcon( imageData: ImageData) {
         val inState = state.value
-        state.value = inState.copy(startIconRes = icon)
+        state.value = inState.copy(startIconData = imageData)
     }
 
     /**
      * Set the drawable resource at the right side of the item
-     * @param icon drawable resource to be set
+     * @param imageData [ImageData] object to set resource to be set. If [ImageData] contains both
+     * [ImageData.drawable] and [ImageData.drawableRes], [ImageData.drawable] will be used.
      */
-    fun setEndIcon(@DrawableRes icon: Int) {
+    fun setEndIcon( imageData: ImageData) {
         val inState = state.value
-        state.value = inState.copy(endIconRes = icon)
+        state.value = inState.copy(endIconData = imageData)
     }
 
     /**
@@ -109,13 +111,13 @@ abstract class BaseAutoCompleter @JvmOverloads constructor(
 }
 
 data class AutoCompleterDataState(
-    val startIconRes: Int?,
+    val startIconData: ImageData?,
     val title: String?,
     val from: String?,
     val to: String?,
     val subTitle: String?,
     val code: String?,
-    val endIconRes: Int?,
+    val endIconData: ImageData?,
     val onItemClick: () -> Unit,
     val onEndIconClick: () -> Unit,
     val onStartIconClick: () -> Unit,

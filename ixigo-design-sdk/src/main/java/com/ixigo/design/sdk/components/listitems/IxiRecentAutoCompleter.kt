@@ -18,9 +18,9 @@ class IxiRecentAutoCompleter @JvmOverloads constructor(
         )
         AutoCompleterRecentComposable(
             subTitle = state.value.subTitle,
-            startIcon = state.value.startIconRes,
+            startIcon = state.value.startIconData,
             code = state.value.code,
-            endIcon = state.value.endIconRes,
+            endIcon = state.value.endIconData,
             onEndIconClick = state.value.onEndIconClick,
             onStartIconClick = state.value.onStartIconClick,
             onItemClick = state.value.onItemClick,

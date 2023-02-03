@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.listitems.base.BaseAutoCompleter
 import com.ixigo.design.sdk.databinding.FragmentAutoCompleterBinding
 
@@ -35,8 +38,22 @@ class AutoCompleterFragment : BaseFragment() {
             AutoCompleterData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                startIconRes = R.drawable.ic_search,
-                endIconRes = R.drawable.ic_search,
+                startIconRes = ImageData(
+                    drawableRes = R.drawable.ic_baseline_cancel_24,
+                    null,
+                    null,
+                    "https://images.template.net/101912/location-icon-clipart-5z262.jpg",
+                    null,
+                    null
+                ),
+                endIconRes = ImageData(
+                    drawableRes = R.drawable.ic_baseline_cancel_24,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ),
                 to = "Delhi",
                 from = "Mumbai",
                 code = null
@@ -45,7 +62,14 @@ class AutoCompleterFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIconRes = ImageData(
+                    drawableRes = null,
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_cancel_24),
+                    null,
+                    null,
+                    null,
+                    null
+                ),
                 to = "Delhi",
                 from = "Mumbai",
                 code = "12111"
@@ -54,7 +78,14 @@ class AutoCompleterFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = null,
                 startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIconRes = ImageData(
+                    drawableRes = R.drawable.ic_baseline_cancel_24,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ),
                 to = "Delhi",
                 from = "Mumbai",
                 code = "12111"
@@ -63,7 +94,14 @@ class AutoCompleterFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = null,
                 startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIconRes = ImageData(
+                    drawableRes = null,
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_cancel_24),
+                    null,
+                    "https://images.template.net/101912/location-icon-clipart-5z262.jpg",
+                    100.dp,
+                    100.dp
+                ),
                 to = "Delhi",
                 from = "Mumbai",
                 code = "12111"
@@ -138,12 +176,12 @@ class RecyclerAdapter(val context: Context, private val list: List<AutoCompleter
 }
 
 data class AutoCompleterData(
-    val startIconRes: Int?,
+    val startIconRes: ImageData?,
     val title: String?,
     val from: String?,
     val to: String?,
     val subTitle: String?,
     val code: String?,
-    val endIconRes: Int?,
+    val endIconRes: ImageData?,
 )
 

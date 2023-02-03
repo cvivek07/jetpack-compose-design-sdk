@@ -19,8 +19,8 @@ class IxiDestinationAutoCompleter @JvmOverloads constructor(
         )
 
         AutoCompleterDestinationComposable(
-            startIcon = state.value.startIconRes,
-            endIcon = state.value.endIconRes,
+            startIcon = state.value.startIconData,
+            endIcon = state.value.endIconData,
             title = state.value.title ?: "",
             subTitle = state.value.subTitle,
             code = state.value.code,
