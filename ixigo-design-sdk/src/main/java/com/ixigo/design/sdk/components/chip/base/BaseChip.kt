@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.google.android.material.chip.Chip
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiChipColor
+import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.utils.Utils
 
 
@@ -107,15 +108,17 @@ abstract class BaseChip @JvmOverloads constructor(
         if (textColorVal != -1) {
             textColor = textColorVal
         }
-        val attrIxiColor =
+        val chipColor =
             getColorFromAttribute(typedArray.getInt(R.styleable.BaseChip_chipColor, -1))
+        val ixiColorAttr = typedArray.getInt(R.styleable.BaseChip_ixiColor, -1)
+        val ixiColor = if(ixiColorAttr!=-1) getColorFromAttribute(ixiColorAttr) else null
         return IxiChipColor(
-            backgroundColor ?: attrIxiColor.backgroundColor,
-            unselectedBackgroundColor ?: attrIxiColor.unselectedBackgroundColor,
-            strokeColor ?: attrIxiColor.strokeColor,
-            textColor ?: attrIxiColor.textColor,
-            unSelectedTextColor ?: attrIxiColor.unSelectedTextColor,
-            drawableTintColor ?: attrIxiColor.drawableTintColor
+            backgroundColor?:ixiColor?.backgroundColor?: chipColor.backgroundColor,
+            unselectedBackgroundColor?:ixiColor?.unselectedBackgroundColor ?: chipColor.unselectedBackgroundColor,
+            strokeColor?:ixiColor?.strokeColor ?: chipColor.strokeColor,
+            textColor?:ixiColor?.textColor ?: chipColor.textColor,
+            unSelectedTextColor?:ixiColor?.unSelectedTextColor ?: chipColor.unSelectedTextColor,
+            drawableTintColor?:ixiColor?.drawableTintColor ?: chipColor.drawableTintColor
         )
 
     }
@@ -175,6 +178,7 @@ abstract class BaseChip @JvmOverloads constructor(
      * Sets the color of the Chip.
      * @param color The color to be set for the Chip.
      */
+    @Deprecated(message = "For color consistency throughout the SDK. Support for this will be removed in 1.0.0")
     fun setColor(color: IxiChipColor) {
         this.ixiChipColor = color
         chipIconTint = iconTintSelector(color)
@@ -183,6 +187,21 @@ abstract class BaseChip @JvmOverloads constructor(
         chipBackgroundColor = backgroundSelector(color)
         setTextColor(textSelector(color))
         chipStrokeColor = strokeColorSelector(color)
+    }
+
+    fun setColor(ixiColor: IxiColor) {
+        val color = when (ixiColor) {
+            IxiColor.Blue -> IxiChipColor.BLUE
+            IxiColor.Error -> IxiChipColor.RED
+            IxiColor.Extension -> IxiChipColor.PURPLE
+            IxiColor.Orange -> IxiChipColor.ORANGE
+            IxiColor.Success -> IxiChipColor.GREEN
+            IxiColor.Warning -> IxiChipColor.YELLOW
+            else ->{
+                IxiChipColor()
+            }
+        }
+       setColor(color)
     }
 
 
@@ -255,12 +274,13 @@ abstract class BaseChip @JvmOverloads constructor(
 
     private fun getColorFromAttribute(int: Int): IxiChipColor {
         return when (int) {
-            0 -> IxiChipColor.NEUTRAL
-            1 -> IxiChipColor.BLUE
-            2 -> IxiChipColor.GREEN
-            3 -> IxiChipColor.PURPLE
-            4 -> IxiChipColor.RED
-            5 -> IxiChipColor.YELLOW
+            0 -> IxiChipColor.YELLOW
+            1 -> IxiChipColor.PURPLE
+            2 -> IxiChipColor.RED
+            3 -> IxiChipColor.GREEN
+            4 -> IxiChipColor.BLUE
+            5 -> IxiChipColor.NEUTRAL
+            6 -> IxiChipColor.ORANGE
             else -> {
                 IxiChipColor()
             }

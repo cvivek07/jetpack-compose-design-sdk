@@ -15,6 +15,7 @@ sealed class IxiColor(
     object Warning : IxiColor(R.color.y500, R.color.y500, R.color.n0)
     object Success : IxiColor(R.color.g500, R.color.g500, R.color.n0)
     object Extension : IxiColor(R.color.p500, R.color.p500, R.color.n0)
+    object Neutral : IxiColor(R.color.n500, R.color.n500, R.color.n0)
     data class Extra(
         @ColorRes val bg: Int,
         @ColorRes val pressed: Int,
@@ -29,10 +30,11 @@ sealed class IxiColor(
     internal object WarningSecondary : IxiColor(R.color.y100, R.color.y100, R.color.y700)
     internal object SuccessSecondary : IxiColor(R.color.g50, R.color.g50, R.color.g500)
     internal object ExtensionSecondary : IxiColor(R.color.p50, R.color.p50, R.color.p500)
-    internal object BlueBottomNavbar : IxiColor(R.color.b50, R.color.b100, R.color.b500)
-    internal object OrangeBottomNavbar : IxiColor(R.color.o50, R.color.o100, R.color.o800)
+    internal object NeutralSecondary : IxiColor(R.color.n40, R.color.n40, R.color.n500)
     internal object OrangeTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.o800)
+    internal object NeutralTertiary :
+        IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.n800)
 
     internal object BlueTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.b500)
@@ -48,31 +50,21 @@ sealed class IxiColor(
 
     internal object ExtensionTertiary :
         IxiColor(android.R.color.transparent, android.R.color.transparent, R.color.p500)
+    // Bottom Navigation Bar can be of two colors only
+    internal object BlueBottomNavbar : IxiColor(R.color.b50, R.color.b100, R.color.b500)
+    internal object OrangeBottomNavbar : IxiColor(R.color.o50, R.color.o100, R.color.o800)
 
-    internal fun getSecondaryColor(): IxiColor {
-        return when (this) {
-            Blue -> BlueSecondary
-            Error -> ErrorSecondary
-            Extension -> ExtensionSecondary
-            Orange -> OrangeSecondary
-            Success -> SuccessSecondary
-            Warning -> WarningSecondary
-            else -> {
-                BlueSecondary
-            }
-        }
-    }
-
-    internal fun getTertiaryColor(): IxiColor {
-        return when (this) {
-            Blue -> BlueTertiary
-            Error -> ErrorTertiary
-            Extension -> ExtensionTertiary
-            Orange -> OrangeTertiary
-            Success -> SuccessTertiary
-            Warning -> WarningTertiary
-            else -> {
-                BlueSecondary
+    companion object{
+        fun mapFromAttrEnum(int: Int): IxiColor {
+            return when (int) {
+                0 -> Warning
+                1 -> Extension
+                2 -> Error
+                3 -> Success
+                4 -> Blue
+                5 -> Neutral
+                6 -> Orange
+                else -> Neutral
             }
         }
     }
@@ -126,6 +118,14 @@ open class IxiChipColor(
         unSelectedTextColor = R.color.y400,
         drawableTintColor = R.color.n0,
         strokeColor = R.color.y400,
+    )
+    object ORANGE : IxiChipColor(
+        backgroundColor = R.color.o400,
+        textColor = R.color.white,
+        unselectedBackgroundColor = android.R.color.transparent,
+        unSelectedTextColor = R.color.o400,
+        drawableTintColor = R.color.n0,
+        strokeColor = R.color.o400,
     )
     object PURPLE : IxiChipColor(
         backgroundColor = R.color.p400,

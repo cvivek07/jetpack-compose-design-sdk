@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:text="Large"
                 app:closeIcon="@drawable/baseline_keyboard_arrow_down_24"
-                app:chipColor="yellow"
+                app:ixiColor="warning"
                 app:chipType="large" />
 
             <com.ixigo.design.sdk.components.chip.IxiChip
@@ -62,7 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
-                app:chipColor="neutral"
+                app:ixiColor="neutral"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
 
@@ -89,7 +89,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined Disabled"
-                app:chipColor="green"
+                app:ixiColor="success"
                 android:enabled="false"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
@@ -108,7 +108,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
-                app:chipColor="blue"
+                app:ixiColor="blue"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
 
@@ -134,7 +134,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
-                app:chipColor="green"
+                app:ixiColor="success"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
 
@@ -160,7 +160,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
-                app:chipColor="red"
+                app:ixiColor="error"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
 
@@ -186,7 +186,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
-                app:chipColor="yellow"
+                app:ixiColor="warning"
                 app:chipIcon="@drawable/baseline_remove_circle_24"
                 app:closeIcon="@drawable/baseline_remove_circle_24" />
 
@@ -212,12 +212,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined A"
-                app:chipColor="purple"
+                app:ixiColor="extension"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
 
             <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/p_outlined_chip2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outlined B"
+                app:chipColor="purple"
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <com.google.android.material.chip.ChipGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <com.ixigo.design.sdk.components.chip.IxiChip
+                android:id="@+id/o_outlined_chip1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outlined A"
+                app:ixiColor="orange"
+                app:closeIcon="@drawable/baseline_remove_circle_24"
+                app:chipIcon="@drawable/baseline_remove_circle_24" />
+
+            <com.ixigo.design.sdk.components.chip.IxiChip
+                android:id="@+id/o_outlined_chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Outlined B"
