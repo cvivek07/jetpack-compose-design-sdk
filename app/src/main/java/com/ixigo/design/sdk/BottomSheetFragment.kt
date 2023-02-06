@@ -8,12 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.components.bottomsheets.helper.IxiBottomSheetHelper
 import com.ixigo.design.sdk.databinding.FragmentBottomSheetBinding
-import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
 
 class BottomSheetFragment: Fragment() {
 
     private var _binding: FragmentBottomSheetBinding? = null
-    private var sampleBinding: FragmentButtonsBinding? = null
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -24,7 +22,6 @@ class BottomSheetFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentBottomSheetBinding.inflate(inflater, container, false)
-        sampleBinding = FragmentButtonsBinding.inflate(inflater)
         return binding.root
 
     }
@@ -79,12 +76,13 @@ class BottomSheetFragment: Fragment() {
             )
         }
 
-//        //variant 4
+        val fragment = ButtonsFragment()
+        childFragmentManager.beginTransaction().add(fragment, "Test").commit()
         binding.fourth.setClickListener {
             IxiBottomSheetHelper.showBlankBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     toolbarTitle = "Main title sentence",
-                    view = sampleBinding?.root,
+                    view = fragment.view,
                     primaryButtonText = "Button",
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
