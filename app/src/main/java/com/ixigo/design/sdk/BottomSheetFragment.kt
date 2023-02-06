@@ -87,6 +87,7 @@ class BottomSheetFragment: Fragment() {
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
+                    disableDragging = true
                 ), childFragmentManager
             )
         }

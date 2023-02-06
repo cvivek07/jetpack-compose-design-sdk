@@ -12,6 +12,7 @@ object IxiBottomSheetHelper {
         fragment.setTitleText(ixiBottomSheetUiModel.titleText)
         fragment.setBodyText(ixiBottomSheetUiModel.bodyText)
         fragment.setImageBackgroundColor(ixiBottomSheetUiModel.imageBackgroundColor)
+        fragment.disableDragging(ixiBottomSheetUiModel.disableDragging)
         ixiBottomSheetUiModel.iconSize?.let {
             fragment.setIconSize(it)
         }
@@ -33,6 +34,7 @@ object IxiBottomSheetHelper {
         ixiBottomSheetUiModel.iconSize?.let {
             fragment.setIconSize(it)
         }
+        fragment.disableDragging(ixiBottomSheetUiModel.disableDragging)
         fragment.setImage(ixiBottomSheetUiModel.image)
         ixiBottomSheetUiModel.primaryButtonText?.let {
             fragment.setPrimaryButton(it, ixiBottomSheetUiModel.primaryActionListener)
@@ -50,6 +52,7 @@ object IxiBottomSheetHelper {
         ixiBottomSheetUiModel.iconSize?.let {
             fragment.setIconSize(it)
         }
+        fragment.disableDragging(ixiBottomSheetUiModel.disableDragging)
         ixiBottomSheetUiModel.primaryButtonText?.let {
             fragment.setPrimaryButton(it, ixiBottomSheetUiModel.primaryActionListener)
         }
@@ -65,6 +68,7 @@ object IxiBottomSheetHelper {
         ixiBottomSheetUiModel.view?.let {
             fragment.setView(ixiBottomSheetUiModel.view)
         }
+        fragment.disableDragging(ixiBottomSheetUiModel.disableDragging)
         ixiBottomSheetUiModel.primaryButtonText?.let {
             fragment.setPrimaryButton(it, ixiBottomSheetUiModel.primaryActionListener)
         }
@@ -84,6 +88,7 @@ object IxiBottomSheetHelper {
     val primaryActionListener:(()->Unit)? = null,
     val secondaryButtonText:String? = null,
     val secondaryActionListener:(()->Unit)? = null,
-    val view: View? = null
+    val view: View? = null,
+    val disableDragging: Boolean = false
     )
 }

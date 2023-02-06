@@ -61,7 +61,7 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
         _binding.ixiBottomSheet.setBodyText(uiState.bodyText)
         _binding.ixiBottomSheet.setToolbarText(uiState.masterTitle)
         _binding.ixiBottomSheet.setIconSize(uiState.iconSize)
-        _binding.ixiBottomSheet.enablePointer(uiState.enablePointer)
+        _binding.ixiBottomSheet.disableDragging(uiState.disableDragging)
         uiState.view?.let {
             _binding.ixiBottomSheet.setView(it)
         }
@@ -170,8 +170,8 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
      *
      * @param enabled whether the pointer is enabled or disabled.
      */
-    fun enablePointer(enabled: Boolean){
-        uiState = uiState.copy(enablePointer = enabled)
+    fun disableDragging(enabled: Boolean){
+        uiState = uiState.copy(disableDragging = enabled)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -182,6 +182,9 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
                 val behaviour =  BottomSheetBehavior.from(bottomSheet)
                 behaviour.state = BottomSheetBehavior.STATE_EXPANDED
                 behaviour.skipCollapsed = true
+                if(uiState.disableDragging){
+                    behaviour.isDraggable = false
+                }
             }
         }
         return dialog
@@ -203,5 +206,5 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val onClose: (() -> Unit)? = null,
     val iconSize:Float? = null,
     val view:View? = null,
-    val enablePointer:Boolean = false,
+    val disableDragging:Boolean = false,
 )

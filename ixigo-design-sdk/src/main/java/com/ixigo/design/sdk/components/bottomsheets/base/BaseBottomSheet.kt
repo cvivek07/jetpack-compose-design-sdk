@@ -123,9 +123,9 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      *
      * @param enabled whether the pointer is enabled or disabled.
      */
-    fun enablePointer(enabled: Boolean){
+    fun disableDragging(enabled: Boolean){
         val inState = state.value
-        state.value = inState.copy(enablePointer = enabled)
+        state.value = inState.copy(disableDragging = enabled)
     }
 
     /**
@@ -153,5 +153,5 @@ data class BottomSheetState(
     val onClose: (() -> Unit)? = null,
     val iconSize:Float? = null,
     val view: View? = null,
-    val enablePointer:Boolean = false
+    val disableDragging:Boolean = false
     )

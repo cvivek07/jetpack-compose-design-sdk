@@ -32,7 +32,7 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 closeActionListener = onClose,
                 iconSize = Util.convertDimensionToDp(px = iconSize?:80f),
                 view = view,
-                enablePointer = enablePointer
+                enablePointer = !disableDragging
             )
         }
     }
