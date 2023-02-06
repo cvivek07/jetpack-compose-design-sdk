@@ -1,6 +1,7 @@
 package com.ixigo.design.sdk
 
 import android.os.Bundle
+import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,6 +45,7 @@ class BottomSheetFragment: Fragment() {
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
+                    inlineAlertText = "This is a placeholder"
                     ), childFragmentManager
             )
         }
@@ -81,13 +83,14 @@ class BottomSheetFragment: Fragment() {
         binding.fourth.setClickListener {
             IxiBottomSheetHelper.showBlankBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
-                    titleText = "Main title sentence",
+                    toolbarTitle = "Main title sentence",
                     view = sampleBinding?.root,
                     primaryButtonText = "Button",
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                    disableDragging = true
+                    disableDragging = true,
+                    closeActionAlignment = Layout.Alignment.ALIGN_NORMAL
                 ), childFragmentManager
             )
         }

@@ -12,6 +12,7 @@ import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiInlineAlertColor
 
 /**
  * Abstract class for a custom Inline Alert View in Android
@@ -196,15 +197,15 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
 
     private fun mapTypeToColor(int:Int):IxiColor{
        return when(int){
-           0 -> IxiColor.Extra(bg = R.color.y50, text = R.color.y700, pressed = R.color.y700)
-           1 -> IxiColor.Extra(bg = R.color.p50, text = R.color.p500, pressed = R.color.p400)
-           2 -> IxiColor.Extra(bg = R.color.r50, text = R.color.r500, pressed = R.color.r400)
-           3 -> IxiColor.Extra(bg = R.color.g50, text = R.color.g500, pressed = R.color.g400)
-           4 -> IxiColor.Extra(bg = R.color.b50, text = R.color.b500, pressed = R.color.b400)
-           5 -> IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
-           6 -> IxiColor.Extra(bg = R.color.o50, text = R.color.o600, pressed = R.color.o800)
+           0 -> IxiInlineAlertColor.Warning
+           1 -> IxiInlineAlertColor.Extension
+           2 -> IxiInlineAlertColor.Error
+           3 -> IxiInlineAlertColor.Success
+           4 -> IxiInlineAlertColor.Blue
+           5 -> IxiInlineAlertColor.Neutral
+           6 -> IxiInlineAlertColor.Orange
            else -> {
-               IxiColor.Extra(bg = R.color.n40, text = R.color.n600, pressed = R.color.n800)
+               IxiInlineAlertColor.Neutral
            }
        }
     }

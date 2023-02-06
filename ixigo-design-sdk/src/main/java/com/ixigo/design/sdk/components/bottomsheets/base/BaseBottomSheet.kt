@@ -1,12 +1,14 @@
 package com.ixigo.design.sdk.components.bottomsheets.base
 
 import android.content.Context
+import android.text.Layout.Alignment
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.styles.IxiColor
 
 /**
  * A base class for a custom bottom sheet view in Android.
@@ -77,6 +79,16 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
     }
 
     /**
+     * Sets the subtitle to be displayed in the toolbar of the bottom sheet.
+     *
+     * @param toolbarSubtitleText The subtitle text to be displayed in the toolbar.
+     */
+    fun setToolbarSubtitleText(toolbarSubtitleText:String?){
+        val inState = state.value
+        state.value = inState.copy(toolbarSubtitleText = toolbarSubtitleText)
+    }
+
+    /**
      * Sets the primary button to be displayed in the bottom sheet.
      *
      * @param ixiPrimaryButtonText The text to be displayed on the primary button.
@@ -138,6 +150,27 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         val inState = state.value
         state.value = inState.copy(view = view)
     }
+
+    /**
+     * Set the inline alert to be displayed below the content in the bottom sheet.
+     *
+     * @param text for the text of inlineAlert.
+     * @param ixiColor for the color of inline alert by default it's [IxiColor.Neutral]
+     */
+    fun setInlineAlert(text: String, ixiColor: IxiColor? =null){
+        val inState = state.value
+        state.value = inState.copy(inlineAlertText = text, inlineAlertIxiColor = ixiColor)
+    }
+
+    /**
+     * Set the close action icon alignment only ALIGN_NORMAL, ALIGN_OPPOSITE & ALIGN_CENTER is supported
+     *
+     * @param alignment alignment of close action icon
+     */
+    fun setCloseActionAlignment(alignment: Alignment){
+        val inState = state.value
+        state.value = inState.copy(closeActionAlignment = alignment)
+    }
 }
 
 data class BottomSheetState(
@@ -153,5 +186,9 @@ data class BottomSheetState(
     val onClose: (() -> Unit)? = null,
     val iconSize:Float? = null,
     val view: View? = null,
-    val disableDragging:Boolean = false
+    val disableDragging:Boolean = false,
+    val inlineAlertText: String? = null,
+    val inlineAlertIxiColor: IxiColor? = null,
+    val toolbarSubtitleText: String? = null,
+    val closeActionAlignment: Alignment = Alignment.ALIGN_OPPOSITE
     )

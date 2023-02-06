@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.bottomsheets
 
 import android.app.Dialog
 import android.os.Bundle
+import android.text.Layout.Alignment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -59,9 +60,16 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
         _binding.ixiBottomSheet.setHeaderText(uiState.titleText)
         _binding.ixiBottomSheet.setImageBackgroundColor(uiState.imageBackgroundColor)
         _binding.ixiBottomSheet.setBodyText(uiState.bodyText)
-        _binding.ixiBottomSheet.setToolbarText(uiState.masterTitle)
+        _binding.ixiBottomSheet.setToolbarText(uiState.toolbarTitle)
+        uiState.closeActionAlignment?.let {
+            _binding.ixiBottomSheet.setCloseActionAlignment(it)
+        }
+        _binding.ixiBottomSheet.setToolbarSubtitleText(uiState.toolbarSubtitle)
         _binding.ixiBottomSheet.setIconSize(uiState.iconSize)
         _binding.ixiBottomSheet.disableDragging(uiState.disableDragging)
+        uiState.inlineAlertText?.let {
+            _binding.ixiBottomSheet.setInlineAlert(it, uiState.inlineAlertIxiColor)
+        }
         uiState.view?.let {
             _binding.ixiBottomSheet.setView(it)
         }
@@ -118,12 +126,21 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
     }
 
     /**
+     * Sets the subtitle to be displayed in the toolbar of the bottom sheet.
+     *
+     * @param toolbarSubtitleText The subtitle text to be displayed in the toolbar.
+     */
+    fun setMasterSubtitle(toolbarSubtitleText:String?){
+        uiState = uiState.copy(toolbarSubtitle = toolbarSubtitleText)
+    }
+
+    /**
      * This function sets the master title to be displayed in the bottom sheet dialog fragment.
      *
      * @param masterTitle The master title to be displayed.
      */
     fun setMasterTitle(masterTitle:String?){
-        uiState = uiState.copy(masterTitle = masterTitle)
+        uiState = uiState.copy(toolbarTitle = masterTitle)
     }
 
     /**
@@ -166,12 +183,31 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
     }
 
     /**
-     * Enable or disable the pointer for the bottom sheet.
+     * Enable or disable the dragging for the bottom sheet.
      *
-     * @param enabled whether the pointer is enabled or disabled.
+     * @param enabled whether the dragging is enabled or disabled.
      */
     fun disableDragging(enabled: Boolean){
         uiState = uiState.copy(disableDragging = enabled)
+    }
+
+    /**
+     * Set the inline alert to be displayed below the content in the bottom sheet.
+     *
+     * @param text for the text of inlineAlert.
+     * @param ixiColor for the color of inline alert by default it's [IxiColor.Neutral]
+     */
+    fun setInlineAlert(text: String, ixiColor: IxiColor? =null){
+        uiState = uiState.copy(inlineAlertText = text, inlineAlertIxiColor = ixiColor)
+    }
+
+    /**
+     * Set the close action icon alignment only ALIGN_NORMAL, ALIGN_OPPOSITE & ALIGN_CENTER is supported
+     *
+     * @param alignment alignment of close action icon
+     */
+    fun setCloseActionAlignment(alignment: Alignment){
+        uiState = uiState.copy(closeActionAlignment = alignment)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -196,7 +232,8 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val titleText:String? = null,
     @ColorRes val imageBackgroundColor: Int? = null,
     val bodyText: String? = null,
-    val masterTitle: String? = null,
+    val toolbarTitle: String? = null,
+    val toolbarSubtitle: String? = null,
     val primaryButtonText: String? = null,
     val primaryButtonAction: (()->Unit)? = null,
     val primaryButtonColor:IxiColor? = null,
@@ -207,4 +244,7 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val iconSize:Float? = null,
     val view:View? = null,
     val disableDragging:Boolean = false,
+    val inlineAlertText: String? = null,
+    val inlineAlertIxiColor: IxiColor? = null,
+    val closeActionAlignment: Alignment? = null,
 )

@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.runtime.Composable
@@ -29,6 +28,8 @@ import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.components.buttons.composable.ComposablePrimaryButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableSecondaryButton
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.inlinealert.composable.ComposableInlineAlert
+import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
@@ -42,6 +43,7 @@ fun BaseBottomSheetComposable(
     bodyText: String? = null,
     bodyStyle: TextStyle = IxiTypography.Body.Medium.regular,
     masterTitleText: String? = null,
+    masterSubtitleText: String? = null,
     primaryButtonText: String? = null,
     secondaryButtonText: String? = null,
     closeActionListener: (() -> Unit)? = null,
@@ -49,7 +51,10 @@ fun BaseBottomSheetComposable(
     secondaryActionListener: (() -> Unit)? = null,
     primaryActionListener: (() -> Unit)? = null,
     view: View? = null,
-    enablePointer: Boolean = false
+    enablePointer: Boolean = false,
+    inlineAlertText: String? = null,
+    inlineAlertIxiColor: IxiColor? = null,
+    closeActionAlignment: Alignment? = Alignment.CenterEnd
 ) {
     val scrollState = rememberScrollState()
     Box(modifier = Modifier
@@ -58,7 +63,14 @@ fun BaseBottomSheetComposable(
             Box() {
                 Column {
                     masterTitleText?.let {
-                        MasterTitle(modifier = Modifier.padding(top = 21.dp), text = masterTitleText, closeActionListener = closeActionListener, alignment = Alignment.Center)
+                        MasterTitle(
+                            modifier = Modifier.padding(top = 21.dp),
+                            text = masterTitleText,
+                            subtitleText = masterSubtitleText,
+                            closeActionListener = closeActionListener,
+                            alignment = Alignment.Center,
+                            closeActionAlignment = closeActionAlignment ?: Alignment.CenterEnd
+                        )
                     }
                     image?.let {
                         if(imageBackgroundColor==null && masterTitleText==null){
@@ -95,7 +107,9 @@ fun BaseBottomSheetComposable(
                     BottomSheetContent(
                         modifier = Modifier.padding(horizontal = 20.dp),
                         heading = { BottomSheetTextComposable(titleText, style = titleStyle) },
-                        subtitle = { BottomSheetTextComposable(text = bodyText, style = bodyStyle) }
+                        subtitle = { BottomSheetTextComposable(text = bodyText, style = bodyStyle) },
+                        inlineAlertText = inlineAlertText,
+                        inlineAlertIxiColor = inlineAlertIxiColor?: IxiColor.Neutral
                     )
                 }
             }
@@ -119,7 +133,7 @@ fun BaseBottomSheetComposable(
 
 @Composable
 private fun BottomSheetTextComposable(text: String?, style: TextStyle) {
-    if (text != null) {
+    if (text != null && text.isNotEmpty()) {
         TypographyText(
             text = text, textStyle = style, textAlign = TextAlign.Center
         )
@@ -171,6 +185,8 @@ private fun BannerImage(
 private fun BottomSheetContent(
     heading: @Composable (() -> Unit)?,
     subtitle: @Composable (() -> Unit)?,
+    inlineAlertText: String? = null,
+    inlineAlertIxiColor: IxiColor = IxiColor.Neutral,
     modifier: Modifier = Modifier
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.fillMaxWidth()) {
@@ -184,6 +200,10 @@ private fun BottomSheetContent(
                     .clipToBounds()
             )
             subtitle()
+        }
+        inlineAlertText?.let {
+            Spacer(modifier = Modifier.height(20.dp))
+            ComposableInlineAlert(text = it, ixiColor = inlineAlertIxiColor.mapIxiColorToInlineAlertColor(inlineAlertIxiColor), textAlignment = TextAlign.Center)
         }
     }
 }
@@ -246,20 +266,31 @@ private fun BottomSheetButtons(
 }
 
 @Composable
-private fun MasterTitle(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, closeActionListener: (() -> Unit)? = null){
+private fun MasterTitle(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, subtitleText:String?= null, closeActionListener: (() -> Unit)? = null, closeActionAlignment: Alignment = Alignment.CenterEnd){
     Column {
         Box(modifier = modifier.fillMaxWidth(), contentAlignment = alignment){
-            Text(text = text, textAlign = TextAlign.Center, style = IxiTypography.Heading.H6.regular, modifier = Modifier.padding(horizontal = 20.dp))
+            Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
+                .fillMaxWidth()){
+                TypographyText(text = text, textAlign = TextAlign.Center, textStyle = IxiTypography.Heading.H6.regular, modifier = Modifier.padding(horizontal = 56.dp))
+            }
             closeActionListener?.let {
                 Box(modifier = Modifier
-                    .align(Alignment.CenterEnd)
-                    .padding(end = 8.dp)
+                    .align(closeActionAlignment)
+                    .padding(start = 26.dp, end = 26.dp, top = 4.dp)
                     .clickable {
                         closeActionListener.invoke()
                     }){
                     Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(22.dp))
                 }
             }
+        }
+        subtitleText?.let {
+            TypographyText(
+                text = it,
+                textAlign = TextAlign.Center,
+                textStyle = IxiTypography.Body.Small.regular,
+                modifier = Modifier.padding(horizontal = 48.dp)
+            )
         }
         Spacer(modifier = Modifier.height(16.dp))
         Divider(modifier = Modifier.height(1.dp), color = colorResource(id = R.color.n100))
@@ -275,5 +306,10 @@ fun BottomSheetView() {
         bodyText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer venenatis volutpat tortor quis ultrices. Proin posuere dictum aliquet. In quis tempor sapien, eget faucibus nisl. Maecenas non nibh ultricies dui iaculis fringilla ac nec mauris. Sed eget aliquam ante. Nunc ex",
         image = R.drawable.ic_launcher_background,
         imageBackgroundColor = R.color.r50,
+        inlineAlertText = "This is a placeholder",
+        masterTitleText = "Test",
+        masterSubtitleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer s",
+        closeActionListener = {},
+        closeActionAlignment = Alignment.CenterStart
     )
 }
