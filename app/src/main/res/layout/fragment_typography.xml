@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="false"
     android:layout_gravity="center_horizontal">
 
@@ -178,13 +179,17 @@
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeReg"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:textDisplayType="body_large"
+            app:textWeight="regular"/>
 
         <include layout="@layout/divider"/>
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeMed"
             android:layout_width="wrap_content"
+            app:textDisplayType="body_large"
+            app:textWeight="medium"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
@@ -192,6 +197,8 @@
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeBold"
             android:layout_width="wrap_content"
+            app:textDisplayType="body_large"
+            app:textWeight="bold"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
@@ -199,6 +206,9 @@
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeStrike"
             android:layout_width="wrap_content"
+            app:textDisplayType="body_large"
+            app:textWeight="regular"
+            app:strikeThrough="true"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
@@ -206,6 +216,9 @@
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeItalic"
             android:layout_width="wrap_content"
+            app:textDisplayType="body_large"
+            app:textWeight="regular"
+            app:italics="true"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>
@@ -213,6 +226,9 @@
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeUnderlined"
             android:layout_width="wrap_content"
+            app:textDisplayType="body_large"
+            app:textWeight="regular"
+            app:underline="true"
             android:layout_height="wrap_content" />
 
         <include layout="@layout/divider"/>

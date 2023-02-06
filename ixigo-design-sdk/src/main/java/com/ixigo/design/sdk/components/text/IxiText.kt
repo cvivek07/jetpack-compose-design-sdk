@@ -13,6 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.W500
+import androidx.compose.ui.text.font.FontWeight.Companion.W700
+import androidx.compose.ui.text.font.FontWeight.Companion.W900
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.ixigo.design.sdk.R
@@ -20,6 +24,9 @@ import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
 import com.ixigo.design.sdk.components.inputfields.IxiOutlinedInputField
 import com.ixigo.design.sdk.components.styles.IxiTypography
+import com.ixigo.design.sdk.components.styles.IxiTypography.Body.Small.applyItalics
+import com.ixigo.design.sdk.components.styles.IxiTypography.Body.Small.applyStrikeThrough
+import com.ixigo.design.sdk.components.styles.IxiTypography.Body.Small.applyUnderLine
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 
@@ -75,10 +82,14 @@ class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
+    //    private var textStyle = TextStyle(fontFamily = IxiFamily)
     private var textColorRes: Int
     private val state = mutableStateOf(
         TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, null)
     )
+
+    private var defaultTypography : IxiTypography.TypographyType = IxiTypography.Body.Medium
+    private var defaultTextStyle  = defaultTypography.regular
 
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.IxiText)
@@ -86,8 +97,23 @@ class IxiText @JvmOverloads constructor(
             val text = typedArray.getString(R.styleable.IxiText_android_text) ?: ""
             setText(text)
             textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
-            setTextColor(textColorRes)
 
+            val textDisplayType = typedArray.getInt(R.styleable.IxiText_textDisplayType, TextDisplayType.BODY_MEDIUM.ordinal)
+            val textWeight = typedArray.getInt(R.styleable.IxiText_textWeight, TextWeight.REGULAR.ordinal)
+            setTextDisplayType(textDisplayType)
+            setTextWeight(TextWeight.values()[textWeight])
+
+            val underline = typedArray.getBoolean(R.styleable.IxiText_underline, false)
+            if(underline) setUnderLine()
+
+            val strikeThrough = typedArray.getBoolean(R.styleable.IxiText_strikeThrough, false)
+            if(strikeThrough) setStrikeThrough()
+
+            val italics = typedArray.getBoolean(R.styleable.IxiText_italics, false)
+            if(italics) setItalics()
+
+            setTextColor(textColorRes)
+            state.value = state.value.copy(textStyle = defaultTextStyle)
         } finally {
             typedArray.recycle()
         }
@@ -133,6 +159,54 @@ class IxiText @JvmOverloads constructor(
             typo
         }
         state.value = state.value.copy(textStyle = t)
+    }
+
+    private fun setTextDisplayType(displayType: Int) {
+        setTypographyType(TextDisplayType.values()[displayType])
+    }
+
+    enum class TextDisplayType {
+        DISPLAY_LARGE, H1, H2, H3, H4, H5, H6, BODY_LARGE, BODY_MEDIUM, BODY_SMALL, BODY_XSMALL
+    }
+
+    enum class TextWeight(val weight: FontWeight) {
+        BOLD(W900), MEDIUM(W700), REGULAR(W500)
+    }
+
+    fun setUnderLine() {
+        defaultTextStyle = defaultTextStyle.applyUnderLine()
+    }
+
+    fun setStrikeThrough() {
+        defaultTextStyle = defaultTextStyle.applyStrikeThrough()
+    }
+
+    fun setItalics() {
+        defaultTextStyle = defaultTextStyle.applyItalics()
+    }
+
+    fun setTextWeight(weight: TextWeight) {
+        defaultTextStyle = when(weight){
+            TextWeight.BOLD -> defaultTypography.bold
+            TextWeight.MEDIUM -> defaultTypography.medium
+            TextWeight.REGULAR -> defaultTypography.regular
+        }
+    }
+
+    private fun setTypographyType(textType: TextDisplayType) {
+          defaultTypography = when(textType) {
+            TextDisplayType.DISPLAY_LARGE -> IxiTypography.Heading.DisplayLarge
+            TextDisplayType.H1 -> IxiTypography.Heading.H1
+            TextDisplayType.H2 -> IxiTypography.Heading.H2
+            TextDisplayType.H3 -> IxiTypography.Heading.H3
+            TextDisplayType.H4 -> IxiTypography.Heading.H4
+            TextDisplayType.H5 -> IxiTypography.Heading.H5
+            TextDisplayType.H6 -> IxiTypography.Heading.H6
+            TextDisplayType.BODY_LARGE -> IxiTypography.Body.Large
+            TextDisplayType.BODY_MEDIUM -> IxiTypography.Body.Medium
+            TextDisplayType.BODY_SMALL -> IxiTypography.Body.Small
+            TextDisplayType.BODY_XSMALL -> IxiTypography.Body.XSmall
+        }
     }
 
     /**

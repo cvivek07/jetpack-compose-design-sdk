@@ -27,6 +27,28 @@
     <declare-styleable name="IxiText">
         <attr name="android:text" format="string" />
         <attr name="android:textColor" format="color|reference" />
+        <attr name="underline" format="boolean" />
+        <attr name="strikeThrough" format="boolean" />
+        <attr name="italics" format="boolean" />
+
+        <attr name="textDisplayType" format="enum">
+            <enum name="display_large" value="0" />
+            <enum name="h1" value="1" />
+            <enum name="h2" value="2" />
+            <enum name="h3" value="3" />
+            <enum name="h4" value="4" />
+            <enum name="h5" value="5" />
+            <enum name="h6" value="6" />
+            <enum name="body_large" value="7" />
+            <enum name="body_medium" value="8" />
+            <enum name="body_small" value="9" />
+            <enum name="body_xsmall" value="10" />
+        </attr>
+        <attr name="textWeight" format="enum">
+            <enum name="bold" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="regular" value="2" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="BaseBottomNavItem">
