@@ -55,9 +55,17 @@
         <item name="fontFamily">@font/ixi_sans_bold</item>
     </style>
 
-    <style name="chipText" parent="TextAppearance.MaterialComponents.Chip">
+    <style name="ChipTextAppearance" parent="TextAppearance.MaterialComponents.Chip">
         <item name="android:textSize">14sp</item>
         <item name="android:fontFamily">@font/ixi_font_family</item>
         <item name="android:textAlignment">center</item>
+    </style>
+
+    <style name="ChipTextAppearance.Bold" parent="ChipTextAppearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ChipTextAppearance.Italic" parent="ChipTextAppearance">
+        <item name="android:textStyle">italic</item>
     </style>
 </resources>

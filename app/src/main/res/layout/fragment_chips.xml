@@ -101,13 +101,15 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            app:checkedChip="@id/b_outlined_chip2"
+            >
 
             <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/b_outlined_chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Outlined A"
+                android:text="Outlined"
                 app:ixiColor="blue"
                 app:closeIcon="@drawable/baseline_remove_circle_24"
                 app:chipIcon="@drawable/baseline_remove_circle_24" />
@@ -127,7 +129,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal"
-            android:padding="8dp">
+            android:padding="8dp"
+            app:checkedChip="@id/g_outlined_chip1"
+            >
 
             <com.ixigo.design.sdk.components.chip.IxiChip
                 android:id="@+id/g_outlined_chip1"
@@ -332,12 +336,21 @@
             android:id="@+id/sample_outline_8"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="80dp"
             android:layout_margin="8dp"
+            android:textSize="21sp"
             android:text="Custom Chip"
             app:chipColor="yellow"
             app:ixiChipBackgroundColor="@color/r500"
+            app:ixiChipUnselectedBackgroundColor="@color/b100"
             app:ixiChipDrawableTintColor="@color/b400"
+            app:ixiChipUnselectedDrawableTintColor="@color/n900"
+            app:ixiChipStrokeColor="@color/b600"
+            app:ixiChipUnselectedStrokeColor="@color/g900"
             app:closeIcon="@drawable/baseline_keyboard_arrow_down_24"
-            app:size="8dp" />
+            app:size="12dp"
+            app:ixiChipTextColor="@color/p200"
+            app:ixiChipUnselectedTextColor="@color/teal_700"
+            />
     </LinearLayout>
 </ScrollView>
