@@ -65,6 +65,21 @@ sealed class IxiColor(
         Neutral -> IxiTertiaryColor.Neutral
         else -> colors
     }
+
+    fun mapIxiColorToInlineAlertColor(ixiColor: IxiColor):IxiColor{
+        return when(ixiColor){
+            IxiSecondaryColor.Warning -> IxiInlineAlertColor.Warning
+            IxiSecondaryColor.Extension -> IxiInlineAlertColor.Extension
+            IxiSecondaryColor.Error -> IxiInlineAlertColor.Error
+            IxiSecondaryColor.Success -> IxiInlineAlertColor.Success
+            IxiSecondaryColor.Blue -> IxiInlineAlertColor.Blue
+            IxiSecondaryColor.Neutral -> IxiInlineAlertColor.Neutral
+            IxiSecondaryColor.Orange -> IxiInlineAlertColor.Orange
+            else -> {
+                ixiColor
+            }
+        }
+    }
 }
 
 internal object IxiSecondaryColor{
@@ -76,20 +91,6 @@ internal object IxiSecondaryColor{
     internal object Extension : IxiColor(R.color.p50, R.color.p50, R.color.p500)
     internal object Neutral : IxiColor(R.color.n40, R.color.n40, R.color.n500)
 
-    fun mapIxiColorToInlineAlertColor(ixiColor: IxiColor):IxiColor{
-        return when(ixiColor){
-            Warning -> IxiInlineAlertColor.Warning
-            Extension -> IxiInlineAlertColor.Extension
-            Error -> IxiInlineAlertColor.Error
-            Success -> IxiInlineAlertColor.Success
-            Blue -> IxiInlineAlertColor.Blue
-            Neutral -> IxiInlineAlertColor.Neutral
-            Orange -> IxiInlineAlertColor.Orange
-            else -> {
-                ixiColor
-            }
-        }
-    }
 }
 
 internal object IxiInlineAlertColor{
