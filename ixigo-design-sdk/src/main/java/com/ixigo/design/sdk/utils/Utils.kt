@@ -30,7 +30,7 @@ object Utils {
     }
 
     @Composable
-    fun mapLayoutAlignmentToComposeAlignment(alignment: Layout.Alignment): TextAlign{
+    fun mapLayoutAlignmentToComposeTextAlignment(alignment: Layout.Alignment): TextAlign{
         return when(alignment){
             Layout.Alignment.ALIGN_NORMAL -> TextAlign.Start
             Layout.Alignment.ALIGN_OPPOSITE -> TextAlign.End

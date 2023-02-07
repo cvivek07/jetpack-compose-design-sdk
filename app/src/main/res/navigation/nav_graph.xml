@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_componentFragment_to_separatorFragment"
             app:destination="@id/separatorFragment" />
+        <action
+            android:id="@+id/action_componentFragment_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
 
         <action
             android:id="@+id/action_componentFragment_to_progressStepFragment"
@@ -129,5 +132,12 @@
         android:name="com.ixigo.design.sdk.SeparatorFragment"
         android:label="@string/separator"
         tools:layout="@layout/fragment_separator">
+    </fragment>
+
+    <fragment
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.ixigo.design.sdk.BottomSheetFragment"
+        android:label="@string/bottom_sheets"
+        tools:layout="@layout/fragment_bottom_sheet">
     </fragment>
 </navigation>
