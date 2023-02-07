@@ -182,7 +182,7 @@ fun ComposableSecondaryButton(
 ) {
     ComposablePrimaryButton(
         text = text,
-        color = mapSecStyle(color),
+        color = color.mapSecStyle(color),
         shape = shape,
         size = size,
         isEnabled = isEnabled,
@@ -242,7 +242,7 @@ internal fun ComposableTextButton(
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
 ) {
-    val textColor = if (isEnabled) mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
+    val textColor = if (isEnabled) color.mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
 
     TextButton(
         onClick = onClick,
@@ -420,30 +420,6 @@ private fun DrawComponents(
         createHorizontalChain(imageStart, textView, imageEnd, chainStyle = ChainStyle.Packed)
 
     }
-}
-
-private fun mapSecStyle(colors: IxiColor) = when (colors) {
-    IxiColor.Blue -> IxiColor.BlueSecondary
-    IxiColor.Disabled -> IxiColor.Disabled
-    IxiColor.Error -> IxiColor.ErrorSecondary
-    IxiColor.Extension -> IxiColor.ExtensionSecondary
-    IxiColor.Orange -> IxiColor.OrangeSecondary
-    IxiColor.Success -> IxiColor.SuccessSecondary
-    IxiColor.Neutral -> IxiColor.NeutralSecondary
-    IxiColor.Warning -> IxiColor.WarningSecondary
-    else -> IxiColor.OrangeSecondary
-}
-
-private fun mapTertiaryStyle(colors: IxiColor) = when (colors) {
-    IxiColor.Blue -> IxiColor.BlueTertiary
-    IxiColor.Disabled -> IxiColor.Disabled
-    IxiColor.Error -> IxiColor.ErrorTertiary
-    IxiColor.Extension -> IxiColor.ExtensionTertiary
-    IxiColor.Orange -> IxiColor.OrangeTertiary
-    IxiColor.Success -> IxiColor.SuccessTertiary
-    IxiColor.Warning -> IxiColor.WarningTertiary
-    IxiColor.Neutral -> IxiColor.NeutralTertiary
-    else -> colors
 }
 
 fun Modifier.updateWidth(width: Int) = when (width) {
