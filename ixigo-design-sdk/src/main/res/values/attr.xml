@@ -121,4 +121,12 @@
         <attr name="ixiColor"/>
 
     </declare-styleable>
+
+    <declare-styleable name="BaseBottomSheet">
+        <attr name="image" format="reference" />
+        <attr name="headerText" format="string" />
+        <attr name="imageBackgroundColor" format="reference" />
+        <attr name="bodyText" format="string" />
+        <attr name="toolbarText" format="string" />
+    </declare-styleable>
 </resources>

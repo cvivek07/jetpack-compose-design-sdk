@@ -6,7 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.inlinealert.base.BaseInlineAlert
 import com.ixigo.design.sdk.components.inlinealert.composable.ComposableInlineAlert
-import com.ixigo.design.sdk.utils.Utils.mapLayoutAlignmentToComposeAlignment
+import com.ixigo.design.sdk.utils.Utils.mapLayoutAlignmentToComposeTextAlignment
 
 class IxiInlineAlert @JvmOverloads constructor(
     context: Context,
@@ -30,9 +30,9 @@ class IxiInlineAlert @JvmOverloads constructor(
                 rightButtonText = state.value.rightButtonText,
                 rightButtonClickListener = rightButtonClickListener,
                 onRightIconClickListener = state.value.onActionIconClickListener,
-                ixiColor = state.value.ixiColor,
-                textAlignment = mapLayoutAlignmentToComposeAlignment(state.value.textAlignment),
-                headingAlignment = mapLayoutAlignmentToComposeAlignment(state.value.textAlignment),
+                ixiColor = state.value.ixiColor.mapIxiColorToInlineAlertColor(state.value.ixiColor),
+                textAlignment = mapLayoutAlignmentToComposeTextAlignment(state.value.textAlignment),
+                headingAlignment = mapLayoutAlignmentToComposeTextAlignment(state.value.textAlignment),
                 buttonColor = buttonColor
             )
         }
