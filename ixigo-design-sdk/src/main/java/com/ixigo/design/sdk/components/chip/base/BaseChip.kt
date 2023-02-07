@@ -34,10 +34,16 @@ abstract class BaseChip @JvmOverloads constructor(
     protected var ixiChipColor: IxiChipColor = IxiChipColor.BLUE
 
     init {
-        this.setTextAppearance(R.style.ChipTextAppearance)
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseChip)
         try {
-            setColor(setUserDefinedOrStandardColor(typedArray))
+            val appearanceAttr = typedArray.getInt(R.styleable.BaseChip_ixiChipTextAppearance, -1)
+            if(appearanceAttr!=-1){
+                this.setTextAppearance(mapChipTextAppearanceTypeToStyle(appearanceAttr))
+            } else{
+                this.setTextAppearance(R.style.ChipTextAppearance)
+            }
+            ixiChipColor = setUserDefinedOrStandardColor(typedArray)
+            setColor(ixiChipColor)
             ixiChipSize = mapChipTypeToEnum(typedArray.getInt(R.styleable.BaseChip_chipType, 0))
             val text = typedArray.getString(R.styleable.BaseChip_android_text) ?: ""
             val textSizeAttr = typedArray.getDimensionPixelSize(R.styleable.BaseChip_android_textSize, -1)
@@ -186,6 +192,13 @@ abstract class BaseChip @JvmOverloads constructor(
         setColor(color)
     }
 
+    fun setIxiChipTextAppearance(textAppearance: IxiChipTextAppearance){
+        val originalTextSize = this.textSize
+        this.setTextAppearance(mapChipTextAppearanceTypeToStyle(textAppearance.ordinal))
+        this.textSize = Utils.pixelsToSp(context, originalTextSize)
+        setTextColor(textSelector(ixiChipColor))
+    }
+
 
     private fun backgroundSelector(color: IxiChipColor): ColorStateList {
         return makeSelector(
@@ -258,6 +271,16 @@ abstract class BaseChip @JvmOverloads constructor(
         }
     }
 
+    private fun mapChipTextAppearanceTypeToStyle(enum: Int): Int {
+        return when (enum) {
+            0 -> R.style.ChipTextAppearance
+            1 -> R.style.ChipTextAppearance_Bold
+            2 -> R.style.ChipTextAppearance_Italic
+            3 -> R.style.ChipTextAppearance_Bold_Italic
+            else -> R.style.ChipTextAppearance
+        }
+    }
+
     private fun getColorFromAttribute(int: Int): IxiChipColor {
         return when (int) {
             0 -> IxiChipColor.YELLOW
@@ -278,6 +301,13 @@ abstract class BaseChip @JvmOverloads constructor(
         SMALL(12f, 20f),
         XSMALL(10f, 15f),
         NOTIFICATION(0f, 2f);
+    }
+
+    enum class IxiChipTextAppearance {
+        NORMAL,
+        BOLD,
+        ITALIC,
+        BOLD_ITALIC,
     }
 }
 

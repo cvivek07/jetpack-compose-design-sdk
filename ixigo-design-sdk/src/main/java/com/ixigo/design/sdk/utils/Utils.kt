@@ -24,6 +24,11 @@ object Utils {
         return dp * (metrics.densityDpi / 160f)
     }
 
+    fun pixelsToSp(context: Context, px: Float): Float {
+        val scaledDensity = context.resources.displayMetrics.scaledDensity
+        return px / scaledDensity
+    }
+
     @Composable
     fun mapLayoutAlignmentToComposeAlignment(alignment: Layout.Alignment): TextAlign{
         return when(alignment){

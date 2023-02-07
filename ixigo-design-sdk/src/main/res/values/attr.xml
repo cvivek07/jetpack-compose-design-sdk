@@ -53,6 +53,12 @@
 
     <declare-styleable name="BaseChip">
         <attr name="android:text" format="string" />
+        <attr name="ixiChipTextAppearance" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="boldItalic" value="3" />
+        </attr>
         <attr name="android:checkable" format="boolean" />
         <attr name="closeIcon" format="reference" />
         <attr name="android:enabled" format="boolean" />
