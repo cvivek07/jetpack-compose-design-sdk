@@ -2,7 +2,6 @@ package com.ixigo.design.sdk.components.bottomsheets
 
 import android.app.Dialog
 import android.os.Bundle
-import android.text.Layout.Alignment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,7 @@ import com.ixigo.design.sdk.databinding.IxiBottomSheetFragmentBinding
  * @version 1.0
  * @since 2023-01-27
  */
-abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
+class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)? = null) :BottomSheetDialogFragment() {
     private lateinit var _binding: IxiBottomSheetFragmentBinding
     private var uiState: IxiBottomSheetDialogFragmentUiModel = IxiBottomSheetDialogFragmentUiModel()
 
@@ -60,11 +59,14 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
         _binding.ixiBottomSheet.setHeaderText(uiState.titleText)
         _binding.ixiBottomSheet.setImageBackgroundColor(uiState.imageBackgroundColor)
         _binding.ixiBottomSheet.setBodyText(uiState.bodyText)
-        _binding.ixiBottomSheet.setToolbarText(uiState.toolbarTitle)
+        _binding.ixiBottomSheet.setToolbarTitle(uiState.toolbarTitle)
         uiState.closeActionAlignment?.let {
             _binding.ixiBottomSheet.setCloseActionAlignment(it)
         }
-        _binding.ixiBottomSheet.setToolbarSubtitleText(uiState.toolbarSubtitle)
+        uiState.toolbarCloseIcon?.let {
+            _binding.ixiBottomSheet.setToolbarCloseIcon(it)
+        }
+        _binding.ixiBottomSheet.setToolbarSubtitle(uiState.toolbarSubtitle)
         _binding.ixiBottomSheet.setIconSize(uiState.iconSize)
         _binding.ixiBottomSheet.disableDragging(uiState.disableDragging)
         uiState.inlineAlertText?.let {
@@ -88,7 +90,9 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
     /**
      * An abstract method to be implemented by subclasses to handle the close action.
      */
-    abstract fun onCloseActionListener()
+    fun onCloseActionListener(){
+        this.onCloseActionListener?.invoke()
+    }
 
     /**
      * Sets the image to be displayed in the Bottom Sheet.
@@ -206,8 +210,17 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
      *
      * @param alignment alignment of close action icon
      */
-    fun setCloseActionAlignment(alignment: Alignment){
+    fun setCloseActionAlignment(alignment: IxiBottomSheetView.ActionIconAlignment){
         uiState = uiState.copy(closeActionAlignment = alignment)
+    }
+
+    /**
+     * Sets the close icon drawable on Toolbar by default it's a Filled Cross Icon
+     *
+     * @param icon of close action icon
+     */
+    fun setToolbarCloseIcon(@DrawableRes icon: Int){
+        uiState = uiState.copy(toolbarCloseIcon = icon)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -224,6 +237,15 @@ abstract class IxiBottomSheetDialogFragment :BottomSheetDialogFragment() {
             }
         }
         return dialog
+    }
+
+    companion object {
+        val TAG: String = IxiBottomSheetDialogFragment::class.java.simpleName
+        val TAG2: String? = IxiBottomSheetDialogFragment::class.java.canonicalName
+        @JvmStatic
+        fun newInstance(onCloseActionListener:(()->Unit)?=null):IxiBottomSheetDialogFragment{
+            return IxiBottomSheetDialogFragment(onCloseActionListener)
+        }
     }
 }
 
@@ -246,5 +268,6 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val disableDragging:Boolean = false,
     val inlineAlertText: String? = null,
     val inlineAlertIxiColor: IxiColor? = null,
-    val closeActionAlignment: Alignment? = null,
+    val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
+    @DrawableRes val toolbarCloseIcon: Int? = null,
 )

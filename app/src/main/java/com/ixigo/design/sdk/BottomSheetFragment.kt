@@ -1,11 +1,11 @@
 package com.ixigo.design.sdk
 
 import android.os.Bundle
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.bottomsheets.helper.IxiBottomSheetHelper
 import com.ixigo.design.sdk.databinding.FragmentBottomSheetBinding
 
@@ -88,7 +88,8 @@ class BottomSheetFragment: Fragment() {
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
                     disableDragging = true,
-                    closeActionAlignment = Layout.Alignment.ALIGN_NORMAL
+                    closeActionAlignment = IxiBottomSheetView.ActionIconAlignment.START,
+                    toolbarCloseIcon = R.drawable.left_arrow
                 ), childFragmentManager
             )
         }

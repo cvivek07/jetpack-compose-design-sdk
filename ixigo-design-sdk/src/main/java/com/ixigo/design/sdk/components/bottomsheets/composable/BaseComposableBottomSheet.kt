@@ -54,7 +54,8 @@ fun BaseBottomSheetComposable(
     enablePointer: Boolean = false,
     inlineAlertText: String? = null,
     inlineAlertIxiColor: IxiColor? = null,
-    closeActionAlignment: Alignment? = Alignment.CenterEnd
+    closeActionAlignment: Alignment? = Alignment.CenterEnd,
+    @DrawableRes closeIcon: Int? = null,
 ) {
     val scrollState = rememberScrollState()
     Box(modifier = Modifier
@@ -69,7 +70,8 @@ fun BaseBottomSheetComposable(
                             subtitleText = masterSubtitleText,
                             closeActionListener = closeActionListener,
                             alignment = Alignment.Center,
-                            closeActionAlignment = closeActionAlignment ?: Alignment.CenterEnd
+                            closeActionAlignment = closeActionAlignment ?: Alignment.CenterEnd,
+                            closeIcon = closeIcon
                         )
                     }
                     image?.let {
@@ -183,11 +185,11 @@ private fun BannerImage(
 
 @Composable
 private fun BottomSheetContent(
+    modifier: Modifier = Modifier,
     heading: @Composable (() -> Unit)?,
     subtitle: @Composable (() -> Unit)?,
     inlineAlertText: String? = null,
-    inlineAlertIxiColor: IxiColor = IxiColor.Neutral,
-    modifier: Modifier = Modifier
+    inlineAlertIxiColor: IxiColor = IxiColor.Neutral
 ) {
     Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = modifier.fillMaxWidth()) {
         heading?.let {
@@ -266,7 +268,15 @@ private fun BottomSheetButtons(
 }
 
 @Composable
-private fun MasterTitle(modifier: Modifier = Modifier, alignment: Alignment  = Alignment.Center, text:String, subtitleText:String?= null, closeActionListener: (() -> Unit)? = null, closeActionAlignment: Alignment = Alignment.CenterEnd){
+private fun MasterTitle(
+    modifier: Modifier = Modifier,
+    alignment: Alignment = Alignment.Center,
+    text: String,
+    subtitleText: String? = null,
+    closeActionListener: (() -> Unit)? = null,
+    closeActionAlignment: Alignment = Alignment.CenterEnd,
+    @DrawableRes closeIcon: Int? = null
+) {
     Column {
         Box(modifier = modifier.fillMaxWidth(), contentAlignment = alignment){
             Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier
@@ -280,7 +290,11 @@ private fun MasterTitle(modifier: Modifier = Modifier, alignment: Alignment  = A
                     .clickable {
                         closeActionListener.invoke()
                     }){
-                    Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(22.dp))
+                    if(closeIcon!=null) {
+                        Icon(painter = painterResource(id = closeIcon), contentDescription = null, Modifier.size(22.dp))
+                    } else{
+                        Icon(imageVector = Icons.Filled.Close, contentDescription = null, modifier = Modifier.size(22.dp))
+                    }
                 }
             }
         }

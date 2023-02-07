@@ -1,12 +1,11 @@
 package com.ixigo.design.sdk.components.bottomsheets.helper
 
-import android.text.Layout.Alignment
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.FragmentManager
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragment
-import com.ixigo.design.sdk.components.bottomsheets.fragment.BottomSheetImplementation
+import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.styles.IxiColor
 
 object IxiBottomSheetHelper {
@@ -16,6 +15,9 @@ object IxiBottomSheetHelper {
         bottomSheet.setMasterSubtitle(ixiBottomSheetUiModel.toolbarSubtitle)
         bottomSheet.setBodyText(ixiBottomSheetUiModel.bodyText)
         bottomSheet.disableDragging(ixiBottomSheetUiModel.disableDragging)
+        ixiBottomSheetUiModel.toolbarCloseIcon?.let {
+            bottomSheet.setToolbarCloseIcon(it)
+        }
         ixiBottomSheetUiModel.closeActionAlignment?.let {
             bottomSheet.setCloseActionAlignment(ixiBottomSheetUiModel.closeActionAlignment)
         }
@@ -32,7 +34,7 @@ object IxiBottomSheetHelper {
     }
 
     fun showImageBottomSheet(ixiBottomSheetUiModel: IxiBottomSheetUiModel, fragmentManager: FragmentManager){
-        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, BottomSheetImplementation.newInstance())
+        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, IxiBottomSheetDialogFragment.newInstance())
         fragment.setImageBackgroundColor(ixiBottomSheetUiModel.imageBackgroundColor)
         ixiBottomSheetUiModel.iconSize?.let {
             fragment.setIconSize(it)
@@ -41,30 +43,30 @@ object IxiBottomSheetHelper {
         ixiBottomSheetUiModel.inlineAlertText?.let {
             fragment.setInlineAlert(it, ixiBottomSheetUiModel.inlineAlertIxiColor)
         }
-        fragment.show(fragmentManager, BottomSheetImplementation.TAG)
+        fragment.show(fragmentManager, IxiBottomSheetDialogFragment.TAG)
     }
 
 
     fun showFeatureIconBottomSheet(ixiBottomSheetUiModel: IxiBottomSheetUiModel, fragmentManager: FragmentManager){
-        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, BottomSheetImplementation.newInstance())
+        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, IxiBottomSheetDialogFragment.newInstance())
         ixiBottomSheetUiModel.iconSize?.let {
             fragment.setIconSize(it)
         }
         fragment.setImage(ixiBottomSheetUiModel.image)
-        fragment.show(fragmentManager, BottomSheetImplementation.TAG)
+        fragment.show(fragmentManager, IxiBottomSheetDialogFragment.TAG)
     }
 
     fun showNoIconBottomSheet(ixiBottomSheetUiModel: IxiBottomSheetUiModel, fragmentManager: FragmentManager){
-        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, BottomSheetImplementation.newInstance())
-        fragment.show(fragmentManager, BottomSheetImplementation.TAG)
+        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, IxiBottomSheetDialogFragment.newInstance())
+        fragment.show(fragmentManager, IxiBottomSheetDialogFragment.TAG)
     }
 
     fun showBlankBottomSheet(ixiBottomSheetUiModel: IxiBottomSheetUiModel, fragmentManager: FragmentManager){
-        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, BottomSheetImplementation.newInstance())
+        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, IxiBottomSheetDialogFragment.newInstance())
         ixiBottomSheetUiModel.view?.let {
             fragment.setView(ixiBottomSheetUiModel.view)
         }
-        fragment.show(fragmentManager, BottomSheetImplementation.TAG)
+        fragment.show(fragmentManager, IxiBottomSheetDialogFragment.TAG)
     }
 
     data class IxiBottomSheetUiModel(
@@ -83,6 +85,7 @@ object IxiBottomSheetHelper {
         val disableDragging: Boolean = false,
         val inlineAlertText: String? = null,
         val inlineAlertIxiColor: IxiColor? = null,
-        val closeActionAlignment: Alignment? = null
+        val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
+        @DrawableRes val toolbarCloseIcon: Int? = null
     )
 }

@@ -1,13 +1,13 @@
 package com.ixigo.design.sdk.components.bottomsheets.base
 
 import android.content.Context
-import android.text.Layout.Alignment
 import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.styles.IxiColor
 
 /**
@@ -73,7 +73,7 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      *
      * @param toolbarText The text to be displayed in the toolbar.
      */
-    fun setToolbarText(toolbarText:String?){
+    fun setToolbarTitle(toolbarText:String?){
         val inState = state.value
         state.value = inState.copy(toolbarText = toolbarText)
     }
@@ -83,7 +83,7 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      *
      * @param toolbarSubtitleText The subtitle text to be displayed in the toolbar.
      */
-    fun setToolbarSubtitleText(toolbarSubtitleText:String?){
+    fun setToolbarSubtitle(toolbarSubtitleText:String?){
         val inState = state.value
         state.value = inState.copy(toolbarSubtitleText = toolbarSubtitleText)
     }
@@ -163,13 +163,23 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
     }
 
     /**
-     * Set the close action icon alignment only ALIGN_NORMAL, ALIGN_OPPOSITE & ALIGN_CENTER is supported
+     * Set the close action icon alignment only START & END is supported
      *
      * @param alignment alignment of close action icon
      */
-    fun setCloseActionAlignment(alignment: Alignment){
+    fun setCloseActionAlignment(alignment: IxiBottomSheetView.ActionIconAlignment){
         val inState = state.value
         state.value = inState.copy(closeActionAlignment = alignment)
+    }
+
+    /**
+     * Sets the close icon drawable on Toolbar by default it's a Filled Cross Icon
+     *
+     * @param icon of close action icon
+     */
+    fun setToolbarCloseIcon(@DrawableRes icon: Int){
+        val inState = state.value
+        state.value = inState.copy(toolbarCloseIcon = icon)
     }
 }
 
@@ -190,5 +200,6 @@ data class BottomSheetState(
     val inlineAlertText: String? = null,
     val inlineAlertIxiColor: IxiColor? = null,
     val toolbarSubtitleText: String? = null,
-    val closeActionAlignment: Alignment = Alignment.ALIGN_OPPOSITE
+    val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment = IxiBottomSheetView.ActionIconAlignment.END,
+    @DrawableRes val toolbarCloseIcon: Int? = null,
     )
