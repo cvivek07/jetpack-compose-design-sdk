@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -246,32 +247,35 @@ class IxiText @JvmOverloads constructor(
         state.value = inState.copy(onClick = { l?.onClick(this) })
     }
 
+
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+            ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed
         )
-        val modifier = if (state.value.onClick != null) {
+        val stateValue = remember { state }
+        val modifier = if (stateValue.value.onClick != null) {
             Modifier.clickable {
-                state.value.onClick!!.invoke()
+                stateValue.value.onClick!!.invoke()
             }
         } else {
             Modifier
         }
-        if (state.value.text != null) {
+        if (stateValue.value.text != null) {
             TypographyText(
-                text = state.value.text!!,
-                textStyle = state.value.textStyle,
+                text = stateValue.value.text!!,
+                textStyle = stateValue.value.textStyle,
                 modifier = modifier
             )
         }
-        if (state.value.spannedString != null) {
+        if (stateValue.value.spannedString != null) {
             TypographyText(
-                spanned = state.value.spannedString!!,
-                textStyle = state.value.textStyle,
+                spanned = stateValue.value.spannedString!!,
+                textStyle = stateValue.value.textStyle,
                 modifier = modifier
             )
         }
+
     }
 }
 
