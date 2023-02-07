@@ -7,7 +7,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomsheets.base.BaseBottomSheet
 import com.ixigo.design.sdk.components.bottomsheets.composable.BaseBottomSheetComposable
-import com.ixigo.design.sdk.util.Util
 
 class IxiBottomSheetView @JvmOverloads constructor(
     context: Context,
@@ -31,7 +30,7 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 primaryActionListener = primaryActionListener,
                 secondaryActionListener = secondaryActionListener,
                 closeActionListener = onClose,
-                iconSize = Util.convertDimensionToDp(px = iconSize?:80f),
+                iconSize = iconSize?.toInt()?:80,
                 view = view,
                 enablePointer = !disableDragging,
                 inlineAlertText = inlineAlertText,

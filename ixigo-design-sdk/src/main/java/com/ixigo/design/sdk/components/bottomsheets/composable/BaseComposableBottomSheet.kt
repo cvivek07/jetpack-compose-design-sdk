@@ -20,8 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.times
 import androidx.compose.ui.viewinterop.AndroidView
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.SdkManager
@@ -47,7 +47,7 @@ fun BaseBottomSheetComposable(
     primaryButtonText: String? = null,
     secondaryButtonText: String? = null,
     closeActionListener: (() -> Unit)? = null,
-    iconSize: Dp? = 80.dp,
+    iconSize: Int? = 80,
     secondaryActionListener: (() -> Unit)? = null,
     primaryActionListener: (() -> Unit)? = null,
     view: View? = null,
@@ -158,7 +158,7 @@ private fun BannerImage(
     modifier: Modifier = Modifier,
     @ColorRes backgroundColor: Int? = R.color.r50,
     @DrawableRes logo: Int,
-    iconSize: Dp? = null
+    iconSize: Int? = null
 ) {
     Box(
         modifier = modifier.then(
@@ -177,7 +177,7 @@ private fun BannerImage(
             painter = painterResource(id = logo),
             contentDescription = null,
             Modifier
-                .then(if (iconSize == null) Modifier.size(25.dp) else Modifier.size(iconSize))
+                .then(if (iconSize == null) Modifier.size(25.dp) else Modifier.size(iconSize * 1.dp))
                 .align(Alignment.Center)
         )
     }

@@ -15,7 +15,7 @@ import com.ixigo.design.sdk.databinding.IxiBottomSheetFragmentBinding
 
 
 /**
- * An abstract class representing a custom base Bottom Sheet view in Android.
+ * A class representing a custom base Bottom Sheet view in Android.
  * This class extends [BottomSheetDialogFragment] and implements UI customization
  * functionality
  *
