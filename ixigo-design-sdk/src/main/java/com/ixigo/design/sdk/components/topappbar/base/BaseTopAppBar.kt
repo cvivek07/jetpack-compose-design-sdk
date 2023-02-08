@@ -48,6 +48,11 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
         val initState = state.value
         state.value = initState.copy(elevation = elevation)
     }
+
+    fun getTitle() = state.value.title
+
+    fun getSubTitle() = state.value.subTitle
+
 }
 
 data class AppBarState(
