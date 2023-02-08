@@ -3,8 +3,6 @@ package com.ixigo.design.sdk.components
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.ui.platform.AbstractComposeView
-import com.ixigo.design.sdk.DesignConfig
-import com.ixigo.design.sdk.Project
 import com.ixigo.design.sdk.SdkManager
 import com.ixigo.design.sdk.utils.setupEditMode
 
@@ -26,4 +24,6 @@ abstract class BaseComponent @JvmOverloads constructor(
         preferredWidth = layoutParams.width
         preferredHeight = layoutParams.height
     }
+
+
 }
