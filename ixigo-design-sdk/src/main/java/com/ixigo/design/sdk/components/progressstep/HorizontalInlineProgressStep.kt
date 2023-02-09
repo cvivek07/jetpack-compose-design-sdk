@@ -29,7 +29,7 @@ class HorizontalInlineProgressStep @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindow)
+        setViewCompositionStrategy( ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool)
 
         with(state.value) {
             DrawHorizontalInlineSteps(

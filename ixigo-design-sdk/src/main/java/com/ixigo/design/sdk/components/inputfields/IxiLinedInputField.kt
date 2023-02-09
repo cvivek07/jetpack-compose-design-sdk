@@ -14,7 +14,7 @@ class IxiLinedInputField  @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
 
         LinedInputField(

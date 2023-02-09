@@ -38,7 +38,7 @@ class TypographyFragment : Fragment() {
             }
 
             displayText700.setText("Display Text SemiBold")
-            displayText700.setTypography(IxiTypography.Heading.DisplayLarge.medium)
+            displayText700.setTypography(IxiTypography.Heading.DisplayLarge.semiBold)
 
             displayText500.setHtmlText(R.string.hello_world)
             displayText500.setTypography(IxiTypography.Heading.DisplayLarge.regular)
@@ -93,7 +93,7 @@ class TypographyFragment : Fragment() {
             bodyLargeItalic.setText("Body Large Italic ->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
 //            bodyLargeItalic.setTypography(IxiTypography.Body.Large.italics)
             bodyLargeMed.setText("Body Large Medium ->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
-//            bodyLargeMed.setTypography(IxiTypography.Body.Large.medium)
+            bodyLargeMed.setTypography(IxiTypography.Body.Large.medium)
             bodyLargeReg.setText("Body Large Regular ->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
 //            bodyLargeReg.setTypography(IxiTypography.Body.Large.regular)
             bodyLargeUnderlined.setText("Body large Underlined->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")

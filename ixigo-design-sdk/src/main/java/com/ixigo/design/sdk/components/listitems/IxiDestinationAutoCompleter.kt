@@ -15,7 +15,7 @@ class IxiDestinationAutoCompleter @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
 
         AutoCompleterDestinationComposable(

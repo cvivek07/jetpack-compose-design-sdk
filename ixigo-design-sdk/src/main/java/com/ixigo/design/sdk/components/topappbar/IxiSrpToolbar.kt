@@ -22,7 +22,7 @@ class IxiSrpToolbar @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
         with(state.value) {
             SrpBar(

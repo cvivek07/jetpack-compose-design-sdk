@@ -30,7 +30,7 @@ internal class IxiBottomNavItem @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
         ComposableBottomNavItem(
             icon = CompatImage(resourceId = state.value.icon, drawable = state.value.iconDrawable),

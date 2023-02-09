@@ -102,6 +102,16 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+            @Deprecated("Use DisplayLarge.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 54.sp,
+                lineHeight = 65.sp,
+                letterSpacing = 4.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
             override val medium = TextStyle(
                 fontSize = 54.sp,
                 lineHeight = 65.sp,
@@ -159,6 +169,17 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
+            @Deprecated("Use H1.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 40.sp,
+                lineHeight = 48.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
             override val medium = TextStyle(
                 fontSize = 40.sp,
                 lineHeight = 48.sp,
@@ -211,6 +232,16 @@ object IxiTypography {
                 lineHeight = 43.sp,
                 letterSpacing = 3.sp,
                 fontWeight = W500,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
+            @Deprecated("Use H2.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 36.sp,
+                lineHeight = 43.sp,
+                letterSpacing = 3.sp,
+                fontWeight = W700,
                 color = n800,
                 fontFamily = IxiFamily
             )
@@ -271,6 +302,16 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+            @Deprecated("Use H3.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 30.sp,
+                lineHeight = 36.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
             override val medium = TextStyle(
                 fontSize = 30.sp,
                 lineHeight = 36.sp,
@@ -326,6 +367,17 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
+            @Deprecated("Use H4.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 24.sp,
+                lineHeight = 29.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
             override val medium = TextStyle(
                 fontSize = 24.sp,
                 lineHeight = 29.sp,
@@ -381,6 +433,17 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
+            @Deprecated("Use H5.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 20.sp,
+                lineHeight = 24.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
             override val medium = TextStyle(
                 fontSize = 20.sp,
                 lineHeight = 24.sp,
@@ -436,6 +499,17 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
+            @Deprecated("Use H6.medium instead")
+            val semiBold = TextStyle(
+                fontSize = 18.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 1.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily
+            )
+
             override val medium = TextStyle(
                 fontSize = 18.sp,
                 lineHeight = 22.sp,

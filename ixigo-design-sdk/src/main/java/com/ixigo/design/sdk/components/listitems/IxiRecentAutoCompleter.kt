@@ -14,7 +14,7 @@ class IxiRecentAutoCompleter @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
         AutoCompleterRecentComposable(
             subTitle = state.value.subTitle,
