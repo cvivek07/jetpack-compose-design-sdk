@@ -1,8 +1,6 @@
 package com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable
 
-import android.graphics.drawable.Drawable
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,9 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,11 +24,12 @@ import androidx.compose.ui.unit.sp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.LARGE
 import com.ixigo.design.sdk.components.bottomnavigation.bottomnavitem.composable.BadgeType.SMALL
+import com.ixigo.design.sdk.components.imageutils.ImageData
+import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
-import com.ixigo.design.sdk.utils.DrawablePainter
 
 
 /**
@@ -48,8 +45,8 @@ import com.ixigo.design.sdk.utils.DrawablePainter
  */
 @Composable
 fun ComposableBottomNavItem(
-    icon: CompatImage?,
-    selectedIcon: CompatImage? = null,
+    icon: ImageData?,
+    selectedIcon: ImageData? = null,
     label: String?,
     selected: Boolean = false,
     onClick: () -> Unit,
@@ -104,7 +101,7 @@ fun ComposableBottomNavItem(
  */
 @Composable
 fun IconWithBadge(
-    icon: CompatImage?,
+    icon: ImageData?,
     badgeType: BadgeType? = null,
     badgeContent: String? = null,
     @ColorRes tint: Int? = null,
@@ -125,17 +122,10 @@ fun IconWithBadge(
                     .align(Alignment.Center)
                     .then(if (enableBackground) Modifier.background(colorResource(id = ixiColor.pressedColor)) else Modifier)
             ) {
-                val painter: Painter? =
-                    if (icon.drawable != null) {
-                        DrawablePainter(icon.drawable)
-                    } else if (icon.resourceId != null) {
-                        painterResource(id = icon.resourceId)
-                    } else {
-                        null
-                    }
-                painter?.let {
+
+                icon.getPainterForImage()?.let {
                     Icon(
-                        painter = painter,
+                        painter = it,
                         contentDescription = null,
                         tint = if (tint != null) colorResource(id = tint) else Color.Unspecified,
                         modifier = Modifier
@@ -279,5 +269,3 @@ fun Badge(){
         LargeBadge(content="2000k")
     }
 }
-
-data class CompatImage(@DrawableRes val resourceId: Int?, val drawable: Drawable?)

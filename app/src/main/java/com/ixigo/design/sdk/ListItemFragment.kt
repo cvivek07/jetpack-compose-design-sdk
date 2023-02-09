@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.listitems.IxiListItem
 import com.ixigo.design.sdk.components.listitems.base.BaseListItem
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -37,8 +40,8 @@ class ListItemFragment : BaseFragment() {
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                endIconRes = R.drawable.ic_search,
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -401,23 +404,26 @@ class ListItemFragment : BaseFragment() {
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                startIconRes = R.drawable.ic_search,
-                endIconRes = R.drawable.ic_search,
-                startLogo = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+                startIcon = ImageData.createFromRes(R.drawable.ic_search),
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
+                startLogo = ImageData.createFromUrl("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = null,
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_search
+                    )
+                ),
                 startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "My subtitle is Very long in order to test the lengthy url. It can be a very large description. To add more description please continue to write vague content",
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 meta = "Delhi",
                 endCheckBox = false
             ),
@@ -434,7 +440,7 @@ class ListItemFragment : BaseFragment() {
                 switch = false
             ),
             ListItemData(
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
                 endCheckBox = true
@@ -443,7 +449,7 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Orange,
                 endCheckBox = true
             ),
@@ -451,58 +457,61 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Success,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Railway Station complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Warning,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                endIconRes = R.drawable.ic_search,
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                startIconRes = R.drawable.ic_search,
-                endIconRes = R.drawable.ic_search,
-                startLogo = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+                startIcon = ImageData.createFromRes(R.drawable.ic_search),
+                endIcon = ImageData.createFromDrawable(
+                    ContextCompat.getDrawable(
+                        requireContext(),
+                        R.drawable.ic_search
+                    )
+                ),
+                startLogo = ImageData.createFromUrl("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = null,
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                startIcon = null,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "My subtitle is Very long in order to test the lengthy url. It can be a very large description. To add more description please continue to write vague content",
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 meta = "Delhi",
                 endCheckBox = false
             ),
@@ -519,7 +528,7 @@ class ListItemFragment : BaseFragment() {
                 switch = false
             ),
             ListItemData(
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
                 endCheckBox = true
@@ -528,7 +537,7 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Orange,
                 endCheckBox = true
             ),
@@ -536,58 +545,57 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Success,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Railway Station complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Warning,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                endIconRes = R.drawable.ic_search,
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                startIconRes = R.drawable.ic_search,
-                endIconRes = R.drawable.ic_search,
-                startLogo = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+                startIcon = ImageData.createFromRes(R.drawable.ic_search),
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
+                startLogo = ImageData.createFromUrl("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = null,
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                startIcon = null,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "My subtitle is Very long in order to test the lengthy url. It can be a very large description. To add more description please continue to write vague content",
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                startIcon = null,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 meta = "Delhi",
                 endCheckBox = false
             ),
@@ -604,7 +612,7 @@ class ListItemFragment : BaseFragment() {
                 switch = false
             ),
             ListItemData(
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
                 endCheckBox = true
@@ -613,7 +621,7 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Orange,
                 endCheckBox = true
             ),
@@ -621,58 +629,57 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Success,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Railway Station complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Warning,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                endIconRes = R.drawable.ic_search,
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
-                startIconRes = R.drawable.ic_search,
-                endIconRes = R.drawable.ic_search,
-                startLogo = "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+                startIcon = ImageData.createFromRes(R.drawable.ic_search, 100.dp, 100.dp),
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
+                startLogo = ImageData.createFromUrl("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = null,
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                startIcon = null,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 startCheckBox = false,
                 color = IxiColor.Extension,
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "My subtitle is Very long in order to test the lengthy url. It can be a very large description. To add more description please continue to write vague content",
-                startIconRes = null,
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 meta = "Delhi",
                 endCheckBox = false
             ),
@@ -689,7 +696,7 @@ class ListItemFragment : BaseFragment() {
                 switch = false
             ),
             ListItemData(
-                endIconRes = R.drawable.ic_search,
+                endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 title = "Nearest Railway Station",
                 subTitle = "SubTtle",
                 endCheckBox = true,
@@ -701,7 +708,7 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Orange,
                 endCheckBox = true
             ),
@@ -709,31 +716,31 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp"
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Success,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Railway Station complete name",
                 textButton = "Action",
-                avatar = "https://pixlr.com/images/index/remove-bg.webp",
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 color = IxiColor.Warning,
                 endCheckBox = true,
                 startCheckBox = true,
                 switch = false,
-                startLogo = "https://pixlr.com/images/index/remove-bg.webp",
-                endLogo = "https://pixlr.com/images/index/remove-bg.webp"
+                startLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                endLogo = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
             )
         )
         binding.recyclerView.apply {
@@ -757,15 +764,15 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
             (itemView as? BaseListItem)?.apply {
                 data.title?.let { setTitle(it) }
                 setSubTitle(data.subTitle)
-                setAvatarUrl(data.avatar)
+                setAvatar(data.avatar)
                 setMetaText(data.meta)
                 setActionText(data.textButton)
                 data.startCheckBox?.let { setStartCheckedValue(it) }
                 setStartCheckedChangeListener(data.startCheckChangeListener)
                 data.endCheckBox?.let { setEndCheckedValue(it) }
-                setEndCheckedChangeListener (data.endCheckChangeListener)
-                data.endIconRes?.let { setEndIcon(it) }
-                data.startIconRes?.let { setStartIcon(it) }
+                setEndCheckedChangeListener(data.endCheckChangeListener)
+                data.endIcon?.let { setEndIcon(it) }
+                data.startIcon?.let { setStartIcon(it) }
                 data.switch?.let {
                     setSwitchCheckedValue(it)
                     setSwitchCheckedChangeListener(data.switchChangeListener)
@@ -798,15 +805,15 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
 }
 
 data class ListItemData(
-    val startIconRes: Int? = null,
+    val startIcon: ImageData? = null,
+    val endIcon: ImageData? = null,
     val title: String?,
     val meta: String? = null,
     val textButton: String? = null,
     val subTitle: String? = null,
-    val avatar: String? = null,
-    val startLogo: String? = null,
-    val endLogo: String? = null,
-    val endIconRes: Int? = null,
+    val avatar: ImageData? = null,
+    val startLogo: ImageData? = null,
+    val endLogo: ImageData? = null,
     val switch: Boolean? = null,
     val switchChangeListener: (Boolean) -> Unit = {},
     val startCheckChangeListener: (Boolean) -> Unit = {},

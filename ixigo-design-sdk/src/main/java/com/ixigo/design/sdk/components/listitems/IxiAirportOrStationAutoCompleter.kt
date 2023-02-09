@@ -22,8 +22,8 @@ class IxiAirportOrStationAutoCompleter @JvmOverloads constructor(
         )
 
         AutoCompleterAirPortOrStationComposable(
-            startIcon = state.value.startIconRes,
-            endIcon = state.value.endIconRes,
+            startIcon = state.value.startIconData,
+            endIcon = state.value.endIconData,
             title = state.value.title ?: "",
             subTitle = state.value.subTitle,
             to = state.value.to,

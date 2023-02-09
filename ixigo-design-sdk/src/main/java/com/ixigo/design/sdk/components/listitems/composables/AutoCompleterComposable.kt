@@ -1,6 +1,5 @@
 package com.ixigo.design.sdk.components.listitems.composables
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
@@ -24,14 +23,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.progressstep.base.ProgressStepIconSize
+import com.ixigo.design.sdk.components.imageutils.AsyncImageView
+import com.ixigo.design.sdk.components.imageutils.ImageData
+import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 @Composable
 fun AutoCompleterRecentComposable(
-    @DrawableRes startIcon: Int? = null,
-    @DrawableRes endIcon: Int? = null,
+    startIcon: ImageData? = null,
+    endIcon: ImageData? = null,
     code: String? = null,
     from: String?,
     to: String?,
@@ -54,24 +55,15 @@ fun AutoCompleterRecentComposable(
             }
         }
 
-        if (endIcon != null) {
-            Icon(
-                modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .clickable { onEndIconClick() },
-                painter = painterResource(id = endIcon),
-                contentDescription = "",
-            )
-
-        }
+        DrawEndIcon(endIcon, onEndIconClick)
     }
 }
 
+
 @Composable
 fun AutoCompleterDestinationComposable(
-    @DrawableRes startIcon: Int? = null,
-    @DrawableRes endIcon: Int? = null,
+    startIcon: ImageData? = null,
+    endIcon: ImageData? = null,
     title: String,
     code: String?,
     subTitle: String? = null,
@@ -94,24 +86,14 @@ fun AutoCompleterDestinationComposable(
 
         }
 
-        if (endIcon != null) {
-            Icon(
-                modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .clickable { onEndIconClick() },
-                painter = painterResource(id = endIcon),
-                contentDescription = "",
-            )
-
-        }
+        DrawEndIcon(endIcon = endIcon, onEndIconClick = onEndIconClick)
     }
 }
 
 @Composable
 fun AutoCompleterAirPortOrStationComposable(
-    @DrawableRes startIcon: Int? = null,
-    @DrawableRes endIcon: Int? = null,
+    startIcon: ImageData? = null,
+    endIcon: ImageData? = null,
     title: String,
     subTitle: String? = null,
     to: String? = null,
@@ -142,17 +124,8 @@ fun AutoCompleterAirPortOrStationComposable(
             }
         }
 
-        if (endIcon != null) {
-            Icon(
-                modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .clickable { onEndIconClick() },
-                painter = painterResource(id = endIcon),
-                contentDescription = "",
-            )
+        DrawEndIcon(endIcon = endIcon, onEndIconClick = onEndIconClick)
 
-        }
     }
 }
 
@@ -185,11 +158,11 @@ private fun DrawRow(onItemClick: () -> Unit, content: @Composable RowScope.() ->
 }
 
 @Composable
-private fun DrawStartIcon(startIcon: Int?, iconText: String?, onStartIconClick: () -> Unit) {
+private fun DrawStartIcon(startIcon: ImageData?, iconText: String?, onStartIconClick: () -> Unit) {
     Box(
         modifier = Modifier
-            .width(50.dp)
-            .height(50.dp)
+            .width(startIcon?.width ?: 50.dp)
+            .height(startIcon?.height ?: 50.dp)
             .clip(RoundedCornerShape(corner = CornerSize(10.dp)))
             .border(
                 1.dp,
@@ -202,16 +175,57 @@ private fun DrawStartIcon(startIcon: Int?, iconText: String?, onStartIconClick: 
 
     ) {
         if (startIcon != null) {
-            Icon(
-                modifier = Modifier
-                    .width(30.dp)
-                    .height(30.dp)
-                    .align(Alignment.Center),
-                painter = painterResource(id = startIcon),
-                contentDescription = ""
-            )
+            if (startIcon.url != null) {
+                AsyncImageView(
+                    modifier = Modifier
+                        .width(startIcon.width ?: 30.dp)
+                        .height(startIcon.width ?: 30.dp),
+                    url = startIcon.url,
+                    placeholder = startIcon.drawableRes,
+                    contentDes = null
+                )
+            } else {
+                startIcon.getPainterForImage()?.let {
+                    Icon(
+                        modifier = Modifier
+                            .width(30.dp)
+                            .height(30.dp)
+                            .align(Alignment.Center),
+                        painter = it,
+                        contentDescription = ""
+                    )
+                }
+            }
         } else if (iconText != null) {
             TypographyText(text = iconText, textStyle = IxiTypography.Body.Small.regular)
+        }
+    }
+}
+
+
+@Composable
+private fun DrawEndIcon(endIcon: ImageData?, onEndIconClick: () -> Unit) {
+    if (endIcon != null) {
+        if (endIcon.url != null) {
+            AsyncImageView(
+                modifier = Modifier
+                    .width(endIcon.width ?: 30.dp)
+                    .height(endIcon.width ?: 30.dp),
+                url = endIcon.url,
+                placeholder = endIcon.drawableRes,
+                contentDes = null
+            )
+        } else {
+            endIcon.getPainterForImage()?.let {
+                Icon(
+                    modifier = Modifier
+                        .width(endIcon.width ?: 30.dp)
+                        .height(endIcon.height ?: 30.dp)
+                        .clickable { onEndIconClick() },
+                    painter = it,
+                    contentDescription = "",
+                )
+            }
         }
     }
 }
@@ -243,10 +257,24 @@ fun FromToTitleView(
 
 @Preview(showSystemUi = true)
 @Composable
-fun showPreviewList() {
+fun ShowPreviewList() {
     Column(modifier = Modifier.fillMaxSize()) {
         AutoCompleterRecentComposable(
-            endIcon = R.drawable.ic_baseline_cancel_24,
+            startIcon = ImageData(
+                drawableRes = R.drawable.ic_baseline_cancel_24,
+                null,
+                null,
+                null,
+                null,
+                null
+            ),
+            endIcon = ImageData(
+                drawableRes = R.drawable.ic_baseline_cancel_24,
+                null,
+                null,
+                null,
+                null, null
+            ),
             subTitle = "State name",
             from = "Delhi",
             to = "Mumbai",
@@ -257,8 +285,22 @@ fun showPreviewList() {
         )
 
         AutoCompleterDestinationComposable(
-            startIcon = R.drawable.ic_baseline_cancel_24,
-            endIcon = R.drawable.ic_baseline_cancel_24,
+            startIcon = ImageData(
+                drawableRes = R.drawable.ic_baseline_cancel_24,
+                null,
+                null,
+                null,
+                null,
+                null
+            ),
+            endIcon = ImageData(
+                drawableRes = R.drawable.ic_baseline_cancel_24,
+                null,
+                null,
+                null,
+                null,
+                null
+            ),
             title = "Nearest Railway Station",
             code = null,
             onItemClick = {},
@@ -267,8 +309,22 @@ fun showPreviewList() {
         )
 
         AutoCompleterAirPortOrStationComposable(
-            startIcon = R.drawable.ic_baseline_cancel_24,
-            endIcon = R.drawable.ic_baseline_cancel_24,
+            startIcon = ImageData(
+                drawableRes = R.drawable.ic_baseline_cancel_24,
+                null,
+                null,
+                null,
+                null,
+                null
+            ),
+            endIcon = ImageData(
+                drawableRes = R.drawable.ic_baseline_cancel_24,
+                null,
+                null,
+                null,
+                null,
+                null
+            ),
             title = "Nearest Railway Station",
             to = "Delhi",
             from = "Mumbai",
