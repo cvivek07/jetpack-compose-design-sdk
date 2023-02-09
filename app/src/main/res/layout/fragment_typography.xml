@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fillViewport="false"
-    android:layout_gravity="center_horizontal">
+    android:layout_gravity="center_horizontal"
+    android:fillViewport="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,20 +13,38 @@
         android:padding="20dp">
 
         <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/test"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@color/r200"
+            app:textDisplayType="display_large"
+            app:textWeight="bold"
+            android:padding="20dp"
+            app:horizontalAlignment="end"
+            app:verticalAlignment="bottom"
+            android:text="Test" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/displayText900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/displayText700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/display"
-            android:textColor="@color/o700"/>
+            android:textColor="@color/o700" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/displayText500"
@@ -34,337 +52,358 @@
             android:layout_height="wrap_content"
             android:textColor="@color/r700" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h1900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h1700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h1500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h2900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h2700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h2500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h3900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h3700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h3500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h4900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h4700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h4500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h5900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h5700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h5500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h6900"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h6700"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/h6500"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:textDisplayType="body_large"
-            app:textWeight="regular"/>
+            app:textWeight="regular" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeMed"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:textDisplayType="body_large"
-            app:textWeight="medium"
-            android:layout_height="wrap_content" />
+            app:textWeight="medium" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeBold"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:textDisplayType="body_large"
-            app:textWeight="bold"
-            android:layout_height="wrap_content" />
+            app:textWeight="bold" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeStrike"
             android:layout_width="wrap_content"
-            app:textDisplayType="body_large"
-            app:textWeight="regular"
+            android:layout_height="wrap_content"
             app:strikeThrough="true"
-            android:layout_height="wrap_content" />
+            app:textDisplayType="body_large"
+            app:textWeight="regular" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeItalic"
             android:layout_width="wrap_content"
-            app:textDisplayType="body_large"
-            app:textWeight="regular"
+            android:layout_height="wrap_content"
             app:italics="true"
-            android:layout_height="wrap_content" />
+            app:textDisplayType="body_large"
+            app:textWeight="regular" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyLargeUnderlined"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:textDisplayType="body_large"
             app:textWeight="regular"
-            app:underline="true"
-            android:layout_height="wrap_content" />
+            app:underline="true" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyMediumReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyMediumMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyMediumBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyMediumStrike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyMediumItalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyMediumUnderlined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodySmallReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodySmallMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodySmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodySmallStrike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodySmallItalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodySmallUnderlined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyXSmallReg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyXSmallMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyXSmallBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyXSmallStrike"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyXSmallItalic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
 
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/bodyXSmallUnderlined"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
-        <include layout="@layout/divider"/>
-        <include layout="@layout/divider"/>
+        <include layout="@layout/divider" />
+
+        <include layout="@layout/divider" />
 
     </LinearLayout>
 </ScrollView>

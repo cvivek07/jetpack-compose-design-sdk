@@ -30,6 +30,9 @@ class TypographyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+//            test.setVerticalAlignment(Alignment.CenterVertically)
+//            test.setHorizontalAlignment(Alignment.End)
+//            test.setHorizontalTextAlignment(TextAlign.End)
 //            displayText900.setTextColor(ContextCompat.getColor(requireContext(),R.color.b300))
             displayText900.setTypography(IxiTypography.Heading.DisplayLarge.bold)
             displayText900.setText("Display Text Bold")

@@ -60,6 +60,16 @@
             <enum name="medium" value="1" />
             <enum name="regular" value="2" />
         </attr>
+        <attr name="verticalAlignment" format="enum">
+            <enum name="bottom" value="0" />
+            <enum name="center_vertically" value="1" />
+            <enum name="top" value="2" />
+        </attr>
+        <attr name="horizontalAlignment" format="enum">
+            <enum name="start" value="0" />
+            <enum name="center_horizontally" value="1" />
+            <enum name="end" value="2" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="BaseBottomNavItem">

@@ -7,9 +7,12 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
@@ -22,6 +25,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.buttons.composable.updateHeight
+import com.ixigo.design.sdk.components.buttons.composable.updateWidth
 import com.ixigo.design.sdk.components.inputfields.IxiLinedInputField
 import com.ixigo.design.sdk.components.inputfields.IxiOutlinedInputField
 import com.ixigo.design.sdk.components.styles.IxiTypography
@@ -85,35 +90,64 @@ class IxiText @JvmOverloads constructor(
 
     //    private var textStyle = TextStyle(fontFamily = IxiFamily)
     private var textColorRes: Int
-    private val state = mutableStateOf(
-        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, null)
-    )
+    private var defaultTypography: IxiTypography.TypographyType = IxiTypography.Body.Medium
+    private var defaultTextStyle = defaultTypography.regular
 
-    private var defaultTypography : IxiTypography.TypographyType = IxiTypography.Body.Medium
-    private var defaultTextStyle  = defaultTypography.regular
+    private val state = mutableStateOf(
+        TextState(
+            text = "",
+            spannedString = null,
+            textStyle = defaultTextStyle,
+            color = null,
+            onClick = null,
+            vAlignment = Alignment.CenterVertically,
+            hAlignment = Alignment.CenterHorizontally,
+        )
+    )
 
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.IxiText)
         try {
             val text = typedArray.getString(R.styleable.IxiText_android_text) ?: ""
             setText(text)
-            textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
 
-            val textDisplayType = typedArray.getInt(R.styleable.IxiText_textDisplayType, TextDisplayType.BODY_MEDIUM.ordinal)
-            val textWeight = typedArray.getInt(R.styleable.IxiText_textWeight, TextWeight.REGULAR.ordinal)
+            textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
+            setTextColor(textColorRes)
+
+            val textDisplayType = typedArray.getInt(
+                R.styleable.IxiText_textDisplayType,
+                TextDisplayType.BODY_MEDIUM.ordinal
+            )
+            val textWeight = typedArray.getInt(
+                R.styleable.IxiText_textWeight,
+                TextWeight.REGULAR.ordinal
+            )
             setTextDisplayType(textDisplayType)
             setTextWeight(TextWeight.values()[textWeight])
 
+            val hAlign = when (typedArray.getInt(R.styleable.IxiText_horizontalAlignment, 1)) {
+                0 -> Alignment.Start
+                2 -> Alignment.End
+                else -> Alignment.CenterHorizontally
+            }
+            setHorizontalAlignment(hAlign)
+
+            val vAlign = when (typedArray.getInt(R.styleable.IxiText_verticalAlignment, 1)) {
+                0 -> Alignment.Bottom
+                2 -> Alignment.Top
+                else -> Alignment.CenterVertically
+            }
+            setVerticalAlignment(vAlign)
+
             val underline = typedArray.getBoolean(R.styleable.IxiText_underline, false)
-            if(underline) setUnderLine()
+            if (underline) setUnderLine()
 
             val strikeThrough = typedArray.getBoolean(R.styleable.IxiText_strikeThrough, false)
-            if(strikeThrough) setStrikeThrough()
+            if (strikeThrough) setStrikeThrough()
 
             val italics = typedArray.getBoolean(R.styleable.IxiText_italics, false)
-            if(italics) setItalics()
+            if (italics) setItalics()
 
-            setTextColor(textColorRes)
             state.value = state.value.copy(textStyle = defaultTextStyle)
         } finally {
             typedArray.recycle()
@@ -124,7 +158,15 @@ class IxiText @JvmOverloads constructor(
      * Sets the text to be displayed.
      */
     fun setText(text: String) {
-        state.value = state.value.copy(text = text)
+        state.value = state.value.copy(text = text, spannedString = null)
+    }
+
+    fun setVerticalAlignment(alignment: Alignment.Vertical) {
+        state.value = state.value.copy(vAlignment = alignment)
+    }
+
+    fun setHorizontalAlignment(alignment: Alignment.Horizontal) {
+        state.value = state.value.copy(hAlignment = alignment)
     }
 
     /**
@@ -135,7 +177,7 @@ class IxiText @JvmOverloads constructor(
     fun setHtmlText(html: String) {
         val spannedS =
             HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY, null, null)
-        state.value = state.value.copy(spannedString = spannedS)
+        state.value = state.value.copy(spannedString = spannedS, text = null)
     }
 
     /**
@@ -187,7 +229,7 @@ class IxiText @JvmOverloads constructor(
     }
 
     fun setTextWeight(weight: TextWeight) {
-        defaultTextStyle = when(weight){
+        defaultTextStyle = when (weight) {
             TextWeight.BOLD -> defaultTypography.bold
             TextWeight.MEDIUM -> defaultTypography.medium
             TextWeight.REGULAR -> defaultTypography.regular
@@ -195,7 +237,7 @@ class IxiText @JvmOverloads constructor(
     }
 
     private fun setTypographyType(textType: TextDisplayType) {
-          defaultTypography = when(textType) {
+        defaultTypography = when (textType) {
             TextDisplayType.DISPLAY_LARGE -> IxiTypography.Heading.DisplayLarge
             TextDisplayType.H1 -> IxiTypography.Heading.H1
             TextDisplayType.H2 -> IxiTypography.Heading.H2
@@ -251,7 +293,7 @@ class IxiText @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
+            ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
         val stateValue = remember { state }
         val modifier = if (stateValue.value.onClick != null) {
@@ -261,18 +303,23 @@ class IxiText @JvmOverloads constructor(
         } else {
             Modifier
         }
+            .updateWidth(preferredWidth)
+            .updateHeight(preferredHeight)
+            .wrapContentHeight(align = stateValue.value.vAlignment)
+            .wrapContentWidth(align = stateValue.value.hAlignment)
+
         if (stateValue.value.text != null) {
             TypographyText(
                 text = stateValue.value.text!!,
                 textStyle = stateValue.value.textStyle,
-                modifier = modifier
+                modifier = modifier,
             )
         }
         if (stateValue.value.spannedString != null) {
             TypographyText(
                 spanned = stateValue.value.spannedString!!,
                 textStyle = stateValue.value.textStyle,
-                modifier = modifier
+                modifier = modifier,
             )
         }
 
@@ -284,5 +331,7 @@ data class TextState(
     val spannedString: Spanned? = null,
     val textStyle: TextStyle,
     @ColorInt val color: Int?,
-    val onClick: (() -> Unit)?
+    val onClick: (() -> Unit)?,
+    val vAlignment: Alignment.Vertical,
+    val hAlignment: Alignment.Horizontal,
 )
