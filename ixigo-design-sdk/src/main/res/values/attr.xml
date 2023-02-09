@@ -1,10 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <attr name="ixiColor"  format="enum">
+        <enum name="warning" value="0"/>
+        <enum name="extension" value="1"/>
+        <enum name="error" value="2"/>
+        <enum name="success" value="3"/>
+        <enum name="blue" value="4"/>
+        <enum name="neutral" value="5"/>
+        <enum name="orange" value="6"/>
+    </attr>
+
     <declare-styleable name="BaseButton">
         <attr name="android:text" format="string" />
         <attr name="android:drawableEnd" format="reference" />
         <attr name="android:drawableStart" format="reference" />
+        <attr name="ixiColor"/>
     </declare-styleable>
 
     <declare-styleable name="SolidIxigoButton" parent="IxigoButton" />
@@ -64,6 +75,12 @@
 
     <declare-styleable name="BaseChip">
         <attr name="android:text" format="string" />
+        <attr name="ixiChipTextAppearance" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="boldItalic" value="3" />
+        </attr>
         <attr name="android:checkable" format="boolean" />
         <attr name="closeIcon" format="reference" />
         <attr name="android:enabled" format="boolean" />
@@ -73,8 +90,10 @@
         <attr name="ixiChipBackgroundColor" format="reference" />
         <attr name="ixiChipUnselectedBackgroundColor" format="reference" />
         <attr name="ixiChipTextColor" format="reference" />
-        <attr name="ixiChipUnSelectedTextColor" format="reference" />
+        <attr name="ixiChipUnselectedTextColor" format="reference" />
         <attr name="ixiChipStrokeColor" format="reference" />
+        <attr name="ixiChipUnselectedStrokeColor" format="reference" />
+        <attr name="ixiChipUnselectedDrawableTintColor" format="reference" />
         <attr name="drawableEndSize" format="dimension" />
         <attr name="size" format="dimension" />
         <attr name="chipType" format="enum">
@@ -83,14 +102,18 @@
             <enum name="xsmall" value="2" />
             <enum name="notification" value="3" />
         </attr>
+        <attr name="ixiColor"/>
+        <!-- {@deprecated Use ixiColor instead.} -->
         <attr name="chipColor" format="enum">
-            <enum name="neutral" value="0" />
-            <enum name="blue" value="1" />
-            <enum name="green" value="2" />
-            <enum name="purple" value="3" />
-            <enum name="red" value="4" />
-            <enum name="yellow" value="5" />
+            <enum name="yellow" value="0" />
+            <enum name="purple" value="1" />
+            <enum name="red" value="2" />
+            <enum name="green" value="3" />
+            <enum name="blue" value="4" />
+            <enum name="neutral" value="5" />
+            <enum name="orange" value="6" />
         </attr>
+        <attr name="android:textSize" format="dimension"/>
     </declare-styleable>
 
     <declare-styleable name="IxiTabLayout">
@@ -106,5 +129,35 @@
         <attr name="android:text" format="string" />
         <attr name="android:drawableEnd" format="reference" />
         <attr name="android:drawableStart" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="BaseInlineAlert">
+        <attr name="android:logo" format="reference" />
+        <attr name="heading"  format="string"/>
+        <attr name="android:text"  format="string"/>
+        <attr name="contentAlignment"  format="integer">
+            <enum name="textStart" value="0" />
+            <enum name="textEnd" value="1" />
+            <enum name="center" value="2" />
+        </attr>
+        <attr name="headingAlignment"  format="integer">
+            <enum name="textStart" value="0" />
+            <enum name="textEnd" value="1" />
+            <enum name="center" value="2" />
+        </attr>
+        <attr name="actionIcon"  format="reference"/>
+        <attr name="rightButtonText"  format="string"/>
+        <attr name="leftButtonText"  format="string"/>
+        <attr name="buttonColor"  format="reference"/>
+        <attr name="ixiColor"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="BaseBottomSheet">
+        <attr name="image" format="reference" />
+        <attr name="headerText" format="string" />
+        <attr name="imageBackgroundColor" format="reference" />
+        <attr name="bodyText" format="string" />
+        <attr name="toolbarText" format="string" />
     </declare-styleable>
 </resources>

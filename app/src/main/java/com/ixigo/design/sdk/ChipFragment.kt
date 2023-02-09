@@ -38,6 +38,7 @@ class ChipFragment : BaseFragment() {
         setYellowGroup()
         setPurpleGroup()
         sampleGroup()
+        binding.sampleOutline8.setIxiChipTextAppearance(BaseChip.IxiChipTextAppearance.BOLD)
     }
 
     private fun setMasterGroup() {

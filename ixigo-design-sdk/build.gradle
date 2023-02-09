@@ -10,11 +10,12 @@ plugins {
 }
 
 group = 'com.ixigo.sdk'
-version = '1.0.0-alpha4_test'
+version = '1.0.0-alpha6'
 
 android {
     compileSdkVersion 33
     buildFeatures {
+        viewBinding true
         compose true
     }
 
