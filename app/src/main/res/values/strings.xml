@@ -17,5 +17,7 @@
     <string name="tab_bar">Tab Bar</string>
     <string name="display">Display</string>
     <string name="bottom_nav">Bottom Navigation</string>
+    <string name="inline_alert">Inline Alert</string>
     <string name="separator">Separator</string>
+    <string name="bottom_sheets">Bottom Sheets</string>
 </resources>

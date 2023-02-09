@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
+import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.databinding.FragmentButtonsBinding
 
 /**
