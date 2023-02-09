@@ -32,33 +32,33 @@ class AutoCompleterFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val list = listOf(
-//            AutoCompleterData(
-//                title = "Nearest Railway Station",
-//                subTitle = "Airport complete name",
-//                startIconRes = R.drawable.ic_search,
-//                endIconRes = R.drawable.ic_search,
-//                to = "Delhi",
-//                from = "Mumbai",
-//                code = null
-//            ),
-//            AutoCompleterData(
-//                title = "Nearest Railway Station",
-//                subTitle = "Airport complete name",
-//                startIconRes = null,
-//                endIconRes = R.drawable.ic_search,
-//                to = "Delhi",
-//                from = "Mumbai",
-//                code = "12111"
-//            ),
-//            AutoCompleterData(
-//                title = "Nearest Railway Station",
-//                subTitle = null,
-//                startIconRes = null,
-//                endIconRes = R.drawable.ic_search,
-//                to = "Delhi",
-//                from = "Mumbai",
-//                code = "12111"
-//            ),
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = "Airport complete name",
+                startIconRes = R.drawable.ic_search,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = null
+            ),
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = "Airport complete name",
+                startIconRes = null,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = "12111"
+            ),
+            AutoCompleterData(
+                title = "Nearest Railway Station",
+                subTitle = null,
+                startIconRes = null,
+                endIconRes = R.drawable.ic_search,
+                to = "Delhi",
+                from = "Mumbai",
+                code = "12111"
+            ),
             AutoCompleterData(
                 title = "Nearest Railway Station",
                 subTitle = null,
