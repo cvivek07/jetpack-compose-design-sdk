@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.ixigo.design.sdk.R
@@ -77,7 +78,7 @@ class IxiText @JvmOverloads constructor(
 
     private var textColorRes: Int
     private val state = mutableStateOf(
-        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, null)
+        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, 1, TextOverflow.Visible, {})
     )
 
     init {
@@ -87,7 +88,10 @@ class IxiText @JvmOverloads constructor(
             setText(text)
             textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
             setTextColor(textColorRes)
-
+            val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, 1)
+            setMaxLines(maxLines)
+            val overflow = mapTextOverflowToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextOverflow, 0))
+            setOverflow(overflow)
         } finally {
             typedArray.recycle()
         }
@@ -162,6 +166,14 @@ class IxiText @JvmOverloads constructor(
         setTextColor(ContextCompat.getColor(context, color))
     }
 
+    fun setMaxLines(lines: Int) {
+        state.value = state.value.copy(maxLines = lines)
+    }
+
+    fun setOverflow(textOverflow: TextOverflow) {
+        state.value = state.value.copy(overflow = textOverflow)
+    }
+
     /**
      * provide the text value
      */
@@ -170,6 +182,15 @@ class IxiText @JvmOverloads constructor(
         super.setOnClickListener(l)
         val inState = state.value
         state.value = inState.copy(onClick = { l?.onClick(this) })
+    }
+
+    private fun mapTextOverflowToEnum(int: Int): TextOverflow {
+        return when (int) {
+            0 -> TextOverflow.Visible
+            1 -> TextOverflow.Ellipsis
+            2 -> TextOverflow.Clip
+            else -> TextOverflow.Visible
+        }
     }
 
     @Composable
@@ -188,14 +209,18 @@ class IxiText @JvmOverloads constructor(
             TypographyText(
                 text = state.value.text!!,
                 textStyle = state.value.textStyle,
-                modifier = modifier
+                modifier = modifier,
+                maxLines = state.value.maxLines,
+                overflow = state.value.overflow
             )
         }
         if (state.value.spannedString != null) {
             TypographyText(
                 spanned = state.value.spannedString!!,
                 textStyle = state.value.textStyle,
-                modifier = modifier
+                modifier = modifier,
+                maxLines = state.value.maxLines,
+                overflow = state.value.overflow
             )
         }
     }
@@ -206,5 +231,7 @@ data class TextState(
     val spannedString: Spanned? = null,
     val textStyle: TextStyle,
     @ColorInt val color: Int?,
-    val onClick: (() -> Unit)?
+    val maxLines: Int,
+    val overflow: TextOverflow,
+    val onClick: () -> Unit
 )
