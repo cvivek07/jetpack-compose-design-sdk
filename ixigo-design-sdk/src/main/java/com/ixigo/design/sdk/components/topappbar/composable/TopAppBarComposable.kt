@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.IconButton
@@ -27,8 +26,10 @@ import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout.*
+import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.imageutils.ImageData
+import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
@@ -43,7 +44,7 @@ import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 @Composable
 fun MainToolBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     title: String? = null,
     subTitle: String? = null,
     elevation: Dp = 10.dp,
@@ -82,7 +83,7 @@ fun MainToolBar(
 
 @Composable
 fun SearchBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     onQueryChange: (String) -> Unit
@@ -109,7 +110,7 @@ fun SearchBar(
 
 @Composable
 fun SegmentedControlBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     items: List<String>,
@@ -138,7 +139,7 @@ fun SegmentedControlBar(
 
 @Composable
 fun SrpBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     data: SrpModel?,
@@ -175,7 +176,7 @@ fun getRoundRect(context: Context, @ColorRes color: Int): Drawable {
 @Composable
 fun TabbedBar(
     modifier: Modifier = Modifier,
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     data: List<TabDataItem>,
@@ -205,7 +206,7 @@ fun TabbedBar(
 @Composable
 fun BasicToolbar(
     modifier: Modifier = Modifier,
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     content: @Composable RowScope.() -> Unit
@@ -220,12 +221,14 @@ fun BasicToolbar(
         elevation = elevation,
         contentPadding = PaddingValues(0.dp)
     ) {
-        if (homeIcon != 0) {
-            IconButton(onClick = { menuProvider?.onMenuItemClick(android.R.id.home) }) {
-                Image(
-                    painter = painterResource(id = homeIcon),
-                    contentDescription = "Image",
-                )
+        if (homeIcon != null) {
+            homeIcon.getPainterForImage()?.let {
+                IconButton(onClick = { menuProvider?.onMenuItemClick(android.R.id.home) }) {
+                    Image(
+                        painter = it,
+                        contentDescription = "Image",
+                    )
+                }
             }
         }
         content()

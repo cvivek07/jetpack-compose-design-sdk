@@ -1,6 +1,7 @@
 package com.ixigo.design.sdk.components.topappbar.base
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
@@ -10,9 +11,11 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
+import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
+import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 abstract class BaseTopAppBar @JvmOverloads constructor(
@@ -22,7 +25,7 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
     protected var state = mutableStateOf(AppBarState())
-    protected var menuProvider: IxiMenuProvider? = null
+
 
     fun setTitle(title: String) {
         val initState = state.value
@@ -39,9 +42,37 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
         state.value = initState.copy(menuProvider = provider)
     }
 
+    fun updateMenuItem(position: Int, data: IxiMenu) {
+        val prevProvider = state.value.menuProvider
+        val menuProviderList = prevProvider?.provideMenu()
+       val list =  menuProviderList?.toMutableList()
+          list ?.set(position, data)
+        val p = object :IxiMenuProvider {
+            override fun provideMenu(): List<IxiMenu> {
+                return list ?: menuProviderList?: listOf()
+            }
+
+            override fun onMenuItemClick(id: Int) {
+                prevProvider?.onMenuItemClick(id)
+            }
+
+        }
+        state.value = state.value.copy(menuProvider = p)
+    }
+
     fun setNavigationIcon(@DrawableRes actionIcon: Int) {
         val initState = state.value
-        state.value = initState.copy(homeIcon = actionIcon)
+        state.value = initState.copy(
+            homeIcon = ImageData.createFromRes(actionIcon)
+        )
+    }
+
+
+    fun setNavigationIcon(actionIcon: Drawable) {
+        val initState = state.value
+        state.value = initState.copy(
+            homeIcon = ImageData.createFromDrawable(actionIcon)
+        )
     }
 
     fun setupElevation(elevation: Dp) {
@@ -56,7 +87,14 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 }
 
 data class AppBarState(
-    @DrawableRes val homeIcon: Int = R.drawable.left_arrow,
+    val homeIcon: ImageData = ImageData(
+        drawableRes = R.drawable.left_arrow,
+        null,
+        null,
+        null,
+        null,
+        null
+    ),
     val title: String? = null,
     val subTitle: String? = null,
     val elevation: Dp = 10.dp,
