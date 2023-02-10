@@ -2,6 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="false"
     android:layout_gravity="center_horizontal">
 
@@ -349,6 +350,44 @@
 
         <include layout="@layout/divider"/>
         <include layout="@layout/divider"/>
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/textMaxLines1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="1"/>
+
+        <include layout="@layout/divider"/>
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/textMaxLines2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="2"/>
+
+        <include layout="@layout/divider"/>
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/textOverflowClip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ixiTextOverflow="clip"/>
+
+        <include layout="@layout/divider"/>
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/textOverflowVisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ixiTextOverflow="visible"/>
+
+        <include layout="@layout/divider"/>
+
+        <com.ixigo.design.sdk.components.text.IxiText
+            android:id="@+id/textOverflowEllipsis"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ixiTextOverflow="ellipsis"/>
 
     </LinearLayout>
 </ScrollView>

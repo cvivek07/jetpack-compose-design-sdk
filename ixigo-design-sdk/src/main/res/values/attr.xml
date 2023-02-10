@@ -37,7 +37,13 @@
 
     <declare-styleable name="IxiText">
         <attr name="android:text" format="string" />
-        <attr name="android:textColor" format="color|reference" />
+        <attr name="android:textColor"  format="color|reference"/>
+        <attr name="android:maxLines" format="integer"/>
+        <attr name="ixiTextOverflow" format="enum">
+            <enum name="visible" value="0" />
+            <enum name="ellipsis" value="1" />
+            <enum name="clip" value="2" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="BaseBottomNavItem">
