@@ -233,5 +233,5 @@ data class TextState(
     @ColorInt val color: Int?,
     val maxLines: Int,
     val overflow: TextOverflow,
-    val onClick: () -> Unit
+    val onClick: (() -> Unit)?
 )
