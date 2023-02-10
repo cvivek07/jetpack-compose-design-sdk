@@ -78,7 +78,7 @@ class IxiText @JvmOverloads constructor(
 
     private var textColorRes: Int
     private val state = mutableStateOf(
-        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, 1, TextOverflow.Visible, {})
+        TextState("", null, IxiTypography.Heading.DisplayLarge.regular, null, Int.MAX_VALUE, TextOverflow.Visible, {})
     )
 
     init {
