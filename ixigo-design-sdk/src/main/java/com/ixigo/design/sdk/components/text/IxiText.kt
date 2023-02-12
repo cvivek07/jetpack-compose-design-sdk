@@ -9,6 +9,7 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,6 +22,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.font.FontWeight.Companion.W900
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
@@ -104,6 +106,7 @@ class IxiText @JvmOverloads constructor(
             maxLines = Int.MAX_VALUE,
             vAlignment = Alignment.Top,
             hAlignment = Alignment.Start,
+            textAlign = TextAlign.Left,
             overflow = TextOverflow.Visible
         )
     )
@@ -145,6 +148,9 @@ class IxiText @JvmOverloads constructor(
                 else -> Alignment.CenterVertically
             }
             setVerticalAlignment(vAlign)
+
+            val textAlign = mapTextAlignToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextAlignment, 0))
+            setTextAlignment(textAlign)
 
             val underline = typedArray.getBoolean(R.styleable.IxiText_underline, false)
             if (underline) setUnderLine()
@@ -309,6 +315,10 @@ class IxiText @JvmOverloads constructor(
         state.value = state.value.copy(overflow = textOverflow)
     }
 
+    fun setTextAlignment(textAlign: TextAlign) {
+        state.value = state.value.copy(textAlign = textAlign)
+    }
+
     /**
      * provide the text value
      */
@@ -325,6 +335,18 @@ class IxiText @JvmOverloads constructor(
             1 -> TextOverflow.Ellipsis
             2 -> TextOverflow.Clip
             else -> TextOverflow.Clip
+        }
+    }
+
+    private fun mapTextAlignToEnum(int: Int): TextAlign {
+        return when (int) {
+            0 -> TextAlign.Left
+            1 -> TextAlign.Right
+            2 -> TextAlign.Center
+            3 -> TextAlign.Justify
+            4 -> TextAlign.Start
+            5 -> TextAlign.End
+            else -> TextAlign.Left
         }
     }
 
@@ -352,7 +374,8 @@ class IxiText @JvmOverloads constructor(
                 textStyle = stateValue.value.textStyle,
                 modifier = modifier,
                 maxLines = stateValue.value.maxLines,
-                overflow = stateValue.value.overflow
+                overflow = stateValue.value.overflow,
+                textAlign = stateValue.value.textAlign
             )
         }
         if (stateValue.value.spannedString != null) {
@@ -362,6 +385,7 @@ class IxiText @JvmOverloads constructor(
                 modifier = modifier,
                 maxLines = stateValue.value.maxLines,
                 overflow = stateValue.value.overflow,
+                textAlign = stateValue.value.textAlign
             )
         }
 
@@ -375,7 +399,8 @@ data class TextState(
     @ColorInt val color: Int?,
     val maxLines: Int,
     val overflow: TextOverflow,
-    val onClick: (() -> Unit)?,
     val vAlignment: Alignment.Vertical,
     val hAlignment: Alignment.Horizontal,
+    val textAlign: TextAlign,
+    val onClick: (() -> Unit)?,
 )

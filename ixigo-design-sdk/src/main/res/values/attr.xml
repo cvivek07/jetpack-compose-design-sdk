@@ -80,6 +80,14 @@
             <enum name="center_horizontally" value="1" />
             <enum name="end" value="2" />
         </attr>
+        <attr name="ixiTextAlignment" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="center" value="2" />
+            <enum name="justify" value="3" />
+            <enum name="start" value="4" />
+            <enum name="end" value="5" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="BaseBottomNavItem">
