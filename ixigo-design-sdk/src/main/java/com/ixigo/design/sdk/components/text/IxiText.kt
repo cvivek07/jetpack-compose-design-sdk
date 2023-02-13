@@ -116,7 +116,7 @@ class IxiText @JvmOverloads constructor(
 
             textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
             setTextColor(textColorRes)
-            val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, 1)
+            val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, Int.MAX_VALUE)
             setMaxLines(maxLines)
             val overflow = mapTextOverflowToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextOverflow, 0))
             setOverflow(overflow)
