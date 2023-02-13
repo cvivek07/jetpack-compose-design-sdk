@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
@@ -102,9 +101,10 @@ class IxiText @JvmOverloads constructor(
             textStyle = defaultTextStyle,
             color = null,
             onClick = null,
-
+            maxLines = 1,
             vAlignment = Alignment.CenterVertically,
             hAlignment = Alignment.CenterHorizontally,
+            overflow = TextOverflow.Visible
         )
     )
 
@@ -333,26 +333,20 @@ class IxiText @JvmOverloads constructor(
 
         if (stateValue.value.text != null) {
             TypographyText(
-                text = state.value.text!!,
-                textStyle = state.value.textStyle,
-                modifier = modifier,
-                maxLines = state.value.maxLines,
-                overflow = state.value.overflow
                 text = stateValue.value.text!!,
                 textStyle = stateValue.value.textStyle,
                 modifier = modifier,
+                maxLines = stateValue.value.maxLines,
+                overflow = stateValue.value.overflow
             )
         }
         if (stateValue.value.spannedString != null) {
             TypographyText(
-                spanned = state.value.spannedString!!,
-                textStyle = state.value.textStyle,
-                modifier = modifier,
-                maxLines = state.value.maxLines,
-                overflow = state.value.overflow
                 spanned = stateValue.value.spannedString!!,
                 textStyle = stateValue.value.textStyle,
                 modifier = modifier,
+                maxLines = stateValue.value.maxLines,
+                overflow = stateValue.value.overflow,
             )
         }
 
