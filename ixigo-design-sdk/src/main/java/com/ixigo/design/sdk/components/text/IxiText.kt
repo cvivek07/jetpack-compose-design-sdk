@@ -101,7 +101,7 @@ class IxiText @JvmOverloads constructor(
             textStyle = defaultTextStyle,
             color = null,
             onClick = null,
-            maxLines = 1,
+            maxLines = Int.MAX_VALUE,
             vAlignment = Alignment.CenterVertically,
             hAlignment = Alignment.CenterHorizontally,
             overflow = TextOverflow.Visible
