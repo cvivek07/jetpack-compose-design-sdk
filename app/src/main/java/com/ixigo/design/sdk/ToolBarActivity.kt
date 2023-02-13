@@ -117,6 +117,7 @@ class ToolBarActivity : AppCompatActivity() {
 
     fun searchToolbar() {
         val toolbar = IxiSearchBar(context = this)
+        toolbar.setSearchBarHint("Provide Search")
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
                 return listOf(

@@ -26,7 +26,6 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 
     protected var state = mutableStateOf(AppBarState())
 
-
     fun setTitle(title: String) {
         val initState = state.value
         state.value = initState.copy(title = title)
@@ -80,6 +79,15 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
         state.value = initState.copy(elevation = elevation)
     }
 
+    fun setItemEnable(id: Int, shouldEnable: Boolean) {
+        val list = state.value.disabledIds.toMutableList()
+        if(shouldEnable){
+            list.remove(id)
+        } else {
+            list.add(id)
+        }
+        state.value = state.value.copy(disabledIds = list)
+    }
     fun getTitle() = state.value.title
 
     fun getSubTitle() = state.value.subTitle
@@ -104,5 +112,7 @@ data class AppBarState(
     val viewPager: ViewPager2? = null,
     val adapter: FragmentStateAdapter? = null,
     val tabType: TabType = TabType.LINE,
-    val tabbedSelectionListener: (selectedItemIndex: Int) -> Unit = {}
+    val hint: String? = null,
+    val tabbedSelectionListener: (selectedItemIndex: Int) -> Unit = {},
+    val disabledIds: List<Int> = listOf()
 )

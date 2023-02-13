@@ -48,12 +48,14 @@ fun MainToolBar(
     title: String? = null,
     subTitle: String? = null,
     elevation: Dp = 10.dp,
-    menuProvider: IxiMenuProvider? = null
+    menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf()
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds
     ) {
         Column(Modifier.weight(1f)) {
             if (title != null) {
@@ -86,19 +88,22 @@ fun SearchBar(
     homeIcon: ImageData = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    hint: String? = null,
+    disabledIds: List<Int> = listOf(),
     onQueryChange: (String) -> Unit
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds,
     ) {
         SearchViewComposable(
             query = "",
             onQueryChange = onQueryChange,
             onSearchFocusChange = {},
             onClearQuery = { },
-            hint = "Search",
+            hint = hint ?: "",
             modifier = Modifier
                 .weight(1f)
                 .padding(
@@ -113,6 +118,7 @@ fun SegmentedControlBar(
     homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf(),
     items: List<String>,
     defaultSelectedItemIndex: Int = 0,
     onItemSelection: (selectedItemIndex: Int) -> Unit
@@ -120,7 +126,8 @@ fun SegmentedControlBar(
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds
     ) {
         SegmentedControl(
             items = items,
@@ -142,12 +149,14 @@ fun SrpBar(
     homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf(),
     data: SrpModel?,
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds
     ) {
         if (data != null) {
             SrpComposable(
@@ -179,6 +188,7 @@ fun TabbedBar(
     homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf(),
     data: List<TabDataItem>,
     adapter: FragmentStateAdapter?,
     viewPager: ViewPager2,
@@ -188,7 +198,8 @@ fun TabbedBar(
         homeIcon = homeIcon,
         elevation = elevation,
         menuProvider = menuProvider,
-        modifier = modifier
+        modifier = modifier,
+        disabledIds = disabledIds
     ) {
 
         AndroidView(factory = {
@@ -209,6 +220,7 @@ fun BasicToolbar(
     homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int>,
     content: @Composable RowScope.() -> Unit
 ) {
     TopAppBar(
@@ -245,7 +257,11 @@ fun BasicToolbar(
                         )
                     }
                 } else {
-                    TextButton(onClick = { menuProvider.onMenuItemClick(it.id) }) {
+                    TextButton(onClick = {
+                        if (!disabledIds.contains(it.id)) {
+                            menuProvider.onMenuItemClick(it.id)
+                        }
+                    }) {
                         Text(
                             text = it.text ?: "",
                         )
