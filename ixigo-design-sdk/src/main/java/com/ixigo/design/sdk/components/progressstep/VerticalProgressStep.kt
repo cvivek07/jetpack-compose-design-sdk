@@ -19,7 +19,7 @@ class VerticalProgressStep @JvmOverloads constructor(
 ) : BaseProgressStep(context, attrs, defStyleAttr) {
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnDetachedFromWindow)
+        setViewCompositionStrategy( ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool)
 
         with(state.value) {
             DrawVerticalSteps(

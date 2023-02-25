@@ -17,7 +17,7 @@ class IxiBottomSheetView @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow )
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool )
         with(state.value) {
             BaseBottomSheetComposable(
                 image = image,

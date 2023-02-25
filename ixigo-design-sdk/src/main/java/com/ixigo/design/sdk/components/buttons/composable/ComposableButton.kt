@@ -434,6 +434,18 @@ fun Modifier.updateWidth(width: Int) = when (width) {
     }
 }
 
+fun Modifier.updateHeight(height: Int) = when (height) {
+    -1 -> {
+        this.fillMaxWidth()
+    }
+    -2 -> {
+        this.wrapContentHeight()
+    }
+    else -> {
+        this.height(Dp(height.toDp.toFloat()))
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 private fun ComposablePreview() {

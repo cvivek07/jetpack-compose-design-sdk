@@ -41,7 +41,7 @@ fun TypographyText(
         softWrap = softWrap,
         maxLines = maxLines,
         textAlign = textAlign,
-        color = color ?: textStyle.color
+        color = color ?: textStyle.color,
     )
 }
 

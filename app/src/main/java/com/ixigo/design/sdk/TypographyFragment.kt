@@ -6,9 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.databinding.FragmentTypographyBinding
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.IxiText
+import com.ixigo.design.sdk.databinding.FragmentTypographyBinding
 
 class TypographyFragment : Fragment() {
     private var _binding: FragmentTypographyBinding? = null
@@ -30,6 +30,9 @@ class TypographyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
+//            test.setVerticalAlignment(Alignment.CenterVertically)
+//            test.setHorizontalAlignment(Alignment.End)
+//            test.setHorizontalTextAlignment(TextAlign.End)
 //            displayText900.setTextColor(ContextCompat.getColor(requireContext(),R.color.b300))
             displayText900.setTypography(IxiTypography.Heading.DisplayLarge.bold)
             displayText900.setText("Display Text Bold")
@@ -48,58 +51,58 @@ class TypographyFragment : Fragment() {
             h1900.setText("H1 Bold")
             h1900.setTypography(IxiTypography.Heading.H1.bold)
             h1700.setHtmlText(R.string.app_name)
-            h1700.setTypography(IxiTypography.Heading.H1.semiBold)
+            h1700.setTypography(IxiTypography.Heading.H1.medium)
             h1500.setHtmlText("<html><b><i><u>Trusted by</u></i></b> <font color=\"#FEB900\">2 crore+ </font>Indian travellers &#127470;&#127475;</html>")
             h1500.setTypography(IxiTypography.Heading.H1.regular)
 
             h2900.setText("H2 Bold")
             h2900.setTypography(IxiTypography.Heading.H2.bold)
             h2700.setText("H2 SemiBold")
-            h2700.setTypography(IxiTypography.Heading.H2.semiBold)
+            h2700.setTypography(IxiTypography.Heading.H2.medium)
             h2500.setText("H2 Regular")
             h2500.setTypography(IxiTypography.Heading.H2.regular)
 
             h3900.setText("H3 Bold")
             h3900.setTypography(IxiTypography.Heading.H3.bold)
             h3700.setText("H3 SemiBold")
-            h3700.setTypography(IxiTypography.Heading.H3.semiBold)
+            h3700.setTypography(IxiTypography.Heading.H3.medium)
             h3500.setText("H3 Regular")
             h3500.setTypography(IxiTypography.Heading.H3.regular)
 
             h4900.setText("H4 Bold")
             h4900.setTypography(IxiTypography.Heading.H4.bold)
             h4700.setText("H4 SemiBold")
-            h4700.setTypography(IxiTypography.Heading.H4.semiBold)
+            h4700.setTypography(IxiTypography.Heading.H4.medium)
             h4500.setText("H4 Regular")
             h4500.setTypography(IxiTypography.Heading.H4.regular)
 
             h5900.setText("H5 Bold")
             h5900.setTypography(IxiTypography.Heading.H5.bold)
             h5700.setText("H5 SemiBold")
-            h5700.setTypography(IxiTypography.Heading.H5.semiBold)
+            h5700.setTypography(IxiTypography.Heading.H5.medium)
             h5500.setText("H5 Regular")
             h5500.setTypography(IxiTypography.Heading.H5.regular)
 
             h6900.setText("H6 Bold")
             h6900.setTypography(IxiTypography.Heading.H6.bold)
             h6700.setText("H6 SemiBold")
-            h6700.setTypography(IxiTypography.Heading.H6.semiBold)
+            h6700.setTypography(IxiTypography.Heading.H6.medium)
             h6500.setText("H6 Regular")
             h6500.setTypography(IxiTypography.Heading.H6.regular)
 
 
             bodyLargeBold.setText("Body Large Bold -> Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
-            bodyLargeBold.setTypography(IxiTypography.Body.Large.bold)
+//            bodyLargeBold.setTypography(IxiTypography.Body.Large.bold)
             bodyLargeItalic.setText("Body Large Italic ->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
-            bodyLargeItalic.setTypography(IxiTypography.Body.Large.italics)
+//            bodyLargeItalic.setTypography(IxiTypography.Body.Large.italics)
             bodyLargeMed.setText("Body Large Medium ->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
             bodyLargeMed.setTypography(IxiTypography.Body.Large.medium)
             bodyLargeReg.setText("Body Large Regular ->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
-            bodyLargeReg.setTypography(IxiTypography.Body.Large.regular)
+//            bodyLargeReg.setTypography(IxiTypography.Body.Large.regular)
             bodyLargeUnderlined.setText("Body large Underlined->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
-            bodyLargeUnderlined.setTypography(IxiTypography.Body.Large.underline)
+//            bodyLargeUnderlined.setTypography(IxiTypography.Body.Large.underline)
             bodyLargeStrike.setText("Body large strikethrough->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
-            bodyLargeStrike.setTypography(IxiTypography.Body.Large.strikeThrough)
+//            bodyLargeStrike.setTypography(IxiTypography.Body.Large.strikeThrough)
 
 
 

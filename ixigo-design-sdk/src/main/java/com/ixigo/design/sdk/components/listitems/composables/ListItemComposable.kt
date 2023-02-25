@@ -1,15 +1,12 @@
 package com.ixigo.design.sdk.components.listitems.composables
 
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
@@ -21,18 +18,16 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
-import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.imageutils.AsyncImageView
+import com.ixigo.design.sdk.components.imageutils.ImageData
+import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
@@ -44,30 +39,17 @@ private val avatarDefaultSize = 40.dp
 @Composable
 fun ListItemComposable(
     padding: PaddingValues = PaddingValues(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
-    @DrawableRes startIcon: Int?,
-    startIconWidth: Dp?,
-    startIconHeight: Dp?,
-    startAvatarUrl: String?,
-    @DrawableRes startAvatarPlaceHolder: Int?,
-    startAvatarWidth: Dp?,
-    startAvatarHeight: Dp?,
-    @DrawableRes startLogo: Int?,
-    startLogoUrl: String?,
-    startLogoWidth: Dp?,
-    startLogoHeight: Dp?,
+    startIcon: ImageData?,
+    startAvatar: ImageData?,
+    startLogo: ImageData?,
     startCheckedValue: Boolean?,
     startCheckChangeListener: (Boolean) -> Unit,
     color: IxiColor = IxiColor.Blue,
-    endIcon: Int?,
-    endIconWidth: Dp?,
-    endIconHeight: Dp?,
+    endIcon: ImageData?,
     title: String?,
     subTitle: String?,
     metaText: String?,
-    endLogo: Int?,
-    endLogoUrl: String?,
-    endLogoWidth: Dp?,
-    endLogoHeight: Dp?,
+    endLogo: ImageData?,
     endCheckedValue: Boolean?,
     endCheckChangeListener: (Boolean) -> Unit,
     endSwitchValue: Boolean?,
@@ -89,16 +71,8 @@ fun ListItemComposable(
     ) {
         LeftContent(
             icon = startIcon,
-            iconWidth = startIconWidth,
-            iconHeight = startIconHeight,
-            avatarUrl = startAvatarUrl,
-            avatarPlaceHolder = startAvatarPlaceHolder,
-            avatarWidth = startAvatarWidth,
-            avatarHeight = startAvatarHeight,
+            avatar = startAvatar,
             logo = startLogo,
-            logoUrl = startLogoUrl,
-            logoWidth = startLogoWidth,
-            logoHeight = startLogoHeight,
             checkedValue = startCheckedValue,
             checkChangeListener = startCheckChangeListener,
             color = color
@@ -112,12 +86,7 @@ fun ListItemComposable(
 
         RightContent(
             icon = endIcon,
-            iconWidth = endIconWidth,
-            iconHeight = endIconHeight,
             logo = endLogo,
-            logoUrl = endLogoUrl,
-            logoWidth = endLogoWidth,
-            logoHeight = endLogoHeight,
             checkedValue = endCheckedValue,
             checkChangeListener = endCheckChangeListener,
             switchValue = endSwitchValue,
@@ -131,43 +100,38 @@ fun ListItemComposable(
 
 @Composable
 fun LeftContent(
-    @DrawableRes icon: Int?,
-    iconWidth: Dp?,
-    iconHeight: Dp?,
-    avatarUrl: String?,
-    @DrawableRes avatarPlaceHolder: Int?,
-    avatarWidth: Dp?,
-    avatarHeight: Dp?,
-    @DrawableRes logo: Int?,
-    logoUrl: String?,
-    logoWidth: Dp?,
-    logoHeight: Dp?,
+    icon: ImageData?,
+    avatar: ImageData?,
+    logo: ImageData?,
     checkedValue: Boolean?,
     checkChangeListener: (Boolean) -> Unit,
     color: IxiColor
 ) {
     if (icon != null) {
-        Icon(
-            modifier = Modifier
-                .width(iconWidth ?: iconDefaultSize)
-                .height(iconHeight ?: iconDefaultSize),
-            painter = painterResource(id = icon),
-            contentDescription = ""
-        )
-        Spacer(modifier = Modifier.width(10.dp))
+
+        icon.getPainterForImage()?.let {
+            Icon(
+                modifier = Modifier
+                    .width(icon.width ?: iconDefaultSize)
+                    .height(icon.height ?: iconDefaultSize),
+                painter = it,
+                contentDescription = ""
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+        }
     }
 
     if (checkedValue != null) {
         DrawCheckBox(color, checkedValue, checkChangeListener)
     }
 
-    if (avatarUrl != null) {
+    if (avatar != null) {
         AsyncImageView(
             modifier = Modifier
-                .width(avatarWidth ?: avatarDefaultSize)
-                .height(avatarHeight ?: avatarDefaultSize),
-            url = avatarUrl,
-            placeholder = avatarPlaceHolder,
+                .width(avatar.width ?: avatarDefaultSize)
+                .height(avatar.height ?: avatarDefaultSize),
+            url = avatar.url ?: "",
+            placeholder = avatar.drawableRes,
             contentDes = null,
             shape = CircleShape,
             scale = ContentScale.Crop
@@ -175,13 +139,13 @@ fun LeftContent(
         Spacer(modifier = Modifier.width(10.dp))
     }
 
-    if (logoUrl != null) {
+    if (logo != null) {
         AsyncImageView(
             modifier = Modifier
-                .width(logoWidth ?: logoDefaultSize)
-                .height(logoHeight ?: logoDefaultSize),
-            url = logoUrl,
-            placeholder = logo,
+                .width(logo.width ?: logoDefaultSize)
+                .height(logo.height ?: logoDefaultSize),
+            url = logo.url ?: "",
+            placeholder = logo.drawableRes,
             contentDes = null,
             shape = CircleShape,
             scale = ContentScale.Crop
@@ -224,13 +188,8 @@ fun MiddleContent(title: String?, subTitle: String?, meta: String?, modifier: Mo
 
 @Composable
 fun RightContent(
-    @DrawableRes icon: Int?,
-    iconWidth: Dp?,
-    iconHeight: Dp?,
-    @DrawableRes logo: Int?,
-    logoUrl: String?,
-    logoWidth: Dp?,
-    logoHeight: Dp?,
+    icon: ImageData?,
+    logo: ImageData?,
     checkedValue: Boolean?,
     checkChangeListener: (Boolean) -> Unit,
     switchValue: Boolean?,
@@ -240,23 +199,25 @@ fun RightContent(
     color: IxiColor = IxiColor.Blue
 ) {
     if (icon != null) {
-        Icon(
-            modifier = Modifier
-                .width(iconWidth ?: iconDefaultSize)
-                .height(iconHeight ?: iconDefaultSize),
-            painter = painterResource(id = icon),
-            contentDescription = ""
-        )
+        icon.getPainterForImage()?.let {
+            Icon(
+                modifier = Modifier
+                    .width(icon.width ?: iconDefaultSize)
+                    .height(icon.height ?: iconDefaultSize),
+                painter = it,
+                contentDescription = ""
+            )
+        }
         Spacer(modifier = Modifier.width(10.dp))
     }
 
-    if (logoUrl != null) {
+    if (logo != null) {
         AsyncImageView(
             modifier = Modifier
-                .width(logoWidth ?: logoDefaultSize)
-                .height(logoHeight ?: logoDefaultSize),
-            url = logoUrl,
-            placeholder = logo,
+                .width(logo.width ?: logoDefaultSize)
+                .height(logo.height ?: logoDefaultSize),
+            url = logo.url?:"",
+            placeholder = logo.drawableRes,
             contentDes = null,
             shape = CircleShape,
             scale = ContentScale.Crop

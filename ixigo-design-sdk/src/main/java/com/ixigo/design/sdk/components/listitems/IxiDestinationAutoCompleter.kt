@@ -15,12 +15,12 @@ class IxiDestinationAutoCompleter @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindow
+             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
 
         AutoCompleterDestinationComposable(
-            startIcon = state.value.startIconRes,
-            endIcon = state.value.endIconRes,
+            startIcon = state.value.startIconData,
+            endIcon = state.value.endIconData,
             title = state.value.title ?: "",
             subTitle = state.value.subTitle,
             code = state.value.code,
