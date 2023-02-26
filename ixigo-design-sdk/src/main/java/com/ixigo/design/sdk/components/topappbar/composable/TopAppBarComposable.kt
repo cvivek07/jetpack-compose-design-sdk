@@ -13,9 +13,13 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -89,9 +93,16 @@ fun SearchBar(
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     hint: String? = null,
+    shouldFocus: Boolean?,
     disabledIds: List<Int> = listOf(),
-    onQueryChange: (String) -> Unit
+    onQueryChange: (String) -> Unit,
+    onFocusChange: ((Boolean)-> Unit) = {}
 ) {
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect("") {
+        if(shouldFocus != true) focusRequester.freeFocus() else focusRequester.requestFocus()
+    }
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
@@ -101,16 +112,18 @@ fun SearchBar(
         SearchViewComposable(
             query = "",
             onQueryChange = onQueryChange,
-            onSearchFocusChange = {},
+            onSearchFocusChange = onFocusChange,
             onClearQuery = { },
             hint = hint ?: "",
             modifier = Modifier
                 .weight(1f)
                 .padding(
                     end = 15.dp
-                )
+                ).focusRequester(focusRequester)
+
         )
     }
+
 }
 
 @Composable

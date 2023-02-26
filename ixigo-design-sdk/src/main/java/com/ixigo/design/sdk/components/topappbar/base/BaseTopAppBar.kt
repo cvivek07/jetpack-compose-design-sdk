@@ -44,11 +44,11 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
     fun updateMenuItem(position: Int, data: IxiMenu) {
         val prevProvider = state.value.menuProvider
         val menuProviderList = prevProvider?.provideMenu()
-       val list =  menuProviderList?.toMutableList()
-          list ?.set(position, data)
-        val p = object :IxiMenuProvider {
+        val list = menuProviderList?.toMutableList()
+        list?.set(position, data)
+        val p = object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
-                return list ?: menuProviderList?: listOf()
+                return list ?: menuProviderList ?: listOf()
             }
 
             override fun onMenuItemClick(id: Int) {
@@ -81,7 +81,7 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 
     fun setItemEnable(id: Int, shouldEnable: Boolean) {
         val list = state.value.disabledIds.toMutableList()
-        if(shouldEnable){
+        if (shouldEnable) {
             list.remove(id)
         } else {
             list.add(id)
@@ -114,5 +114,7 @@ data class AppBarState(
     val tabType: TabType = TabType.LINE,
     val hint: String? = null,
     val tabbedSelectionListener: (selectedItemIndex: Int) -> Unit = {},
-    val disabledIds: List<Int> = listOf()
+    val disabledIds: List<Int> = listOf(),
+    val onSearchFocusChange: (Boolean) -> Unit = {},
+    val shouldFocus: Boolean? = null
 )

@@ -118,12 +118,21 @@ class ToolBarActivity : AppCompatActivity() {
     fun searchToolbar() {
         val toolbar = IxiSearchBar(context = this)
         toolbar.setSearchBarHint("Provide Search")
+        toolbar.setSearchFocusChange {
+            Log.e("Tag",if(it)"Focussed" else "Unfocussed")
+        }
+        binding.update.setOnClickListener {
+            toolbar.setNavigationIcon(R.drawable.ic_contact)
+            toolbar.updateMenuItem(0,IxiMenu(0, null, R.drawable.ic_search),)
+            toolbar.captureFocus()
+        }
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
                 return listOf(
-//                    IxiMenu(0, null, R.drawable.ic_baseline_cancel_24),
+                    IxiMenu(0, null, R.drawable.ic_baseline_cancel_24),
                 )
             }
+
 
             override fun onMenuItemClick(id: Int) {
                 when (id) {
