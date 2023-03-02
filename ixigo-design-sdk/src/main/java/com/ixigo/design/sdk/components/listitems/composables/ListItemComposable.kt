@@ -39,34 +39,7 @@ private val logoDefaultSize = 50.dp
 private val avatarDefaultSize = 40.dp
 
 @Composable
-fun ListItemComposable(
-    state: MutableState<ListItemDataState>,
-//    padding: PaddingValues = PaddingValues(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
-//    startIcon: ImageData?,
-//    startAvatar: ImageData?,
-//    startLogo: ImageData?,
-//    startCheckedValue: Boolean?,
-//    startCheckChangeListener: (Boolean) -> Unit,
-//    startRadioValue: Boolean?,
-//    startRadioChangeListener: (Boolean) -> Unit,
-//    color: IxiColor = IxiColor.Blue,
-//    endIcon: ImageData?,
-//    title: String?,
-//    subTitle: String?,
-//    metaText: String?,
-//    endLogo: ImageData?,
-//    endCheckedValue: Boolean?,
-//    endCheckChangeListener: (Boolean) -> Unit,
-//    endRadioValue: Boolean?,
-//    endRadioChangeListener: (Boolean) -> Unit,
-//    endSwitchValue: Boolean?,
-//    endSwitchChangeListener: (Boolean) -> Unit,
-//    endActionText: String?,
-//    endActionClick: (() -> Unit)? = null,
-//    onItemClick: (() -> Unit) = {},
-//    @ColorRes itemBackGroundColor: Int = R.color.n0,
-) {
-
+fun ListItemComposable(state: MutableState<ListItemDataState>) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -94,9 +67,7 @@ fun ListItemComposable(
 }
 
 @Composable
-fun LeftContent(
-    state: MutableState<ListItemDataState>,
-) {
+fun LeftContent(state: MutableState<ListItemDataState>) {
     with(state.value) {
         if (startIcon != null) {
 
@@ -170,7 +141,7 @@ fun MiddleContent(
                     TypographyText(
                         text = title,
                         Modifier.weight(1f),
-                        textStyle = IxiTypography.Body.Medium.regular,
+                        textStyle = state.value.titleTypography,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -178,7 +149,7 @@ fun MiddleContent(
                 if (!metaText.isNullOrBlank()) {
                     TypographyText(
                         text = metaText,
-                        textStyle = IxiTypography.Body.XSmall.regular
+                        textStyle = state.value.metaTextTypography
                     )
                 }
                 Spacer(modifier = Modifier.width(10.dp))
@@ -186,7 +157,7 @@ fun MiddleContent(
             if (!subTitle.isNullOrBlank()) {
                 TypographyText(
                     text = subTitle,
-                    textStyle = IxiTypography.Body.Small.regular
+                    textStyle = state.value.subtitleTypography
                 )
             }
         }
@@ -196,10 +167,7 @@ fun MiddleContent(
 
 
 @Composable
-fun RightContent(
-
-    state: MutableState<ListItemDataState>,
-) {
+fun RightContent(state: MutableState<ListItemDataState>) {
     with(state.value) {
         if (endIcon != null) {
             endIcon.getPainterForImage()?.let {
@@ -274,7 +242,7 @@ private fun DrawSwitch(
 ) {
     val switchState = remember { mutableStateOf(switchValue) }
 
-    if(switchValue != switchState.value) {
+    if (switchValue != switchState.value) {
         switchState.value = switchValue
     }
 
@@ -296,7 +264,6 @@ private fun DrawSwitch(
 
 @Composable
 fun DrawThumb(color: IxiColor, isChecked: Boolean) {
-
     Box(
         modifier = Modifier
             .size(24.dp)
@@ -324,7 +291,7 @@ fun DrawCheckBox(
         mutableStateOf(checkedValue)
     }
 
-    if(checkedValue != checkedState.value) {
+    if (checkedValue != checkedState.value) {
         checkedState.value = checkedValue
     }
 
@@ -351,7 +318,7 @@ fun DrawRadioButton(
         mutableStateOf(checkedValue)
     }
 
-    if(checkedValue != checkedState.value) {
+    if (checkedValue != checkedState.value) {
         checkedState.value = checkedValue
     }
     RadioButton(

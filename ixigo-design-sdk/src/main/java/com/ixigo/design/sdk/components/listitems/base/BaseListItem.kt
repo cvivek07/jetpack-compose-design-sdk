@@ -5,11 +5,13 @@ import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
 abstract class BaseListItem @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -275,6 +277,33 @@ abstract class BaseListItem @JvmOverloads constructor(
         state.value = currState.copy(endActionClick = clickAction)
     }
 
+    /**
+     * Set the typography(Text Style) for title text
+     * @param typography typography to be set
+     */
+    fun setTitleTypography(typography: TextStyle) {
+        val currState = state.value
+        state.value = currState.copy(titleTypography = typography)
+    }
+
+    /**
+     * Set the typography(Text Style) for subtitle text
+     * @param typography typography to be set
+     */
+    fun setSubtitleTypography(typography: TextStyle) {
+        val currState = state.value
+        state.value = currState.copy(subtitleTypography = typography)
+    }
+
+    /**
+     * Set the typography(Text Style) for Meta text
+     * @param typography typography to be set
+     */
+    fun setMetTextTypography(typography: TextStyle) {
+        val currState = state.value
+        state.value = currState.copy(metaTextTypography = typography)
+    }
+
 
     private fun setItemClickListener(onClick: () -> Unit) {
         val currState = state.value
@@ -290,7 +319,12 @@ abstract class BaseListItem @JvmOverloads constructor(
 }
 
 data class ListItemDataState(
-    val paddingValues: PaddingValues = PaddingValues(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
+    val paddingValues: PaddingValues = PaddingValues(
+        top = 10.dp,
+        bottom = 10.dp,
+        start = 4.dp,
+        end = 4.dp
+    ),
     val startIcon: ImageData? = null,
     val startAvatar: ImageData? = null,
     val startLogo: ImageData? = null,
@@ -300,11 +334,14 @@ data class ListItemDataState(
     val startCheckChangeListener: (Boolean) -> Unit = {},
     val color: IxiColor,
     val title: String,
+    val titleTypography: TextStyle = IxiTypography.Body.Medium.regular,
+    val subtitleTypography: TextStyle = IxiTypography.Body.Small.regular,
+    val metaTextTypography: TextStyle = IxiTypography.Body.XSmall.regular,
     val subTitle: String? = null,
     val metaText: String? = null,
     val endIcon: ImageData? = null,
     val endLogo: ImageData? = null,
-    @ColorRes val itemBackGroundColor: Int =  R.color.n0,
+    @ColorRes val itemBackGroundColor: Int = R.color.n0,
     val endCheckedValue: Boolean? = null,
     val endCheckChangeListener: (Boolean) -> Unit = {},
     val endSwitchValue: Boolean? = null,

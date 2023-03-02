@@ -18,8 +18,6 @@ class IxiListItem @JvmOverloads constructor(
             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
 
-        ListItemComposable(
-            state
-        )
+        ListItemComposable(state)
     }
 }

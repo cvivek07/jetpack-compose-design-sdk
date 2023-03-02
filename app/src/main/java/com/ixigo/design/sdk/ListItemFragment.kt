@@ -15,6 +15,7 @@ import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.listitems.IxiListItem
 import com.ixigo.design.sdk.components.listitems.base.BaseListItem
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.databinding.FragmentListItemBinding
 
 class ListItemFragment : BaseFragment() {
@@ -44,7 +45,6 @@ class ListItemFragment : BaseFragment() {
                 endIcon = ImageData.createFromRes(R.drawable.ic_search),
                 avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
                 startRadioButton = true,
-
                 ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -426,6 +426,9 @@ class ListRecyclerAdapter(val context: Context, val list: MutableList<ListItemDa
                 setEndRadioValue(data.endRadioButton)
                 setThemeColor(data.color)
 
+                setTitleTypography(IxiTypography.Body.Large.bold)
+                setSubtitleTypography(IxiTypography.Body.Large.strikeThrough)
+                setMetTextTypography(IxiTypography.Body.XSmall.bold)
                 setOnClickListener { listItem ->
                     Log.e(
                         "LIST_ITEM",
