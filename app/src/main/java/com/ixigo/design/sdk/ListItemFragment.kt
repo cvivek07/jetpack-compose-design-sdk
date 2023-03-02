@@ -2,6 +2,7 @@ package com.ixigo.design.sdk
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,14 +42,17 @@ class ListItemFragment : BaseFragment() {
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 endIcon = ImageData.createFromRes(R.drawable.ic_search),
-                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp")
-            ),
+                avatar = ImageData.createFromUrl("https://pixlr.com/images/index/remove-bg.webp"),
+                startRadioButton = true,
+
+                ),
             ListItemData(
                 title = "Nearest Railway Station",
                 subTitle = "Airport complete name",
                 startIcon = ImageData.createFromRes(R.drawable.ic_search),
                 endIcon = ImageData.createFromRes(R.drawable.ic_search),
-                startLogo = ImageData.createFromUrl("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg")
+                startLogo = ImageData.createFromUrl("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"),
+                endRadioButton = true
             ),
             ListItemData(
                 title = "Nearest Railway Station",
@@ -387,7 +391,7 @@ class ListItemFragment : BaseFragment() {
         )
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
-            adapter = ListRecyclerAdapter(context, list)
+            adapter = ListRecyclerAdapter(context, list.toMutableList())
             addItemDecoration(
                 DividerItemDecoration(
                     context, DividerItemDecoration.VERTICAL
@@ -397,12 +401,12 @@ class ListItemFragment : BaseFragment() {
     }
 }
 
-class ListRecyclerAdapter(val context: Context, private val list: List<ListItemData>) :
+class ListRecyclerAdapter(val context: Context, val list: MutableList<ListItemData>) :
     RecyclerView.Adapter<ListRecyclerAdapter.MyViewHolder>() {
 
-    class MyViewHolder(itemView: IxiListItem) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(data: ListItemData) {
+    inner class MyViewHolder(itemView: IxiListItem) : RecyclerView.ViewHolder(itemView) {
+        fun bind(data: ListItemData, position: Int) {
             (itemView as? BaseListItem)?.apply {
                 data.title?.let { setTitle(it) }
                 setSubTitle(data.subTitle)
@@ -415,12 +419,41 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
                 setEndCheckedChangeListener(data.endCheckChangeListener)
                 data.endIcon?.let { setEndIcon(it) }
                 data.startIcon?.let { setStartIcon(it) }
-                data.switch?.let {
-                    setSwitchCheckedValue(it)
-                    setSwitchCheckedChangeListener(data.switchChangeListener)
-                }
+                setSwitchCheckedValue(data.switch)
+                setSwitchCheckedChangeListener(data.switchChangeListener)
+
+                setStartRadioValue(data.startRadioButton)
+                setEndRadioValue(data.endRadioButton)
                 setThemeColor(data.color)
 
+                setOnClickListener { listItem ->
+                    Log.e(
+                        "LIST_ITEM",
+                        (listItem as? IxiListItem)?.getEndRadioValue()?.toString() ?: "null"
+                    )
+                    val newStartCheckBoxValue = getStartCheckedValue()?.not()
+                    val newEndCheckBoxValue = getEndCheckedValue()?.not()
+                    val newStartRadioBoxValue = getStartRadioValue()?.not()
+                    val newEndRadioBoxValue = getEndRadioValue()?.not()
+                    val newSwitchValue = getSwitchCheckedValue()?.not()
+
+
+                    setStartRadioValue(newStartRadioBoxValue)
+                    setStartCheckedValue(newStartCheckBoxValue)
+                    setEndCheckedValue(newEndCheckBoxValue)
+                    setEndRadioValue(newEndRadioBoxValue)
+                    setSwitchCheckedValue(newSwitchValue)
+
+                    val data1 = data.copy(
+                        startCheckBox = newStartCheckBoxValue,
+                        endCheckBox = newEndCheckBoxValue,
+                        startRadioButton = newStartRadioBoxValue,
+                        endRadioButton = newEndRadioBoxValue,
+                        switch = newSwitchValue
+                    )
+                    list[position] = data1
+                    notifyItemChanged(position)
+                }
             }
         }
     }
@@ -436,7 +469,7 @@ class ListRecyclerAdapter(val context: Context, private val list: List<ListItemD
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(list[position])
+        holder.bind(list[position], position)
     }
 
     override fun getItemCount(): Int {
@@ -462,5 +495,7 @@ data class ListItemData(
     val endCheckChangeListener: (Boolean) -> Unit = {},
     val startCheckBox: Boolean? = null,
     val endCheckBox: Boolean? = null,
+    val startRadioButton: Boolean? = null,
+    val endRadioButton: Boolean? = null,
     val color: IxiColor = IxiColor.Blue
 )

@@ -1,18 +1,20 @@
 package com.ixigo.design.sdk.components.listitems.composables
 
-import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
+import androidx.compose.material.RadioButton
+import androidx.compose.material.RadioButtonDefaults
 import androidx.compose.material.TextButton
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -26,8 +28,8 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.imageutils.AsyncImageView
-import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.imageutils.getPainterForImage
+import com.ixigo.design.sdk.components.listitems.base.ListItemDataState
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
@@ -38,148 +40,155 @@ private val avatarDefaultSize = 40.dp
 
 @Composable
 fun ListItemComposable(
-    padding: PaddingValues = PaddingValues(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
-    startIcon: ImageData?,
-    startAvatar: ImageData?,
-    startLogo: ImageData?,
-    startCheckedValue: Boolean?,
-    startCheckChangeListener: (Boolean) -> Unit,
-    color: IxiColor = IxiColor.Blue,
-    endIcon: ImageData?,
-    title: String?,
-    subTitle: String?,
-    metaText: String?,
-    endLogo: ImageData?,
-    endCheckedValue: Boolean?,
-    endCheckChangeListener: (Boolean) -> Unit,
-    endSwitchValue: Boolean?,
-    endSwitchChangeListener: (Boolean) -> Unit,
-    endActionText: String?,
-    endActionClick: (() -> Unit)? = null,
-    onItemClick: (() -> Unit) = {},
-    @ColorRes itemBackGroundColor: Int = R.color.n0
+    state: MutableState<ListItemDataState>,
+//    padding: PaddingValues = PaddingValues(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
+//    startIcon: ImageData?,
+//    startAvatar: ImageData?,
+//    startLogo: ImageData?,
+//    startCheckedValue: Boolean?,
+//    startCheckChangeListener: (Boolean) -> Unit,
+//    startRadioValue: Boolean?,
+//    startRadioChangeListener: (Boolean) -> Unit,
+//    color: IxiColor = IxiColor.Blue,
+//    endIcon: ImageData?,
+//    title: String?,
+//    subTitle: String?,
+//    metaText: String?,
+//    endLogo: ImageData?,
+//    endCheckedValue: Boolean?,
+//    endCheckChangeListener: (Boolean) -> Unit,
+//    endRadioValue: Boolean?,
+//    endRadioChangeListener: (Boolean) -> Unit,
+//    endSwitchValue: Boolean?,
+//    endSwitchChangeListener: (Boolean) -> Unit,
+//    endActionText: String?,
+//    endActionClick: (() -> Unit)? = null,
+//    onItemClick: (() -> Unit) = {},
+//    @ColorRes itemBackGroundColor: Int = R.color.n0,
 ) {
 
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable(onClick = onItemClick)
-            .background(color = colorResource(id = itemBackGroundColor))
-            .padding(padding),
+            .clickable(onClick = state.value.onItemClick)
+            .background(color = colorResource(id = state.value.itemBackGroundColor))
+            .padding(state.value.paddingValues),
         verticalAlignment = Alignment.CenterVertically
     ) {
         LeftContent(
-            icon = startIcon,
-            avatar = startAvatar,
-            logo = startLogo,
-            checkedValue = startCheckedValue,
-            checkChangeListener = startCheckChangeListener,
-            color = color
+            state = state,
         )
 
         MiddleContent(
-            title = title, subTitle = subTitle, meta = metaText, modifier = Modifier
+            state = state,
+            modifier = Modifier
                 .fillMaxWidth()
                 .weight(1F)
         )
 
         RightContent(
-            icon = endIcon,
-            logo = endLogo,
-            checkedValue = endCheckedValue,
-            checkChangeListener = endCheckChangeListener,
-            switchValue = endSwitchValue,
-            switchChangeListener = endSwitchChangeListener,
-            actionText = endActionText,
-            actionClick = endActionClick,
-            color = color
+            state = state,
         )
     }
 }
 
 @Composable
 fun LeftContent(
-    icon: ImageData?,
-    avatar: ImageData?,
-    logo: ImageData?,
-    checkedValue: Boolean?,
-    checkChangeListener: (Boolean) -> Unit,
-    color: IxiColor
+    state: MutableState<ListItemDataState>,
 ) {
-    if (icon != null) {
+    with(state.value) {
+        if (startIcon != null) {
 
-        icon.getPainterForImage()?.let {
-            Icon(
+            startIcon.getPainterForImage()?.let {
+                Icon(
+                    modifier = Modifier
+                        .width(startIcon.width ?: iconDefaultSize)
+                        .height(startIcon.height ?: iconDefaultSize),
+                    painter = it,
+                    contentDescription = ""
+                )
+                Spacer(modifier = Modifier.width(10.dp))
+            }
+        }
+
+        if (startCheckedValue != null) {
+            DrawCheckBox(color, startCheckedValue) {
+                startCheckChangeListener(it)
+                state.value = state.value.copy(startCheckedValue = it)
+            }
+        }
+
+        if (startRadioValue != null) {
+            DrawRadioButton(color = color, checkedValue = startRadioValue) {
+                startRadioChangeListener(it)
+                state.value = state.value.copy(startRadioValue = it)
+            }
+        }
+        if (startAvatar != null) {
+            AsyncImageView(
                 modifier = Modifier
-                    .width(icon.width ?: iconDefaultSize)
-                    .height(icon.height ?: iconDefaultSize),
-                painter = it,
-                contentDescription = ""
+                    .width(startAvatar.width ?: avatarDefaultSize)
+                    .height(startAvatar.height ?: avatarDefaultSize),
+                url = startAvatar.url ?: "",
+                placeholder = startAvatar.drawableRes,
+                contentDes = null,
+                shape = CircleShape,
+                scale = ContentScale.Crop
             )
             Spacer(modifier = Modifier.width(10.dp))
         }
-    }
 
-    if (checkedValue != null) {
-        DrawCheckBox(color, checkedValue, checkChangeListener)
-    }
-
-    if (avatar != null) {
-        AsyncImageView(
-            modifier = Modifier
-                .width(avatar.width ?: avatarDefaultSize)
-                .height(avatar.height ?: avatarDefaultSize),
-            url = avatar.url ?: "",
-            placeholder = avatar.drawableRes,
-            contentDes = null,
-            shape = CircleShape,
-            scale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.width(10.dp))
-    }
-
-    if (logo != null) {
-        AsyncImageView(
-            modifier = Modifier
-                .width(logo.width ?: logoDefaultSize)
-                .height(logo.height ?: logoDefaultSize),
-            url = logo.url ?: "",
-            placeholder = logo.drawableRes,
-            contentDes = null,
-            shape = CircleShape,
-            scale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.width(10.dp))
+        if (startLogo != null) {
+            AsyncImageView(
+                modifier = Modifier
+                    .width(startLogo.width ?: logoDefaultSize)
+                    .height(startLogo.height ?: logoDefaultSize),
+                url = startLogo.url ?: "",
+                placeholder = startLogo.drawableRes,
+                contentDes = null,
+                shape = CircleShape,
+                scale = ContentScale.Crop
+            )
+            Spacer(modifier = Modifier.width(10.dp))
+        }
     }
 }
 
 @Composable
-fun MiddleContent(title: String?, subTitle: String?, meta: String?, modifier: Modifier) {
-    Column(modifier = modifier) {
-        Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()) {
-            if (!title.isNullOrBlank()) {
+fun MiddleContent(
+    modifier: Modifier,
+    state: MutableState<ListItemDataState>
+) {
+    with(state.value) {
+        Column(modifier = modifier) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                if (!title.isNullOrBlank()) {
+                    TypographyText(
+                        text = title,
+                        Modifier.weight(1f),
+                        textStyle = IxiTypography.Body.Medium.regular,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+                if (!metaText.isNullOrBlank()) {
+                    TypographyText(
+                        text = metaText,
+                        textStyle = IxiTypography.Body.XSmall.regular
+                    )
+                }
+                Spacer(modifier = Modifier.width(10.dp))
+            }
+            if (!subTitle.isNullOrBlank()) {
                 TypographyText(
-                    text = title,
-                    Modifier.weight(1f),
-                    textStyle = IxiTypography.Body.Medium.regular,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
+                    text = subTitle,
+                    textStyle = IxiTypography.Body.Small.regular
                 )
             }
-            if (!meta.isNullOrBlank()) {
-                TypographyText(
-                    text = meta,
-                    textStyle = IxiTypography.Body.XSmall.regular
-                )
-            }
-            Spacer(modifier = Modifier.width(10.dp))
-        }
-        if (!subTitle.isNullOrBlank()) {
-            TypographyText(
-                text = subTitle,
-                textStyle = IxiTypography.Body.Small.regular
-            )
         }
     }
 
@@ -188,82 +197,101 @@ fun MiddleContent(title: String?, subTitle: String?, meta: String?, modifier: Mo
 
 @Composable
 fun RightContent(
-    icon: ImageData?,
-    logo: ImageData?,
-    checkedValue: Boolean?,
-    checkChangeListener: (Boolean) -> Unit,
-    switchValue: Boolean?,
-    switchChangeListener: (Boolean) -> Unit,
-    actionText: String?,
-    actionClick: (() -> Unit)? = null,
-    color: IxiColor = IxiColor.Blue
+
+    state: MutableState<ListItemDataState>,
 ) {
-    if (icon != null) {
-        icon.getPainterForImage()?.let {
-            Icon(
-                modifier = Modifier
-                    .width(icon.width ?: iconDefaultSize)
-                    .height(icon.height ?: iconDefaultSize),
-                painter = it,
-                contentDescription = ""
-            )
+    with(state.value) {
+        if (endIcon != null) {
+            endIcon.getPainterForImage()?.let {
+                Icon(
+                    modifier = Modifier
+                        .width(endIcon.width ?: iconDefaultSize)
+                        .height(endIcon.height ?: iconDefaultSize),
+                    painter = it,
+                    contentDescription = ""
+                )
+            }
+            Spacer(modifier = Modifier.width(10.dp))
         }
-        Spacer(modifier = Modifier.width(10.dp))
-    }
 
-    if (logo != null) {
-        AsyncImageView(
-            modifier = Modifier
-                .width(logo.width ?: logoDefaultSize)
-                .height(logo.height ?: logoDefaultSize),
-            url = logo.url?:"",
-            placeholder = logo.drawableRes,
-            contentDes = null,
-            shape = CircleShape,
-            scale = ContentScale.Crop
-        )
-        Spacer(modifier = Modifier.width(10.dp))
-    }
-
-
-    if (checkedValue != null) {
-        DrawCheckBox(color, checkedValue, checkChangeListener)
-    }
-
-    if (switchValue != null) {
-        val switchState = remember { mutableStateOf(switchValue) }
-
-        Switch(
-            checked = switchState.value,
-            onCheckedChange = {
-                switchState.value = it
-                switchChangeListener(it)
-            },
-            thumbContent = { DrawThumb(color = color, switchState.value) },
-            colors = SwitchDefaults.colors(
-                checkedTrackColor = colorResource(id = color.bgColor),
-                uncheckedTrackColor = colorResource(id = R.color.n100),
-                uncheckedThumbColor = colorResource(id = R.color.n0),
-                uncheckedBorderColor = colorResource(id = R.color.n100)
+        if (endLogo != null) {
+            AsyncImageView(
+                modifier = Modifier
+                    .width(endLogo.width ?: logoDefaultSize)
+                    .height(endLogo.height ?: logoDefaultSize),
+                url = endLogo.url ?: "",
+                placeholder = endLogo.drawableRes,
+                contentDes = null,
+                shape = CircleShape,
+                scale = ContentScale.Crop
             )
-        )
-        Spacer(modifier = Modifier.width(10.dp))
-    }
+            Spacer(modifier = Modifier.width(10.dp))
+        }
 
-    if (!actionText.isNullOrBlank()) {
-        TextButton(onClick = actionClick ?: {}) {
-            TypographyText(
-                text = actionText, textStyle = IxiTypography.Button.Small.regular.copy(
-                    color = colorResource(
-                        id = color.bgColor
+
+        if (endCheckedValue != null) {
+            DrawCheckBox(color, endCheckedValue) {
+                endCheckChangeListener(it)
+                state.value = state.value.copy(endCheckedValue = it)
+            }
+        }
+
+        if (endRadioValue != null) {
+            DrawRadioButton(color = color, checkedValue = endRadioValue) {
+                endRadioChangeListener(it)
+                state.value = state.value.copy(endRadioValue = it)
+            }
+        }
+
+        if (endSwitchValue != null) {
+            DrawSwitch(color = color, switchValue = endSwitchValue) {
+                endSwitchChangeListener(it)
+                state.value = state.value.copy(endSwitchValue = it)
+            }
+            Spacer(modifier = Modifier.width(10.dp))
+        }
+
+        if (!endActionText.isNullOrBlank()) {
+            TextButton(onClick = endActionClick ?: {}) {
+                TypographyText(
+                    text = endActionText, textStyle = IxiTypography.Button.Small.regular.copy(
+                        color = colorResource(
+                            id = color.bgColor
+                        )
                     )
                 )
-            )
+            }
+            Spacer(modifier = Modifier.width(10.dp))
         }
-        Spacer(modifier = Modifier.width(10.dp))
+    }
+}
+
+@Composable
+private fun DrawSwitch(
+    color: IxiColor,
+    switchValue: Boolean,
+    switchChangeListener: (Boolean) -> Unit,
+) {
+    val switchState = remember { mutableStateOf(switchValue) }
+
+    if(switchValue != switchState.value) {
+        switchState.value = switchValue
     }
 
-
+    Switch(
+        checked = switchState.value,
+        onCheckedChange = {
+            switchState.value = it
+            switchChangeListener(it)
+        },
+        thumbContent = { DrawThumb(color = color, switchState.value) },
+        colors = SwitchDefaults.colors(
+            checkedTrackColor = colorResource(id = color.bgColor),
+            uncheckedTrackColor = colorResource(id = R.color.n100),
+            uncheckedThumbColor = colorResource(id = R.color.n0),
+            uncheckedBorderColor = colorResource(id = R.color.n100)
+        )
+    )
 }
 
 @Composable
@@ -287,10 +315,20 @@ fun DrawThumb(color: IxiColor, isChecked: Boolean) {
 }
 
 @Composable
-fun DrawCheckBox(color: IxiColor, checkedValue: Boolean, checkChangeListener: (Boolean) -> Unit) {
+fun DrawCheckBox(
+    color: IxiColor,
+    checkedValue: Boolean,
+    checkChangeListener: (Boolean) -> Unit
+) {
     val checkedState = remember {
         mutableStateOf(checkedValue)
     }
+
+    if(checkedValue != checkedState.value) {
+        checkedState.value = checkedValue
+    }
+
+
     Checkbox(
         checked = checkedState.value,
         onCheckedChange = {
@@ -299,6 +337,32 @@ fun DrawCheckBox(color: IxiColor, checkedValue: Boolean, checkChangeListener: (B
         },
         colors = CheckboxDefaults.colors(
             checkedColor = colorResource(id = color.bgColor),
+        )
+    )
+}
+
+@Composable
+fun DrawRadioButton(
+    color: IxiColor,
+    checkedValue: Boolean,
+    checkChangeListener: (Boolean) -> Unit
+) {
+    val checkedState = remember {
+        mutableStateOf(checkedValue)
+    }
+
+    if(checkedValue != checkedState.value) {
+        checkedState.value = checkedValue
+    }
+    RadioButton(
+        selected = checkedState.value,
+        onClick = {
+            checkedState.value = checkedState.value.not()
+            checkChangeListener(checkedState.value)
+        },
+
+        colors = RadioButtonDefaults.colors(
+            selectedColor = colorResource(id = color.bgColor),
         )
     )
 }

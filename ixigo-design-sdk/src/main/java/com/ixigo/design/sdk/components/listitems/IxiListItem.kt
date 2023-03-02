@@ -15,29 +15,11 @@ class IxiListItem @JvmOverloads constructor(
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
+            ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
 
         ListItemComposable(
-            padding = state.value.paddingValues,
-            startIcon = state.value.startIcon,
-            startAvatar = state.value.startAvatar,
-            startLogo = state.value.startLogo,
-            startCheckedValue = state.value.startCheckedValue,
-            startCheckChangeListener = state.value.startCheckChangeListener,
-            color = state.value.color,
-            title = state.value.title,
-            subTitle = state.value.subTitle,
-            metaText = state.value.metaText,
-            endIcon = state.value.endIcon,
-            endLogo = state.value.endLogo,
-            endCheckedValue = state.value.endCheckedValue,
-            endCheckChangeListener = state.value.endCheckChangeListener,
-            endSwitchValue = state.value.endSwitchValue,
-            endSwitchChangeListener = state.value.endSwitchChangeListener,
-            endActionText = state.value.endActionText,
-            endActionClick = state.value.endActionClick,
-            onItemClick = state.value.onItemClick
+            state
         )
     }
 }

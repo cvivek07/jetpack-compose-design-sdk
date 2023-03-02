@@ -2,11 +2,11 @@ package com.ixigo.design.sdk.components.listitems.base
 
 import android.content.Context
 import android.util.AttributeSet
-import androidx.annotation.DrawableRes
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -24,13 +24,13 @@ abstract class BaseListItem @JvmOverloads constructor(
                     end = 4.dp
                 ),
                 title = "",
-                color = themeColor
+                color = themeColor,
             )
         )
 
     override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
-        val inState = state.value
-        state.value = inState.copy(
+        val currState = state.value
+        state.value = currState.copy(
             paddingValues = PaddingValues(
                 top = top.dp,
                 bottom = bottom.dp,
@@ -45,8 +45,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param icon The drawable resource ID of the start icon.
      */
     fun setStartIcon(icon: ImageData?) {
-        val inState = state.value
-        state.value = inState.copy(startIcon = icon)
+        val currState = state.value
+        state.value = currState.copy(startIcon = icon)
     }
 
     /**
@@ -54,8 +54,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param icon The drawable resource id of the end icon.
      */
     fun setEndIcon(icon: ImageData?) {
-        val inState = state.value
-        state.value = inState.copy(endIcon = icon)
+        val currState = state.value
+        state.value = currState.copy(endIcon = icon)
     }
 
 
@@ -64,8 +64,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param avatar The URL of the avatar.
      */
     fun setAvatar(avatar: ImageData?) {
-        val inState = state.value
-        state.value = inState.copy(startAvatar = avatar)
+        val currState = state.value
+        state.value = currState.copy(startAvatar = avatar)
     }
 
     /**
@@ -73,26 +73,63 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param logoUrl The URL of the start logo.
      */
     fun setStartLogo(logoUrl: ImageData?) {
-        val inState = state.value
-        state.value = inState.copy(startLogo = logoUrl)
+        val currState = state.value
+        state.value = currState.copy(startLogo = logoUrl)
     }
 
     /**
      * set the initial state of the start checkbox. Providing this will make the checkbox visible.
-     * @param initialValue checkbox will be checked if true else unchecked
+     * @param value checkbox will be checked if true else unchecked
      */
-    fun setStartCheckedValue(initialValue: Boolean) {
-        val inState = state.value
-        state.value = inState.copy(startCheckedValue = initialValue)
+    fun setStartCheckedValue(value: Boolean?) {
+        val currState = state.value
+        state.value = currState.copy(startCheckedValue = value)
     }
+
+    /**
+     * get the  checked state of the end CheckBox. Returns null if Checkbox is not drawn
+     */
+    fun getStartCheckedValue(): Boolean? {
+        return state.value.startCheckedValue
+    }
+
 
     /**
      * set the check change listener for the start CheckBox.
      * @param checkChangeListener checkChangeListener lambda
      */
     fun setStartCheckedChangeListener(checkChangeListener: (Boolean) -> Unit) {
-        val inState = state.value
-        state.value = inState.copy(startCheckChangeListener = checkChangeListener)
+        val currState = state.value
+        state.value = currState.copy(startCheckChangeListener = checkChangeListener)
+    }
+
+    /**
+     * set the initial state of the start RadioButton. Providing this will make the RadioButton visible.
+     * @param value radio button will be checked if true, unchecked if false and will not be drawn otherwise
+     */
+    fun setStartRadioValue(value: Boolean?) {
+        val currState = state.value
+        state.value = currState.copy(startRadioValue = value)
+    }
+
+    /**
+     * get the checked state of the Start Radio Button.. Returns null if RadioButton is not drawn
+     */
+    fun getStartRadioValue(): Boolean? {
+        return state.value.startRadioValue
+    }
+
+    /**
+     * set the check change listener for the end Radio Button.
+     * @param radioChangeListener checkChangeListener lambda
+     */
+    fun setStartRadioChangeListener(radioChangeListener: (Boolean) -> Unit) {
+        val currState = state.value
+        val internalListener: (Boolean) -> Unit = { bool ->
+            state.value = state.value.copy(startRadioValue = bool)
+            radioChangeListener(bool)
+        }
+        state.value = currState.copy(startRadioChangeListener = internalListener)
     }
 
     /**
@@ -101,8 +138,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param color Color to be set
      */
     fun setThemeColor(color: IxiColor) {
-        val inState = state.value
-        state.value = inState.copy(color = color)
+        val currState = state.value
+        state.value = currState.copy(color = color)
     }
 
 
@@ -111,8 +148,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param title title to be set
      */
     fun setTitle(title: String) {
-        val inState = state.value
-        state.value = inState.copy(title = title)
+        val currState = state.value
+        state.value = currState.copy(title = title)
     }
 
     /**
@@ -120,8 +157,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param subTitle subtitle to be set
      */
     fun setSubTitle(subTitle: String?) {
-        val inState = state.value
-        state.value = inState.copy(subTitle = subTitle)
+        val currState = state.value
+        state.value = currState.copy(subTitle = subTitle)
     }
 
     /**
@@ -129,8 +166,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param metaText meta text value to be set
      */
     fun setMetaText(metaText: String?) {
-        val inState = state.value
-        state.value = inState.copy(metaText = metaText)
+        val currState = state.value
+        state.value = currState.copy(metaText = metaText)
     }
 
     /**
@@ -138,47 +175,86 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param logoUrl The URL of the end logo.
      */
     fun setEndLogoUrl(logoUrl: ImageData?) {
-        val inState = state.value
-        state.value = inState.copy(endLogo = logoUrl)
+        val currState = state.value
+        state.value = currState.copy(endLogo = logoUrl)
     }
 
 
     /**
      * set the initial state of the end checkbox. Providing this will make the checkbox visible.
-     * @param initialValue checkbox will be checked if true else unchecked
+     * @param value checkbox will be checked if true, unchecked if false and will not be drawn otherwise
      */
-    fun setEndCheckedValue(initialValue: Boolean) {
-        val inState = state.value
-        state.value = inState.copy(endCheckedValue = initialValue)
+    fun setEndCheckedValue(value: Boolean?) {
+        val currState = state.value
+        state.value = currState.copy(endCheckedValue = value)
     }
+
+    /**
+     * get the  checked state of the end CheckBox. Returns null if Checkbox is not drawn
+     */
+    fun getEndCheckedValue(): Boolean? {
+        return state.value.endCheckedValue
+    }
+
+    /**
+     * set the initial state of the end RadioButton. Providing this will make the RadioButton visible.
+     * @param value radio button will be checked if true, unchecked if false and will not be drawn otherwise
+     */
+    fun setEndRadioValue(value: Boolean?) {
+        val currState = state.value
+        state.value = currState.copy(endRadioValue = value)
+    }
+
+    /**
+     * get the  checked state of the end End Radio Button.. Returns null if RadioButton is not drawn
+     */
+    fun getEndRadioValue(): Boolean? {
+        return state.value.endRadioValue
+    }
+
+    /**
+     * set the check change listener for the end Radio Button.
+     * @param radioChangeListener checkChangeListener lambda
+     */
+    fun setEndRadioChangeListener(radioChangeListener: (Boolean) -> Unit) {
+        val currState = state.value
+        state.value = currState.copy(endRadioChangeListener = radioChangeListener)
+    }
+
 
     /**
      * set the check change listener for the end CheckBox.
      * @param checkChangeListener checkChangeListener lambda
      */
     fun setEndCheckedChangeListener(checkChangeListener: (Boolean) -> Unit) {
-        val inState = state.value
-        state.value = inState.copy(endCheckChangeListener = checkChangeListener)
+        val currState = state.value
+        state.value = currState.copy(endCheckChangeListener = checkChangeListener)
     }
 
 
     /**
-     * set the initial state of the start Switch. Providing this will make the Switch visible.
-     * @param initialValue checkbox will be checked if true else unchecked
+     * set the state of the end Switch. Providing this will make the Switch visible.
+     * @param value switch will be checked if true, unchecked if false and will not be drawn otherwise
      */
-    fun setSwitchCheckedValue(initialValue: Boolean) {
-        val inState = state.value
-        state.value = inState.copy(endSwitchValue = initialValue)
+    fun setSwitchCheckedValue(value: Boolean?) {
+        val currState = state.value
+        state.value = currState.copy(endSwitchValue = value)
     }
 
+    /**
+     * get the  checked state of the end Switch. Returns null if switch is not visible
+     */
+    fun getSwitchCheckedValue(): Boolean? {
+        return state.value.endSwitchValue
+    }
 
     /**
      * set the check change listener for the end Switch.
      * @param checkChangeListener checkChangeListener lambda
      */
     fun setSwitchCheckedChangeListener(checkChangeListener: (Boolean) -> Unit) {
-        val inState = state.value
-        state.value = inState.copy(endSwitchChangeListener = checkChangeListener)
+        val currState = state.value
+        state.value = currState.copy(endSwitchChangeListener = checkChangeListener)
     }
 
     /**
@@ -186,8 +262,8 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param text text to be set
      */
     fun setActionText(text: String?) {
-        val inState = state.value
-        state.value = inState.copy(endActionText = text)
+        val currState = state.value
+        state.value = currState.copy(endActionText = text)
     }
 
     /**
@@ -195,13 +271,14 @@ abstract class BaseListItem @JvmOverloads constructor(
      * @param clickAction click lambda
      */
     fun setActionTextClickListener(clickAction: (() -> Unit)?) {
-        val inState = state.value
-        state.value = inState.copy(endActionClick = clickAction)
+        val currState = state.value
+        state.value = currState.copy(endActionClick = clickAction)
     }
 
+
     private fun setItemClickListener(onClick: () -> Unit) {
-        val inState = state.value
-        state.value = inState.copy(onItemClick = onClick)
+        val currState = state.value
+        state.value = currState.copy(onItemClick = onClick)
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
@@ -213,10 +290,12 @@ abstract class BaseListItem @JvmOverloads constructor(
 }
 
 data class ListItemDataState(
-    val paddingValues: PaddingValues,
+    val paddingValues: PaddingValues = PaddingValues(top = 10.dp, bottom = 10.dp, start = 4.dp, end = 4.dp),
     val startIcon: ImageData? = null,
     val startAvatar: ImageData? = null,
     val startLogo: ImageData? = null,
+    val startRadioValue: Boolean? = null,
+    val startRadioChangeListener: (Boolean) -> Unit = {},
     val startCheckedValue: Boolean? = null,
     val startCheckChangeListener: (Boolean) -> Unit = {},
     val color: IxiColor,
@@ -225,11 +304,16 @@ data class ListItemDataState(
     val metaText: String? = null,
     val endIcon: ImageData? = null,
     val endLogo: ImageData? = null,
+    @ColorRes val itemBackGroundColor: Int =  R.color.n0,
     val endCheckedValue: Boolean? = null,
     val endCheckChangeListener: (Boolean) -> Unit = {},
     val endSwitchValue: Boolean? = null,
     val endSwitchChangeListener: (Boolean) -> Unit = {},
+    val endRadioValue: Boolean? = null,
+    val endRadioChangeListener: (Boolean) -> Unit = {},
     val endActionText: String? = null,
     val endActionClick: (() -> Unit)? = null,
-    val onItemClick: (() -> Unit) = {}
-)
+    val onItemClick: (() -> Unit) = {},
+) {
+
+}
