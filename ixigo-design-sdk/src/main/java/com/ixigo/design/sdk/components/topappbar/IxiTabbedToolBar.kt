@@ -33,9 +33,6 @@ class IxiTabbedToolBar @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
         with(state.value) {
             state.value.tabbedData?.let {
                 viewPager?.let { it1 ->

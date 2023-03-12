@@ -79,9 +79,6 @@ class IxiSecondaryButton @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
         with(state.value) {
             ComposableSecondaryButton(
                 text,

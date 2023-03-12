@@ -13,10 +13,6 @@ class IxiLinedInputField @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
-
         LinedInputField(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,

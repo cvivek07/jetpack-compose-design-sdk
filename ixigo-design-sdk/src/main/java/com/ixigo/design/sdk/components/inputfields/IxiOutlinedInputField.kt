@@ -13,10 +13,6 @@ class IxiOutlinedInputField @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
-
         OutlinedInputField(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,

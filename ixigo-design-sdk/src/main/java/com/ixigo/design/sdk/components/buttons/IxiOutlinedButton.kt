@@ -3,7 +3,6 @@ package com.ixigo.design.sdk.components.buttons
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableOutlinedButton
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
@@ -77,9 +76,6 @@ class IxiOutlinedButton @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
         with(state.value) {
             ComposableOutlinedButton(
                 text,
