@@ -148,6 +148,16 @@ class TypographyFragment : Fragment() {
             bodyXSmallUnderlined.setTypography(IxiTypography.Body.XSmall.underline)
             bodyXSmallStrike.setText("Body XSmall strikethrough->Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
             bodyXSmallStrike.setTypography(IxiTypography.Body.XSmall.strikeThrough)
+            textMaxLines1.setText("Text with maxlines set to 1 -> Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
+            textMaxLines1.setTypography(IxiTypography.Body.Medium.medium)
+            textMaxLines2.setText("Text with maxlines set to 2 -> Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
+            textMaxLines2.setTypography(IxiTypography.Body.Medium.medium)
+            textOverflowClip.setText("Text Overflow clip -> Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
+            textOverflowClip.setTypography(IxiTypography.Body.Medium.medium)
+            textOverflowVisible.setText("Text Overflow Visible -> Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
+            textOverflowVisible.setTypography(IxiTypography.Body.Medium.medium)
+            textOverflowEllipsis.setText("Text Overflow Ellipsis -> Glide is going to be an epic Design system and we all are gonna need to follow it with utter most disipline")
+            textOverflowEllipsis.setTypography(IxiTypography.Body.Medium.medium)
         }
     }
 }

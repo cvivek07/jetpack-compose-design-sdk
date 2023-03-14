@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
 import androidx.compose.ui.text.font.FontWeight.Companion.W900
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.content.ContextCompat
 import androidx.core.text.HtmlCompat
 import com.ixigo.design.sdk.R
@@ -100,8 +101,10 @@ class IxiText @JvmOverloads constructor(
             textStyle = defaultTextStyle,
             color = null,
             onClick = null,
+            maxLines = Int.MAX_VALUE,
             vAlignment = Alignment.CenterVertically,
             hAlignment = Alignment.CenterHorizontally,
+            overflow = TextOverflow.Visible
         )
     )
 
@@ -113,6 +116,10 @@ class IxiText @JvmOverloads constructor(
 
             textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
             setTextColor(textColorRes)
+            val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, Int.MAX_VALUE)
+            setMaxLines(maxLines)
+            val overflow = mapTextOverflowToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextOverflow, 0))
+            setOverflow(overflow)
 
             val textDisplayType = typedArray.getInt(
                 R.styleable.IxiText_textDisplayType,
@@ -294,6 +301,14 @@ class IxiText @JvmOverloads constructor(
         setTextColor(ContextCompat.getColor(context, color))
     }
 
+    fun setMaxLines(lines: Int) {
+        state.value = state.value.copy(maxLines = lines)
+    }
+
+    fun setOverflow(textOverflow: TextOverflow) {
+        state.value = state.value.copy(overflow = textOverflow)
+    }
+
     /**
      * provide the text value
      */
@@ -304,6 +319,14 @@ class IxiText @JvmOverloads constructor(
         state.value = inState.copy(onClick = { l?.onClick(this) })
     }
 
+    private fun mapTextOverflowToEnum(int: Int): TextOverflow {
+        return when (int) {
+            0 -> TextOverflow.Visible
+            1 -> TextOverflow.Ellipsis
+            2 -> TextOverflow.Clip
+            else -> TextOverflow.Clip
+        }
+    }
 
     @Composable
     override fun Content() {
@@ -328,6 +351,8 @@ class IxiText @JvmOverloads constructor(
                 text = stateValue.value.text!!,
                 textStyle = stateValue.value.textStyle,
                 modifier = modifier,
+                maxLines = stateValue.value.maxLines,
+                overflow = stateValue.value.overflow
             )
         }
         if (stateValue.value.spannedString != null) {
@@ -335,6 +360,8 @@ class IxiText @JvmOverloads constructor(
                 spanned = stateValue.value.spannedString!!,
                 textStyle = stateValue.value.textStyle,
                 modifier = modifier,
+                maxLines = stateValue.value.maxLines,
+                overflow = stateValue.value.overflow,
             )
         }
 
@@ -346,6 +373,8 @@ data class TextState(
     val spannedString: Spanned? = null,
     val textStyle: TextStyle,
     @ColorInt val color: Int?,
+    val maxLines: Int,
+    val overflow: TextOverflow,
     val onClick: (() -> Unit)?,
     val vAlignment: Alignment.Vertical,
     val hAlignment: Alignment.Horizontal,
