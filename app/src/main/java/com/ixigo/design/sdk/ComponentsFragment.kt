@@ -42,6 +42,7 @@ class ComponentsFragment : Fragment() {
         Pair("Chips", R.id.action_componentFragment_to_chipFragment),
         Pair("Bottom Sheet", R.id.action_componentFragment_to_bottomSheetFragment),
         Pair("Inline Alert", R.id.action_componentFragment_to_inlineAlertFragment),
+        Pair("Sticky Alert", R.id.action_componentFragment_to_stickyAlertFragment),
         Pair("Separator", R.id.action_componentFragment_to_separatorFragment)
     )
 

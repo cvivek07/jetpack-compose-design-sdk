@@ -54,6 +54,10 @@
         <action
             android:id="@+id/action_componentFragment_to_inlineAlertFragment"
             app:destination="@id/inlineAlertFragment" />
+
+        <action
+            android:id="@+id/action_componentFragment_to_stickyAlertFragment"
+            app:destination="@id/stickyAlertFramgent" />
     </fragment>
     <fragment
         android:id="@+id/buttonsFragment"
@@ -101,6 +105,12 @@
         android:name="com.ixigo.design.sdk.InlineAlertFragment"
         android:label="@string/inline_alert"
         tools:layout="@layout/fragment_inline_alert"/>
+
+    <fragment
+        android:id="@+id/stickyAlertFramgent"
+        android:name="com.ixigo.design.sdk.StickyAlertFragment"
+        android:label="@string/sticky_alert"
+        tools:layout="@layout/fragment_sticky_alert"/>
 
     <fragment
         android:id="@+id/chipFragment"

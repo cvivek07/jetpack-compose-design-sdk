@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.ixigo.design.sdk.components.stickyalert.IxiStickyAlert
+        android:id="@+id/neutral_alert"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback message"
+        app:leftIcon="@drawable/ic_home_filled"
+        app:rightButtonText="Right"
+        app:leftButtonText="Left"
+        app:rightIcon="@drawable/ic_home_filled"
+        app:ixiColor="neutral"
+        app:buttonColor="@color/o600"
+        android:elevation="2dp"
+        />
+    <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.stickyalert.IxiStickyAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback message"
+        app:rightIcon="@drawable/ic_home_filled"
+        app:leftIcon="@drawable/ic_home_filled"
+        app:rightButtonText="Right"
+        app:leftButtonText="Left"
+        app:ixiColor="neutral"
+        app:buttonColor="@color/o600"
+        app:arrangement="normal"
+        android:elevation="2dp"
+        />
+    <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.stickyalert.IxiStickyAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback message"
+        app:leftIcon="@drawable/ic_home_filled"
+        app:rightButtonText="Right"
+        app:leftButtonText="Left"
+        app:rightIcon="@drawable/ic_home_filled"
+        app:ixiColor="warning"
+        android:elevation="2dp"
+        />
+    <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.stickyalert.IxiStickyAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback message"
+        app:leftIcon="@drawable/ic_home_filled"
+        app:rightButtonText="Right"
+        app:leftButtonText="Left"
+        app:rightIcon="@drawable/ic_home_filled"
+        app:ixiColor="error"
+        />
+    <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.stickyalert.IxiStickyAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback message"
+        app:leftIcon="@drawable/ic_home_filled"
+        app:rightButtonText="Right"
+        app:leftButtonText="Left"
+        app:rightIcon="@drawable/ic_home_filled"
+        app:ixiColor="success"
+        android:elevation="2dp"
+        />
+    <include layout="@layout/divider"/>
+    <com.ixigo.design.sdk.components.stickyalert.IxiStickyAlert
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Feedback message"
+        app:leftIcon="@drawable/ic_home_filled"
+        app:rightButtonText="Right"
+        app:leftButtonText="Left"
+        app:rightIcon="@drawable/ic_home_filled"
+        app:ixiColor="extension"
+        />
+
+
+</LinearLayout>
