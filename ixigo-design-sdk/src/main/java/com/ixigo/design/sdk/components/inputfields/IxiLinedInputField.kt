@@ -7,14 +7,14 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.inputfields.base.BaseInputField
 import com.ixigo.design.sdk.components.inputfields.composables.LinedInputField
 
-class IxiLinedInputField  @JvmOverloads constructor(
+class IxiLinedInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseInputField(context, attrs, defStyleAttr) {
 
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
+            ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
 
         LinedInputField(
@@ -31,8 +31,10 @@ class IxiLinedInputField  @JvmOverloads constructor(
             onActionTextClick = state.value.onClickActionText,
             onActionIconClick = state.value.onClickActionIcon,
             onTextChange = state.value.onTextChange,
+            onFocusChange = state.value.onFocusChange,
             colors = state.value.color,
-            width = preferredWidth
+            width = preferredWidth,
+            readOnly = state.value.readOnly
         )
 
     }

@@ -6,7 +6,6 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.IconButton
@@ -14,9 +13,13 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,8 +30,10 @@ import androidx.compose.ui.zIndex
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout.*
+import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.imageutils.ImageData
+import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.search.composables.SearchViewComposable
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
@@ -43,16 +48,18 @@ import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 
 @Composable
 fun MainToolBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     title: String? = null,
     subTitle: String? = null,
     elevation: Dp = 10.dp,
-    menuProvider: IxiMenuProvider? = null
+    menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf()
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds
     ) {
         Column(Modifier.weight(1f)) {
             if (title != null) {
@@ -82,36 +89,49 @@ fun MainToolBar(
 
 @Composable
 fun SearchBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
-    onQueryChange: (String) -> Unit
+    hint: String? = null,
+    shouldFocus: Boolean?,
+    disabledIds: List<Int> = listOf(),
+    onQueryChange: (String) -> Unit,
+    onFocusChange: ((Boolean)-> Unit) = {}
 ) {
+    val focusRequester = remember { FocusRequester() }
+
+    LaunchedEffect("") {
+        if(shouldFocus != true) focusRequester.freeFocus() else focusRequester.requestFocus()
+    }
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds,
     ) {
         SearchViewComposable(
             query = "",
             onQueryChange = onQueryChange,
-            onSearchFocusChange = {},
+            onSearchFocusChange = onFocusChange,
             onClearQuery = { },
-            hint = "Search",
+            hint = hint ?: "",
             modifier = Modifier
                 .weight(1f)
                 .padding(
                     end = 15.dp
-                )
+                ).focusRequester(focusRequester)
+
         )
     }
+
 }
 
 @Composable
 fun SegmentedControlBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf(),
     items: List<String>,
     defaultSelectedItemIndex: Int = 0,
     onItemSelection: (selectedItemIndex: Int) -> Unit
@@ -119,7 +139,8 @@ fun SegmentedControlBar(
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds
     ) {
         SegmentedControl(
             items = items,
@@ -138,15 +159,17 @@ fun SegmentedControlBar(
 
 @Composable
 fun SrpBar(
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf(),
     data: SrpModel?,
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
         elevation = elevation,
-        menuProvider = menuProvider
+        menuProvider = menuProvider,
+        disabledIds = disabledIds
     ) {
         if (data != null) {
             SrpComposable(
@@ -175,9 +198,10 @@ fun getRoundRect(context: Context, @ColorRes color: Int): Drawable {
 @Composable
 fun TabbedBar(
     modifier: Modifier = Modifier,
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int> = listOf(),
     data: List<TabDataItem>,
     adapter: FragmentStateAdapter?,
     viewPager: ViewPager2,
@@ -187,7 +211,8 @@ fun TabbedBar(
         homeIcon = homeIcon,
         elevation = elevation,
         menuProvider = menuProvider,
-        modifier = modifier
+        modifier = modifier,
+        disabledIds = disabledIds
     ) {
 
         AndroidView(factory = {
@@ -205,9 +230,10 @@ fun TabbedBar(
 @Composable
 fun BasicToolbar(
     modifier: Modifier = Modifier,
-    @DrawableRes homeIcon: Int = R.drawable.left_arrow,
+    homeIcon: ImageData? = ImageData.createFromRes(R.drawable.left_arrow),
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
+    disabledIds: List<Int>,
     content: @Composable RowScope.() -> Unit
 ) {
     TopAppBar(
@@ -220,12 +246,14 @@ fun BasicToolbar(
         elevation = elevation,
         contentPadding = PaddingValues(0.dp)
     ) {
-        if (homeIcon != 0) {
-            IconButton(onClick = { menuProvider?.onMenuItemClick(android.R.id.home) }) {
-                Image(
-                    painter = painterResource(id = homeIcon),
-                    contentDescription = "Image",
-                )
+        if (homeIcon != null) {
+            homeIcon.getPainterForImage()?.let {
+                IconButton(onClick = { menuProvider?.onMenuItemClick(android.R.id.home) }) {
+                    Image(
+                        painter = it,
+                        contentDescription = "Image",
+                    )
+                }
             }
         }
         content()
@@ -242,7 +270,11 @@ fun BasicToolbar(
                         )
                     }
                 } else {
-                    TextButton(onClick = { menuProvider.onMenuItemClick(it.id) }) {
+                    TextButton(onClick = {
+                        if (!disabledIds.contains(it.id)) {
+                            menuProvider.onMenuItemClick(it.id)
+                        }
+                    }) {
                         Text(
                             text = it.text ?: "",
                         )

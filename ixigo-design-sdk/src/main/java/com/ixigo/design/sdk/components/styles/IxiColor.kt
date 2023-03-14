@@ -68,13 +68,13 @@ sealed class IxiColor(
 
     fun mapIxiColorToInlineAlertColor(ixiColor: IxiColor):IxiColor{
         return when(ixiColor){
-            IxiSecondaryColor.Warning -> IxiInlineAlertColor.Warning
-            IxiSecondaryColor.Extension -> IxiInlineAlertColor.Extension
-            IxiSecondaryColor.Error -> IxiInlineAlertColor.Error
-            IxiSecondaryColor.Success -> IxiInlineAlertColor.Success
-            IxiSecondaryColor.Blue -> IxiInlineAlertColor.Blue
-            IxiSecondaryColor.Neutral -> IxiInlineAlertColor.Neutral
-            IxiSecondaryColor.Orange -> IxiInlineAlertColor.Orange
+            Warning -> IxiInlineAlertColor.Warning
+            Extension -> IxiInlineAlertColor.Extension
+            Error -> IxiInlineAlertColor.Error
+            Success -> IxiInlineAlertColor.Success
+            Blue -> IxiInlineAlertColor.Blue
+            Neutral -> IxiInlineAlertColor.Neutral
+            Orange -> IxiInlineAlertColor.Orange
             else -> {
                 ixiColor
             }

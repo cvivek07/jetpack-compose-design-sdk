@@ -3,7 +3,10 @@ package com.ixigo.design.sdk.components.inputfields.composables
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -16,9 +19,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.buttons.composable.updateWidth
-import com.ixigo.design.sdk.components.styles.IxiShape
 import com.ixigo.design.sdk.components.styles.IxiColor
-import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 
@@ -35,12 +36,14 @@ fun OutlinedInputField(
     text: String = "",
     label: String = "",
     width: Int = -1,
+    readOnly: Boolean,
     colors: IxiColor = IxiColor.Orange,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
-    onTextChange: ((String) -> Unit)?
+    onTextChange: ((String) -> Unit)?,
+    onFocusChange: ((Boolean) -> Unit)?
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -60,7 +63,8 @@ fun OutlinedInputField(
         mutableStateOf(false)
     }
 
-    val labelComposable = getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
+    val labelComposable =
+        getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
 
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
@@ -75,12 +79,15 @@ fun OutlinedInputField(
             trailingIcon = trailingIcons,
             singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-            modifier = Modifier
+            modifier =  Modifier
                 .fillMaxWidth()
                 .onFocusChanged {
                     isFocussed.value = it.isFocused
-                },
+                    onFocusChange?.let { it1 -> it1(it.isFocused) }
+                }
+                .padding(PaddingValues(0.dp)),
             colors = getInputFieldColors(colors),
+            readOnly = readOnly
         )
         GetBottomText(helperText, maxCharCount, textValue)
     }
@@ -240,11 +247,13 @@ fun LinedInputField(
     label: String = "",
     width: Int = -1,
     colors: IxiColor = IxiColor.Orange,
+    readOnly: Boolean,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
-    onTextChange: ((String) -> Unit)?
+    onTextChange: ((String) -> Unit)?,
+    onFocusChange: ((Boolean) -> Unit)?
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -265,8 +274,9 @@ fun LinedInputField(
         mutableStateOf(false)
     }
     val dividerColor = if (isFocussed.value) colors.bgColor else unFocusColor
-    val labelComposable = getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
-//    val labelComposable = getPlaceHolder(label, placeholderTextColor.value)
+
+    val labelComposable =
+        getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
             value = textValue.value,
@@ -280,9 +290,13 @@ fun LinedInputField(
             trailingIcon = trailingIcons,
             singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-            modifier = Modifier
+            modifier =  Modifier
                 .fillMaxWidth()
-                .onFocusChanged { isFocussed.value = it.isFocused }.padding(PaddingValues(0.dp)),
+                .onFocusChanged {
+                    isFocussed.value = it.isFocused
+                    onFocusChange?.let { it1 -> it1(it.isFocused) }
+                }
+                .padding(PaddingValues(0.dp)),
             colors = TextFieldDefaults.outlinedTextFieldColors(
                 focusedBorderColor = Color.Transparent,
                 unfocusedBorderColor = Color.Transparent,
@@ -291,6 +305,7 @@ fun LinedInputField(
                 focusedLabelColor = colorResource(id = colors.bgColor),
                 unfocusedLabelColor = colorResource(id = R.color.n800)
             ),
+            readOnly = readOnly
         )
         Divider(color = colorResource(id = dividerColor), modifier = Modifier.padding(top = 0.dp))
         GetBottomText(helperText, maxCharCount, textValue)

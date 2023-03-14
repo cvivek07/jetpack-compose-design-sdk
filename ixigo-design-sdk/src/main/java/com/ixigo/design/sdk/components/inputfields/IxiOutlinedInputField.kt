@@ -31,8 +31,10 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             onActionTextClick = state.value.onClickActionText,
             onActionIconClick = state.value.onClickActionIcon,
             onTextChange = state.value.onTextChange,
+            onFocusChange= state.value.onFocusChange,
             colors = state.value.color,
-            width = preferredWidth
+            width = preferredWidth,
+            readOnly = state.value.readOnly
         )
 
     }

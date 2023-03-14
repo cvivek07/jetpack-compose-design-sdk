@@ -14,6 +14,8 @@ abstract class BaseInputField @JvmOverloads constructor(
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
     private var textValue: String? = null
+
+    @Deprecated("Please use setTextChangeListener() instead")
     lateinit var textChangeListener: TextChangeListener
 
     protected val state = mutableStateOf(
@@ -33,82 +35,200 @@ abstract class BaseInputField @JvmOverloads constructor(
             onClickDrawableEnd = {},
             onClickDrawableStart = {},
             onTextChange = if (::textChangeListener.isInitialized) textChangeListener::onTextChange else null,
-            color = IxiColor.Orange
+            onFocusChange = null,
+            color = IxiColor.Orange,
+            readOnly = false
         )
     )
 
 
+    /**
+     *  Sets the text for this [InputField].
+     *
+     *  @param text The text to be set to the [InputField].
+     */
     fun setText(text: String) {
         textValue = text
         val initState = state.value.copy(text = text)
         state.value = initState
     }
 
+    /**
+     *  @return  The text set on [InputField].
+     */
+    fun getText() = state.value.text
+
+    /**
+     * Sets the action text for this [InputField].
+     *
+     * @param text The action text to be set to the [InputField].
+     */
     fun setActionText(text: String) {
         val initState = state.value.copy(actionText = text)
         state.value = initState
     }
 
+    /**
+     * Sets the helper text for this [InputField].
+     *
+     * @param text The helper text to be set to the [InputField].
+     */
     fun setHelperText(text: String) {
         val initState = state.value.copy(helperText = text)
         state.value = initState
     }
 
+    /**
+     * Sets the label for this [InputField].
+     *
+     * @param text The label to be set to
+     */
     fun setLabel(text: String) {
         val initState = state.value.copy(label = text)
         state.value = initState
     }
 
+    /**
+     * Sets the maximum character allowed for the text input.
+     *
+     * @param count the maximum character count
+     */
     fun setMaxCharCount(count: Int) {
         val initState = state.value.copy(maxCharCount = count)
         state.value = initState
     }
 
+    /**
+     * Sets the color of the text input.
+     *
+     * @param color the color to be set
+     */
     fun setColor(color: IxiColor) {
         val initState = state.value.copy(color = color)
         state.value = initState
     }
 
 
-    protected fun setActualCharCountText(text: String) {
+    /**
+     * Sets the actual character count text to be displayed.
+     *
+     * @param text the text to be displayed
+     */
+    fun setActualCharCountText(text: String) {
         val initState = state.value.copy(actionText = text)
         state.value = initState
     }
 
+    /**
+     * Sets the drawable to be displayed at the start of the text input.
+     *
+     * @param imageRes the drawable resource id
+     */
     fun setStartImageDrawable(@DrawableRes imageRes: Int) {
         val initState = state.value.copy(drawableStart = imageRes)
         state.value = initState
     }
 
+    /**
+     * Sets the drawable to be displayed at the end of the text input.
+     *
+     * @param imageRes the drawable resource id
+     */
     fun setEndImageDrawable(@DrawableRes imageRes: Int) {
         val initState = state.value.copy(drawableEnd = imageRes)
         state.value = initState
     }
 
+    /**
+     * Sets the drawable to be displayed action icon.
+     *
+     * @param imageRes the drawable resource id
+     */
     fun setActionDrawable(@DrawableRes imageRes: Int) {
         val initState = state.value.copy(actionImage = imageRes)
         state.value = initState
     }
 
+    /**
+     * Sets the click listener for the action text.
+     *
+     * @param onClick the click listener
+     */
     fun setActionTextClickListener(onClick: () -> Unit) {
         val initState = state.value.copy(onClickActionText = onClick)
         state.value = initState
     }
 
+    /**
+     * Sets the click listener for the action icon.
+     *
+     * @param onClick the click listener
+     */
     fun setActionIconClickListener(onClick: () -> Unit) {
         val initState = state.value.copy(onClickActionIcon = onClick)
         state.value = initState
     }
 
+    /**
+     * Sets the click listener for the drawable at start.
+     *
+     * @param onClick the click listener
+     */
     fun setDrawableStartClickListener(onClick: () -> Unit) {
         val initState = state.value.copy(onClickDrawableStart = onClick)
         state.value = initState
     }
 
+    /**
+     * Sets the click listener for the drawable at end.
+     *
+     * @param onClick the click listener
+     */
     fun setDrawableEndClickListener(onClick: () -> Unit) {
         val initState = state.value.copy(onClickDrawableEnd = onClick)
         state.value = initState
     }
+
+    /**
+     * Sets the text change listener.
+     *
+     * @param listener the text change listener
+     */
+    fun setTextChangeListener(listener: ((String) -> Unit)?) {
+        val initState = state.value
+        val midListener : ((String) -> Unit)= {value->
+            state.value = initState.copy(text = value)
+            listener?.invoke(value)
+        }
+        state.value = initState.copy(onTextChange = midListener)
+    }
+
+    /**
+     * Sets the focus change listener.
+     *
+     * @param listener the focus change listener
+     */
+    fun setFocusChangeListener(listener: ((Boolean) -> Unit)?) {
+        val initState = state.value
+        state.value = initState.copy(onFocusChange = listener)
+    }
+
+    /**
+     * Sets the text input to read only.
+     *
+     * @param value true to set the text input to read only, false otherwise
+     */
+    fun setReadOnly(value: Boolean) {
+        val initState = state.value
+        state.value = initState.copy(readOnly = value)
+    }
+
+    /**
+     * Sets the text input to read only.
+     *
+     * @param value true to set the text input to read only, false otherwise
+     */
+    fun isReadOnly() = state.value.readOnly
 
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseInputField);
@@ -157,6 +277,8 @@ data class InputFieldState(
     val onClickDrawableStart: () -> Unit,
     val onClickDrawableEnd: () -> Unit,
     val onTextChange: ((String) -> Unit)?,
+    val onFocusChange: ((Boolean) -> Unit)?,
+    val readOnly: Boolean
 )
 
 

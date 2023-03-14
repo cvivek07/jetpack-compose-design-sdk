@@ -50,6 +50,7 @@ class ToolBarActivity : AppCompatActivity() {
             SRP_TOOLBAR -> srpToolbar()
             TABBED_TOOLBAR -> tabbedToolbar()
         }
+
     }
 
     fun basicToolbar() {
@@ -75,6 +76,8 @@ class ToolBarActivity : AppCompatActivity() {
     }
 
     fun basicSubTitledToolbar() {
+
+
         val toolbar = IxiAppBar(context = this)
         toolbar.setTitle("Title")
         toolbar.setSubTitle("Very Long Sub-title")
@@ -105,16 +108,31 @@ class ToolBarActivity : AppCompatActivity() {
         binding.appBar.removeAllViews()
         binding.appBar.addView(toolbar)
 
+        binding.update.setOnClickListener {
+            toolbar.setNavigationIcon(R.drawable.ic_contact)
+            toolbar.updateMenuItem(0,IxiMenu(0, null, R.drawable.ic_search),)
+        }
+
     }
 
     fun searchToolbar() {
         val toolbar = IxiSearchBar(context = this)
+        toolbar.setSearchBarHint("Provide Search")
+        toolbar.setSearchFocusChange {
+            Log.e("Tag",if(it)"Focussed" else "Unfocussed")
+        }
+        binding.update.setOnClickListener {
+            toolbar.setNavigationIcon(R.drawable.ic_contact)
+            toolbar.updateMenuItem(0,IxiMenu(0, null, R.drawable.ic_search),)
+            toolbar.captureFocus()
+        }
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
                 return listOf(
-//                    IxiMenu(0, null, R.drawable.ic_baseline_cancel_24),
+                    IxiMenu(0, null, R.drawable.ic_baseline_cancel_24),
                 )
             }
+
 
             override fun onMenuItemClick(id: Int) {
                 when (id) {
@@ -198,15 +216,15 @@ class ToolBarActivity : AppCompatActivity() {
 
     fun tabbedToolbar() {
         val listTabsName = listOf(
-            TabDataItem("Buttons", R.drawable.ic_search, 0, ),
-            TabDataItem("InputField", 0, R.drawable.ic_search, ),
-            TabDataItem("Progress Steps", 0, 0, ),
+            TabDataItem("Buttons", R.drawable.ic_search, 0),
+            TabDataItem("InputField", 0, R.drawable.ic_search),
+            TabDataItem("Progress Steps", 0, 0),
             TabDataItem(
                 "Typography",
                 R.drawable.ic_search,
                 R.drawable.ic_baseline_cancel_24,
 
-            )
+                )
         )
         val fragmentList = listOf(
             ButtonsFragment(),

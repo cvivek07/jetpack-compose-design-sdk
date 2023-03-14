@@ -31,7 +31,7 @@ class BottomSheetFragment: Fragment() {
 
         //variant 1
         binding.first.setClickListener {
-            IxiBottomSheetHelper.showImageBottomSheet(
+            val fragment = IxiBottomSheetHelper.getImageBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -43,13 +43,14 @@ class BottomSheetFragment: Fragment() {
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
                     inlineAlertText = "This is a placeholder"
-                    ), childFragmentManager
+                    )
             )
+            fragment.show(childFragmentManager, "Tag")
         }
 
 //        //variant 2
         binding.second.setClickListener {
-            IxiBottomSheetHelper.showFeatureIconBottomSheet(
+            val fragment = IxiBottomSheetHelper.getFeatureIconBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -58,13 +59,15 @@ class BottomSheetFragment: Fragment() {
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                ), childFragmentManager
+                )
             )
+            fragment.show(childFragmentManager, "Tag")
+
         }
 
         //variant 3
         binding.third.setClickListener {
-            IxiBottomSheetHelper.showNoIconBottomSheet(
+            val fragment = IxiBottomSheetHelper.getNoIconBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
@@ -72,14 +75,16 @@ class BottomSheetFragment: Fragment() {
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                ), childFragmentManager
+                )
             )
+            fragment.show(childFragmentManager, "Tag")
+
         }
 
         val fragment = ButtonsFragment()
         childFragmentManager.beginTransaction().add(fragment, "Test").commit()
         binding.fourth.setClickListener {
-            IxiBottomSheetHelper.showBlankBottomSheet(
+            val fragment1 =IxiBottomSheetHelper.getBlankBottomSheet(
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     toolbarTitle = "Main title sentence",
                     view = fragment.view,
@@ -90,8 +95,10 @@ class BottomSheetFragment: Fragment() {
                     disableDragging = true,
                     closeActionAlignment = IxiBottomSheetView.ActionIconAlignment.START,
                     toolbarCloseIcon = R.drawable.left_arrow
-                ), childFragmentManager
+                )
             )
+            fragment1.show(childFragmentManager, "Tag")
+
         }
     }
 }

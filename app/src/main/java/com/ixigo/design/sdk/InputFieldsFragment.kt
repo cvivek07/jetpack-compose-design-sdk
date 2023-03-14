@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
 
 class InputFieldsFragment : Fragment() {
 
@@ -30,8 +30,8 @@ class InputFieldsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding?.inputField1?.apply {
-            setLabel("Label")
-
+//            setLabel("Label")
+//            setText("ReadOnly")
             setActionText("Add-On")
             setHelperText("This is helper Text")
             setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
@@ -48,6 +48,16 @@ class InputFieldsFragment : Fragment() {
             setDrawableEndClickListener {
                 Log.e("Action", "\"DrawableEnd Click")
             }
+
+            setFocusChangeListener {
+                val value = if (it) "Focussed" else "Unfocussed"
+                Log.e("InputField", value)
+                _binding?.inputField3?.setText(getText()?:"null")
+            }
+            setTextChangeListener {
+//                Log.e("InputField", it)
+            }
+//            setReadOnly(true)
         }
 
         _binding?.inputField2?.apply {
@@ -64,6 +74,11 @@ class InputFieldsFragment : Fragment() {
             setDrawableEndClickListener {
                 Log.e("Action", "\"DrawableEnd Click")
             }
+
+            setFocusChangeListener {
+                setText(_binding?.inputField1?.getText()?:"null")
+            }
+            setReadOnly(false)
         }
 
 
@@ -114,6 +129,7 @@ class InputFieldsFragment : Fragment() {
             setDrawableEndClickListener {
                 Log.e("Action", "\"DrawableEnd Click")
             }
+            setReadOnly(true)
         }
 
         _binding?.inputField6?.apply {
@@ -145,6 +161,8 @@ class InputFieldsFragment : Fragment() {
                 Log.e("Action", "\"DrawableEnd Click")
             }
         }
+
+        _binding?.inputField3?.setText("asd")
 
     }
 }

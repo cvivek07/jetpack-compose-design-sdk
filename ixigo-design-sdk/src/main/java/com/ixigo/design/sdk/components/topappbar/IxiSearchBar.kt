@@ -18,20 +18,46 @@ class IxiSearchBar @JvmOverloads constructor(
     var textChangeListener: TextChangeListener? = null
 
 
+    /**
+     * Set the hint text in search bar.
+     *
+     * @param hint value to be set as hint
+     */
+    fun setSearchBarHint(hint: String) {
+        state.value = state.value.copy(hint = hint)
+    }
+
+    fun setSearchFocusChange(listener: ((Boolean)->Unit)?) {
+        state.value = state.value.copy (onSearchFocusChange = listener ?:{})
+    }
+
+    override fun clearFocus() {
+        state.value = state.value.copy (shouldFocus = false)
+    }
+
+     fun captureFocus() {
+        state.value = state.value.copy (shouldFocus = true)
+    }
+
+    fun isFocussed() = state.value.shouldFocus
+
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
+            ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
         )
         with(state.value) {
             SearchBar(
                 homeIcon = homeIcon,
                 elevation = elevation,
                 menuProvider = menuProvider,
+                hint = hint,
                 onQueryChange = {
                     text = it
                     textChangeListener?.onTextChange(it)
-                }
+                },
+                onFocusChange = onSearchFocusChange,
+                shouldFocus = shouldFocus
             )
         }
     }

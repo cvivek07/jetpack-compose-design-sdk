@@ -168,10 +168,22 @@ class IxiText @JvmOverloads constructor(
         state.value = state.value.copy(text = text, spannedString = null)
     }
 
+    /**
+     * Set the alignment of the text Vertically. Alignment can be any of following
+     * [Alignment.Top],[Alignment.CenterVertically] and [Alignment.Bottom]
+     *
+     * @param alignment Alignment to be set
+     */
     fun setVerticalAlignment(alignment: Alignment.Vertical) {
         state.value = state.value.copy(vAlignment = alignment)
     }
 
+    /**
+     * Set the alignment of the text Horizontally. Alignment can be any of following
+     * [Alignment.Start],[Alignment.CenterHorizontally] and [Alignment.End]
+     *
+     * @param alignment Alignment to be set
+     */
     fun setHorizontalAlignment(alignment: Alignment.Horizontal) {
         state.value = state.value.copy(hAlignment = alignment)
     }
@@ -202,6 +214,9 @@ class IxiText @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Set the typography for this text
+     */
     fun setTypography(typo: TextStyle) {
         val t = if (textColorRes != 0) {
             typo.copy(color = Color(textColorRes))
