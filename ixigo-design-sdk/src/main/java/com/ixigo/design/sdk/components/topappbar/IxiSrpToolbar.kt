@@ -19,6 +19,11 @@ class IxiSrpToolbar @JvmOverloads constructor(
         state.value = initState.copy(srpData = data)
     }
 
+    fun setOnClickListener(onClick: () -> Unit){
+        val initState = state.value
+        state.value = initState.copy(onClick = onClick)
+    }
+
     @Composable
     override fun Content() {
         setViewCompositionStrategy(
@@ -29,7 +34,8 @@ class IxiSrpToolbar @JvmOverloads constructor(
                 homeIcon = homeIcon,
                 elevation = elevation,
                 menuProvider = menuProvider,
-                data = state.value.srpData
+                data = state.value.srpData,
+                onClick = state.value.onClick
             )
         }
     }

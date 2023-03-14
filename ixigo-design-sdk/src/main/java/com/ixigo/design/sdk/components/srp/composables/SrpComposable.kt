@@ -1,10 +1,14 @@
 package com.ixigo.design.sdk.components.srp.composables
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -19,7 +23,9 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
 fun SrpComposable(
     modifier: Modifier = Modifier,
     data: SrpModel,
+    onClick: () -> Unit = {}
 ) {
+    val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -27,42 +33,32 @@ fun SrpComposable(
             .background(
                 color = colorResource(id = R.color.n60),
                 shape = RoundedCornerShape(percent = 50)
-            ),
+            )
+            .clickable(interactionSource = interactionSource, indication = null) {
+                onClick.invoke()
+            },
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
-        TypographyText(text = data.srcId, textStyle = IxiTypography.Body.Small.medium)
+        TypographyText(text = data.startText, textStyle = IxiTypography.Body.Small.medium)
         Icon(
             modifier = Modifier.padding(horizontal = 5.dp),
-            painter = painterResource(id = R.drawable.right_arrow),
+            painter = painterResource(id = data.icon),
             contentDescription = ""
         )
-        TypographyText(text = data.destId, textStyle = IxiTypography.Body.Small.medium)
-        TypographyText(
-            modifier = Modifier.padding(horizontal = 5.dp),
-            text = "•",
-            textStyle = IxiTypography.Body.Small.regular
-        )
-        TypographyText(text = data.date, textStyle = IxiTypography.Body.Small.regular)
-        TypographyText(
-            modifier = Modifier.padding(horizontal = 5.dp),
-            text = "•",
-            textStyle = IxiTypography.Body.Small.regular
-        )
-        TypographyText(text = data.travellerNumber, textStyle = IxiTypography.Body.Small.regular)
+        TypographyText(text = data.endText, textStyle = IxiTypography.Body.Small.medium)
     }
 }
 
 @Preview
 @Composable
 fun SegmentControlPreview() {
-    SrpComposable(data = SrpModel("DLI", "FBD", "15 Dec 2022", "188829920"))
+    SrpComposable(data = SrpModel("DLI" , R.drawable.right_arrow,"FBD 15 Dec 1 Traveller"))
 }
 
 
 data class SrpModel(
-    val srcId: String,
-    val destId: String,
-    val date: String,
-    val travellerNumber: String,
+    val startText: String,
+    @DrawableRes val icon: Int,
+    val endText: String
 )

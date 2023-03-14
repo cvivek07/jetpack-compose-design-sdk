@@ -62,6 +62,7 @@ data class AppBarState(
     val elevation: Dp = 10.dp,
     val menuProvider: IxiMenuProvider? = null,
     val srpData: SrpModel? = null,
+    val onClick: () -> Unit = {},
     val tabbedData: List<TabDataItem>? = null,
     val viewPager: ViewPager2? = null,
     val adapter: FragmentStateAdapter? = null,
