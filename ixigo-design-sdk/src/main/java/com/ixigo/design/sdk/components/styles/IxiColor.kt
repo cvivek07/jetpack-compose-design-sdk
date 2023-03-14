@@ -80,6 +80,21 @@ sealed class IxiColor(
             }
         }
     }
+
+    fun mapIxiColorToStickyAlertColor(ixiColor: IxiColor):IxiColor{
+        return when(ixiColor){
+            Warning -> IxiStickyAlertColor.Warning
+            Extension -> IxiStickyAlertColor.Extension
+            Error -> IxiStickyAlertColor.Error
+            Success -> IxiStickyAlertColor.Success
+            Blue -> IxiStickyAlertColor.Blue
+            Neutral -> IxiStickyAlertColor.Neutral
+            Orange -> IxiStickyAlertColor.Orange
+            else -> {
+                ixiColor
+            }
+        }
+    }
 }
 
 internal object IxiSecondaryColor{
@@ -100,6 +115,16 @@ internal object IxiInlineAlertColor{
     internal object Success: IxiColor(bgColor = R.color.g50, textColor = R.color.g500, pressedColor = R.color.g400)
     internal object Blue: IxiColor(bgColor = R.color.b50, textColor = R.color.b500, pressedColor = R.color.b400)
     internal object Neutral: IxiColor(bgColor = R.color.n40, textColor = R.color.n600, pressedColor = R.color.n800)
+    internal object Orange: IxiColor(bgColor = R.color.o50, textColor = R.color.o600, pressedColor = R.color.o800)
+}
+
+internal object IxiStickyAlertColor{
+    internal object Warning: IxiColor(bgColor = R.color.y50, textColor = R.color.y600, pressedColor = R.color.y500)
+    internal object Extension: IxiColor(bgColor = R.color.p50, textColor = R.color.p500, pressedColor = R.color.p500)
+    internal object Error: IxiColor(bgColor = R.color.r50, textColor = R.color.r500, pressedColor = R.color.r500)
+    internal object Success: IxiColor(bgColor = R.color.g50, textColor = R.color.g500, pressedColor = R.color.g500)
+    internal object Blue: IxiColor(bgColor = R.color.b50, textColor = R.color.b500, pressedColor = R.color.b500)
+    internal object Neutral: IxiColor(bgColor = R.color.white, textColor = R.color.n800, pressedColor = R.color.n800)
     internal object Orange: IxiColor(bgColor = R.color.o50, textColor = R.color.o600, pressedColor = R.color.o800)
 }
 

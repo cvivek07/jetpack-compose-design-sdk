@@ -11,6 +11,10 @@
         <enum name="orange" value="6"/>
     </attr>
 
+    <attr name="rightButtonText"  format="string"/>
+    <attr name="leftButtonText"  format="string"/>
+    <attr name="buttonColor"  format="reference"/>
+
     <declare-styleable name="BaseButton">
         <attr name="android:text" format="string" />
         <attr name="android:drawableEnd" format="reference" />
@@ -162,10 +166,26 @@
             <enum name="center" value="2" />
         </attr>
         <attr name="actionIcon"  format="reference"/>
-        <attr name="rightButtonText"  format="string"/>
-        <attr name="leftButtonText"  format="string"/>
-        <attr name="buttonColor"  format="reference"/>
+        <attr name="buttonColor"/>
         <attr name="ixiColor"/>
+        <attr name="rightButtonText"/>
+        <attr name="leftButtonText"/>
+
+    </declare-styleable>
+
+    <declare-styleable name="BaseStickyAlert">
+        <attr name="android:text"  format="string"/>
+        <attr name="arrangement"  format="integer">
+            <enum name="normal" value="0" />
+            <enum name="spaced" value="1" />
+        </attr>
+        <attr name="leftIcon"  format="reference"/>
+        <attr name="rightIcon"  format="reference"/>
+        <attr name="android:elevation"  format="integer"/>
+        <attr name="rightButtonText"/>
+        <attr name="leftButtonText"/>
+        <attr name="ixiColor"/>
+        <attr name="buttonColor"/>
 
     </declare-styleable>
 
