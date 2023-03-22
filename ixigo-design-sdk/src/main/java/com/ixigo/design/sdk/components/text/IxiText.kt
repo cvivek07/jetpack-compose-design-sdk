@@ -102,8 +102,8 @@ class IxiText @JvmOverloads constructor(
             color = null,
             onClick = null,
             maxLines = Int.MAX_VALUE,
-            vAlignment = Alignment.CenterVertically,
-            hAlignment = Alignment.CenterHorizontally,
+            vAlignment = Alignment.Top,
+            hAlignment = Alignment.Start,
             overflow = TextOverflow.Visible
         )
     )
@@ -132,14 +132,14 @@ class IxiText @JvmOverloads constructor(
             setTextDisplayType(textDisplayType)
             setTextWeight(TextWeight.values()[textWeight])
 
-            val hAlign = when (typedArray.getInt(R.styleable.IxiText_horizontalAlignment, 1)) {
+            val hAlign = when (typedArray.getInt(R.styleable.IxiText_horizontalAlignment, 0)) {
                 0 -> Alignment.Start
                 2 -> Alignment.End
                 else -> Alignment.CenterHorizontally
             }
             setHorizontalAlignment(hAlign)
 
-            val vAlign = when (typedArray.getInt(R.styleable.IxiText_verticalAlignment, 1)) {
+            val vAlign = when (typedArray.getInt(R.styleable.IxiText_verticalAlignment, 2)) {
                 0 -> Alignment.Bottom
                 2 -> Alignment.Top
                 else -> Alignment.CenterVertically
