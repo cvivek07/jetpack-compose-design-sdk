@@ -81,7 +81,7 @@ private class LeadingShape : Shape {
     }
 }
 
-private class BottomShape(private val radius: Dp = 8.dp) : Shape {
+private class BottomShape(private val radius: Dp = 20.dp) : Shape {
     override fun createOutline(
         size: Size,
         layoutDirection: LayoutDirection,
