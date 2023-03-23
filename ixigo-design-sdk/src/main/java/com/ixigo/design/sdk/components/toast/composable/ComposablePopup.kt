@@ -5,6 +5,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
@@ -12,6 +14,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
+import androidx.compose.ui.window.PopupProperties
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.imageutils.getPainterForImage
@@ -44,73 +47,87 @@ fun ComposablePopup(
         IxiToastType.YELLOW -> colorResource(id = R.color.y600)
     }
 
-    if (show) {
+    val popup = remember {
+        mutableStateOf(show)
+    }
+
+    if (popup.value) {
         Popup(
             alignment = Alignment.TopCenter,
             offset = IntOffset(positionX, positionY),
+            onDismissRequest = { popup.value = false },
+            properties = PopupProperties(
+                dismissOnClickOutside = true,
+            )
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(horizontal = 20.dp)
-                    .background(backgroundColor, RoundedCornerShape(10.dp))
-                    .padding(horizontal = 18.dp, vertical = 10.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceEvenly,
+                    .padding(horizontal = 20.dp),
+                horizontalArrangement = Arrangement.Center
             ) {
-                leftIcon?.let {
-                    Icon(
-                        icon = leftIcon,
-                        iconClickListener = leftIconClickListener
-                    )
-                }
-
-                Column(
+                Row(
                     modifier = Modifier
-                        .wrapContentWidth()
-                        .wrapContentHeight()
-                        .weight(1f)
+                        .wrapContentSize()
+                        .background(backgroundColor, RoundedCornerShape(10.dp))
+                        .padding(horizontal = 18.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
+                    leftIcon?.let {
+                        Icon(
+                            icon = leftIcon,
+                            iconClickListener = leftIconClickListener,
+                            modifier = Modifier
+                                .padding(end = 12.dp)
+                        )
+                    }
 
-                    TypographyText(
-                        text = heading,
-                        textStyle = IxiTypography.Body.Medium.regular,
-                        color = if (ixiToastType == IxiToastType.WHITE) colorResource(
-                            R.color.n800
-                        ) else colorResource(R.color.n0),
-                    )
+                    Column(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .weight(1f)
+                    ) {
 
-                    subHeading?.let {
                         TypographyText(
-                            text = subHeading,
-                            textStyle = IxiTypography.Body.Small.regular,
+                            text = heading,
+                            textStyle = IxiTypography.Body.Medium.regular,
                             color = if (ixiToastType == IxiToastType.WHITE) colorResource(
                                 R.color.n800
                             ) else colorResource(R.color.n0),
                         )
+
+                        subHeading?.let {
+                            TypographyText(
+                                text = subHeading,
+                                textStyle = IxiTypography.Body.Small.regular,
+                                color = if (ixiToastType == IxiToastType.WHITE) colorResource(
+                                    R.color.n800
+                                ) else colorResource(R.color.n0),
+                            )
+                        }
                     }
-                }
 
-                buttonText?.let {
-                    TypographyText(
-                        text = buttonText,
-                        textStyle = IxiTypography.Body.Medium.regular,
-                        modifier = Modifier
-                            .wrapContentHeight()
-                            .wrapContentWidth()
-                            .padding(horizontal = 12.dp, vertical = 10.dp)
-                            .makeClickableIfPossible(buttonClickListener),
-                        color = colorResource(R.color.o800),
-                        textAlign = TextAlign.Center
-                    )
-                }
+                    buttonText?.let {
+                        TypographyText(
+                            text = buttonText,
+                            textStyle = IxiTypography.Body.Medium.regular,
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .padding(horizontal = 12.dp, vertical = 10.dp)
+                                .makeClickableIfPossible(buttonClickListener),
+                            color = colorResource(R.color.o800),
+                            textAlign = TextAlign.Center
+                        )
+                    }
 
-                rightIcon?.let {
-                    Icon(
-                        icon = rightIcon,
-                        iconClickListener = rightIconClickListener,
-                    )
+                    rightIcon?.let {
+                        Icon(
+                            icon = rightIcon,
+                            iconClickListener = rightIconClickListener,
+                        )
+                    }
                 }
             }
         }
@@ -122,9 +139,7 @@ fun Icon(icon: ImageData, iconClickListener: (() -> Unit)?, modifier: Modifier =
     icon.getPainterForImage()?.let {
         androidx.compose.material.Icon(
             modifier = modifier
-                .width(
-                    icon.width ?: iconDefaultSize
-                )
+                .width(icon.width ?: iconDefaultSize)
                 .height(icon.height ?: iconDefaultSize)
                 .makeClickableIfPossible(iconClickListener),
             painter = it,
