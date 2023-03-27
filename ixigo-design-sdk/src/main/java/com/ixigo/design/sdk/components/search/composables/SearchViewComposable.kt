@@ -1,21 +1,19 @@
 package com.ixigo.design.sdk.components.search.composables
 
-import androidx.compose.foundation.background
+import androidx.annotation.ColorRes
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
-import androidx.compose.material.TextField
+import androidx.compose.material.IconButton
+import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.TextFieldDefaults
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
@@ -28,56 +26,83 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
 @Composable
 fun SearchViewComposable(
     query: String,
-    onQueryChange: (String) -> Unit,
-    onSearchFocusChange: (Boolean) -> Unit,
-    onClearQuery: () -> Unit,
+    onQueryChange: ((String) -> Unit),
+    onSearchFocusChange: ((Boolean) -> Unit),
+    requestFocus: Boolean,
+    onClearQuery: (() -> Unit),
     hint: String,
+    @ColorRes backgroundColor: Int,
+    @ColorRes borderColorFocused: Int,
+    @ColorRes borderColorUnfocused: Int,
     modifier: Modifier = Modifier
 ) {
-    val focusRequester = remember { FocusRequester() }
-    val textValue = remember { mutableStateOf(TextFieldValue(text = query)) }
-    TextField(
-        value = textValue.value,
-        onValueChange = {
-            textValue.value = it
-            onQueryChange(it.text)
-        },
-        colors = TextFieldDefaults.textFieldColors(
-            textColor = colorResource(id = R.color.n900),
-            disabledTextColor = colorResource(id = R.color.n700),
-            backgroundColor = Color.Transparent,
-            focusedIndicatorColor = Color.Transparent,
-            unfocusedIndicatorColor = Color.Transparent,
-            disabledIndicatorColor = Color.Transparent,
-            cursorColor = colorResource(id = R.color.n700),
-        ),
-        modifier = modifier
-            .fillMaxWidth()
-            .height(50.dp)
-            .background(
-                color = colorResource(id = R.color.n60),
-                shape = RoundedCornerShape(percent = 50)
-            )
-            .onFocusChanged {
-                onSearchFocusChange(it.isFocused)
-            }
-            .focusRequester(focusRequester),
-        singleLine = true,
-        trailingIcon = @Composable {
+    val focusRequester = FocusRequester()
+    var queryText by remember(query) { mutableStateOf(query) }
+
+    LaunchedEffect(key1 = requestFocus, block = {
+        if (requestFocus) {
+            focusRequester.requestFocus()
+        }
+    })
+    val trailingIconView = @Composable {
+        IconButton(
+            onClick = {
+                queryText = ""
+                focusRequester.requestFocus()
+                onClearQuery.invoke()
+            },
+        ) {
             Icon(
-                painter = painterResource(id = R.drawable.ic_search),
-                contentDescription = null
-            )
-        },
-        placeholder = @Composable {
-            TypographyText(
-                modifier = Modifier.padding(0.dp),
-                text = hint,
-                textStyle = IxiTypography.Body.Medium.regular.copy(color = colorResource(id = R.color.n700))
+                painter = painterResource(id = R.drawable.ic_close),
+                contentDescription = null,
             )
         }
+    }
+    OutlinedTextField(
+        value = queryText,
+        onValueChange = {
+            queryText = it
+            onQueryChange.invoke(it)
+        },
+        shape = RoundedCornerShape(50.dp),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            textColor = colorResource(id = R.color.n900),
+            disabledTextColor = colorResource(id = R.color.n700),
+            backgroundColor = colorResource(id = backgroundColor),
+            focusedBorderColor = colorResource(id = borderColorFocused),
+            unfocusedBorderColor = colorResource(id = borderColorUnfocused),
+            cursorColor = colorResource(id = borderColorFocused),
+        ),
+        modifier = modifier(modifier, onSearchFocusChange, focusRequester),
+        singleLine = true,
+        trailingIcon = if (queryText.isNotBlank()) trailingIconView else null,
+        placeholder = placeholder(hint)
     )
 }
+
+@Composable
+private fun modifier(
+    modifier: Modifier,
+    onSearchFocusChange: ((Boolean) -> Unit),
+    focusRequester: FocusRequester
+): Modifier {
+    return modifier
+        .fillMaxWidth()
+        .height(50.dp)
+        .onFocusChanged {
+            onSearchFocusChange.invoke(it.isFocused)
+        }
+        .focusRequester(focusRequester)
+}
+
+@Composable
+private fun placeholder(hint: String) = (@Composable {
+    TypographyText(
+        modifier = Modifier.padding(0.dp),
+        text = hint,
+        textStyle = IxiTypography.Body.Medium.regular.copy(color = colorResource(id = R.color.n300))
+    )
+})
 
 @Preview
 @Composable
@@ -86,7 +111,11 @@ fun SearchPreview() {
         query = "",
         onQueryChange = {},
         onSearchFocusChange = {},
+        requestFocus = false,
         onClearQuery = { },
-        hint = "Search"
+        hint = "Search",
+        backgroundColor = R.color.n0,
+        borderColorFocused = R.color.n0,
+        borderColorUnfocused = R.color.n300
     )
 }
