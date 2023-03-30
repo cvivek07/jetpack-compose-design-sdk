@@ -26,7 +26,7 @@
         <attr name="android:text" format="string" />
         <attr name="android:drawableEnd" format="reference" />
         <attr name="android:drawableStart" format="reference" />
-        <attr name="backgroundColor"/>
+        <attr name="backgroundColor" format="color"/>
         <attr name="borderColorUnfocused" format="color" />
         <attr name="borderColorFocused" format="color" />
         <attr name="android:hint" format="string" />

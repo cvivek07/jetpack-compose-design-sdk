@@ -39,11 +39,11 @@ fun SearchViewComposable(
     val focusRequester = FocusRequester()
     var queryText by remember(query) { mutableStateOf(query) }
 
-    LaunchedEffect(key1 = requestFocus, block = {
+    SideEffect{
         if (requestFocus) {
             focusRequester.requestFocus()
         }
-    })
+    }
     val trailingIconView = @Composable {
         IconButton(
             onClick = {
