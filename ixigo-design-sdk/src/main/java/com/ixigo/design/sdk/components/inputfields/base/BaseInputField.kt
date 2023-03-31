@@ -15,9 +15,6 @@ abstract class BaseInputField @JvmOverloads constructor(
 
     private var textValue: String? = null
 
-    @Deprecated("Please use setTextChangeListener() instead")
-    lateinit var textChangeListener: TextChangeListener
-
     protected val state = mutableStateOf(
         InputFieldState(
             actionImage = 0,
@@ -34,7 +31,7 @@ abstract class BaseInputField @JvmOverloads constructor(
             onClickActionText = {},
             onClickDrawableEnd = {},
             onClickDrawableStart = {},
-            onTextChange = if (::textChangeListener.isInitialized) textChangeListener::onTextChange else null,
+            onTextChange = {},
             onFocusChange = null,
             color = IxiColor.Orange,
             readOnly = false
@@ -194,13 +191,11 @@ abstract class BaseInputField @JvmOverloads constructor(
      *
      * @param listener the text change listener
      */
-    fun setTextChangeListener(listener: ((String) -> Unit)?) {
-        val initState = state.value
-        val midListener : ((String) -> Unit)= {value->
-            state.value = initState.copy(text = value)
-            listener?.invoke(value)
-        }
-        state.value = initState.copy(onTextChange = midListener)
+    fun setTextChangeListener(onTextChange: ((String) -> Unit)) {
+        state.value = state.value.copy(onTextChange = {
+            state.value = state.value.copy(text = it)
+            onTextChange.invoke(it)
+        })
     }
 
     /**
@@ -276,7 +271,7 @@ data class InputFieldState(
     val onClickActionIcon: () -> Unit,
     val onClickDrawableStart: () -> Unit,
     val onClickDrawableEnd: () -> Unit,
-    val onTextChange: ((String) -> Unit)?,
+    val onTextChange: ((String) -> Unit) = {},
     val onFocusChange: ((Boolean) -> Unit)?,
     val readOnly: Boolean
 )

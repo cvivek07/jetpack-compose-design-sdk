@@ -3,10 +3,7 @@ package com.ixigo.design.sdk.components.inputfields.composables
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
@@ -14,7 +11,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
@@ -57,22 +53,22 @@ fun OutlinedInputField(
 
     val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
 
-    val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
+    var textValue by remember(text) { mutableStateOf(text) }
 
     val isFocussed = remember {
         mutableStateOf(false)
     }
 
     val labelComposable =
-        getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
+        getPlaceHolder(label, colors, isFocussed.value || textValue.isNotBlank())
 
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
-            value = textValue.value,
+            value = textValue,
             onValueChange = {
-                if (it.text.length <= maxCharCount)
-                    textValue.value = it
-                onTextChange?.invoke(it.text)
+                if (it.length <= maxCharCount)
+                    textValue = it
+                onTextChange?.invoke(it)
             },
             label = labelComposable,
             leadingIcon = leadingIcon,
@@ -109,7 +105,7 @@ private fun getInputFieldColors(colors: IxiColor) =
 private fun GetBottomText(
     helperText: String,
     maxCharCount: Int,
-    textValue: MutableState<TextFieldValue>
+    textValue: String
 ) {
     Row {
         if (helperText.isNotEmpty()) {
@@ -125,7 +121,7 @@ private fun GetBottomText(
         }
         if (maxCharCountText.isNotEmpty() && maxCharCount != Int.MAX_VALUE) {
             TypographyText(
-                text = "${textValue.value.text.length} / $maxCharCountText",
+                text = "${textValue.length} / $maxCharCountText",
                 textStyle = IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = R.color.n600))
             )
         }
@@ -252,7 +248,7 @@ fun LinedInputField(
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
-    onTextChange: ((String) -> Unit)?,
+    onTextChange: ((String) -> Unit),
     onFocusChange: ((Boolean) -> Unit)?
 ) {
 
@@ -267,7 +263,7 @@ fun LinedInputField(
 
     val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
 
-    val textValue = remember { mutableStateOf(TextFieldValue(text = text)) }
+    var textValue by remember(text) { mutableStateOf(text) }
 
 
     val isFocussed = remember {
@@ -276,14 +272,14 @@ fun LinedInputField(
     val dividerColor = if (isFocussed.value) colors.bgColor else unFocusColor
 
     val labelComposable =
-        getPlaceHolder(label, colors, isFocussed.value || textValue.value.text.isNotBlank())
+        getPlaceHolder(label, colors, isFocussed.value || textValue.isNotBlank())
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
-            value = textValue.value,
+            value = textValue,
             onValueChange = {
-                if (it.text.length <= maxCharCount)
-                    textValue.value = it
-                onTextChange?.invoke(it.text)
+                if (it.length <= maxCharCount)
+                    textValue = it
+                onTextChange.invoke(it)
             },
             label = labelComposable,
             leadingIcon = leadingIcon,

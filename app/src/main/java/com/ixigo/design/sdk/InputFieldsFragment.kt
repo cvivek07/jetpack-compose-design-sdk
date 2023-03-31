@@ -31,7 +31,7 @@ class InputFieldsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         _binding?.inputField1?.apply {
 //            setLabel("Label")
-//            setText("ReadOnly")
+            setText("old text")
             setActionText("Add-On")
             setHelperText("This is helper Text")
             setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
@@ -40,6 +40,7 @@ class InputFieldsFragment : Fragment() {
             setColor(IxiColor.Error)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
+                setText("new text")
             }
             setDrawableStartClickListener {
                 Log.e("Action", "DrawableStart Click")
@@ -55,9 +56,9 @@ class InputFieldsFragment : Fragment() {
                 _binding?.inputField3?.setText(getText()?:"null")
             }
             setTextChangeListener {
-//                Log.e("InputField", it)
+                Log.e("InputField", it)
             }
-//            setReadOnly(true)
+            setReadOnly(true)
         }
 
         _binding?.inputField2?.apply {
