@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.ixigo.design.sdk.components.srp.composables.SrpModel
 import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.*
@@ -237,6 +238,14 @@ class ToolBarActivity : AppCompatActivity() {
         toolbar.setTabType(TabType.PILL)
         val adapter = PagerAdapter(supportFragmentManager, lifecycle, fragmentList)
         toolbar.setupViewPager(binding.viewPager, adapter)
+
+        binding.scroller.setItemCount(fragmentList.size)
+        binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+                binding.scroller.scrollToPosition(position = position)
+            }
+        })
 
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
