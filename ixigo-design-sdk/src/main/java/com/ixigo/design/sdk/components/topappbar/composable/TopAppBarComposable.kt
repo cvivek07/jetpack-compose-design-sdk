@@ -148,6 +148,7 @@ fun SrpBar(
     menuProvider: IxiMenuProvider? = null,
     disabledIds: List<Int> = listOf(),
     data: SrpModel?,
+    onClick: () -> Unit
 ) {
     BasicToolbar(
         homeIcon = homeIcon,
@@ -158,6 +159,7 @@ fun SrpBar(
         if (data != null) {
             SrpComposable(
                 data = data,
+                onClick = onClick,
                 modifier = Modifier
                     .height(36.dp)
                     .weight(1f)

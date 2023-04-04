@@ -219,7 +219,10 @@ class ToolBarActivity : AppCompatActivity() {
     fun srpToolbar() {
         val toolbar = IxiSrpToolbar(context = this)
 
-        toolbar.setData(SrpModel("DLI", "FBD", "15 Dec 2022", "188829920"))
+        toolbar.setData(SrpModel("DLI", R.drawable.right_arrow, "FBD 15 Dec 2022 1 Traveller"))
+        toolbar.setOnClickListener {
+            "Clicked".toToast(this)
+        }
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
                 return listOf(IxiMenu(0, null, R.drawable.ic_baseline_cancel_24))
