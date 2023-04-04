@@ -19,6 +19,7 @@ import com.ixigo.design.sdk.databinding.ActivityToolBarBinding
 
 class ToolBarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityToolBarBinding
+    private val TAG = ToolBarActivity.javaClass.simpleName
 
     companion object {
         const val BASIC_TOOLBAR = 0
@@ -27,6 +28,7 @@ class ToolBarActivity : AppCompatActivity() {
         const val SEGMENT_CONTROL_TOOLBAR = 3
         const val SRP_TOOLBAR = 4
         const val TABBED_TOOLBAR = 5
+        const val AUTOCOMPLETE_TEXT_FIELD = 6
         const val TOOLBAR_TYPE = "toolbar type"
 
         fun startActivity(context: Context, toolbarType: Int) {
@@ -49,6 +51,7 @@ class ToolBarActivity : AppCompatActivity() {
             SEGMENT_CONTROL_TOOLBAR -> segmentedControlToolbar()
             SRP_TOOLBAR -> srpToolbar()
             TABBED_TOOLBAR -> tabbedToolbar()
+            AUTOCOMPLETE_TEXT_FIELD -> autoCompleteTextField()
         }
 
     }
@@ -117,14 +120,21 @@ class ToolBarActivity : AppCompatActivity() {
 
     fun searchToolbar() {
         val toolbar = IxiSearchBar(context = this)
-        toolbar.setSearchBarHint("Provide Search")
-        toolbar.setSearchFocusChange {
+        toolbar.setHint("Provide Search")
+        toolbar.setFocusChangeListener {
             Log.e("Tag",if(it)"Focussed" else "Unfocussed")
         }
         binding.update.setOnClickListener {
             toolbar.setNavigationIcon(R.drawable.ic_contact)
             toolbar.updateMenuItem(0,IxiMenu(0, null, R.drawable.ic_search),)
-            toolbar.captureFocus()
+            toolbar.setFocus()
+        }
+        toolbar.setHint("Type your text here")
+        toolbar.setTextChangeListener {
+            Log.d(TAG, "entered text: $it")
+        }
+        toolbar.setFocusChangeListener {
+            Log.d(TAG, "isFocused: $it")
         }
         toolbar.addMenuProvider(object : IxiMenuProvider {
             override fun provideMenu(): List<IxiMenu> {
@@ -152,6 +162,29 @@ class ToolBarActivity : AppCompatActivity() {
 
         binding.appBar.removeAllViews()
         binding.appBar.addView(toolbar)
+        binding.appBar.elevation = 100F
+    }
+
+    private fun autoCompleteTextField() {
+        val autoCompleteTextField =  IxiAutoCompleteTextField(context = this).apply {
+            setHint("Type your text here")
+            setFocusChangeListener {
+                Log.e("Tag", if (it) "Focussed" else "Unfocussed")
+            }
+            setTextChangeListener {
+                Log.d(TAG, "entered text: $it")
+            }
+            setOnClearQueryListener {
+                Log.d(TAG, "autoCompleteTextField: ")
+            }
+        }
+
+        binding.update.setOnClickListener {
+            autoCompleteTextField.setQuery("foo")
+        }
+
+        binding.appBar.removeAllViews()
+        binding.appBar.addView(autoCompleteTextField)
         binding.appBar.elevation = 100F
     }
 

@@ -3,6 +3,7 @@ package com.ixigo.design.sdk.components.topappbar.base
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
@@ -26,6 +27,17 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
 
     protected var state = mutableStateOf(AppBarState())
 
+    init {
+        val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.BaseTopAppBar)
+        try {
+            val text = typedArray.getString(R.styleable.BaseButton_android_text) ?: ""
+            setTitle(text)
+            this.setHint(typedArray.getString(R.styleable.BaseTopAppBar_android_hint) ?: "")
+        } finally {
+            typedArray.recycle()
+        }
+    }
+
     fun setTitle(title: String) {
         val initState = state.value
         state.value = initState.copy(title = title)
@@ -34,6 +46,59 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
     fun setSubTitle(subTitle: String) {
         val initState = state.value
         state.value = initState.copy(subTitle = subTitle)
+    }
+
+    fun setHint(hint: String){
+        val initState = state.value
+        state.value = initState.copy(hint = hint)
+    }
+
+    fun setQuery(query: String){
+        val initState = state.value.copy(query= query)
+        state.value = initState
+    }
+
+    fun setTextChangeListener(onTextChange: ((String) -> Unit)){
+        val initState = state.value.copy(onTextChange = onTextChange)
+        state.value = initState
+    }
+
+    fun setFocusChangeListener(onSearchFocusChange: ((Boolean) -> Unit)){
+        val initState = state.value.copy(onSearchFocusChange = {
+            state.value = state.value.copy(requestFocus = it)
+            onSearchFocusChange.invoke(it)
+        })
+        state.value = initState
+    }
+
+    fun setOnClearQueryListener(onClearQuery: (() -> Unit)){
+        val initState = state.value.copy(onClearQuery = {
+            state.value = state.value.copy(query = "")
+            onClearQuery.invoke()
+        })
+        state.value = initState
+    }
+
+    fun setFocus(){
+        state.value = state.value.copy(requestFocus = true)
+    }
+
+    override fun clearFocus(){
+        state.value = state.value.copy(requestFocus = false)
+    }
+
+    override fun isFocused() = state.value.requestFocus
+
+    override fun setBackgroundColor(@ColorRes color: Int) {
+        state.value = state.value.copy(backgroundColor = color)
+    }
+
+    fun setBorderColorFocused(@ColorRes color: Int) {
+        state.value = state.value.copy(borderColorFocused = color)
+    }
+
+    fun setBorderColorUnfocused(@ColorRes color: Int) {
+        state.value = state.value.copy(borderColorUnfocused = color)
     }
 
     fun addMenuProvider(provider: IxiMenuProvider) {
@@ -103,8 +168,16 @@ data class AppBarState(
         null,
         null
     ),
+    @ColorRes val backgroundColor: Int = R.color.n0,
+    @ColorRes val borderColorFocused: Int = R.color.b500,
+    @ColorRes val borderColorUnfocused: Int = R.color.n300,
     val title: String? = null,
     val subTitle: String? = null,
+    val hint: String? = null,
+    val query: String? = null,
+    val onTextChange: ((String) -> Unit) = {},
+    val onClearQuery: (() -> Unit) = {},
+    val requestFocus: Boolean = false,
     val elevation: Dp = 10.dp,
     val menuProvider: IxiMenuProvider? = null,
     val srpData: SrpModel? = null,
@@ -112,9 +185,7 @@ data class AppBarState(
     val viewPager: ViewPager2? = null,
     val adapter: FragmentStateAdapter? = null,
     val tabType: TabType = TabType.LINE,
-    val hint: String? = null,
     val tabbedSelectionListener: (selectedItemIndex: Int) -> Unit = {},
     val disabledIds: List<Int> = listOf(),
-    val onSearchFocusChange: (Boolean) -> Unit = {},
-    val shouldFocus: Boolean? = null
+    val onSearchFocusChange: (Boolean) -> Unit = {}
 )
