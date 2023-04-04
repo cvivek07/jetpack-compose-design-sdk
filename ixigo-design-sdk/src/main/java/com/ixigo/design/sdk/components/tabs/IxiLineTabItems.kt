@@ -17,9 +17,6 @@ internal class IxiLineTabItems @JvmOverloads constructor(
 ) : BaseTabItem(context, attrs, defStyleAttr) {
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
         with(state.value) {
             LineTabComposable(
                 startIcon = startDrawable,

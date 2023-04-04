@@ -352,9 +352,6 @@ class IxiText @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-            ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool
-        )
         val stateValue = remember { state }
         val modifier = if (stateValue.value.onClick != null) {
             Modifier.clickable {
