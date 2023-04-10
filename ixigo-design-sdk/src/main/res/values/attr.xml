@@ -74,6 +74,7 @@
             <enum name="body_medium" value="8" />
             <enum name="body_small" value="9" />
             <enum name="body_xsmall" value="10" />
+            <enum name="body_xxsmall" value="11" />
         </attr>
         <attr name="textWeight" format="enum">
             <enum name="bold" value="0" />
