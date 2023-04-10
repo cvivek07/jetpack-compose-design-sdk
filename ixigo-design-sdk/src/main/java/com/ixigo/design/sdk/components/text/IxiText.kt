@@ -257,10 +257,16 @@ class IxiText @JvmOverloads constructor(
     }
 
     fun setTextWeight(weight: TextWeight) {
-        defaultTextStyle = when (weight) {
+        val textStyle = when (weight) {
             TextWeight.BOLD -> defaultTypography.bold
             TextWeight.MEDIUM -> defaultTypography.medium
             TextWeight.REGULAR -> defaultTypography.regular
+        }
+
+        defaultTextStyle = if(textColorRes != 0) {
+            textStyle.copy(color = Color(textColorRes))
+        } else {
+            textStyle
         }
     }
 
