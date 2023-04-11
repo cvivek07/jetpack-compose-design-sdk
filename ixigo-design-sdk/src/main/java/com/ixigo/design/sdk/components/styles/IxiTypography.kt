@@ -25,22 +25,36 @@ object IxiTypography {
 
         fun TextStyle.applyUnderLine(): TextStyle {
             val prevDecoration = this.textDecoration
-            val currentDecoration = if (prevDecoration != null && prevDecoration != TextDecoration.Underline) {
-                TextDecoration.combine(listOf(prevDecoration, TextDecoration.Underline))
-            } else {
-                TextDecoration.Underline
-            }
+            val currentDecoration =
+                if (prevDecoration != null && prevDecoration != TextDecoration.Underline) {
+                    TextDecoration.combine(listOf(prevDecoration, TextDecoration.Underline))
+                } else {
+                    TextDecoration.Underline
+                }
             return this.copy(textDecoration = currentDecoration)
         }
 
         fun TextStyle.applyStrikeThrough(): TextStyle {
             val prevDecoration = this.textDecoration
-            val currentDecoration = if (prevDecoration != null && prevDecoration != TextDecoration.LineThrough) {
-                TextDecoration.combine(listOf(prevDecoration, TextDecoration.LineThrough))
-            } else {
-                TextDecoration.LineThrough
-            }
+            val currentDecoration =
+                if (prevDecoration != null && prevDecoration != TextDecoration.LineThrough) {
+                    TextDecoration.combine(listOf(prevDecoration, TextDecoration.LineThrough))
+                } else {
+                    TextDecoration.LineThrough
+                }
             return this.copy(textDecoration = currentDecoration)
+        }
+
+        fun TextStyle.applyFontStyle(
+            underline: Boolean,
+            italics: Boolean,
+            strikeThrough: Boolean
+        ): TextStyle {
+            var textStyle = this
+            if (underline) textStyle = textStyle.applyUnderLine()
+            if (strikeThrough) textStyle = textStyle.applyStrikeThrough()
+            if (italics) textStyle = textStyle.applyItalics()
+            return textStyle
         }
     }
 
@@ -102,6 +116,7 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
             @Deprecated("Use DisplayLarge.medium instead")
             val semiBold = TextStyle(
                 fontSize = 54.sp,
@@ -302,6 +317,7 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
             @Deprecated("Use H3.medium instead")
             val semiBold = TextStyle(
                 fontSize = 30.sp,
@@ -797,7 +813,7 @@ object IxiTypography {
             )
         }
 
-        object XXSmall: TypographyType {
+        object XXSmall : TypographyType {
             override val regular = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
