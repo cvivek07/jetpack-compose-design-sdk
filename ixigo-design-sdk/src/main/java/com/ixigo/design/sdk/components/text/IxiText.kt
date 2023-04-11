@@ -115,8 +115,6 @@ class IxiText @JvmOverloads constructor(
             val text = typedArray.getString(R.styleable.IxiText_android_text) ?: ""
             setText(text)
 
-            textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
-            setTextColor(textColorRes)
             val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, Int.MAX_VALUE)
             setMaxLines(maxLines)
             val overflow =
@@ -133,6 +131,9 @@ class IxiText @JvmOverloads constructor(
             )
             setTextDisplayType(textDisplayType)
             setTextWeight(TextWeight.values()[textWeight])
+
+            textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
+            setTextColor(textColorRes)
 
             val hAlign = when (typedArray.getInt(R.styleable.IxiText_horizontalAlignment, 0)) {
                 0 -> Alignment.Start
@@ -257,16 +258,10 @@ class IxiText @JvmOverloads constructor(
     }
 
     fun setTextWeight(weight: TextWeight) {
-        val textStyle = when (weight) {
+        defaultTextStyle = when (weight) {
             TextWeight.BOLD -> defaultTypography.bold
             TextWeight.MEDIUM -> defaultTypography.medium
             TextWeight.REGULAR -> defaultTypography.regular
-        }
-
-        defaultTextStyle = if(textColorRes != 0) {
-            textStyle.copy(color = Color(textColorRes))
-        } else {
-            textStyle
         }
     }
 
@@ -298,8 +293,9 @@ class IxiText @JvmOverloads constructor(
      */
     fun setTextColor(@ColorInt color: Int) {
         textColorRes = color
-        val style = state.value.textStyle.copy(color = Color(color))
-        state.value = state.value.copy(textStyle = style)
+        if(color != 0) {
+            defaultTextStyle = defaultTextStyle.copy(color = Color(color))
+        }
     }
 
     /**
