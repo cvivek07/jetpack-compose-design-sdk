@@ -796,5 +796,64 @@ object IxiTypography {
                 textDecoration = TextDecoration.LineThrough
             )
         }
+
+        object XXSmall: TypographyType {
+            override val regular = TextStyle(
+                fontSize = 10.sp,
+                lineHeight = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W400,
+                color = n800,
+                fontFamily = IxiFamily,
+            )
+
+            override val medium = TextStyle(
+                fontSize = 10.sp,
+                lineHeight = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W500,
+                color = n800,
+                fontFamily = IxiFamily,
+            )
+
+            override val bold = TextStyle(
+                fontSize = 10.sp,
+                lineHeight = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W700,
+                color = n800,
+                fontFamily = IxiFamily,
+            )
+
+            override val italics = TextStyle(
+                fontSize = 10.sp,
+                lineHeight = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W400,
+                color = n800,
+                fontFamily = IxiFamily,
+                fontStyle = FontStyle.Italic,
+            )
+
+            override val underline = TextStyle(
+                fontSize = 10.sp,
+                lineHeight = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W400,
+                color = n800,
+                fontFamily = IxiFamily,
+                textDecoration = TextDecoration.Underline
+            )
+
+            override val strikeThrough = TextStyle(
+                fontSize = 10.sp,
+                lineHeight = 11.sp,
+                letterSpacing = 2.sp,
+                fontWeight = W400,
+                color = n800,
+                fontFamily = IxiFamily,
+                textDecoration = TextDecoration.LineThrough
+            )
+        }
     }
 }

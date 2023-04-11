@@ -237,7 +237,7 @@ class IxiText @JvmOverloads constructor(
     }
 
     enum class TextDisplayType {
-        DISPLAY_LARGE, H1, H2, H3, H4, H5, H6, BODY_LARGE, BODY_MEDIUM, BODY_SMALL, BODY_XSMALL
+        DISPLAY_LARGE, H1, H2, H3, H4, H5, H6, BODY_LARGE, BODY_MEDIUM, BODY_SMALL, BODY_XSMALL, BODY_XXSMALL
     }
 
     enum class TextWeight(val weight: FontWeight) {
@@ -277,6 +277,7 @@ class IxiText @JvmOverloads constructor(
             TextDisplayType.BODY_MEDIUM -> IxiTypography.Body.Medium
             TextDisplayType.BODY_SMALL -> IxiTypography.Body.Small
             TextDisplayType.BODY_XSMALL -> IxiTypography.Body.XSmall
+            TextDisplayType.BODY_XXSMALL -> IxiTypography.Body.XXSmall
         }
     }
 
