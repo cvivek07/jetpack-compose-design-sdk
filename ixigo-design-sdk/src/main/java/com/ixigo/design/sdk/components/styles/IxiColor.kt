@@ -114,7 +114,7 @@ internal object IxiInlineAlertColor{
     internal object Error: IxiColor(bgColor = R.color.r50, textColor = R.color.r500, pressedColor = R.color.r400)
     internal object Success: IxiColor(bgColor = R.color.g50, textColor = R.color.g500, pressedColor = R.color.g400)
     internal object Blue: IxiColor(bgColor = R.color.b50, textColor = R.color.b500, pressedColor = R.color.b400)
-    internal object Neutral: IxiColor(bgColor = R.color.n40, textColor = R.color.n600, pressedColor = R.color.n800)
+    internal object Neutral: IxiColor(bgColor = R.color.n40, textColor = R.color.n800, pressedColor = R.color.n600)
     internal object Orange: IxiColor(bgColor = R.color.o50, textColor = R.color.o600, pressedColor = R.color.o800)
 }
 
