@@ -57,7 +57,6 @@ fun BaseBottomSheetComposable(
     closeActionAlignment: Alignment? = Alignment.CenterEnd,
     @DrawableRes closeIcon: Int? = null,
 ) {
-    val scrollState = rememberScrollState()
     Box(modifier = Modifier
         .clip(RoundedCornerShape(30.dp, 30.dp, 0.dp, 0.dp))) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, modifier = Modifier.background(colorResource(id = R.color.white))) {
@@ -96,7 +95,6 @@ fun BaseBottomSheetComposable(
                 }
             }
             Box(modifier = Modifier
-                .verticalScroll(scrollState)
                 .weight(1f, false)
                 .padding(top = 30.dp, bottom = 15.dp)) {
                 if(view!=null){

@@ -81,7 +81,7 @@ class BottomSheetFragment: Fragment() {
 
         }
 
-        val fragment = ButtonsFragment()
+        val fragment = NestedViewFragment()
         childFragmentManager.beginTransaction().add(fragment, "Test").commit()
         binding.fourth.setClickListener {
             val fragment1 =IxiBottomSheetHelper.getBlankBottomSheet(
