@@ -14,14 +14,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.platform.LocalWindowInfo
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
+import kotlinx.coroutines.launch
 
 @Composable
 fun SearchViewComposable(
@@ -36,14 +37,24 @@ fun SearchViewComposable(
     @ColorRes borderColorUnfocused: Int,
     modifier: Modifier = Modifier
 ) {
-    val focusRequester = FocusRequester()
+    val focusRequester = remember {
+        FocusRequester()
+    }
     var queryText by remember(query) { mutableStateOf(query) }
 
-    SideEffect{
-        if (requestFocus) {
-            focusRequester.requestFocus()
+    val scope = rememberCoroutineScope()
+    val windowInfo = LocalWindowInfo.current
+
+    SideEffect {
+        scope.launch {
+            snapshotFlow { windowInfo.isWindowFocused }.collect { isWindowFocused ->
+                if (isWindowFocused && requestFocus) {
+                    focusRequester.requestFocus()
+                }
+            }
         }
     }
+
     val trailingIconView = @Composable {
         IconButton(
             onClick = {
