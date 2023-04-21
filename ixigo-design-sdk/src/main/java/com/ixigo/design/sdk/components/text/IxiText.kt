@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
-import androidx.compose.ui.text.font.FontWeight.Companion.W900
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.content.ContextCompat
@@ -235,7 +235,7 @@ class IxiText @JvmOverloads constructor(
     }
 
     enum class TextWeight(val weight: FontWeight) {
-        BOLD(W900), MEDIUM(W700), REGULAR(W500)
+        BOLD(W700), MEDIUM(W500), REGULAR(W400)
     }
 
     fun setUnderLine() {
@@ -291,7 +291,7 @@ class IxiText @JvmOverloads constructor(
             strikeThrough = strikeThrough
         )
 
-        if(color != 0) {
+        if (color != 0) {
             textStyle = textStyle.copy(color = Color(color))
         }
 
