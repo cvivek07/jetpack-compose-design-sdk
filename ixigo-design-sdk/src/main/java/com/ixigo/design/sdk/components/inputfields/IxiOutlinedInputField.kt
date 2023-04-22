@@ -30,7 +30,9 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             onFocusChange= state.value.onFocusChange,
             colors = state.value.color,
             width = preferredWidth,
-            readOnly = state.value.readOnly
+            readOnly = state.value.readOnly,
+            isActiveAlways = state.value.isActiveAlways,
+            enabled = state.value.enabled
         )
 
     }

@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.inputfields.composables
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -39,7 +40,9 @@ fun OutlinedInputField(
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
     onTextChange: ((String) -> Unit)?,
-    onFocusChange: ((Boolean) -> Unit)?
+    onFocusChange: ((Boolean) -> Unit)?,
+    isActiveAlways: Boolean,
+    enabled: Boolean
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -75,25 +78,27 @@ fun OutlinedInputField(
             trailingIcon = trailingIcons,
             singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-            modifier =  Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged {
                     isFocussed.value = it.isFocused
                     onFocusChange?.let { it1 -> it1(it.isFocused) }
                 }
                 .padding(PaddingValues(0.dp)),
-            colors = getInputFieldColors(colors),
-            readOnly = readOnly
+            colors = getInputFieldColors(colors, isActiveAlways),
+            readOnly = readOnly,
+            shape = RoundedCornerShape(size = 10.dp),
+            enabled = enabled
         )
         GetBottomText(helperText, maxCharCount, textValue)
     }
 }
 
 @Composable
-private fun getInputFieldColors(colors: IxiColor) =
+private fun getInputFieldColors(colors: IxiColor, isActiveAlways: Boolean) =
     TextFieldDefaults.outlinedTextFieldColors(
         focusedBorderColor = colorResource(id = colors.bgColor),
-        unfocusedBorderColor = colorResource(id = unFocusColor),
+        unfocusedBorderColor = colorResource(id = if (isActiveAlways) colors.bgColor else unFocusColor),
         textColor = colorResource(id = R.color.n800),
         cursorColor = colorResource(id = colors.bgColor),
         focusedLabelColor = colorResource(id = colors.bgColor),
@@ -286,7 +291,7 @@ fun LinedInputField(
             trailingIcon = trailingIcons,
             singleLine = true,
             textStyle = LocalTextStyle.current.copy(textAlign = TextAlign.Start),
-            modifier =  Modifier
+            modifier = Modifier
                 .fillMaxWidth()
                 .onFocusChanged {
                     isFocussed.value = it.isFocused
