@@ -9,14 +9,12 @@ import androidx.annotation.StringRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentWidth
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
@@ -121,7 +119,8 @@ class IxiText @JvmOverloads constructor(
             setTextColor(textColorRes)
             val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, Int.MAX_VALUE)
             setMaxLines(maxLines)
-            val overflow = mapTextOverflowToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextOverflow, 0))
+            val overflow =
+                mapTextOverflowToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextOverflow, 0))
             setOverflow(overflow)
 
             val textDisplayType = typedArray.getInt(
@@ -149,7 +148,8 @@ class IxiText @JvmOverloads constructor(
             }
             setVerticalAlignment(vAlign)
 
-            val textAlign = mapTextAlignToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextAlignment, 0))
+            val textAlign =
+                mapTextAlignToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextAlignment, 0))
             setTextAlignment(textAlign)
 
             val underline = typedArray.getBoolean(R.styleable.IxiText_underline, false)
@@ -170,8 +170,8 @@ class IxiText @JvmOverloads constructor(
     /**
      * Sets the text to be displayed.
      */
-    fun setText(text: String) {
-        state.value = state.value.copy(text = text, spannedString = null)
+    fun setText(text: String?) {
+        state.value = state.value.copy(text = text ?: "", spannedString = null)
     }
 
     /**
