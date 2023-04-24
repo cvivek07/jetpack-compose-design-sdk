@@ -17,9 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.text.font.FontWeight.Companion.W700
-import androidx.compose.ui.text.font.FontWeight.Companion.W900
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.content.ContextCompat
@@ -34,6 +34,7 @@ import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.styles.IxiTypography.Body.Small.applyItalics
 import com.ixigo.design.sdk.components.styles.IxiTypography.Body.Small.applyStrikeThrough
 import com.ixigo.design.sdk.components.styles.IxiTypography.Body.Small.applyUnderLine
+import com.ixigo.design.sdk.components.styles.IxiTypography.Heading.H6.applyFontStyle
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 
 
@@ -115,8 +116,6 @@ class IxiText @JvmOverloads constructor(
             val text = typedArray.getString(R.styleable.IxiText_android_text) ?: ""
             setText(text)
 
-            textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
-            setTextColor(textColorRes)
             val maxLines = typedArray.getInt(R.styleable.IxiText_android_maxLines, Int.MAX_VALUE)
             setMaxLines(maxLines)
             val overflow =
@@ -131,8 +130,18 @@ class IxiText @JvmOverloads constructor(
                 R.styleable.IxiText_textWeight,
                 TextWeight.REGULAR.ordinal
             )
-            setTextDisplayType(textDisplayType)
-            setTextWeight(TextWeight.values()[textWeight])
+            textColorRes = typedArray.getColor(R.styleable.IxiText_android_textColor, 0)
+            val underline = typedArray.getBoolean(R.styleable.IxiText_underline, false)
+            val strikeThrough = typedArray.getBoolean(R.styleable.IxiText_strikeThrough, false)
+            val italics = typedArray.getBoolean(R.styleable.IxiText_italics, false)
+            setTextProperties(
+                textType = TextDisplayType.values()[textDisplayType],
+                textWeight = TextWeight.values()[textWeight],
+                underline = underline,
+                strikeThrough = strikeThrough,
+                italics = italics,
+                textColorRes
+            )
 
             val hAlign = when (typedArray.getInt(R.styleable.IxiText_horizontalAlignment, 0)) {
                 0 -> Alignment.Start
@@ -151,17 +160,6 @@ class IxiText @JvmOverloads constructor(
             val textAlign =
                 mapTextAlignToEnum(typedArray.getInt(R.styleable.IxiText_ixiTextAlignment, 0))
             setTextAlignment(textAlign)
-
-            val underline = typedArray.getBoolean(R.styleable.IxiText_underline, false)
-            if (underline) setUnderLine()
-
-            val strikeThrough = typedArray.getBoolean(R.styleable.IxiText_strikeThrough, false)
-            if (strikeThrough) setStrikeThrough()
-
-            val italics = typedArray.getBoolean(R.styleable.IxiText_italics, false)
-            if (italics) setItalics()
-
-            state.value = state.value.copy(textStyle = defaultTextStyle)
         } finally {
             typedArray.recycle()
         }
@@ -232,40 +230,43 @@ class IxiText @JvmOverloads constructor(
         state.value = state.value.copy(textStyle = t)
     }
 
-    private fun setTextDisplayType(displayType: Int) {
-        setTypographyType(TextDisplayType.values()[displayType])
-    }
-
     enum class TextDisplayType {
         DISPLAY_LARGE, H1, H2, H3, H4, H5, H6, BODY_LARGE, BODY_MEDIUM, BODY_SMALL, BODY_XSMALL, BODY_XXSMALL
     }
 
     enum class TextWeight(val weight: FontWeight) {
-        BOLD(W900), MEDIUM(W700), REGULAR(W500)
+        BOLD(W700), MEDIUM(W500), REGULAR(W400)
     }
 
     fun setUnderLine() {
-        defaultTextStyle = defaultTextStyle.applyUnderLine()
+        val textStyle = state.value.textStyle
+        state.value = state.value.copy(textStyle = textStyle.applyUnderLine())
     }
 
     fun setStrikeThrough() {
-        defaultTextStyle = defaultTextStyle.applyStrikeThrough()
+        val textStyle = state.value.textStyle
+        state.value = state.value.copy(textStyle = textStyle.applyStrikeThrough())
     }
 
     fun setItalics() {
-        defaultTextStyle = defaultTextStyle.applyItalics()
+        val textStyle = state.value.textStyle
+        state.value = state.value.copy(textStyle = textStyle.applyItalics())
     }
 
-    fun setTextWeight(weight: TextWeight) {
-        defaultTextStyle = when (weight) {
-            TextWeight.BOLD -> defaultTypography.bold
-            TextWeight.MEDIUM -> defaultTypography.medium
-            TextWeight.REGULAR -> defaultTypography.regular
-        }
+    fun setTextWeight(textWeight: TextWeight) {
+        val textStyle = state.value.textStyle
+        state.value = state.value.copy(textStyle = textStyle.copy(fontWeight = textWeight.weight))
     }
 
-    private fun setTypographyType(textType: TextDisplayType) {
-        defaultTypography = when (textType) {
+    private fun setTextProperties(
+        textType: TextDisplayType,
+        textWeight: TextWeight,
+        underline: Boolean,
+        strikeThrough: Boolean,
+        italics: Boolean,
+        @ColorInt color: Int
+    ) {
+        val typographyType = when (textType) {
             TextDisplayType.DISPLAY_LARGE -> IxiTypography.Heading.DisplayLarge
             TextDisplayType.H1 -> IxiTypography.Heading.H1
             TextDisplayType.H2 -> IxiTypography.Heading.H2
@@ -279,6 +280,22 @@ class IxiText @JvmOverloads constructor(
             TextDisplayType.BODY_XSMALL -> IxiTypography.Body.XSmall
             TextDisplayType.BODY_XXSMALL -> IxiTypography.Body.XXSmall
         }
+
+        var textStyle = when (textWeight) {
+            TextWeight.BOLD -> typographyType.bold
+            TextWeight.MEDIUM -> typographyType.medium
+            TextWeight.REGULAR -> typographyType.regular
+        }.applyFontStyle(
+            underline = underline,
+            italics = italics,
+            strikeThrough = strikeThrough
+        )
+
+        if (color != 0) {
+            textStyle = textStyle.copy(color = Color(color))
+        }
+
+        state.value = state.value.copy(textStyle = textStyle)
     }
 
     /**
