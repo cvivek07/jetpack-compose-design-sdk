@@ -34,7 +34,9 @@ abstract class BaseInputField @JvmOverloads constructor(
             onTextChange = {},
             onFocusChange = null,
             color = IxiColor.Orange,
-            readOnly = false
+            readOnly = false,
+            isActiveAlways = false,
+            enabled = true
         )
     )
 
@@ -218,6 +220,16 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState.copy(readOnly = value)
     }
 
+    fun setActiveAlways(isActiveAlways: Boolean) {
+        val initState = state.value
+        state.value = initState.copy(isActiveAlways = isActiveAlways)
+    }
+
+    override fun setEnabled(enabled: Boolean) {
+        val initState = state.value
+        state.value = initState.copy(enabled = enabled)
+    }
+
     /**
      * Sets the text input to read only.
      *
@@ -273,7 +285,9 @@ data class InputFieldState(
     val onClickDrawableEnd: () -> Unit,
     val onTextChange: ((String) -> Unit) = {},
     val onFocusChange: ((Boolean) -> Unit)?,
-    val readOnly: Boolean
+    val readOnly: Boolean,
+    val isActiveAlways: Boolean,
+    val enabled: Boolean
 )
 
 
