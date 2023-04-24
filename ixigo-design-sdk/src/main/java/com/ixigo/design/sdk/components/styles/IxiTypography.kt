@@ -24,25 +24,13 @@ object IxiTypography {
         }
 
         fun TextStyle.applyUnderLine(): TextStyle {
-            val prevDecoration = this.textDecoration
-            val currentDecoration =
-                if (prevDecoration != null && prevDecoration != TextDecoration.Underline) {
-                    TextDecoration.combine(listOf(prevDecoration, TextDecoration.Underline))
-                } else {
-                    TextDecoration.Underline
-                }
-            return this.copy(textDecoration = currentDecoration)
+            val currentDecoration = setOfNotNull(this.textDecoration)
+            return this.copy(textDecoration = TextDecoration.combine(decorations = (currentDecoration + TextDecoration.Underline).toList()))
         }
 
         fun TextStyle.applyStrikeThrough(): TextStyle {
-            val prevDecoration = this.textDecoration
-            val currentDecoration =
-                if (prevDecoration != null && prevDecoration != TextDecoration.LineThrough) {
-                    TextDecoration.combine(listOf(prevDecoration, TextDecoration.LineThrough))
-                } else {
-                    TextDecoration.LineThrough
-                }
-            return this.copy(textDecoration = currentDecoration)
+            val currentDecoration = setOfNotNull(this.textDecoration)
+            return this.copy(textDecoration = TextDecoration.combine(decorations = (currentDecoration + TextDecoration.LineThrough).toList()))
         }
 
         fun TextStyle.applyFontStyle(
