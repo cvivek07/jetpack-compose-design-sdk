@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.imageutils.ImageData
-import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.srp.composables.SrpTitle
 import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.TabDataItem
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
@@ -180,7 +180,7 @@ data class AppBarState(
     val requestFocus: Boolean = false,
     val elevation: Dp = 10.dp,
     val menuProvider: IxiMenuProvider? = null,
-    val srpData: SrpModel? = null,
+    val srpTitle: SrpTitle? = null,
     val onClick: () -> Unit = {},
     val tabbedData: List<TabDataItem>? = null,
     val viewPager: ViewPager2? = null,
