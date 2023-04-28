@@ -32,7 +32,7 @@ import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
-import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.srp.composables.SrpTitle
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.tabs.IxiTabLayout
 import com.ixigo.design.sdk.components.tabs.TabType
@@ -147,7 +147,8 @@ fun SrpBar(
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     disabledIds: List<Int> = listOf(),
-    data: SrpModel?,
+    title: SrpTitle?,
+    subTitle: String?,
     onClick: () -> Unit
 ) {
     BasicToolbar(
@@ -156,16 +157,14 @@ fun SrpBar(
         menuProvider = menuProvider,
         disabledIds = disabledIds
     ) {
-        if (data != null) {
+        if (title != null) {
             SrpComposable(
-                data = data,
+                title = title,
+                subTitle = subTitle,
                 onClick = onClick,
                 modifier = Modifier
-                    .height(36.dp)
+                    .wrapContentHeight()
                     .weight(1f)
-                    .padding(
-                        end = 15.dp
-                    ),
             )
         }
     }
@@ -226,7 +225,7 @@ fun BasicToolbar(
         backgroundColor = colorResource(id = R.color.n0),
         modifier = modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .wrapContentHeight()
             .shadow(10.dp)
             .zIndex(10.dp.value),
         elevation = elevation,

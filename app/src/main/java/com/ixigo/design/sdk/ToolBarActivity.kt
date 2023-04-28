@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.srp.composables.SrpTitle
 import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.*
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
@@ -220,7 +220,8 @@ class ToolBarActivity : AppCompatActivity() {
     fun srpToolbar() {
         val toolbar = IxiSrpToolbar(context = this)
 
-        toolbar.setData(SrpModel("DLI", R.drawable.right_arrow, "FBD 15 Dec 2022 1 Traveller"))
+        toolbar.setSrpTitle(SrpTitle("DLI", R.drawable.right_arrow, "FBD 15 Dec 2022 1 Traveller"))
+        toolbar.setSrpSubTitle("14 Oct . 1 Traveller . Economy")
         toolbar.setOnClickListener {
             "Clicked".toToast(this)
         }
