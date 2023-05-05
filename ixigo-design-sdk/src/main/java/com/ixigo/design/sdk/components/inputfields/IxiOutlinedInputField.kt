@@ -19,6 +19,7 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             drawableStart = state.value.drawableStart,
             actionText = state.value.actionText,
             helperText = state.value.helperText,
+            helperTextColor = state.value.helperTextColor,
             text = state.value.text,
             maxCharCount = state.value.maxCharCount,
             label = state.value.label,
@@ -32,7 +33,8 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             width = preferredWidth,
             readOnly = state.value.readOnly,
             isActiveAlways = state.value.isActiveAlways,
-            enabled = state.value.enabled
+            enabled = state.value.enabled,
+            keyboardType = state.value.keyboardType
         )
 
     }
