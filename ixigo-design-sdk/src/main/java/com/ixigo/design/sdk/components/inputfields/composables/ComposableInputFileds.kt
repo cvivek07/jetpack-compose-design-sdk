@@ -69,7 +69,7 @@ fun OutlinedInputField(
     }
 
     val labelComposable =
-        getPlaceHolder(label, colors, isFocussed.value || textValue.isNotBlank())
+        getPlaceHolder(label, colors, isFocussed.value, textValue)
 
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
@@ -147,12 +147,13 @@ private fun GetBottomText(
 private fun getPlaceHolder(
     hint: String,
     ixiColor: IxiColor,
-    isFocussed: Boolean
+    isFocussed: Boolean,
+    inputFieldTextValue: String
 ): @Composable () -> Unit {
 
     val color = if (isFocussed) ixiColor.bgColor else R.color.n600
     val typography =
-        if (isFocussed) {
+        if (isFocussed || inputFieldTextValue.isNotEmpty()) {
             IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = color))
         } else {
             IxiTypography.Body.Medium.regular.copy(
@@ -290,7 +291,7 @@ fun LinedInputField(
     val dividerColor = if (isFocussed.value) colors.bgColor else unFocusColor
 
     val labelComposable =
-        getPlaceHolder(label, colors, isFocussed.value || textValue.isNotBlank())
+        getPlaceHolder(label, colors, isFocussed.value, textValue)
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
             value = textValue,
