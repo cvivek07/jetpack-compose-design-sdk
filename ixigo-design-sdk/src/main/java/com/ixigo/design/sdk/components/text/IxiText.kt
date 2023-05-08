@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.text
 
 import android.content.Context
 import android.text.Spanned
+import android.text.SpannedString
 import android.util.AttributeSet
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
@@ -170,6 +171,10 @@ class IxiText @JvmOverloads constructor(
      */
     fun setText(text: String?) {
         state.value = state.value.copy(text = text ?: "", spannedString = null)
+    }
+
+    fun setSpanned(spanned: Spanned?) {
+        state.value = state.value.copy(text = "", spannedString = spanned ?: SpannedString(""))
     }
 
     /**
