@@ -45,12 +45,10 @@ fun SearchViewComposable(
     val scope = rememberCoroutineScope()
     val windowInfo = LocalWindowInfo.current
 
-    SideEffect {
-        scope.launch {
-            snapshotFlow { windowInfo.isWindowFocused }.collect { isWindowFocused ->
-                if (isWindowFocused && requestFocus) {
-                    focusRequester.requestFocus()
-                }
+    LaunchedEffect(requestFocus) {
+        snapshotFlow { windowInfo.isWindowFocused }.collect { isWindowFocused ->
+            if (isWindowFocused && requestFocus) {
+                focusRequester.requestFocus()
             }
         }
     }

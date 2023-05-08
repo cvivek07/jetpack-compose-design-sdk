@@ -64,11 +64,7 @@ abstract class BaseTopAppBar @JvmOverloads constructor(
     }
 
     fun setFocusChangeListener(onSearchFocusChange: ((Boolean) -> Unit)){
-        val initState = state.value.copy(onSearchFocusChange = {
-            state.value = state.value.copy(requestFocus = it)
-            onSearchFocusChange.invoke(it)
-        })
-        state.value = initState
+        state.value = state.value.copy(onSearchFocusChange = onSearchFocusChange)
     }
 
     fun setOnClearQueryListener(onClearQuery: (() -> Unit)){
