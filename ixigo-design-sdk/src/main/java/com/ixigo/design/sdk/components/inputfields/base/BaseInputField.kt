@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.input.KeyboardType
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -24,6 +25,7 @@ abstract class BaseInputField @JvmOverloads constructor(
             maxCharCount = 0,
             actionText = "",
             helperText = "",
+            helperTextColor = R.color.n600,
             text = "",
             label = "",
             iconTint = R.color.black,
@@ -36,10 +38,16 @@ abstract class BaseInputField @JvmOverloads constructor(
             color = IxiColor.Orange,
             readOnly = false,
             isActiveAlways = false,
-            enabled = true
+            enabled = true,
+            keyboardType = KeyboardType.Text
         )
     )
 
+    private fun registerTextChangeListener() {
+        state.value = state.value.copy(onTextChange = {
+            state.value = state.value.copy(text = it)
+        })
+    }
 
     /**
      *  Sets the text for this [InputField].
@@ -77,6 +85,10 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState
     }
 
+    fun setHelperTextColor(@ColorRes helperTextColor: Int) {
+        state.value = state.value.copy(helperTextColor = helperTextColor)
+    }
+
     /**
      * Sets the label for this [InputField].
      *
@@ -103,7 +115,7 @@ abstract class BaseInputField @JvmOverloads constructor(
      * @param color the color to be set
      */
     fun setColor(color: IxiColor) {
-        val initState = state.value.copy(color = color)
+        val initState = state.value.copy(color = color, helperTextColor = color.bgColor)
         state.value = initState
     }
 
@@ -220,6 +232,10 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState.copy(readOnly = value)
     }
 
+    fun setKeyboardType(type: KeyboardType) {
+        state.value = state.value.copy(keyboardType = type)
+    }
+
     fun setActiveAlways(isActiveAlways: Boolean) {
         val initState = state.value
         state.value = initState.copy(isActiveAlways = isActiveAlways)
@@ -261,6 +277,7 @@ abstract class BaseInputField @JvmOverloads constructor(
                 typedArray.getResourceId(R.styleable.BaseInputField_android_drawableStart, 0)
             )
             setActionDrawable(typedArray.getResourceId(R.styleable.BaseInputField_actionImage, 0))
+            registerTextChangeListener()
         } finally {
             typedArray.recycle()
         }
@@ -276,6 +293,7 @@ data class InputFieldState(
     val maxCharCount: Int,
     val actionText: String,
     val helperText: String,
+    @ColorRes val helperTextColor: Int,
     val text: String,
     val label: String,
     @ColorRes val iconTint: Int,
@@ -287,7 +305,8 @@ data class InputFieldState(
     val onFocusChange: ((Boolean) -> Unit)?,
     val readOnly: Boolean,
     val isActiveAlways: Boolean,
-    val enabled: Boolean
+    val enabled: Boolean,
+    val keyboardType: KeyboardType
 )
 
 
