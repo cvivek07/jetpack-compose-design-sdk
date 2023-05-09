@@ -181,6 +181,10 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         val inState = state.value
         state.value = inState.copy(toolbarCloseIcon = icon)
     }
+
+    fun showBottomDivider(show: Boolean) {
+        state.value = state.value.copy(showBottomDivider = show)
+    }
 }
 
 data class BottomSheetState(
@@ -201,5 +205,6 @@ data class BottomSheetState(
     val inlineAlertIxiColor: IxiColor? = null,
     val toolbarSubtitleText: String? = null,
     val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment = IxiBottomSheetView.ActionIconAlignment.END,
+    val showBottomDivider: Boolean = false,
     @DrawableRes val toolbarCloseIcon: Int? = null,
     )

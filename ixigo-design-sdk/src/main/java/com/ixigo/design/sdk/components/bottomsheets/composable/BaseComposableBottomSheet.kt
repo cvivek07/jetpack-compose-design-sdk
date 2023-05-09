@@ -55,6 +55,7 @@ fun BaseBottomSheetComposable(
     inlineAlertText: String? = null,
     inlineAlertIxiColor: IxiColor? = null,
     closeActionAlignment: Alignment? = Alignment.CenterEnd,
+    showBottomDivider: Boolean = false,
     @DrawableRes closeIcon: Int? = null,
 ) {
     Box(modifier = Modifier
@@ -113,7 +114,7 @@ fun BaseBottomSheetComposable(
                     )
                 }
             }
-            if(masterTitleText!=null){
+            if(showBottomDivider){
                 Divider(modifier = Modifier.fillMaxWidth(),thickness = 1.dp, color = colorResource(id = R.color.n100))
             }
             Spacer(modifier = Modifier.height(15.dp))
@@ -123,7 +124,6 @@ fun BaseBottomSheetComposable(
                     secondaryButtonText = secondaryButtonText,
                     primaryActionListener = primaryActionListener,
                     secondaryActionListener = secondaryActionListener,
-                    spacedButtons = masterTitleText!=null
                 )
             }
             Spacer(modifier = Modifier.height(15.dp))
@@ -213,16 +213,11 @@ private fun BottomSheetButtons(
     secondaryButtonText: String? = null,
     secondaryActionListener: (() -> Unit)? = null,
     primaryButtonText: String? = null,
-    primaryActionListener: (() -> Unit)? = null,
-    spacedButtons: Boolean = false
+    primaryActionListener: (() -> Unit)? = null
 ) {
-    Row(modifier = Modifier.fillMaxWidth(),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+    Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp),verticalAlignment = Alignment.CenterVertically, horizontalArrangement = if(primaryButtonText == null || secondaryButtonText == null) Arrangement.Center else Arrangement.SpaceBetween) {
         secondaryButtonText?.let {
-            Box(
-                modifier = Modifier
-                    .then(if (spacedButtons) Modifier else Modifier.weight(1f))
-                    .padding(start = 20.dp)
-            ) {
+            Box {
                 Box(
                     modifier = if (primaryButtonText == null) Modifier.align(Alignment.Center) else Modifier.align(
                         Alignment.TopEnd
@@ -240,11 +235,7 @@ private fun BottomSheetButtons(
             Spacer(modifier = Modifier.width(30.dp))
         }
         primaryButtonText?.let {
-            Box(
-                modifier = Modifier
-                    .then(if (spacedButtons) Modifier else Modifier.weight(1f))
-                    .padding(end = 20.dp)
-            ) {
+            Box {
                 Box(
                     modifier = Modifier.then(
                         if (secondaryButtonText == null) Modifier.align(

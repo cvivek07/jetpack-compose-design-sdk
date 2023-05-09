@@ -85,6 +85,7 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
             this.dismiss()
             onCloseActionListener()
         }
+        _binding.ixiBottomSheet.showBottomDivider(uiState.showBottomDivider)
     }
 
     /**
@@ -223,6 +224,10 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
         uiState = uiState.copy(toolbarCloseIcon = icon)
     }
 
+    fun showBottomDivider(show: Boolean) {
+        uiState = uiState.copy(showBottomDivider = show)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
@@ -269,5 +274,6 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val inlineAlertText: String? = null,
     val inlineAlertIxiColor: IxiColor? = null,
     val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
+    val showBottomDivider: Boolean = false,
     @DrawableRes val toolbarCloseIcon: Int? = null,
 )

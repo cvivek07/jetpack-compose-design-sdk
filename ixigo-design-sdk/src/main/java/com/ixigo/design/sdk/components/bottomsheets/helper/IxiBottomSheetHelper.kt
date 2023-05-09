@@ -29,6 +29,7 @@ object IxiBottomSheetHelper {
         ixiBottomSheetUiModel.inlineAlertText?.let {
             bottomSheet.setInlineAlert(it, ixiBottomSheetUiModel.inlineAlertIxiColor)
         }
+        bottomSheet.showBottomDivider(ixiBottomSheetUiModel.showBottomDivider)
         return bottomSheet
     }
 
@@ -87,6 +88,7 @@ object IxiBottomSheetHelper {
         val inlineAlertText: String? = null,
         val inlineAlertIxiColor: IxiColor? = null,
         val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
+        val showBottomDivider: Boolean = false,
         @DrawableRes val toolbarCloseIcon: Int? = null
     )
 }
