@@ -241,8 +241,11 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState.copy(readOnly = value)
     }
 
-    fun setKeyboardType(type: KeyboardType) {
-        state.value = state.value.copy(keyboardType = type)
+    fun setKeyboardType(type: InputFieldKeyBoardType) {
+        state.value = state.value.copy(keyboardType = when(type) {
+            InputFieldKeyBoardType.NUMBER -> KeyboardType.Number
+            InputFieldKeyBoardType.TEXT -> KeyboardType.Text
+        })
     }
 
     fun setActiveAlways(isActiveAlways: Boolean) {
@@ -291,6 +294,10 @@ abstract class BaseInputField @JvmOverloads constructor(
             typedArray.recycle()
         }
     }
+}
+
+enum class InputFieldKeyBoardType {
+    TEXT, NUMBER
 }
 
 data class InputFieldState(
