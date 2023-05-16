@@ -107,7 +107,7 @@ fun ComposablePrimaryButton(
         onClick = onClick,
         modifier = modifier
             .height(size.height)
-            .updateWidth(width),
+            .widthIn(min = 150.dp),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
