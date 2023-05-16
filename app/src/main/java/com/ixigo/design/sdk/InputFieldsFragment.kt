@@ -30,7 +30,9 @@ class InputFieldsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding?.inputField1?.apply {
-//            setLabel("Label")
+            setLabel("Label")
+            setStartDrawableText("+91")
+            showLeadingDivider(true)
             setText("old text")
             setActionText("Add-On")
             setHelperText("This is helper Text")
@@ -58,7 +60,7 @@ class InputFieldsFragment : Fragment() {
             setTextChangeListener {
                 Log.e("InputField", it)
             }
-            setReadOnly(true)
+//            setReadOnly(true)
         }
 
         _binding?.inputField2?.apply {

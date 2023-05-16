@@ -2,6 +2,8 @@ package com.ixigo.design.sdk.components.inputfields.composables
 
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -22,13 +24,16 @@ import com.ixigo.design.sdk.components.buttons.composable.updateWidth
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
+import java.time.format.TextStyle
 
 private val unFocusColor = R.color.n100
 
 @Composable
 fun OutlinedInputField(
     actionImage: Int = 0,
+    drawableStartText: String = "",
     drawableStart: Int = 0,
+    showLeadingDivider: Boolean = false,
     drawableEnd: Int = 0,
     maxCharCount: Int = 0,
     actionText: String? = "",
@@ -60,7 +65,7 @@ fun OutlinedInputField(
         onActionIconClick,
     )
 
-    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
+    val leadingIcon = getLeadingAction(drawableStartText, drawableStart, showLeadingDivider,  onDrawableStartClick)
 
     var textValue by remember(text) { mutableStateOf(text) }
 
@@ -174,17 +179,39 @@ private fun getPlaceHolder(
 
 @Composable
 private fun getLeadingAction(
+    drawableStartText: String,
     drawableStart: Int,
+    showLeadingDivider: Boolean,
     onDrawableStartClick: () -> Unit,
 ): (@Composable () -> Unit)? {
     return if (drawableStart != 0) {
         @Composable {
-            IconButton(onClick = onDrawableStartClick) {
+            Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
+                .height(IntrinsicSize.Min)
+                .clickable(onClick = onDrawableStartClick)) {
+                Text(
+                    text = drawableStartText,
+                    modifier = Modifier
+                        .padding(start = 16.dp),
+                    color = colorResource(id = R.color.n800),
+                    style = LocalTextStyle.current.copy(textAlign = TextAlign.Start)
+                )
+
                 Image(
                     painter = painterResource(id = drawableStart),
                     contentDescription = stringResource(id = R.string.outlined_input_drawable_end_des),
-                    modifier = Modifier.padding(2.dp)
+                    modifier = Modifier.padding(horizontal = 8.dp)
                 )
+
+                if(showLeadingDivider) {
+                    Divider(
+                        color = colorResource(id = R.color.n100),
+                        modifier = Modifier
+                            .padding(end = 8.dp)
+                            .fillMaxHeight()
+                            .width(1.dp)
+                    )
+                }
             }
         }
     } else {
@@ -251,6 +278,8 @@ private fun getTrailingActions(
 @Composable
 fun LinedInputField(
     actionImage: Int = 0,
+    drawableStartText: String ="",
+    showLeadingDivider: Boolean = false,
     drawableStart: Int = 0,
     drawableEnd: Int = 0,
     maxCharCount: Int = 0,
@@ -280,7 +309,7 @@ fun LinedInputField(
         onActionIconClick,
     )
 
-    val leadingIcon = getLeadingAction(drawableStart, onDrawableStartClick)
+    val leadingIcon = getLeadingAction(drawableStartText, drawableStart, showLeadingDivider, onDrawableStartClick)
 
     var textValue by remember(text) { mutableStateOf(text) }
 

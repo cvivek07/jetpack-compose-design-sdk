@@ -19,7 +19,9 @@ abstract class BaseInputField @JvmOverloads constructor(
     protected val state = mutableStateOf(
         InputFieldState(
             actionImage = 0,
+            drawableStartText = "",
             drawableStart = 0,
+            showLeadingDivider = false,
             drawableEnd = 0,
             actualCharCountText = "",
             maxCharCount = 0,
@@ -130,6 +132,13 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState
     }
 
+    fun setStartDrawableText(text: String){
+        state.value = state.value.copy(drawableStartText = text)
+    }
+
+    fun showLeadingDivider(show: Boolean){
+        state.value = state.value.copy(showLeadingDivider = show)
+    }
     /**
      * Sets the drawable to be displayed at the start of the text input.
      *
@@ -287,7 +296,9 @@ abstract class BaseInputField @JvmOverloads constructor(
 data class InputFieldState(
     val color: IxiColor,
     @DrawableRes val actionImage: Int,
+    val drawableStartText: String,
     @DrawableRes val drawableStart: Int,
+    val showLeadingDivider: Boolean,
     @DrawableRes val drawableEnd: Int,
     val actualCharCountText: String,
     val maxCharCount: Int,
