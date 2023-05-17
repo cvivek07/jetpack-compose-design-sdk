@@ -1,7 +1,17 @@
 package com.ixigo.design_sdk.components.progress_step.composables
 
 import android.view.View
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.widthIn
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
@@ -21,8 +31,19 @@ import androidx.compose.ui.viewinterop.AndroidView
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.R
-import com.ixigo.design.sdk.components.progressstep.base.*
-import com.ixigo.design.sdk.components.progressstep.composables.*
+import com.ixigo.design.sdk.components.progressstep.base.IndexingPattern
+import com.ixigo.design.sdk.components.progressstep.base.ProgressState
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepData
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepIconSize
+import com.ixigo.design.sdk.components.progressstep.base.ProgressStepMode
+import com.ixigo.design.sdk.components.progressstep.base.SelectionIndicator
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepIcon
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepIconSuccess
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepInlineActiveIcon
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepInlineInactiveIcon
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepInlineSuccessIcon
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepNumber
+import com.ixigo.design.sdk.components.progressstep.composables.ProgressStepNumberSuccess
 import com.ixigo.design.sdk.components.styles.IxiFamily
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import kotlinx.coroutines.CoroutineScope
@@ -318,12 +339,13 @@ fun DrawHorizontalInlineNode(
     selectionIndicator: SelectionIndicator = SelectionIndicator.NUMBER,
     index: Int,
     lineColor: Int,
-    mode: ProgressStepMode = ProgressStepMode.Dark
+    mode: ProgressStepMode = ProgressStepMode.Dark,
+    indexingPattern: IndexingPattern = IndexingPattern.ZERO_BASED
 ) {
     val textStyle: TextStyle = if (progressState == ProgressState.Active) {
-        IxiTypography.Body.Large.medium
+        IxiTypography.Body.Small.medium
     } else {
-        IxiTypography.Body.Large.regular
+        IxiTypography.Body.Small.regular
     }
 
     val textColor  = if(mode == ProgressStepMode.Dark) {
@@ -361,7 +383,7 @@ fun DrawHorizontalInlineNode(
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
-                            }, text = index.toString()
+                            }, text = if(indexingPattern == IndexingPattern.ZERO_BASED) index.toString() else (index + 1).toString()
                         )
                     }
                     else -> {
@@ -371,7 +393,7 @@ fun DrawHorizontalInlineNode(
                             modifier = Modifier.constrainAs(icon) {
                                 start.linkTo(parent.start)
                                 top.linkTo(parent.top)
-                            }, text = index.toString()
+                            }, text = if(indexingPattern == IndexingPattern.ZERO_BASED) index.toString() else (index + 1).toString()
                         )
                     }
                 }
@@ -522,11 +544,12 @@ fun DrawHorizontalInlineSteps(
     currentItem: Int = 0,
     currentProgressState: ProgressState? = null,
     mode: ProgressStepMode = ProgressStepMode.Dark,
-    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
+    indexingPattern: IndexingPattern = IndexingPattern.ZERO_BASED,
+    scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null,
 ) {
     val coroutineScope = rememberCoroutineScope()
     val listState = rememberLazyListState()
-    LazyRow(state = listState) {
+    LazyRow(state = listState, horizontalArrangement = Arrangement.Center) {
         items(steps.size) { index ->
             val stepData = steps[index]
             val progressStateValue = getProgressState(index, currentItem, currentProgressState)
@@ -544,7 +567,8 @@ fun DrawHorizontalInlineSteps(
                 progressState = progressStateValue,
                 selectionIndicator = selectionIndicator,
                 lineColor = lineColor,
-                mode = mode
+                mode = mode,
+                indexingPattern = indexingPattern
             )
         }
         scrollToPosition?.invoke(listState, coroutineScope)
@@ -604,5 +628,5 @@ fun Preview() {
         ),
     )
 
-    DrawHorizontalInlineSteps(steps = steps, mode = ProgressStepMode.Light)
+    DrawHorizontalInlineSteps(steps = steps, mode = ProgressStepMode.Light, indexingPattern = IndexingPattern.ONE_BASED)
 }
