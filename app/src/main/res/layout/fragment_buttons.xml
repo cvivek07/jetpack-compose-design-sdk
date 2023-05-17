@@ -169,5 +169,11 @@
             android:layout_height="wrap_content"
             android:text="Ter xx War" />
 
+        <com.ixigo.design.sdk.components.buttons.IxiToggleButton
+            android:id="@+id/radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ixiColor="blue" />
+
     </LinearLayout>
 </ScrollView>
