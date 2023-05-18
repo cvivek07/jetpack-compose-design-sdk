@@ -80,9 +80,17 @@ fun OutlinedInputField(
         OutlinedTextField(
             value = textValue,
             onValueChange = {
-                if (it.length <= maxCharCount)
-                    textValue = it
-                onTextChange?.invoke(it)
+                if (it.length <= maxCharCount) {
+                    if(keyboardType == KeyboardType.Number) {
+                        if(it.all { c -> c.isDigit() }) {
+                            textValue = it
+                            onTextChange?.invoke(textValue)
+                        }
+                    } else {
+                        textValue = it
+                        onTextChange?.invoke(textValue)
+                    }
+                }
             },
             label = labelComposable,
             leadingIcon = leadingIcon,
@@ -291,11 +299,12 @@ fun LinedInputField(
     width: Int = -1,
     colors: IxiColor = IxiColor.Orange,
     readOnly: Boolean,
+    keyboardType: KeyboardType,
     onDrawableStartClick: () -> Unit,
     onDrawableEndClick: () -> Unit,
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
-    onTextChange: ((String) -> Unit),
+    onTextChange: ((String) -> Unit)?,
     onFocusChange: ((Boolean) -> Unit)?
 ) {
 
@@ -325,9 +334,17 @@ fun LinedInputField(
         OutlinedTextField(
             value = textValue,
             onValueChange = {
-                if (it.length <= maxCharCount)
-                    textValue = it
-                onTextChange.invoke(it)
+                if (it.length <= maxCharCount) {
+                    if(keyboardType == KeyboardType.Number) {
+                        if(it.all { c -> c.isDigit() }) {
+                            textValue = it
+                            onTextChange?.invoke(textValue)
+                        }
+                    } else {
+                        textValue = it
+                        onTextChange?.invoke(textValue)
+                    }
+                }
             },
             label = labelComposable,
             leadingIcon = leadingIcon,
@@ -349,7 +366,8 @@ fun LinedInputField(
                 focusedLabelColor = colorResource(id = colors.bgColor),
                 unfocusedLabelColor = colorResource(id = R.color.n800)
             ),
-            readOnly = readOnly
+            readOnly = readOnly,
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
         )
         Divider(color = colorResource(id = dividerColor), modifier = Modifier.padding(top = 0.dp))
         GetBottomText(helperText, helperTextColor, maxCharCount, textValue)

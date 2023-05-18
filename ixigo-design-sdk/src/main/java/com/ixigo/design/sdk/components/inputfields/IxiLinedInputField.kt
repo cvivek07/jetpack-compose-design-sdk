@@ -31,7 +31,8 @@ class IxiLinedInputField @JvmOverloads constructor(
             onFocusChange = state.value.onFocusChange,
             colors = state.value.color,
             width = preferredWidth,
-            readOnly = state.value.readOnly
+            readOnly = state.value.readOnly,
+            keyboardType = state.value.keyboardType
         )
 
     }
