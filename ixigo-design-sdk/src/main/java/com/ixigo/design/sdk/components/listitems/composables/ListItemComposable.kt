@@ -235,7 +235,7 @@ fun RightContent(state: MutableState<ListItemDataState>) {
 }
 
 @Composable
-private fun DrawSwitch(
+fun DrawSwitch(
     color: IxiColor,
     switchValue: Boolean,
     switchChangeListener: (Boolean) -> Unit,

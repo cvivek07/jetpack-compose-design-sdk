@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.styles.IxiShape
@@ -140,6 +141,9 @@ class ButtonsFragment : BaseFragment() {
         binding.buttonEight.setSize( ButtonSize.Large)
         binding.buttonTen.setClickListener {
             context?.let { it1 -> "Button10 Clicked Change".toToast(it1) }
+        }
+        binding.radioButton.setToggleChangeListener {
+            Toast.makeText(requireContext(), if(it) "Checked" else "Un-Checked", Toast.LENGTH_LONG).show()
         }
     }
 

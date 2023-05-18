@@ -215,4 +215,9 @@
         <attr name="bodyText" format="string" />
         <attr name="toolbarText" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="IxiToggleButton">
+        <attr name="ixiColor" />
+        <attr name="android:checked" format="boolean" />
+    </declare-styleable>
 </resources>
