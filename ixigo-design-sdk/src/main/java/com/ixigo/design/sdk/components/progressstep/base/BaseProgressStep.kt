@@ -79,6 +79,12 @@ abstract class BaseProgressStep @JvmOverloads constructor(
         if (progressState == ProgressState.Active)
             progress++
 
+        selectPosition(progress, progressState)
+    }
+
+    fun selectPosition(position: Int, progressState: ProgressState = ProgressState.Active) {
+        progress = position
+
         val initState = state.value.copy(
             currentIndex = progress,
             currentItemProgressState = progressState,
@@ -108,10 +114,20 @@ abstract class BaseProgressStep @JvmOverloads constructor(
         state.value = initState
     }
 
+    fun setSteps(progressSteps: List<ProgressStepData>) {
+        steps.removeAll(steps)
+        steps.addAll(progressSteps)
+        state.value = state.value.copy(steps = steps)
+    }
+
     private fun setProgress(position: Int, progressState: ProgressState) {
         progress = position
         val initState = state.value.copy(steps = steps)
         state.value = initState
+    }
+
+    fun setIndexingPattern(indexingPattern: IndexingPattern) {
+        state.value = state.value.copy(indexingPattern = indexingPattern)
     }
 
     /**
@@ -128,6 +144,11 @@ enum class SelectionIndicator {
     ICON, // Icons with concentric circles
     CHECK,// Check Icon in a circle
     NUMBER // Number in a circle
+}
+
+enum class IndexingPattern {
+    ZERO_BASED,
+    ONE_BASED
 }
 
 sealed class ProgressState(
@@ -168,6 +189,7 @@ data class ProgressStepState(
     val currentItemProgressState: ProgressState? = null,
     val currentIndex: Int = 0,
     val mode: ProgressStepMode = ProgressStepMode.Dark,
-    val scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null
+    val scrollToPosition: ((LazyListState, CoroutineScope) -> Unit)? = null,
+    val indexingPattern: IndexingPattern = IndexingPattern.ZERO_BASED,
 )
 
