@@ -47,7 +47,7 @@ abstract class BaseInputField @JvmOverloads constructor(
 
     private fun registerTextChangeListener() {
         state.value = state.value.copy(onTextChange = {
-            state.value = state.value.copy(text = it)
+            state.value = state.value.copy(text = it, helperText = "")
         })
     }
 
@@ -216,7 +216,7 @@ abstract class BaseInputField @JvmOverloads constructor(
      */
     fun setTextChangeListener(onTextChange: ((String) -> Unit)) {
         state.value = state.value.copy(onTextChange = {
-            state.value = state.value.copy(text = it)
+            state.value = state.value.copy(text = it, helperText = "")
             onTextChange.invoke(it)
         })
     }
