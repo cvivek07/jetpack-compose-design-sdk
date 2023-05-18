@@ -241,11 +241,8 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState.copy(readOnly = value)
     }
 
-    fun setKeyboardType(type: InputFieldKeyBoardType) {
-        state.value = state.value.copy(keyboardType = when(type) {
-            InputFieldKeyBoardType.NUMBER -> KeyboardType.Number
-            InputFieldKeyBoardType.TEXT -> KeyboardType.Text
-        })
+    fun setKeyboardType(type: KeyboardTypeWrapper) {
+        state.value = state.value.copy(keyboardType = type.getKeyboardType())
     }
 
     fun setActiveAlways(isActiveAlways: Boolean) {
@@ -296,10 +293,6 @@ abstract class BaseInputField @JvmOverloads constructor(
     }
 }
 
-enum class InputFieldKeyBoardType {
-    TEXT, NUMBER
-}
-
 data class InputFieldState(
     val color: IxiColor,
     @DrawableRes val actionImage: Int,
@@ -330,4 +323,32 @@ data class InputFieldState(
 
 interface TextChangeListener {
     fun onTextChange(newText: String)
+}
+
+class KeyboardTypeWrapper(private val keyboardType: KeyboardType) {
+    fun getKeyboardType(): KeyboardType {
+        return keyboardType
+    }
+
+    companion object {
+        @JvmStatic
+        fun text(): KeyboardTypeWrapper {
+            return KeyboardTypeWrapper(KeyboardType.Text)
+        }
+
+        @JvmStatic
+        fun number(): KeyboardTypeWrapper {
+            return KeyboardTypeWrapper(KeyboardType.Number)
+        }
+
+        @JvmStatic
+        fun email(): KeyboardTypeWrapper {
+            return KeyboardTypeWrapper(KeyboardType.Email)
+        }
+
+        @JvmStatic
+        fun phone(): KeyboardTypeWrapper {
+            return KeyboardTypeWrapper(KeyboardType.Phone)
+        }
+    }
 }

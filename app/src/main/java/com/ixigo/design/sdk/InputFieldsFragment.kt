@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.ixigo.design.sdk.components.inputfields.base.KeyboardTypeWrapper
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
 
@@ -116,6 +117,7 @@ class InputFieldsFragment : Fragment() {
             setDrawableEndClickListener {
                 Log.e("Action", "\"DrawableEnd Click")
             }
+            setKeyboardType(KeyboardTypeWrapper.number())
         }
 
         _binding?.inputField5?.apply {
