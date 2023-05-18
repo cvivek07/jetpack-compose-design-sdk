@@ -37,7 +37,8 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 inlineAlertIxiColor = inlineAlertIxiColor,
                 masterSubtitleText = toolbarSubtitleText,
                 closeActionAlignment = mapLayoutAlignmentToComposeAlignment(closeActionAlignment),
-                closeIcon = toolbarCloseIcon
+                closeIcon = toolbarCloseIcon,
+                showBottomDivider = showBottomDivider
             )
         }
     }
