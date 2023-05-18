@@ -20,11 +20,10 @@ class IxiToggleButton @JvmOverloads constructor(
         try {
             val colorEnum = typedArray.getInt(R.styleable.IxiToggleButton_ixiColor, -1)
             if (colorEnum != -1) {
-                setIxiColor(mapTypeToColor(colorEnum))
+                setIxiColor(IxiColor.mapFromAttrEnum(colorEnum))
             }
             val checked = typedArray.getBoolean(R.styleable.IxiToggleButton_android_checked, false)
             setChecked(checked)
-            setToggleChangeListener { }
         } finally {
             typedArray.recycle()
         }
@@ -43,21 +42,6 @@ class IxiToggleButton @JvmOverloads constructor(
             state.value = state.value.copy(switchValue = it)
             func.invoke(it)
         })
-    }
-
-    private fun mapTypeToColor(int: Int): IxiColor {
-        return when (int) {
-            0 -> IxiColor.Warning
-            1 -> IxiColor.Extension
-            2 -> IxiColor.Error
-            3 -> IxiColor.Success
-            4 -> IxiColor.Blue
-            5 -> IxiColor.Neutral
-            6 -> IxiColor.Orange
-            else -> {
-                IxiColor.Neutral
-            }
-        }
     }
 
 
