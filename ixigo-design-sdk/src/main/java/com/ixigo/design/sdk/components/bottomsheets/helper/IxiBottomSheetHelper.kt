@@ -3,6 +3,7 @@ package com.ixigo.design.sdk.components.bottomsheets.helper
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragment
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -26,6 +27,8 @@ object IxiBottomSheetHelper {
         ixiBottomSheetUiModel.secondaryButtonText?.let {
             bottomSheet.setSecondaryButton(it, ixiBottomSheetUiModel.secondaryActionListener)
         }
+        bottomSheet.setButtonMinWidth(ixiBottomSheetUiModel.buttonMinWidth)
+        bottomSheet.setButtonMaxWidth(ixiBottomSheetUiModel.buttonMaxWidth)
         ixiBottomSheetUiModel.inlineAlertText?.let {
             bottomSheet.setInlineAlert(it, ixiBottomSheetUiModel.inlineAlertIxiColor)
         }
@@ -82,6 +85,8 @@ object IxiBottomSheetHelper {
         val primaryButtonText:String? = null,
         val primaryActionListener:(()->Unit)? = null,
         val secondaryButtonText:String? = null,
+        val buttonMinWidth: Dp = Dp.Unspecified,
+        val buttonMaxWidth: Dp = Dp.Infinity,
         val secondaryActionListener:(()->Unit)? = null,
         val view: View? = null,
         val disableDragging: Boolean = false,

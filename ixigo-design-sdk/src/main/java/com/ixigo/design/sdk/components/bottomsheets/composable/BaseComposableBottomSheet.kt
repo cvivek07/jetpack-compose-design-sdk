@@ -20,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import androidx.compose.ui.viewinterop.AndroidView
@@ -46,6 +47,8 @@ fun BaseBottomSheetComposable(
     masterSubtitleText: String? = null,
     primaryButtonText: String? = null,
     secondaryButtonText: String? = null,
+    buttonMinWidth: Dp,
+    buttonMaxWidth: Dp,
     closeActionListener: (() -> Unit)? = null,
     iconSize: Int? = 80,
     secondaryActionListener: (() -> Unit)? = null,
@@ -120,6 +123,8 @@ fun BaseBottomSheetComposable(
             Spacer(modifier = Modifier.height(15.dp))
             Box() {
                 BottomSheetButtons(
+                    buttonMaxWidth = buttonMaxWidth,
+                    buttonMinWidth= buttonMinWidth,
                     primaryButtonText = primaryButtonText,
                     secondaryButtonText = secondaryButtonText,
                     primaryActionListener = primaryActionListener,
@@ -210,6 +215,8 @@ private fun BottomSheetContent(
 
 @Composable
 private fun BottomSheetButtons(
+    buttonMinWidth: Dp,
+    buttonMaxWidth: Dp,
     secondaryButtonText: String? = null,
     secondaryActionListener: (() -> Unit)? = null,
     primaryButtonText: String? = null,
@@ -228,7 +235,8 @@ private fun BottomSheetButtons(
                         color = SdkManager.getConfig().project.color,
                         shape = IxiShape.RegularShape,
                         size = ButtonSize.Large,
-                        width = -2,
+                        minWidth = buttonMinWidth,
+                        maxWidth = buttonMaxWidth,
                         onClick = secondaryActionListener ?: {})
                 }
             }
@@ -248,7 +256,8 @@ private fun BottomSheetButtons(
                         color = SdkManager.getConfig().project.color,
                         shape = IxiShape.RegularShape,
                         size = ButtonSize.Large,
-                        width = -2,
+                        minWidth = buttonMinWidth,
+                        maxWidth = buttonMaxWidth,
                         onClick = primaryActionListener ?: {})
                 }
             }
@@ -313,6 +322,8 @@ fun BottomSheetView() {
         masterTitleText = "Test",
         masterSubtitleText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer s",
         closeActionListener = {},
-        closeActionAlignment = Alignment.CenterStart
+        closeActionAlignment = Alignment.CenterStart,
+        buttonMinWidth = 150.dp,
+        buttonMaxWidth = 300.dp
     )
 }

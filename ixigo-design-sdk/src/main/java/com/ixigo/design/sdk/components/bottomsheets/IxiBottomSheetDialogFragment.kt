@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.compose.ui.unit.Dp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -81,6 +82,8 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
         uiState.secondaryButtonText?.let {
             _binding.ixiBottomSheet.setSecondaryButton(it, uiState.secondaryButtonAction?:{})
         }
+        _binding.ixiBottomSheet.setButtonMinWidth(uiState.buttonMinWidth)
+        _binding.ixiBottomSheet.setButtonMaxWidth(uiState.buttonMaxWidth)
         _binding.ixiBottomSheet.setCloseActionListener{
             this.dismiss()
             onCloseActionListener()
@@ -166,6 +169,14 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
      */
     fun setSecondaryButton(secondaryButtonText: String, action:(()->Unit)? = null){
         uiState = uiState.copy(secondaryButtonText = secondaryButtonText, secondaryButtonAction = action)
+    }
+
+    fun setButtonMinWidth(minWidth: Dp){
+        uiState= uiState.copy(buttonMinWidth = minWidth)
+    }
+
+    fun setButtonMaxWidth(maxWidth: Dp){
+        uiState= uiState.copy(buttonMaxWidth = maxWidth)
     }
 
     /**
@@ -267,6 +278,8 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val secondaryButtonText: String? = null,
     val secondaryButtonAction: (()->Unit)? = null,
     val secondaryButtonColor:IxiColor? = null,
+    val buttonMinWidth: Dp = Dp.Unspecified,
+    val buttonMaxWidth: Dp = Dp.Infinity,
     val onClose: (() -> Unit)? = null,
     val iconSize:Float? = null,
     val view:View? = null,

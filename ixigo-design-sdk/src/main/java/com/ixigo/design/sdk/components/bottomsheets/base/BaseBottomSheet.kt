@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -110,6 +111,15 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryActionListener = secondaryActionListener)
     }
 
+    fun setButtonMinWidth(minWidth: Dp){
+        state.value = state.value.copy(buttonMinWidth = minWidth)
+    }
+
+    fun setButtonMaxWidth(maxWidth: Dp){
+        state.value = state.value.copy(buttonMaxWidth = maxWidth)
+    }
+
+
     /**
      * Set the action listener for close button.
      *
@@ -195,6 +205,8 @@ data class BottomSheetState(
     val toolbarText: String? = null,
     val primaryButtonText: String? = null,
     val secondaryButtonText: String? = null,
+    val buttonMinWidth: Dp = Dp.Unspecified,
+    val buttonMaxWidth: Dp = Dp.Infinity,
     val primaryActionListener: (()->Unit)? = null,
     val secondaryActionListener: (()->Unit)? = null,
     val onClose: (() -> Unit)? = null,
