@@ -87,7 +87,8 @@ fun ComposablePrimaryButton(
     color: IxiColor,
     shape: IxiShape,
     size: ButtonSize,
-    width: Int,
+    minWidth: Dp = Dp.Unspecified,
+    maxWidth: Dp = Dp.Infinity,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
@@ -107,7 +108,7 @@ fun ComposablePrimaryButton(
         onClick = onClick,
         modifier = modifier
             .height(size.height)
-            .widthIn(min = 150.dp),
+            .widthIn(min = minWidth, max = maxWidth),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
@@ -174,8 +175,9 @@ fun ComposableSecondaryButton(
     color: IxiColor,
     shape: IxiShape,
     size: ButtonSize,
+    minWidth: Dp = Dp.Unspecified,
+    maxWidth: Dp = Dp.Infinity,
     isEnabled: Boolean = true,
-    width: Int,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
@@ -185,11 +187,12 @@ fun ComposableSecondaryButton(
         color = color.mapSecStyle(color),
         shape = shape,
         size = size,
+        minWidth = minWidth,
+        maxWidth = maxWidth,
         isEnabled = isEnabled,
         startDrawable = startDrawable,
         endDrawable = endDrawable,
-        onClick = onClick,
-        width = width
+        onClick = onClick
     )
 }
 

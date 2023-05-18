@@ -3,6 +3,7 @@ package com.ixigo.design.sdk.components.buttons
 import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.buttons.base.BaseButton
 import com.ixigo.design.sdk.components.buttons.composable.ComposableSecondaryButton
@@ -81,15 +82,14 @@ class IxiSecondaryButton @JvmOverloads constructor(
     override fun Content() {
         with(state.value) {
             ComposableSecondaryButton(
-                text,
-                colors,
-                shapes,
-                sizes,
-                isEnabled,
-                preferredWidth,
-                startDrawableState.value,
-                endDrawableState.value,
-                onClick
+                text = text,
+                color = colors,
+                shape = shapes,
+                size = sizes,
+                isEnabled = isEnabled,
+                startDrawable = startDrawableState.value,
+                endDrawable = endDrawableState.value,
+                onClick = onClick
             )
         }
     }

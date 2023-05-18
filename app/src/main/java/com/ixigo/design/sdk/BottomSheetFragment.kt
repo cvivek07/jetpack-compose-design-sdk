@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.bottomsheets.helper.IxiBottomSheetHelper
@@ -71,9 +72,11 @@ class BottomSheetFragment: Fragment() {
                 IxiBottomSheetHelper.IxiBottomSheetUiModel(
                     titleText = "Main title sentence",
                     bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                    primaryButtonText = "Button",
+                    primaryButtonText = "No",
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
-                    secondaryButtonText = "Button",
+                    secondaryButtonText = "Yes, Delete",
+                    buttonMinWidth = 150.dp,
+                    buttonMaxWidth = 300.dp,
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
                 )
             )

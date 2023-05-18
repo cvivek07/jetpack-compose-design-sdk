@@ -27,6 +27,8 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 masterTitleText = toolbarText,
                 primaryButtonText = primaryButtonText,
                 secondaryButtonText = secondaryButtonText,
+                buttonMinWidth = buttonMinWidth,
+                buttonMaxWidth = buttonMaxWidth,
                 primaryActionListener = primaryActionListener,
                 secondaryActionListener = secondaryActionListener,
                 closeActionListener = onClose,
