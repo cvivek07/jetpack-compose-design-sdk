@@ -120,7 +120,6 @@ fun BaseBottomSheetComposable(
             if(showBottomDivider){
                 Divider(modifier = Modifier.fillMaxWidth(),thickness = 1.dp, color = colorResource(id = R.color.n100))
             }
-            Spacer(modifier = Modifier.height(15.dp))
             Box() {
                 BottomSheetButtons(
                     buttonMaxWidth = buttonMaxWidth,
@@ -131,7 +130,6 @@ fun BaseBottomSheetComposable(
                     secondaryActionListener = secondaryActionListener,
                 )
             }
-            Spacer(modifier = Modifier.height(15.dp))
         }
     }
 }
@@ -228,7 +226,7 @@ private fun BottomSheetButtons(
                 Box(
                     modifier = if (primaryButtonText == null) Modifier.align(Alignment.Center) else Modifier.align(
                         Alignment.TopEnd
-                    )
+                    ).padding(vertical = 15.dp)
                 ) {
                     ComposableSecondaryButton(
                         text = secondaryButtonText,
@@ -249,7 +247,7 @@ private fun BottomSheetButtons(
                         if (secondaryButtonText == null) Modifier.align(
                             Alignment.Center
                         ) else Modifier.align(Alignment.TopStart)
-                    )
+                    ).padding(vertical = 15.dp)
                 ) {
                     ComposablePrimaryButton(
                         text = primaryButtonText,
