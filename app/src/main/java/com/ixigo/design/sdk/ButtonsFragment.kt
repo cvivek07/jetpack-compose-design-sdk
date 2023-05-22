@@ -78,6 +78,16 @@ class ButtonsFragment : BaseFragment() {
             context?.let { it1 -> "Button6 Clicked Change".toToast(it1) }
         }
 
+        var isButtonSelected = false
+        binding.buttonAddRemove.setSize(ButtonSize.Medium)
+        binding.buttonAddRemove.setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
+        binding.buttonAddRemove.setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
+        binding.buttonAddRemove.setClickListener {
+            val buttonText = if (isButtonSelected) "Add" else "Remove"
+            binding.buttonAddRemove.setText(buttonText)
+            isButtonSelected = !isButtonSelected
+        }
+
         binding.buttonSeven.isEnabled = false
         binding.buttonSeven.setText("Outlined Small Disabled")
         binding.buttonSeven.setShape(IxiShape.RegularShape)
