@@ -397,7 +397,6 @@ private fun DrawComponents(
                     end.linkTo(imageEnd.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                    width = Dimension.preferredWrapContent
                 },
 
             textStyle = size.typography,
