@@ -67,7 +67,7 @@ object IxiBottomSheetHelper {
     }
 
     fun getBlankBottomSheet(ixiBottomSheetUiModel: IxiBottomSheetUiModel): IxiBottomSheetDialogFragment{
-        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, IxiBottomSheetDialogFragment.newInstance())
+        val fragment = addBasePropertiesToBottomSheet(ixiBottomSheetUiModel, IxiBottomSheetDialogFragment.newInstance(ixiBottomSheetUiModel.closeActionListener))
         ixiBottomSheetUiModel.view?.let {
             fragment.setView(ixiBottomSheetUiModel.view)
         }
@@ -93,6 +93,7 @@ object IxiBottomSheetHelper {
         val inlineAlertText: String? = null,
         val inlineAlertIxiColor: IxiColor? = null,
         val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
+        val closeActionListener:(()->Unit)? = null,
         val showBottomDivider: Boolean = false,
         @DrawableRes val toolbarCloseIcon: Int? = null
     )

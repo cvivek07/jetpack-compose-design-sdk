@@ -84,24 +84,32 @@ class BottomSheetFragment: Fragment() {
 
         }
 
-        val fragment = NestedViewFragment()
-        childFragmentManager.beginTransaction().add(fragment, "Test").commit()
         binding.fourth.setClickListener {
-            val fragment1 =IxiBottomSheetHelper.getBlankBottomSheet(
-                IxiBottomSheetHelper.IxiBottomSheetUiModel(
-                    toolbarTitle = "Main title sentence",
-                    view = fragment.view,
-                    primaryButtonText = "Button",
-                    primaryActionListener = { "Primary Button".toToast(requireContext()) },
-                    secondaryButtonText = "Button",
-                    secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                    disableDragging = true,
-                    closeActionAlignment = IxiBottomSheetView.ActionIconAlignment.START,
-                    toolbarCloseIcon = R.drawable.left_arrow
-                )
-            )
-            fragment1.show(childFragmentManager, "Tag")
-
+            val fragment = NestedViewFragment()
+            val fragmentTransaction = childFragmentManager.beginTransaction().add(fragment, "Test")
+            fragmentTransaction.commit()
+            fragmentTransaction.runOnCommit {
+                IxiBottomSheetHelper.getBlankBottomSheet(
+                    IxiBottomSheetHelper.IxiBottomSheetUiModel(
+                        toolbarTitle = "Main title sentence",
+                        view = fragment.view,
+                        primaryButtonText = "Button",
+                        primaryActionListener = { "Primary Button".toToast(requireContext()) },
+                        secondaryButtonText = "Button",
+                        secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
+                        disableDragging = true,
+                        closeActionAlignment = IxiBottomSheetView.ActionIconAlignment.START,
+                        closeActionListener = {
+                            val childFragment = childFragmentManager.findFragmentByTag("Test")
+                            childFragmentManager.beginTransaction().remove(
+                                childFragment!!
+                            ).commit()
+                            "Closed".toToast(requireContext())
+                        },
+                        toolbarCloseIcon = R.drawable.left_arrow
+                    )
+                ).show(childFragmentManager, "Tag")
+            }
         }
     }
 }
