@@ -3,6 +3,8 @@ package com.ixigo.design.sdk.components.inlinealert.base
 import android.animation.LayoutTransition
 import android.content.Context
 import android.text.Layout.Alignment
+import android.text.SpannableString
+import android.text.Spanned
 import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.annotation.ColorRes
@@ -91,7 +93,11 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
      */
     fun setHeading(heading:String){
         val initState = state.value
-        state.value = initState.copy(heading = heading)
+        state.value = initState.copy(heading = SpannableString(heading))
+    }
+
+    fun setSpannedHeading(spannedHeading: Spanned) {
+        state.value = state.value.copy(heading = spannedHeading)
     }
 
     /**
@@ -101,7 +107,11 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
      */
     fun setText(text:String){
         val initState = state.value
-        state.value = initState.copy(text = text)
+        state.value = initState.copy(text = SpannableString(text))
+    }
+
+    fun setSpannedText(spannedText: Spanned) {
+        state.value = state.value.copy(text = spannedText)
     }
 
     /**
@@ -235,8 +245,8 @@ abstract class BaseInlineAlert @JvmOverloads constructor(
 
 data class InlineAlertState(
     @DrawableRes val logo: Int? = null,
-    val heading:String? = null,
-    val text:String = "",
+    val heading:Spanned? = null,
+    val text:Spanned? = null,
     @DrawableRes val actionIcon:Int? = null,
     val onActionIconClickListener: (()->Unit)? = null,
     val ixiColor: IxiColor = SdkManager.getConfig().project.color,

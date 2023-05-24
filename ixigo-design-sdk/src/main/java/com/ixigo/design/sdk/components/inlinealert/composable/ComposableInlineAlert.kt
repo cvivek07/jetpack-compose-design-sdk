@@ -1,5 +1,7 @@
 package com.ixigo.design.sdk.components.inlinealert.composable
 
+import android.text.SpannableString
+import android.text.Spanned
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
@@ -26,8 +28,8 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
 @Composable
 fun ComposableInlineAlert(
     @DrawableRes logo: Int? = null,
-    heading:String? = null,
-    text:String,
+    heading:Spanned? = null,
+    text:Spanned? = null,
     @DrawableRes actionIcon:Int? = null,
     leftButtonText:String? = null,
     leftButtonClickListener:() -> Unit = {},
@@ -45,9 +47,9 @@ fun ComposableInlineAlert(
             .background(
                 color = colorResource(id = ixiColor.bgColor),
                 shape = RoundedCornerShape(10.dp)
-            )
+            ).padding(10.dp)
     ) {
-        Row(verticalAlignment = Alignment.Top, modifier = Modifier.padding(10.dp)) {
+        Row(verticalAlignment = Alignment.Top) {
             Box(modifier = Modifier.weight(3f)){
                 Row(verticalAlignment = Alignment.Top, horizontalArrangement = Arrangement.Center) {
                     logo?.let {
@@ -86,8 +88,8 @@ fun ComposableInlineAlert(
 
 @Composable
 fun InlineAlertContent(
-    heading: String? = null,
-    text: String,
+    heading: Spanned? = null,
+    text: Spanned? = null,
     leftButtonText:String? = null,
     leftButtonClickListener:() -> Unit = {},
     rightButtonText:String? = null,
@@ -99,12 +101,24 @@ fun InlineAlertContent(
 ){
     Column(verticalArrangement = Arrangement.Center, modifier = Modifier.fillMaxWidth()) {
         heading?.let {
-            TypographyText(modifier = Modifier.fillMaxWidth(), text = heading, textStyle = IxiTypography.Body.Small.regular.copy(colorResource(id = ixiColor.textColor)), textAlign = headingAlignment)
-            Spacer(modifier = Modifier.height(6.dp))
+            TypographyText(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                spanned = it,
+                textStyle = IxiTypography.Body.Small.regular.copy(colorResource(id = ixiColor.textColor)),
+                textAlign = headingAlignment
+            )
         }
-        TypographyText(modifier = Modifier.fillMaxWidth(), text = text, textStyle = IxiTypography.Body.XSmall.regular.copy(colorResource(id = ixiColor.pressedColor)), textAlign = textAlignment)
+        text?.let {
+            TypographyText(
+                modifier = Modifier.fillMaxWidth(),
+                spanned = it,
+                textStyle = IxiTypography.Body.XSmall.regular.copy(colorResource(id = ixiColor.pressedColor)),
+                textAlign = textAlignment
+            )
+        }
         if(leftButtonText!=null || rightButtonText!=null){
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(5.dp))
             InlineAlertButtonContainer(
                 leftButtonText,
                 leftButtonClickListener,
@@ -134,7 +148,6 @@ fun InlineAlertButtonContainer(
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.offset(x = (-10).dp)) {
         leftButtonText?.let {
             ComposableTextButton(text = it, color =buttonIxiColor?:ixiColor, size = ButtonSize.Small, width = -2, onClick = leftButtonClickListener)
-            Spacer(modifier = Modifier.width(8.dp))
         }
         rightButtonText?.let {
             ComposableTextButton(text = it, color = buttonIxiColor?:ixiColor, size = ButtonSize.Small, width = -2, onClick = rightButtonClickListener)
@@ -149,8 +162,8 @@ fun InlineAlertButtonContainer(
 fun PreviewComposable(){
     ComposableInlineAlert(
         logo = R.drawable.ic_call_24,
-        heading = "A short heading can be multiple liness this could also go into rwo lines",
-        text = "Lorem ipsum dolor sit amet, consecteturds jdsjd sjkdks dk skds jkd skj",
+        heading = SpannableString("A short heading can be multiple liness this could also go into rwo lines"),
+        text = SpannableString("Lorem ipsum dolor sit amet, consecteturds jdsjd sjkdks dk skds jkd skj"),
         actionIcon = R.drawable.ic_search,
     )
 }
