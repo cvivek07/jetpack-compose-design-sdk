@@ -35,7 +35,7 @@ fun OutlinedInputField(
     drawableStart: Int = 0,
     showLeadingDivider: Boolean = false,
     drawableEnd: Int = 0,
-    maxCharCount: Int = 0,
+    maxCharCount: Int = Int.MAX_VALUE,
     actionText: String? = "",
     helperText: String = "",
     helperTextColor: Int,
