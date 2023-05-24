@@ -87,7 +87,7 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
  *
  * @since 1.0
  */
-class IxiText @JvmOverloads constructor(
+open class IxiText @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr) {
 
