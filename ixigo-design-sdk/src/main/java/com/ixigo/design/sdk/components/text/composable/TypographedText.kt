@@ -96,6 +96,12 @@ fun Spanned.toAnnotatedString(): AnnotatedString = buildAnnotatedString {
                         fontFamily = IxiFamily
                     ), start, end
                 )
+                Typeface.NORMAL -> addStyle(
+                    SpanStyle(
+                        fontStyle = FontStyle.Normal,
+                        fontFamily = IxiFamily
+                    ), start, end
+                )
             }
             is UnderlineSpan -> addStyle(
                 SpanStyle(textDecoration = TextDecoration.Underline.plus(TextDecoration.Underline)),
