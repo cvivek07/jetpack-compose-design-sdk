@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
@@ -41,7 +42,8 @@ abstract class BaseInputField @JvmOverloads constructor(
             readOnly = false,
             isActiveAlways = false,
             enabled = true,
-            keyboardType = KeyboardType.Text
+            keyboardType = KeyboardType.Text,
+            capitalization = KeyboardCapitalization.None
         )
     )
 
@@ -245,6 +247,10 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = state.value.copy(keyboardType = type.getKeyboardType())
     }
 
+    fun setKeyboardCapitalization(capitalization: KeyboardCapitalizationWrapper) {
+        state.value = state.value.copy(capitalization = capitalization.getKeyboardCapitalization())
+    }
+
     fun setActiveAlways(isActiveAlways: Boolean) {
         val initState = state.value
         state.value = initState.copy(isActiveAlways = isActiveAlways)
@@ -317,7 +323,8 @@ data class InputFieldState(
     val readOnly: Boolean,
     val isActiveAlways: Boolean,
     val enabled: Boolean,
-    val keyboardType: KeyboardType
+    val keyboardType: KeyboardType,
+    val capitalization: KeyboardCapitalization
 )
 
 
@@ -349,6 +356,34 @@ class KeyboardTypeWrapper(private val keyboardType: KeyboardType) {
         @JvmStatic
         fun phone(): KeyboardTypeWrapper {
             return KeyboardTypeWrapper(KeyboardType.Phone)
+        }
+    }
+}
+
+class KeyboardCapitalizationWrapper(private val capitalization: KeyboardCapitalization) {
+    fun getKeyboardCapitalization(): KeyboardCapitalization {
+        return capitalization
+    }
+
+    companion object {
+        @JvmStatic
+        fun none(): KeyboardCapitalizationWrapper {
+            return KeyboardCapitalizationWrapper(KeyboardCapitalization.None)
+        }
+
+        @JvmStatic
+        fun characters(): KeyboardCapitalizationWrapper {
+            return KeyboardCapitalizationWrapper(KeyboardCapitalization.Characters)
+        }
+
+        @JvmStatic
+        fun words(): KeyboardCapitalizationWrapper {
+            return KeyboardCapitalizationWrapper(KeyboardCapitalization.Words)
+        }
+
+        @JvmStatic
+        fun sentences(): KeyboardCapitalizationWrapper {
+            return KeyboardCapitalizationWrapper(KeyboardCapitalization.Sentences)
         }
     }
 }

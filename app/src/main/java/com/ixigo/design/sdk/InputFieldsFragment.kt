@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.fragment.app.Fragment
+import com.ixigo.design.sdk.components.inputfields.base.KeyboardCapitalizationWrapper
 import com.ixigo.design.sdk.components.inputfields.base.KeyboardTypeWrapper
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
@@ -37,7 +39,6 @@ class InputFieldsFragment : Fragment() {
             setText("old text")
             setActionText("Add-On")
             setHelperText("This is helper Text")
-            setEndImageDrawable(R.drawable.ic_baseline_cancel_24)
             setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
             setMaxCharCount(30)
             setColor(IxiColor.Error)
@@ -62,6 +63,7 @@ class InputFieldsFragment : Fragment() {
                 Log.e("InputField", it)
             }
 //            setReadOnly(true)
+            setKeyboardCapitalization(KeyboardCapitalizationWrapper.characters())
         }
 
         _binding?.inputField2?.apply {
