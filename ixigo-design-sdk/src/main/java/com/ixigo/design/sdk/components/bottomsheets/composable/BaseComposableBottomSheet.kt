@@ -100,7 +100,7 @@ fun BaseBottomSheetComposable(
             }
             Box(modifier = Modifier
                 .weight(1f, false)
-                .padding(top = 30.dp, bottom = 15.dp)) {
+                .padding(top = 15.dp, bottom = 15.dp)) {
                 if(view!=null){
                     AndroidView(
                         factory = {
