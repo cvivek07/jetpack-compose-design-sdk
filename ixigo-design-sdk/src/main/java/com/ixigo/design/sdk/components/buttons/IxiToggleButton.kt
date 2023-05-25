@@ -44,12 +44,17 @@ class IxiToggleButton @JvmOverloads constructor(
         })
     }
 
+    fun setScale(scale: Float){
+        state.value = state.value.copy(scale = scale)
+    }
+
 
     @Composable
     override fun Content() {
         DrawSwitch(
             color = state.value.color,
             switchValue = state.value.switchValue,
+            scale = state.value.scale,
             switchChangeListener = state.value.onToggleListener
         )
     }
@@ -58,5 +63,6 @@ class IxiToggleButton @JvmOverloads constructor(
 data class ToggleButtonState(
     val color: IxiColor = IxiColor.Blue,
     val switchValue: Boolean = false,
+    val scale: Float = 1f,
     val onToggleListener: (Boolean) -> Unit = {}
 )
