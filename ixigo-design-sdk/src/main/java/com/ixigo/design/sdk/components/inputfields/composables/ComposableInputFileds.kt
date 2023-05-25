@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,8 @@ fun OutlinedInputField(
     onFocusChange: ((Boolean) -> Unit)?,
     isActiveAlways: Boolean,
     enabled: Boolean,
-    keyboardType: KeyboardType
+    keyboardType: KeyboardType,
+    capitalization: KeyboardCapitalization
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -108,7 +110,7 @@ fun OutlinedInputField(
             readOnly = readOnly,
             shape = RoundedCornerShape(size = 10.dp),
             enabled = enabled,
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType, capitalization = capitalization),
         )
         GetBottomText(helperText, helperTextColor, maxCharCount, textValue)
     }
@@ -133,7 +135,7 @@ private fun GetBottomText(
     maxCharCount: Int,
     textValue: String
 ) {
-    Row {
+    Row(modifier = Modifier.padding(top = 2.dp)) {
         Spacer(modifier = Modifier.width(15.dp).height(1.dp))
         if (helperText.isNotEmpty()) {
             TypographyText(
@@ -251,7 +253,7 @@ private fun getTrailingActions(
                     Text(
                         text = actionText,
                         modifier = Modifier
-                            .padding(2.dp),
+                            .padding(end = 8.dp),
                         color = colorResource(id = actionTextColor)
                     )
                 }
@@ -305,7 +307,8 @@ fun LinedInputField(
     onActionTextClick: () -> Unit,
     onActionIconClick: () -> Unit,
     onTextChange: ((String) -> Unit)?,
-    onFocusChange: ((Boolean) -> Unit)?
+    onFocusChange: ((Boolean) -> Unit)?,
+    capitalization: KeyboardCapitalization
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -367,7 +370,7 @@ fun LinedInputField(
                 unfocusedLabelColor = colorResource(id = R.color.n800)
             ),
             readOnly = readOnly,
-            keyboardOptions = KeyboardOptions(keyboardType = keyboardType)
+            keyboardOptions = KeyboardOptions(keyboardType = keyboardType, capitalization = capitalization)
         )
         Divider(color = colorResource(id = dividerColor), modifier = Modifier.padding(top = 0.dp))
         GetBottomText(helperText, helperTextColor, maxCharCount, textValue)

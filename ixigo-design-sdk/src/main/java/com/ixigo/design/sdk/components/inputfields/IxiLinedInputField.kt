@@ -32,7 +32,8 @@ class IxiLinedInputField @JvmOverloads constructor(
             colors = state.value.color,
             width = preferredWidth,
             readOnly = state.value.readOnly,
-            keyboardType = state.value.keyboardType
+            keyboardType = state.value.keyboardType,
+            capitalization = state.value.capitalization
         )
 
     }
