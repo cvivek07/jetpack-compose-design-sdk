@@ -1,5 +1,7 @@
 package com.ixigo.design.sdk.components.bottomsheets.composable
 
+import android.text.SpannableString
+import android.text.Spanned
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -206,7 +208,7 @@ private fun BottomSheetContent(
         }
         inlineAlertText?.let {
             Spacer(modifier = Modifier.height(20.dp))
-            ComposableInlineAlert(text = it, ixiColor = inlineAlertIxiColor.mapIxiColorToInlineAlertColor(inlineAlertIxiColor), textAlignment = TextAlign.Center)
+            ComposableInlineAlert(text = SpannableString(it), ixiColor = inlineAlertIxiColor.mapIxiColorToInlineAlertColor(inlineAlertIxiColor), textAlignment = TextAlign.Center)
         }
     }
 }
