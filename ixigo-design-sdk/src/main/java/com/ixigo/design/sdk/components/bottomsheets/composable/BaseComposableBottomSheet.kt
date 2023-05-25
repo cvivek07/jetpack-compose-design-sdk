@@ -242,7 +242,7 @@ private fun BottomSheetContent(
             Spacer(modifier = Modifier.height(20.dp))
             ComposableInlineAlert(text = SpannableString(it), ixiColor = inlineAlertIxiColor.mapIxiColorToInlineAlertColor(inlineAlertIxiColor), textAlignment = TextAlign.Center)
             ComposableInlineAlert(
-                text = it,
+                text = SpannableString(it),
                 ixiColor = inlineAlertIxiColor.mapIxiColorToInlineAlertColor(inlineAlertIxiColor),
                 textAlignment = TextAlign.Center
             )
