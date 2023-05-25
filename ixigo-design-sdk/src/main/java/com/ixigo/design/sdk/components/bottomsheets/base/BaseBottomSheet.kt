@@ -95,9 +95,9 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      * @param ixiPrimaryButtonText The text to be displayed on the primary button.
      * @param primaryActionListener The action to be performed when the primary button is clicked.
      */
-    fun setPrimaryButton(ixiPrimaryButtonText: String, primaryActionListener: (() -> Unit)?){
+    fun setPrimaryButton(ixiPrimaryButtonText: String, primaryButtonHelperText: String? = null, primaryActionListener: (() -> Unit)?){
         val inState = state.value
-        state.value = inState.copy(primaryButtonText = ixiPrimaryButtonText, primaryActionListener = primaryActionListener)
+        state.value = inState.copy(primaryButtonText = ixiPrimaryButtonText, primaryButtonHelperText = primaryButtonHelperText, primaryActionListener = primaryActionListener)
     }
 
     /**
@@ -106,9 +106,9 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      * @param ixiSecondaryButtonText the text for the secondary button.
      * @param secondaryActionListener the action listener for the secondary button.
      */
-    fun setSecondaryButton(ixiSecondaryButtonText: String, secondaryActionListener: (() -> Unit)){
+    fun setSecondaryButton(ixiSecondaryButtonText: String, secondaryButtonHelperText: String? = null, secondaryActionListener: (() -> Unit)){
         val inState = state.value
-        state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryActionListener = secondaryActionListener)
+        state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryButtonHelperText = secondaryButtonHelperText, secondaryActionListener = secondaryActionListener)
     }
 
     fun setButtonMinWidth(minWidth: Dp){
@@ -205,6 +205,8 @@ data class BottomSheetState(
     val toolbarText: String? = null,
     val primaryButtonText: String? = null,
     val secondaryButtonText: String? = null,
+    val primaryButtonHelperText: String? = null,
+    val secondaryButtonHelperText: String? = null,
     val buttonMinWidth: Dp = Dp.Unspecified,
     val buttonMaxWidth: Dp = Dp.Infinity,
     val primaryActionListener: (()->Unit)? = null,

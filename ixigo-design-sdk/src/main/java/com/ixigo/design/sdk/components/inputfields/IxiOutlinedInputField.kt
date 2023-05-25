@@ -36,7 +36,8 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             readOnly = state.value.readOnly,
             isActiveAlways = state.value.isActiveAlways,
             enabled = state.value.enabled,
-            keyboardType = state.value.keyboardType
+            keyboardType = state.value.keyboardType,
+            capitalization = state.value.capitalization
         )
 
     }

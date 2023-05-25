@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -238,6 +239,7 @@ fun RightContent(state: MutableState<ListItemDataState>) {
 fun DrawSwitch(
     color: IxiColor,
     switchValue: Boolean,
+    scale: Float = 1f,
     switchChangeListener: (Boolean) -> Unit,
 ) {
     val switchState = remember { mutableStateOf(switchValue) }
@@ -247,6 +249,7 @@ fun DrawSwitch(
     }
 
     Switch(
+        modifier = Modifier.scale(scale),
         checked = switchState.value,
         onCheckedChange = {
             switchState.value = it

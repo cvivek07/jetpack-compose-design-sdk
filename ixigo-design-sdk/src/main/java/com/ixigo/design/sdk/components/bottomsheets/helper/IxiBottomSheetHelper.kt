@@ -22,10 +22,10 @@ object IxiBottomSheetHelper {
             bottomSheet.setCloseActionAlignment(ixiBottomSheetUiModel.closeActionAlignment)
         }
         ixiBottomSheetUiModel.primaryButtonText?.let {
-            bottomSheet.setPrimaryButton(it, ixiBottomSheetUiModel.primaryActionListener)
+            bottomSheet.setPrimaryButton(it, ixiBottomSheetUiModel.primaryButtonHelperText, ixiBottomSheetUiModel.primaryActionListener)
         }
         ixiBottomSheetUiModel.secondaryButtonText?.let {
-            bottomSheet.setSecondaryButton(it, ixiBottomSheetUiModel.secondaryActionListener)
+            bottomSheet.setSecondaryButton(it, ixiBottomSheetUiModel.secondaryButtonHelperText, ixiBottomSheetUiModel.secondaryActionListener)
         }
         bottomSheet.setButtonMinWidth(ixiBottomSheetUiModel.buttonMinWidth)
         bottomSheet.setButtonMaxWidth(ixiBottomSheetUiModel.buttonMaxWidth)
@@ -85,6 +85,8 @@ object IxiBottomSheetHelper {
         val primaryButtonText:String? = null,
         val primaryActionListener:(()->Unit)? = null,
         val secondaryButtonText:String? = null,
+        val primaryButtonHelperText: String? = null,
+        val secondaryButtonHelperText: String? = null,
         val buttonMinWidth: Dp = Dp.Unspecified,
         val buttonMaxWidth: Dp = Dp.Infinity,
         val secondaryActionListener:(()->Unit)? = null,

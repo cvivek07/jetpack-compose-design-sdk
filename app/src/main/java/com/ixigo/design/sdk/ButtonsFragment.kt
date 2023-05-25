@@ -152,6 +152,7 @@ class ButtonsFragment : BaseFragment() {
         binding.buttonTen.setClickListener {
             context?.let { it1 -> "Button10 Clicked Change".toToast(it1) }
         }
+        binding.radioButton.setScale(0.5f)
         binding.radioButton.setToggleChangeListener {
             Toast.makeText(requireContext(), if(it) "Checked" else "Un-Checked", Toast.LENGTH_LONG).show()
         }

@@ -31,6 +31,8 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 buttonMaxWidth = buttonMaxWidth,
                 primaryActionListener = primaryActionListener,
                 secondaryActionListener = secondaryActionListener,
+                primaryButtonHelperText = primaryButtonHelperText,
+                secondaryButtonHelperText = secondaryButtonHelperText,
                 closeActionListener = onClose,
                 iconSize = iconSize?.toInt()?:80,
                 view = view,
