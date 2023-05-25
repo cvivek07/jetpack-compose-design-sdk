@@ -43,7 +43,9 @@ class BottomSheetFragment: Fragment() {
                     primaryActionListener = { "Primary Button".toToast(requireContext()) },
                     secondaryButtonText = "Button",
                     secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                    inlineAlertText = "This is a placeholder"
+                    inlineAlertText = "This is a placeholder",
+                    secondaryButtonHelperText = "Hello",
+                    primaryButtonHelperText = "Hey!"
                     )
             )
             fragment.show(childFragmentManager, "Tag")

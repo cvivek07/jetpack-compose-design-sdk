@@ -77,10 +77,10 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
             _binding.ixiBottomSheet.setView(it)
         }
         uiState.primaryButtonText?.let {
-            _binding.ixiBottomSheet.setPrimaryButton(it, uiState.primaryButtonAction?:{})
+            _binding.ixiBottomSheet.setPrimaryButton(it, uiState.primaryButtonHelperText, uiState.primaryButtonAction?:{})
         }
         uiState.secondaryButtonText?.let {
-            _binding.ixiBottomSheet.setSecondaryButton(it, uiState.secondaryButtonAction?:{})
+            _binding.ixiBottomSheet.setSecondaryButton(it, uiState.secondaryButtonHelperText, uiState.secondaryButtonAction?:{})
         }
         _binding.ixiBottomSheet.setButtonMinWidth(uiState.buttonMinWidth)
         _binding.ixiBottomSheet.setButtonMaxWidth(uiState.buttonMaxWidth)
@@ -157,8 +157,8 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
      * @param primaryButtonText The text to be displayed on the primary button.
      * @param action The action to be performed when the primary button is clicked.
      */
-    fun setPrimaryButton(primaryButtonText: String, action:(()->Unit)? = null){
-        uiState = uiState.copy(primaryButtonText = primaryButtonText, primaryButtonAction = action)
+    fun setPrimaryButton(primaryButtonText: String, primaryButtonHelperText: String? = null, action:(()->Unit)? = null){
+        uiState = uiState.copy(primaryButtonText = primaryButtonText, primaryButtonAction = action, primaryButtonHelperText = primaryButtonHelperText)
     }
 
     /**
@@ -167,8 +167,8 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
      * @param secondaryButtonText The text to be displayed on the secondary button.
      * @param action The action to be performed when the secondary button is clicked.
      */
-    fun setSecondaryButton(secondaryButtonText: String, action:(()->Unit)? = null){
-        uiState = uiState.copy(secondaryButtonText = secondaryButtonText, secondaryButtonAction = action)
+    fun setSecondaryButton(secondaryButtonText: String, secondaryButtonHelperText: String? = null, action:(()->Unit)? = null){
+        uiState = uiState.copy(secondaryButtonText = secondaryButtonText, secondaryButtonAction = action, secondaryButtonHelperText = secondaryButtonHelperText)
     }
 
     fun setButtonMinWidth(minWidth: Dp){
@@ -273,9 +273,11 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val toolbarTitle: String? = null,
     val toolbarSubtitle: String? = null,
     val primaryButtonText: String? = null,
+    val primaryButtonHelperText: String? = null,
     val primaryButtonAction: (()->Unit)? = null,
     val primaryButtonColor:IxiColor? = null,
     val secondaryButtonText: String? = null,
+    val secondaryButtonHelperText: String? = null,
     val secondaryButtonAction: (()->Unit)? = null,
     val secondaryButtonColor:IxiColor? = null,
     val buttonMinWidth: Dp = Dp.Unspecified,
