@@ -2,7 +2,6 @@ package com.ixigo.design.sdk.components.inputfields.composables
 
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -16,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
@@ -25,7 +25,6 @@ import com.ixigo.design.sdk.components.buttons.composable.updateWidth
 import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
-import java.time.format.TextStyle
 
 private val unFocusColor = R.color.n100
 
@@ -33,6 +32,7 @@ private val unFocusColor = R.color.n100
 fun OutlinedInputField(
     actionImage: Int = 0,
     drawableStartText: String = "",
+    drawableStartTextStyle: TextStyle = IxiTypography.Body.Large.regular,
     drawableStart: Int = 0,
     showLeadingDivider: Boolean = false,
     drawableEnd: Int = 0,
@@ -67,7 +67,7 @@ fun OutlinedInputField(
         onActionIconClick,
     )
 
-    val leadingIcon = getLeadingAction(drawableStartText, drawableStart, showLeadingDivider,  onDrawableStartClick)
+    val leadingIcon = getLeadingAction(drawableStartText, drawableStartTextStyle, drawableStart, showLeadingDivider,  onDrawableStartClick)
 
     var textValue by remember(text) { mutableStateOf(text) }
 
@@ -190,6 +190,7 @@ private fun getPlaceHolder(
 @Composable
 private fun getLeadingAction(
     drawableStartText: String,
+    drawableStartTextStyle: TextStyle,
     drawableStart: Int,
     showLeadingDivider: Boolean,
     onDrawableStartClick: () -> Unit,
@@ -199,12 +200,12 @@ private fun getLeadingAction(
             Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier
                 .height(IntrinsicSize.Min)
                 .clickable(onClick = onDrawableStartClick)) {
-                Text(
+                TypographyText(
                     text = drawableStartText,
                     modifier = Modifier
                         .padding(start = 16.dp),
                     color = colorResource(id = R.color.n800),
-                    style = LocalTextStyle.current.copy(textAlign = TextAlign.Start)
+                    textStyle = drawableStartTextStyle
                 )
 
                 Image(
@@ -289,6 +290,7 @@ private fun getTrailingActions(
 fun LinedInputField(
     actionImage: Int = 0,
     drawableStartText: String ="",
+    drawableStartTextStyle: TextStyle = IxiTypography.Body.Large.regular,
     showLeadingDivider: Boolean = false,
     drawableStart: Int = 0,
     drawableEnd: Int = 0,
@@ -321,7 +323,7 @@ fun LinedInputField(
         onActionIconClick,
     )
 
-    val leadingIcon = getLeadingAction(drawableStartText, drawableStart, showLeadingDivider, onDrawableStartClick)
+    val leadingIcon = getLeadingAction(drawableStartText, drawableStartTextStyle, drawableStart, showLeadingDivider, onDrawableStartClick)
 
     var textValue by remember(text) { mutableStateOf(text) }
 

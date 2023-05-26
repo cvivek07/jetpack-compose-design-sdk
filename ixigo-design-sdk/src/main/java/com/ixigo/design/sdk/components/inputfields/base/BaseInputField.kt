@@ -5,11 +5,13 @@ import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiTypography
 
 abstract class BaseInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
@@ -136,6 +138,10 @@ abstract class BaseInputField @JvmOverloads constructor(
 
     fun setStartDrawableText(text: String){
         state.value = state.value.copy(drawableStartText = text)
+    }
+
+    fun setStartDrawableTextStyle(style: TextStyle){
+        state.value = state.value.copy(drawableStartTextStyle = style)
     }
 
     fun showLeadingDivider(show: Boolean){
@@ -303,6 +309,7 @@ data class InputFieldState(
     val color: IxiColor,
     @DrawableRes val actionImage: Int,
     val drawableStartText: String,
+    val drawableStartTextStyle: TextStyle = IxiTypography.Body.Large.regular,
     @DrawableRes val drawableStart: Int,
     val showLeadingDivider: Boolean,
     @DrawableRes val drawableEnd: Int,

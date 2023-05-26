@@ -17,6 +17,7 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,
             drawableStartText = state.value.drawableStartText,
+            drawableStartTextStyle = state.value.drawableStartTextStyle,
             drawableStart = state.value.drawableStart,
             showLeadingDivider = state.value.showLeadingDivider,
             actionText = state.value.actionText,

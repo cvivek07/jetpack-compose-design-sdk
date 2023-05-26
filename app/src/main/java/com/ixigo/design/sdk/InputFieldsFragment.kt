@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.components.inputfields.base.KeyboardCapitalizationWrapper
 import com.ixigo.design.sdk.components.inputfields.base.KeyboardTypeWrapper
 import com.ixigo.design.sdk.components.styles.IxiColor
+import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.databinding.FragmentInputFieldsBinding
 
 class InputFieldsFragment : Fragment() {
@@ -35,6 +36,7 @@ class InputFieldsFragment : Fragment() {
         _binding?.inputField1?.apply {
             setLabel("Label")
             setStartDrawableText("+91")
+            setStartDrawableTextStyle(IxiTypography.Heading.H5.italics)
             showLeadingDivider(true)
             setText("old text")
             setActionText("Add-On")
