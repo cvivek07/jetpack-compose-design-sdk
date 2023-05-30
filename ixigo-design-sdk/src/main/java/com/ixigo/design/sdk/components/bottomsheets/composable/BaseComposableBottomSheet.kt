@@ -122,7 +122,7 @@ fun BaseBottomSheetComposable(
             }
             Box(modifier = Modifier
                 .weight(1f, false)
-                .padding(top = 15.dp, bottom = 15.dp)) {
+                .padding(top = 20.dp, bottom = 20.dp)) {
                 if(view!=null){
                     AndroidView(
                         factory = {
@@ -292,13 +292,12 @@ private fun BottomSheetButtons(
                                 text = it,
                                 textStyle = IxiTypography.Body.XSmall.regular,
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                                color = Color(R.color.n600)
+                                color = colorResource(id = R.color.n600)
                             )
                         }
                     }
                 }
             }
-            Spacer(modifier = Modifier.width(30.dp))
         }
         primaryButtonText?.let {
             Box {
@@ -326,7 +325,7 @@ private fun BottomSheetButtons(
                                 text = primaryButtonHelperText,
                                 textStyle = IxiTypography.Body.XSmall.regular,
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                                color = Color(R.color.n600)
+                                color = colorResource(id = R.color.n600)
                             )
                         }
                     }
@@ -387,7 +386,9 @@ private fun MasterTitle(
                 text = it,
                 textAlign = TextAlign.Center,
                 textStyle = IxiTypography.Body.Small.regular,
-                modifier = Modifier.padding(horizontal = 48.dp).align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .padding(start = 48.dp, end = 48.dp, top = 5.dp)
+                    .align(Alignment.CenterHorizontally)
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
