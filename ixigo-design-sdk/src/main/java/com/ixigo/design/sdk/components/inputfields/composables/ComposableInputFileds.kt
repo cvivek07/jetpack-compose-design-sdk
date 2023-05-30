@@ -32,7 +32,7 @@ private val unFocusColor = R.color.n100
 fun OutlinedInputField(
     actionImage: Int = 0,
     drawableStartText: String = "",
-    drawableStartTextStyle: TextStyle = IxiTypography.Body.Large.regular,
+    drawableStartTextStyle: TextStyle = IxiTypography.Body.Medium.regular,
     drawableStart: Int = 0,
     showLeadingDivider: Boolean = false,
     drawableEnd: Int = 0,
