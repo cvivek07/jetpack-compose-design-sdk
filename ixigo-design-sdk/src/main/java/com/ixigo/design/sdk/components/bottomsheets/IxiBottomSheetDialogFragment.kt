@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.LayoutRes
 import androidx.compose.ui.unit.Dp
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
@@ -25,9 +26,9 @@ import com.ixigo.design.sdk.databinding.IxiBottomSheetFragmentBinding
  * @version 1.0
  * @since 2023-01-27
  */
-class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)? = null) :BottomSheetDialogFragment() {
+open class IxiBottomSheetDialogFragment(@LayoutRes val contentLayoutId: Int = 0, ixiBottomSheetDialogFragmentUiModel: IxiBottomSheetDialogFragmentUiModel = IxiBottomSheetDialogFragmentUiModel(), private val onCloseActionListener:(()->Unit)? = null) :BottomSheetDialogFragment() {
     private lateinit var _binding: IxiBottomSheetFragmentBinding
-    private var uiState: IxiBottomSheetDialogFragmentUiModel = IxiBottomSheetDialogFragmentUiModel()
+    private var uiState: IxiBottomSheetDialogFragmentUiModel = ixiBottomSheetDialogFragmentUiModel
 
     /**
      * Overrides [BottomSheetDialogFragment.onCreate] to set the style of the fragment
@@ -56,6 +57,7 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
      * Sets up the UI using the [uiState] object.
      */
     private fun setupUi(){
+        setView()
         _binding.ixiBottomSheet.setImage(uiState.image)
         _binding.ixiBottomSheet.setHeaderText(uiState.titleText)
         _binding.ixiBottomSheet.setImageBackgroundColor(uiState.imageBackgroundColor)
@@ -73,9 +75,6 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
         uiState.inlineAlertText?.let {
             _binding.ixiBottomSheet.setInlineAlert(it, uiState.inlineAlertIxiColor)
         }
-        uiState.view?.let {
-            _binding.ixiBottomSheet.setView(it)
-        }
         uiState.primaryButtonText?.let {
             _binding.ixiBottomSheet.setPrimaryButton(it, uiState.primaryButtonHelperText, uiState.primaryButtonAction?:{})
         }
@@ -89,6 +88,17 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
             onCloseActionListener()
         }
         _binding.ixiBottomSheet.showBottomDivider(uiState.showBottomDivider)
+    }
+
+    private fun setView() {
+        if (contentLayoutId != 0) {
+            val view = LayoutInflater.from(requireContext()).inflate(contentLayoutId, _binding.root, false)
+            _binding.ixiBottomSheet.setView(view = view)
+            return
+        }
+        uiState.view?.let {
+            _binding.ixiBottomSheet.setView(it)
+        }
     }
 
     /**
@@ -260,7 +270,7 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
         val TAG2: String? = IxiBottomSheetDialogFragment::class.java.canonicalName
         @JvmStatic
         fun newInstance(onCloseActionListener:(()->Unit)?=null):IxiBottomSheetDialogFragment{
-            return IxiBottomSheetDialogFragment(onCloseActionListener)
+            return IxiBottomSheetDialogFragment(onCloseActionListener = onCloseActionListener)
         }
     }
 }

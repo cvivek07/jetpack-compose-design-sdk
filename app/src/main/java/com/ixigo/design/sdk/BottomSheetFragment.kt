@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
+import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragmentUiModel
 import com.ixigo.design.sdk.components.bottomsheets.helper.IxiBottomSheetHelper
 import com.ixigo.design.sdk.databinding.FragmentBottomSheetBinding
 
@@ -87,31 +87,13 @@ class BottomSheetFragment: Fragment() {
         }
 
         binding.fourth.setClickListener {
-            val fragment = NestedViewFragment()
-            val fragmentTransaction = childFragmentManager.beginTransaction().add(fragment, "Test")
-            fragmentTransaction.commit()
-            fragmentTransaction.runOnCommit {
-                IxiBottomSheetHelper.getBlankBottomSheet(
-                    IxiBottomSheetHelper.IxiBottomSheetUiModel(
-                        toolbarTitle = "Main title sentence",
-                        view = fragment.view,
-                        primaryButtonText = "Button",
-                        primaryActionListener = { "Primary Button".toToast(requireContext()) },
-                        secondaryButtonText = "Button",
-                        secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                        disableDragging = true,
-                        closeActionAlignment = IxiBottomSheetView.ActionIconAlignment.START,
-                        closeActionListener = {
-                            val childFragment = childFragmentManager.findFragmentByTag("Test")
-                            childFragmentManager.beginTransaction().remove(
-                                childFragment!!
-                            ).commit()
-                            "Closed".toToast(requireContext())
-                        },
-                        toolbarCloseIcon = R.drawable.left_arrow
-                    )
-                ).show(childFragmentManager, "Tag")
-            }
+            val ixiBottomSheetDialogFragmentUiModel = IxiBottomSheetDialogFragmentUiModel(
+                toolbarTitle = "Toolbar Title",
+                primaryButtonText = "Done",
+                secondaryButtonText = "Cancel",
+                disableDragging = true
+            )
+            BottomSheet(ixiBottomSheetDialogFragmentUiModel).show(childFragmentManager, "BOTTOM_SHEET")
         }
     }
 }
