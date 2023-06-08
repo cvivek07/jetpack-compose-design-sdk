@@ -2,9 +2,9 @@ package com.ixigo.design.sdk.components.toast
 
 import android.content.Context
 import android.graphics.PixelFormat
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.WindowManager
+import androidx.annotation.DrawableRes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.ViewRootForInspector
@@ -15,19 +15,20 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.toast.composable.ComposablePopup
-import java.util.*
+import java.util.Timer
+import java.util.TimerTask
 
 
 private const val popupShortDuration = 3000L
 private const val popupLongDuration = 6000L
 
-class IxiToast @JvmOverloads constructor(
+class IxiToast private constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
 ) : BaseComponent(context, attrs, defStyleAttr), ViewRootForInspector {
 
-    constructor(context: Context, viewLifecycleOwner: LifecycleOwner) : this(context) {
+    private constructor(context: Context, viewLifecycleOwner: LifecycleOwner) : this(context) {
         ViewTreeLifecycleOwner.set(this, viewLifecycleOwner)
         setViewTreeSavedStateRegistryOwner(viewLifecycleOwner as SavedStateRegistryOwner)
     }
@@ -58,21 +59,21 @@ class IxiToast @JvmOverloads constructor(
     }
 
     fun setLeftIconDetails(
-        drawable: Drawable,
+        @DrawableRes drawable: Int,
         leftIconClickListener: (() -> Unit)? = null
     ) {
         state.value = state.value.copy(
-            leftIcon = ImageData.createFromDrawable(drawable),
+            leftIcon = ImageData.createFromRes(drawable),
             leftIconClickListener = leftIconClickListener
         )
     }
 
     fun setRightIconDetails(
-        drawable: Drawable,
+        @DrawableRes drawable: Int,
         rightIconClickListener: (() -> Unit)? = null
     ) {
         state.value = state.value.copy(
-            rightIcon = ImageData.createFromDrawable(drawable),
+            rightIcon = ImageData.createFromRes(drawable),
             rightIconClickListener = rightIconClickListener
         )
     }
@@ -91,30 +92,72 @@ class IxiToast @JvmOverloads constructor(
         state.value = state.value.copy(ixiToastType = ixiToastType)
     }
 
-    fun setPosition(
-        positionX: Int,
+    fun setPositionX(
+        positionX: Int
+    ) {
+        state.value = state.value.copy(positionX = positionX)
+    }
+
+    fun setPositionY(
         positionY: Int
     ) {
-        state.value = state.value.copy(positionX = positionX, positionY = positionY)
+        state.value = state.value.copy(positionY = positionY)
     }
 
     fun setDuration(duration: IxiToastDuration) {
-        Timer().schedule(object : TimerTask() {
-            override fun run() {
-                state.value = state.value.copy(show = false)
-            }
-
-        }, getPopupAutoDismissDuration(duration))
+        state.value = state.value.copy(duration = getPopupAutoDismissDuration(duration))
     }
 
     fun show() {
         state.value = state.value.copy(show = true)
         windowManager.addView(this, params)
+        startAutoDismissTimer()
     }
 
     fun hide() {
         state.value = state.value.copy(show = false)
         windowManager.removeView(this)
+    }
+
+    private fun startAutoDismissTimer() {
+        state.value.duration?.let {
+            Timer().schedule(object : TimerTask() {
+                override fun run() {
+                    hide()
+                }
+            }, it)
+        }
+    }
+
+    class Builder(context: Context, lifecycleOwner: LifecycleOwner) {
+        private var ixiToast: IxiToast = IxiToast(context, lifecycleOwner)
+
+        fun setTitle(title: String) = apply { ixiToast.setTitle(title) }
+        fun setSubtitle(subTitle: String) = apply { ixiToast.setSubtitle(subTitle) }
+        fun setLeftIcon(@DrawableRes drawable: Int, listener: (() -> Unit)? = null) =
+            apply {
+                ixiToast.setLeftIconDetails(drawable, listener)
+            }
+
+        fun setRightIcon(@DrawableRes drawable: Int, listener: (() -> Unit)? = null) =
+            apply {
+                ixiToast.setRightIconDetails(drawable, listener)
+            }
+
+        fun setButton(text: String, listener: (() -> Unit)? = null) =
+            apply {
+                ixiToast.setButtonDetails(text, listener)
+            }
+
+        fun setType(type: IxiToastType) = apply { ixiToast.setIxiToastType(type) }
+        fun setXPosition(x: Int) = apply { ixiToast.setPositionX(x) }
+        fun setYPosition(y: Int) = apply { ixiToast.setPositionY(y) }
+
+        fun setDuration(duration: IxiToastDuration) = apply { ixiToast.setDuration(duration) }
+
+        fun build(): IxiToast {
+            return ixiToast
+        }
     }
 
     @Composable

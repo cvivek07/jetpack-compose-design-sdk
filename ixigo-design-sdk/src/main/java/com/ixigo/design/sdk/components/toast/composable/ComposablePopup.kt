@@ -2,7 +2,15 @@ package com.ixigo.design.sdk.components.toast.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -22,7 +30,13 @@ import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
 import com.ixigo.design.sdk.components.toast.IxiToastType
 
-private val iconDefaultSize = 20.dp
+private val ICON_DEFAULT_SIZE = 20.dp
+private val ICON_PADDING_END = 12.dp
+private val POPUP_PADDING_HORIZONTAL = 20.dp
+private val CONTENT_PADDING = 18.dp
+private val BUTTON_PADDING_HORIZONTAL = 12.dp
+private val BUTTON_PADDING_VERTICAL = 10.dp
+private val TOAST_RADIUS = 10.dp
 
 @Composable
 fun ComposablePopup(
@@ -47,31 +61,26 @@ fun ComposablePopup(
         IxiToastType.YELLOW -> colorResource(id = R.color.y600)
     }
 
-    val popup = remember {
-        mutableStateOf(show)
-    }
+    val popup = remember { mutableStateOf(show) }
 
     if (popup.value) {
         Popup(
-            alignment = Alignment.TopCenter,
             offset = IntOffset(positionX, positionY),
             onDismissRequest = { popup.value = false },
-            properties = PopupProperties(
-                dismissOnClickOutside = true,
-            )
+            properties = PopupProperties(dismissOnClickOutside = true),
         ) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
                     .wrapContentHeight()
-                    .padding(horizontal = 20.dp),
+                    .padding(horizontal = POPUP_PADDING_HORIZONTAL),
                 horizontalArrangement = Arrangement.Center
             ) {
                 Row(
                     modifier = Modifier
                         .wrapContentSize()
-                        .background(backgroundColor, RoundedCornerShape(10.dp))
-                        .padding(horizontal = 18.dp, vertical = 10.dp),
+                        .background(backgroundColor, RoundedCornerShape(TOAST_RADIUS))
+                        .padding(horizontal = CONTENT_PADDING, vertical = BUTTON_PADDING_VERTICAL),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceEvenly,
                 ) {
@@ -79,8 +88,7 @@ fun ComposablePopup(
                         Icon(
                             icon = leftIcon,
                             iconClickListener = leftIconClickListener,
-                            modifier = Modifier
-                                .padding(end = 12.dp)
+                            modifier = Modifier.padding(end = ICON_PADDING_END)
                         )
                     }
 
@@ -93,18 +101,16 @@ fun ComposablePopup(
                         TypographyText(
                             text = heading,
                             textStyle = IxiTypography.Body.Medium.regular,
-                            color = if (ixiToastType == IxiToastType.WHITE) colorResource(
-                                R.color.n800
-                            ) else colorResource(R.color.n0),
+                            color = if (ixiToastType == IxiToastType.WHITE) colorResource(R.color.n800)
+                            else colorResource(R.color.n0),
                         )
 
                         subHeading?.let {
                             TypographyText(
                                 text = subHeading,
                                 textStyle = IxiTypography.Body.Small.regular,
-                                color = if (ixiToastType == IxiToastType.WHITE) colorResource(
-                                    R.color.n800
-                                ) else colorResource(R.color.n0),
+                                color = if (ixiToastType == IxiToastType.WHITE) colorResource(R.color.n800)
+                                else colorResource(R.color.n0),
                             )
                         }
                     }
@@ -115,7 +121,10 @@ fun ComposablePopup(
                             textStyle = IxiTypography.Body.Medium.regular,
                             modifier = Modifier
                                 .wrapContentSize()
-                                .padding(horizontal = 12.dp, vertical = 10.dp)
+                                .padding(
+                                    horizontal = BUTTON_PADDING_HORIZONTAL,
+                                    vertical = BUTTON_PADDING_VERTICAL
+                                )
                                 .makeClickableIfPossible(buttonClickListener),
                             color = colorResource(R.color.o800),
                             textAlign = TextAlign.Center
@@ -139,8 +148,8 @@ fun Icon(icon: ImageData, iconClickListener: (() -> Unit)?, modifier: Modifier =
     icon.getPainterForImage()?.let {
         androidx.compose.material.Icon(
             modifier = modifier
-                .width(icon.width ?: iconDefaultSize)
-                .height(icon.height ?: iconDefaultSize)
+                .width(icon.width ?: ICON_DEFAULT_SIZE)
+                .height(icon.height ?: ICON_DEFAULT_SIZE)
                 .makeClickableIfPossible(iconClickListener),
             painter = it,
             contentDescription = ""
