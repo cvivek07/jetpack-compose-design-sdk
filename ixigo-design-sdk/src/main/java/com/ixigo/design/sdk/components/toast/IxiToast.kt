@@ -37,7 +37,7 @@ class IxiToast private constructor(
         context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
 
     private val state = mutableStateOf(
-        ToastState(title = "")
+        ToastState()
     )
 
     private val params = WindowManager.LayoutParams(
@@ -195,7 +195,7 @@ fun getPopupAutoDismissDuration(popupDuration: IxiToastDuration): Long {
 }
 
 data class ToastState(
-    val title: String,
+    val title: String? = null,
     val subTitle: String? = null,
     val leftIcon: ImageData? = null,
     val leftIconClickListener: (() -> Unit)? = null,
