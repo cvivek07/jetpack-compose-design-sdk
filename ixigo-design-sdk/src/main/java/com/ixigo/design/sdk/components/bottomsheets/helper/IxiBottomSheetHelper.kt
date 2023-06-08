@@ -33,6 +33,7 @@ object IxiBottomSheetHelper {
             bottomSheet.setInlineAlert(it, ixiBottomSheetUiModel.inlineAlertIxiColor)
         }
         bottomSheet.showBottomDivider(ixiBottomSheetUiModel.showBottomDivider)
+        bottomSheet.showFullWidthButtons(ixiBottomSheetUiModel.showFullWidthButtons)
         return bottomSheet
     }
 
@@ -97,6 +98,7 @@ object IxiBottomSheetHelper {
         val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
         val closeActionListener:(()->Unit)? = null,
         val showBottomDivider: Boolean = false,
-        @DrawableRes val toolbarCloseIcon: Int? = null
+        @DrawableRes val toolbarCloseIcon: Int? = null,
+        val showFullWidthButtons: Boolean = false
     )
 }

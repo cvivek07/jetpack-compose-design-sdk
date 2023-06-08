@@ -77,6 +77,7 @@ fun BaseBottomSheetComposable(
     closeActionAlignment: Alignment? = Alignment.CenterEnd,
     showBottomDivider: Boolean = false,
     @DrawableRes closeIcon: Int? = null,
+    showFullWidthButtons: Boolean = false
 ) {
     Box(
         modifier = Modifier
@@ -161,7 +162,8 @@ fun BaseBottomSheetComposable(
                     primaryActionListener = primaryActionListener,
                     secondaryActionListener = secondaryActionListener,
                     primaryButtonHelperText = primaryButtonHelperText,
-                    secondaryButtonHelperText = secondaryButtonHelperText
+                    secondaryButtonHelperText = secondaryButtonHelperText,
+                    showFullWidthButtons = showFullWidthButtons
                 )
             }
         }
@@ -259,7 +261,8 @@ private fun BottomSheetButtons(
     secondaryActionListener: (() -> Unit)? = null,
     primaryButtonText: String? = null,
     primaryButtonHelperText: String? = null,
-    primaryActionListener: (() -> Unit)? = null
+    primaryActionListener: (() -> Unit)? = null,
+    showFullWidthButtons: Boolean = false
 ) {
     Row(
         modifier = Modifier
@@ -269,7 +272,13 @@ private fun BottomSheetButtons(
         horizontalArrangement = if (primaryButtonText == null || secondaryButtonText == null) Arrangement.Center else Arrangement.SpaceBetween
     ) {
         secondaryButtonText?.let {
-            Box {
+            Box(
+                modifier = if(showFullWidthButtons) {
+                    Modifier.weight(1f)
+                } else {
+                    Modifier
+                }
+            ) {
                 Box(
                     modifier = if (primaryButtonText == null) Modifier.align(Alignment.Center) else Modifier
                         .align(
@@ -285,7 +294,7 @@ private fun BottomSheetButtons(
                             size = ButtonSize.Large,
                             minWidth = buttonMinWidth,
                             maxWidth = buttonMaxWidth,
-                            onClick = secondaryActionListener ?: {})
+                            onClick = secondaryActionListener ?: {}, fullWidth = showFullWidthButtons)
 
                         secondaryButtonHelperText?.let {
                             TypographyText(
@@ -299,8 +308,19 @@ private fun BottomSheetButtons(
                 }
             }
         }
+
+        if(primaryButtonText != null && secondaryButtonText != null) {
+            Spacer(modifier = Modifier.width(20.dp))
+        }
+
         primaryButtonText?.let {
-            Box {
+            Box(
+                modifier = if(showFullWidthButtons) {
+                    Modifier.weight(1f)
+                } else {
+                    Modifier
+                }
+            ) {
                 Box(
                     modifier = Modifier
                         .then(
@@ -318,7 +338,7 @@ private fun BottomSheetButtons(
                             size = ButtonSize.Large,
                             minWidth = buttonMinWidth,
                             maxWidth = buttonMaxWidth,
-                            onClick = primaryActionListener ?: {})
+                            onClick = primaryActionListener ?: {}, fullWidth = showFullWidthButtons)
 
                         primaryButtonHelperText?.let {
                             TypographyText(
