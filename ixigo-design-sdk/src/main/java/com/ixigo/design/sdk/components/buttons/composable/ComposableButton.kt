@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
 import com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
 import com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
@@ -92,7 +91,8 @@ fun ComposablePrimaryButton(
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    fullWidth: Boolean = false
 ) {
 
     val interactionSource = remember { MutableInteractionSource() }
@@ -106,9 +106,11 @@ fun ComposablePrimaryButton(
 
     Button(
         onClick = onClick,
-        modifier = modifier
-            .height(size.height)
-            .widthIn(min = minWidth, max = maxWidth),
+        modifier = if (fullWidth) {
+            modifier.fillMaxWidth()
+        } else {
+            modifier.widthIn(min = minWidth, max = maxWidth)
+        }.height(size.height),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
@@ -180,7 +182,8 @@ fun ComposableSecondaryButton(
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    fullWidth: Boolean = false
 ) {
     ComposablePrimaryButton(
         text = text,
@@ -192,7 +195,8 @@ fun ComposableSecondaryButton(
         isEnabled = isEnabled,
         startDrawable = startDrawable,
         endDrawable = endDrawable,
-        onClick = onClick
+        onClick = onClick,
+        fullWidth = fullWidth
     )
 }
 
@@ -245,7 +249,8 @@ internal fun ComposableTextButton(
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
 ) {
-    val textColor = if (isEnabled) color.mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
+    val textColor =
+        if (isEnabled) color.mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
 
     TextButton(
         onClick = onClick,
@@ -428,9 +433,11 @@ fun Modifier.updateWidth(width: Int) = when (width) {
     -1 -> {
         this.fillMaxWidth()
     }
+
     -2 -> {
         this.wrapContentWidth()
     }
+
     else -> {
         this.width(Dp(width.toDp.toFloat()))
     }
@@ -440,9 +447,11 @@ fun Modifier.updateHeight(height: Int) = when (height) {
     -1 -> {
         this.fillMaxWidth()
     }
+
     -2 -> {
         this.wrapContentHeight()
     }
+
     else -> {
         this.height(Dp(height.toDp.toFloat()))
     }

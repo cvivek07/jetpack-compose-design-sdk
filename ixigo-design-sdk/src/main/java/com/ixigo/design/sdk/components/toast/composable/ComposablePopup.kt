@@ -40,7 +40,7 @@ private val TOAST_RADIUS = 10.dp
 
 @Composable
 fun ComposablePopup(
-    heading: String,
+    heading: String? = null,
     subHeading: String? = null,
     leftIcon: ImageData? = null,
     leftIconClickListener: (() -> Unit)? = null,
@@ -98,12 +98,14 @@ fun ComposablePopup(
                             .weight(1f)
                     ) {
 
-                        TypographyText(
-                            text = heading,
-                            textStyle = IxiTypography.Body.Medium.regular,
-                            color = if (ixiToastType == IxiToastType.WHITE) colorResource(R.color.n800)
-                            else colorResource(R.color.n0),
-                        )
+                        heading?.let {
+                            TypographyText(
+                                text = heading,
+                                textStyle = IxiTypography.Body.Medium.regular,
+                                color = if (ixiToastType == IxiToastType.WHITE) colorResource(R.color.n800)
+                                else colorResource(R.color.n0),
+                            )
+                        }
 
                         subHeading?.let {
                             TypographyText(

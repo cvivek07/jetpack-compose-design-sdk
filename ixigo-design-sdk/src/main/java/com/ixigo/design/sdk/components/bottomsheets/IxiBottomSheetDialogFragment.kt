@@ -89,6 +89,7 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
             onCloseActionListener()
         }
         _binding.ixiBottomSheet.showBottomDivider(uiState.showBottomDivider)
+        _binding.ixiBottomSheet.showFullWidthButtons(uiState.showFullWidthButtons)
     }
 
     /**
@@ -239,6 +240,10 @@ class IxiBottomSheetDialogFragment(private val onCloseActionListener:(()->Unit)?
         uiState = uiState.copy(showBottomDivider = show)
     }
 
+    fun showFullWidthButtons(show: Boolean) {
+        uiState = uiState.copy(showFullWidthButtons = show)
+    }
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = super.onCreateDialog(savedInstanceState)
         dialog.setOnShowListener {
@@ -291,4 +296,5 @@ data class IxiBottomSheetDialogFragmentUiModel(
     val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment? = null,
     val showBottomDivider: Boolean = false,
     @DrawableRes val toolbarCloseIcon: Int? = null,
+    val showFullWidthButtons: Boolean = false
 )
