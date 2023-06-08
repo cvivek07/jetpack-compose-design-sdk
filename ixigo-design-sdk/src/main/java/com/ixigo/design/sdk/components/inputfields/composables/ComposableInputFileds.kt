@@ -76,7 +76,7 @@ fun OutlinedInputField(
     }
 
     val labelComposable =
-        getPlaceHolder(label, colors, isFocussed.value, textValue)
+        getPlaceHolder(label, colors, isFocussed.value, textValue, isActiveAlways)
 
     Column(Modifier.updateWidth(width)) {
         OutlinedTextField(
@@ -163,10 +163,11 @@ private fun getPlaceHolder(
     hint: String,
     ixiColor: IxiColor,
     isFocussed: Boolean,
-    inputFieldTextValue: String
+    inputFieldTextValue: String,
+    isActiveAlways: Boolean = false
 ): @Composable () -> Unit {
 
-    val color = if (isFocussed) ixiColor.bgColor else R.color.n600
+    val color = if (isFocussed || isActiveAlways) ixiColor.bgColor else R.color.n600
     val typography =
         if (isFocussed || inputFieldTextValue.isNotEmpty()) {
             IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = color))
