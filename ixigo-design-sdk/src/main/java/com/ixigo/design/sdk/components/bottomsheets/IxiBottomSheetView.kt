@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomsheets.base.BaseBottomSheet
 import com.ixigo.design.sdk.components.bottomsheets.composable.BaseBottomSheetComposable
 
@@ -16,8 +15,6 @@ class IxiBottomSheetView @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool )
         with(state.value) {
             BaseBottomSheetComposable(
                 image = image,

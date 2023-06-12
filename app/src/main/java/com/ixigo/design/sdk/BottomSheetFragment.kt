@@ -4,13 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.compose.ui.unit.dp
 import androidx.fragment.app.Fragment
-import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragmentUiModel
-import com.ixigo.design.sdk.components.bottomsheets.helper.IxiBottomSheetHelper
 import com.ixigo.design.sdk.databinding.FragmentBottomSheetBinding
 
-class BottomSheetFragment: Fragment() {
+class BottomSheetFragment : Fragment() {
 
     private var _binding: FragmentBottomSheetBinding? = null
 
@@ -27,73 +24,31 @@ class BottomSheetFragment: Fragment() {
 
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //variant 1
         binding.first.setClickListener {
-            val fragment = IxiBottomSheetHelper.getImageBottomSheet(
-                IxiBottomSheetHelper.IxiBottomSheetUiModel(
-                    titleText = "Main title sentence",
-                    bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                    imageBackgroundColor = R.color.r50,
-                    iconSize = 127f,
-                    image = R.drawable.sample_image,
-                    primaryButtonText = "Button",
-                    primaryActionListener = { "Primary Button".toToast(requireContext()) },
-                    secondaryButtonText = "Button",
-                    secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                    inlineAlertText = "This is a placeholder",
-                    secondaryButtonHelperText = "Hello",
-                    primaryButtonHelperText = "Hey!"
-                    )
-            )
+            val fragment = BottomSheetImageFragment.newInstance()
             fragment.show(childFragmentManager, "Tag")
         }
 
-//        //variant 2
+        //variant 2
         binding.second.setClickListener {
-            val fragment = IxiBottomSheetHelper.getFeatureIconBottomSheet(
-                IxiBottomSheetHelper.IxiBottomSheetUiModel(
-                    titleText = "Main title sentence",
-                    bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                    image = R.drawable.sample_logo,
-                    primaryButtonText = "Button",
-                    primaryActionListener = { "Primary Button".toToast(requireContext()) },
-                    secondaryButtonText = "Button",
-                    secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                )
-            )
+            val fragment = BottomSheetFeatureIconFragment.newInstance()
             fragment.show(childFragmentManager, "Tag")
 
         }
 
         //variant 3
         binding.third.setClickListener {
-            val fragment = IxiBottomSheetHelper.getNoIconBottomSheet(
-                IxiBottomSheetHelper.IxiBottomSheetUiModel(
-                    titleText = "Main title sentence",
-                    bodyText = "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum",
-                    primaryButtonText = "No",
-                    primaryActionListener = { "Primary Button".toToast(requireContext()) },
-                    secondaryButtonText = "Yes, Delete",
-                    buttonMinWidth = 150.dp,
-                    buttonMaxWidth = 300.dp,
-                    secondaryActionListener = { "Secondary Button".toToast(requireContext()) },
-                )
-            )
+            val fragment = BottomSheetNoIconFragment.newInstance()
             fragment.show(childFragmentManager, "Tag")
-
         }
 
+        //variant 4
         binding.fourth.setClickListener {
-            val ixiBottomSheetDialogFragmentUiModel = IxiBottomSheetDialogFragmentUiModel(
-                toolbarTitle = "Toolbar Title",
-                primaryButtonText = "Done",
-                secondaryButtonText = "Cancel",
-                disableDragging = true
-            )
-            BottomSheet(ixiBottomSheetDialogFragmentUiModel).show(childFragmentManager, "BOTTOM_SHEET")
+            val myBottomSheetFragment = BottomSheetViewFragment.newInstance()
+            myBottomSheetFragment.show(childFragmentManager, "BOTTOM_SHEET")
         }
     }
 }
