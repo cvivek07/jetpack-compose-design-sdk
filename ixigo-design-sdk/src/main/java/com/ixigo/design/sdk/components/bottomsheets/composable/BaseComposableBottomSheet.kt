@@ -77,6 +77,7 @@ fun BaseBottomSheetComposable(
     closeActionAlignment: Alignment? = Alignment.CenterEnd,
     showBottomDivider: Boolean = false,
     @DrawableRes closeIcon: Int? = null,
+    showFullWidthButtons: Boolean = false
 ) {
     Box(
         modifier = Modifier
@@ -122,7 +123,7 @@ fun BaseBottomSheetComposable(
             }
             Box(modifier = Modifier
                 .weight(1f, false)
-                .padding(top = 15.dp, bottom = 15.dp)) {
+                .padding(top = 20.dp, bottom = 20.dp)) {
                 if(view!=null){
                     AndroidView(
                         factory = {
@@ -161,7 +162,8 @@ fun BaseBottomSheetComposable(
                     primaryActionListener = primaryActionListener,
                     secondaryActionListener = secondaryActionListener,
                     primaryButtonHelperText = primaryButtonHelperText,
-                    secondaryButtonHelperText = secondaryButtonHelperText
+                    secondaryButtonHelperText = secondaryButtonHelperText,
+                    showFullWidthButtons = showFullWidthButtons
                 )
             }
         }
@@ -259,7 +261,8 @@ private fun BottomSheetButtons(
     secondaryActionListener: (() -> Unit)? = null,
     primaryButtonText: String? = null,
     primaryButtonHelperText: String? = null,
-    primaryActionListener: (() -> Unit)? = null
+    primaryActionListener: (() -> Unit)? = null,
+    showFullWidthButtons: Boolean = false
 ) {
     Row(
         modifier = Modifier
@@ -269,7 +272,13 @@ private fun BottomSheetButtons(
         horizontalArrangement = if (primaryButtonText == null || secondaryButtonText == null) Arrangement.Center else Arrangement.SpaceBetween
     ) {
         secondaryButtonText?.let {
-            Box {
+            Box(
+                modifier = if(showFullWidthButtons) {
+                    Modifier.weight(1f)
+                } else {
+                    Modifier
+                }
+            ) {
                 Box(
                     modifier = if (primaryButtonText == null) Modifier.align(Alignment.Center) else Modifier
                         .align(
@@ -285,23 +294,33 @@ private fun BottomSheetButtons(
                             size = ButtonSize.Large,
                             minWidth = buttonMinWidth,
                             maxWidth = buttonMaxWidth,
-                            onClick = secondaryActionListener ?: {})
+                            onClick = secondaryActionListener ?: {}, fullWidth = showFullWidthButtons)
 
                         secondaryButtonHelperText?.let {
                             TypographyText(
                                 text = it,
                                 textStyle = IxiTypography.Body.XSmall.regular,
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                                color = Color(R.color.n600)
+                                color = colorResource(id = R.color.n600)
                             )
                         }
                     }
                 }
             }
-            Spacer(modifier = Modifier.width(30.dp))
         }
+
+        if(primaryButtonText != null && secondaryButtonText != null) {
+            Spacer(modifier = Modifier.width(20.dp))
+        }
+
         primaryButtonText?.let {
-            Box {
+            Box(
+                modifier = if(showFullWidthButtons) {
+                    Modifier.weight(1f)
+                } else {
+                    Modifier
+                }
+            ) {
                 Box(
                     modifier = Modifier
                         .then(
@@ -319,14 +338,14 @@ private fun BottomSheetButtons(
                             size = ButtonSize.Large,
                             minWidth = buttonMinWidth,
                             maxWidth = buttonMaxWidth,
-                            onClick = primaryActionListener ?: {})
+                            onClick = primaryActionListener ?: {}, fullWidth = showFullWidthButtons)
 
                         primaryButtonHelperText?.let {
                             TypographyText(
                                 text = primaryButtonHelperText,
                                 textStyle = IxiTypography.Body.XSmall.regular,
                                 modifier = Modifier.align(Alignment.CenterHorizontally),
-                                color = Color(R.color.n600)
+                                color = colorResource(id = R.color.n600)
                             )
                         }
                     }
@@ -387,7 +406,9 @@ private fun MasterTitle(
                 text = it,
                 textAlign = TextAlign.Center,
                 textStyle = IxiTypography.Body.Small.regular,
-                modifier = Modifier.padding(horizontal = 48.dp).align(Alignment.CenterHorizontally)
+                modifier = Modifier
+                    .padding(start = 48.dp, end = 48.dp, top = 5.dp)
+                    .align(Alignment.CenterHorizontally)
             )
         }
         Spacer(modifier = Modifier.height(16.dp))

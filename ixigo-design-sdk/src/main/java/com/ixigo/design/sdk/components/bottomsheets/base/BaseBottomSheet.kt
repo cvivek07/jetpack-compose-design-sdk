@@ -203,6 +203,10 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
     fun showBottomDivider(show: Boolean) {
         state.value = state.value.copy(showBottomDivider = show)
     }
+
+    fun showFullWidthButtons(enable: Boolean) {
+        state.value = state.value.copy(showFullWidthButtons = enable)
+    }
 }
 
 data class BottomSheetState(
@@ -229,4 +233,5 @@ data class BottomSheetState(
     val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment = IxiBottomSheetView.ActionIconAlignment.END,
     val showBottomDivider: Boolean = false,
     @DrawableRes val toolbarCloseIcon: Int? = null,
+    val showFullWidthButtons: Boolean = false
     )

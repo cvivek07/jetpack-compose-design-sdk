@@ -39,7 +39,8 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 masterSubtitleText = toolbarSubtitleText,
                 closeActionAlignment = mapLayoutAlignmentToComposeAlignment(closeActionAlignment),
                 closeIcon = toolbarCloseIcon,
-                showBottomDivider = showBottomDivider
+                showBottomDivider = showBottomDivider,
+                showFullWidthButtons = showFullWidthButtons
             )
         }
     }

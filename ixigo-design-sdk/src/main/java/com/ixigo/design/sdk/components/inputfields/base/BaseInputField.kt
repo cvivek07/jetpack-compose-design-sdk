@@ -309,7 +309,7 @@ data class InputFieldState(
     val color: IxiColor,
     @DrawableRes val actionImage: Int,
     val drawableStartText: String,
-    val drawableStartTextStyle: TextStyle = IxiTypography.Body.Large.regular,
+    val drawableStartTextStyle: TextStyle = IxiTypography.Body.Medium.regular,
     @DrawableRes val drawableStart: Int,
     val showLeadingDivider: Boolean,
     @DrawableRes val drawableEnd: Int,
