@@ -90,6 +90,7 @@ open class IxiBottomSheetDialogFragment : BottomSheetDialogFragment() {
             state.onClose?.invoke()
         }
         _binding.ixiBottomSheet.showBottomDivider(state.showBottomDivider)
+        _binding.ixiBottomSheet.showFullWidthButtons(state.showFullWidthButtons)
         return _binding.ixiBottomSheet
     }
 }
