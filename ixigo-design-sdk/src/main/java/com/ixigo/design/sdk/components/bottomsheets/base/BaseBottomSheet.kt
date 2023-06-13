@@ -95,9 +95,13 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      * @param ixiPrimaryButtonText The text to be displayed on the primary button.
      * @param primaryActionListener The action to be performed when the primary button is clicked.
      */
-    fun setPrimaryButton(ixiPrimaryButtonText: String, primaryButtonHelperText: String? = null, primaryActionListener: (() -> Unit)?){
+    fun setPrimaryButton(ixiPrimaryButtonText: String, primaryButtonHelperText: String? = null){
         val inState = state.value
-        state.value = inState.copy(primaryButtonText = ixiPrimaryButtonText, primaryButtonHelperText = primaryButtonHelperText, primaryActionListener = primaryActionListener)
+        state.value = inState.copy(primaryButtonText = ixiPrimaryButtonText, primaryButtonHelperText = primaryButtonHelperText)
+    }
+
+    fun setPrimaryButtonActionListener(primaryActionListener: (() -> Unit)?) {
+        state.value = state.value.copy(primaryActionListener = primaryActionListener)
     }
 
     /**
@@ -106,9 +110,13 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      * @param ixiSecondaryButtonText the text for the secondary button.
      * @param secondaryActionListener the action listener for the secondary button.
      */
-    fun setSecondaryButton(ixiSecondaryButtonText: String, secondaryButtonHelperText: String? = null, secondaryActionListener: (() -> Unit)){
+    fun setSecondaryButton(ixiSecondaryButtonText: String, secondaryButtonHelperText: String? = null){
         val inState = state.value
-        state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryButtonHelperText = secondaryButtonHelperText, secondaryActionListener = secondaryActionListener)
+        state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryButtonHelperText = secondaryButtonHelperText)
+    }
+
+    fun setSecondaryButtonActionListener(secondaryActionListener: (() -> Unit)?) {
+        state.value = state.value.copy(secondaryActionListener =  secondaryActionListener)
     }
 
     fun setButtonMinWidth(minWidth: Dp){
