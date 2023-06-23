@@ -36,7 +36,8 @@ class HorizontalInlineProgressStep @JvmOverloads constructor(
                 selectionIndicator = selectionIndicator,
                 currentItem = currentIndex,
                 currentProgressState = currentItemProgressState,
-                mode = mode
+                mode = mode,
+                indexingPattern = state.value.indexingPattern
             ) { state, scope ->
                 scope.launch {
                     state.animateScrollToItem(currentIndex)

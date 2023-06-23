@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.bottomsheets.base.BaseBottomSheet
 import com.ixigo.design.sdk.components.bottomsheets.composable.BaseBottomSheetComposable
 
@@ -16,8 +15,6 @@ class IxiBottomSheetView @JvmOverloads constructor(
 
     @Composable
     override fun Content() {
-        setViewCompositionStrategy(
-             ViewCompositionStrategy.DisposeOnDetachedFromWindowOrReleasedFromPool )
         with(state.value) {
             BaseBottomSheetComposable(
                 image = image,
@@ -27,8 +24,12 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 masterTitleText = toolbarText,
                 primaryButtonText = primaryButtonText,
                 secondaryButtonText = secondaryButtonText,
+                buttonMinWidth = buttonMinWidth,
+                buttonMaxWidth = buttonMaxWidth,
                 primaryActionListener = primaryActionListener,
                 secondaryActionListener = secondaryActionListener,
+                primaryButtonHelperText = primaryButtonHelperText,
+                secondaryButtonHelperText = secondaryButtonHelperText,
                 closeActionListener = onClose,
                 iconSize = iconSize?.toInt()?:80,
                 view = view,
@@ -37,7 +38,9 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 inlineAlertIxiColor = inlineAlertIxiColor,
                 masterSubtitleText = toolbarSubtitleText,
                 closeActionAlignment = mapLayoutAlignmentToComposeAlignment(closeActionAlignment),
-                closeIcon = toolbarCloseIcon
+                closeIcon = toolbarCloseIcon,
+                showBottomDivider = showBottomDivider,
+                showFullWidthButtons = showFullWidthButtons
             )
         }
     }

@@ -7,10 +7,17 @@ import android.graphics.drawable.ShapeDrawable
 import android.graphics.drawable.shapes.RectShape
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,11 +35,14 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout.MODE_SCROLLABLE
 import com.ixigo.design.sdk.R
+import com.ixigo.design.sdk.components.buttons.composable.ComposableTextButton
+import com.ixigo.design.sdk.components.buttons.styles.ButtonSize
 import com.ixigo.design.sdk.components.imageutils.ImageData
 import com.ixigo.design.sdk.components.imageutils.getPainterForImage
 import com.ixigo.design.sdk.components.segmentedcontrol.composable.SegmentedControl
 import com.ixigo.design.sdk.components.srp.composables.SrpComposable
-import com.ixigo.design.sdk.components.srp.composables.SrpModel
+import com.ixigo.design.sdk.components.srp.composables.SrpTitle
+import com.ixigo.design.sdk.components.styles.IxiColor
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.tabs.IxiTabLayout
 import com.ixigo.design.sdk.components.tabs.TabType
@@ -147,7 +157,8 @@ fun SrpBar(
     elevation: Dp = 10.dp,
     menuProvider: IxiMenuProvider? = null,
     disabledIds: List<Int> = listOf(),
-    data: SrpModel?,
+    title: SrpTitle?,
+    subTitle: String?,
     onClick: () -> Unit
 ) {
     BasicToolbar(
@@ -156,16 +167,14 @@ fun SrpBar(
         menuProvider = menuProvider,
         disabledIds = disabledIds
     ) {
-        if (data != null) {
+        if (title != null) {
             SrpComposable(
-                data = data,
+                title = title,
+                subTitle = subTitle,
                 onClick = onClick,
                 modifier = Modifier
-                    .height(36.dp)
+                    .wrapContentHeight()
                     .weight(1f)
-                    .padding(
-                        end = 15.dp
-                    ),
             )
         }
     }
@@ -226,7 +235,7 @@ fun BasicToolbar(
         backgroundColor = colorResource(id = R.color.n0),
         modifier = modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .wrapContentHeight()
             .shadow(10.dp)
             .zIndex(10.dp.value),
         elevation = elevation,
@@ -256,15 +265,16 @@ fun BasicToolbar(
                         )
                     }
                 } else {
-                    TextButton(onClick = {
-                        if (!disabledIds.contains(it.id)) {
-                            menuProvider.onMenuItemClick(it.id)
+                    ComposableTextButton(
+                        color = IxiColor.Orange,
+                        size = ButtonSize.Medium,
+                        text = it.text ?: "",
+                        onClick = {
+                            if (!disabledIds.contains(it.id)) {
+                                menuProvider.onMenuItemClick(it.id)
+                            }
                         }
-                    }) {
-                        Text(
-                            text = it.text ?: "",
-                        )
-                    }
+                    )
                 }
             }
 

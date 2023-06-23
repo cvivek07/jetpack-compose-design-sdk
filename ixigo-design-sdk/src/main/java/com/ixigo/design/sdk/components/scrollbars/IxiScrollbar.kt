@@ -23,15 +23,24 @@ class IxiScrollbar @JvmOverloads constructor(
         state.value = state.value.copy(itemCount =  itemCount)
     }
 
+    /**
+     * set min width for knob
+     * @param minWidth
+     */
+    fun setMinKnobWidth(minWidth: Float){
+        state.value = state.value.copy(minKnobWidth = minWidth)
+    }
+
     @Composable
     override fun Content() {
         with(state.value) {
-            ScrollBar(itemCount = this.itemCount,  position = this.scrollPosition)
+            ScrollBar(itemCount = this.itemCount,  position = this.scrollPosition, minKnobWidth = this.minKnobWidth)
         }
     }
 }
 
 data class ScrollBarState(
     val scrollPosition: Int = 0,
-    val itemCount: Int = 0
+    val itemCount: Int = 0,
+    val minKnobWidth: Float = 10F
 )

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.BaseComponent
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.components.styles.IxiColor
@@ -94,9 +95,13 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      * @param ixiPrimaryButtonText The text to be displayed on the primary button.
      * @param primaryActionListener The action to be performed when the primary button is clicked.
      */
-    fun setPrimaryButton(ixiPrimaryButtonText: String, primaryActionListener: (() -> Unit)?){
+    fun setPrimaryButton(ixiPrimaryButtonText: String, primaryButtonHelperText: String? = null){
         val inState = state.value
-        state.value = inState.copy(primaryButtonText = ixiPrimaryButtonText, primaryActionListener = primaryActionListener)
+        state.value = inState.copy(primaryButtonText = ixiPrimaryButtonText, primaryButtonHelperText = primaryButtonHelperText)
+    }
+
+    fun setPrimaryButtonActionListener(primaryActionListener: (() -> Unit)?) {
+        state.value = state.value.copy(primaryActionListener = primaryActionListener)
     }
 
     /**
@@ -105,10 +110,23 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
      * @param ixiSecondaryButtonText the text for the secondary button.
      * @param secondaryActionListener the action listener for the secondary button.
      */
-    fun setSecondaryButton(ixiSecondaryButtonText: String, secondaryActionListener: (() -> Unit)){
+    fun setSecondaryButton(ixiSecondaryButtonText: String, secondaryButtonHelperText: String? = null){
         val inState = state.value
-        state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryActionListener = secondaryActionListener)
+        state.value = inState.copy(secondaryButtonText = ixiSecondaryButtonText, secondaryButtonHelperText = secondaryButtonHelperText)
     }
+
+    fun setSecondaryButtonActionListener(secondaryActionListener: (() -> Unit)?) {
+        state.value = state.value.copy(secondaryActionListener =  secondaryActionListener)
+    }
+
+    fun setButtonMinWidth(minWidth: Dp){
+        state.value = state.value.copy(buttonMinWidth = minWidth)
+    }
+
+    fun setButtonMaxWidth(maxWidth: Dp){
+        state.value = state.value.copy(buttonMaxWidth = maxWidth)
+    }
+
 
     /**
      * Set the action listener for close button.
@@ -181,6 +199,14 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         val inState = state.value
         state.value = inState.copy(toolbarCloseIcon = icon)
     }
+
+    fun showBottomDivider(show: Boolean) {
+        state.value = state.value.copy(showBottomDivider = show)
+    }
+
+    fun showFullWidthButtons(enable: Boolean) {
+        state.value = state.value.copy(showFullWidthButtons = enable)
+    }
 }
 
 data class BottomSheetState(
@@ -191,6 +217,10 @@ data class BottomSheetState(
     val toolbarText: String? = null,
     val primaryButtonText: String? = null,
     val secondaryButtonText: String? = null,
+    val primaryButtonHelperText: String? = null,
+    val secondaryButtonHelperText: String? = null,
+    val buttonMinWidth: Dp = Dp.Unspecified,
+    val buttonMaxWidth: Dp = Dp.Infinity,
     val primaryActionListener: (()->Unit)? = null,
     val secondaryActionListener: (()->Unit)? = null,
     val onClose: (() -> Unit)? = null,
@@ -201,5 +231,7 @@ data class BottomSheetState(
     val inlineAlertIxiColor: IxiColor? = null,
     val toolbarSubtitleText: String? = null,
     val closeActionAlignment: IxiBottomSheetView.ActionIconAlignment = IxiBottomSheetView.ActionIconAlignment.END,
+    val showBottomDivider: Boolean = false,
     @DrawableRes val toolbarCloseIcon: Int? = null,
+    val showFullWidthButtons: Boolean = false
     )

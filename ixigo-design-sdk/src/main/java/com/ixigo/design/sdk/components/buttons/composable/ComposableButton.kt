@@ -25,7 +25,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.ixigo.design.sdk.components.buttons.IxiOutlinedButton
 import com.ixigo.design.sdk.components.buttons.IxiPrimaryButton
 import com.ixigo.design.sdk.components.buttons.IxiSecondaryButton
@@ -87,11 +86,13 @@ fun ComposablePrimaryButton(
     color: IxiColor,
     shape: IxiShape,
     size: ButtonSize,
-    width: Int,
+    minWidth: Dp = Dp.Unspecified,
+    maxWidth: Dp = Dp.Infinity,
     isEnabled: Boolean = true,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    fullWidth: Boolean = false
 ) {
 
     val interactionSource = remember { MutableInteractionSource() }
@@ -105,9 +106,11 @@ fun ComposablePrimaryButton(
 
     Button(
         onClick = onClick,
-        modifier = modifier
-            .height(size.height)
-            .updateWidth(width),
+        modifier = if (fullWidth) {
+            modifier.fillMaxWidth()
+        } else {
+            modifier.widthIn(min = minWidth, max = maxWidth)
+        }.height(size.height),
         enabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = colorResource(id = bgColor)
@@ -174,22 +177,26 @@ fun ComposableSecondaryButton(
     color: IxiColor,
     shape: IxiShape,
     size: ButtonSize,
+    minWidth: Dp = Dp.Unspecified,
+    maxWidth: Dp = Dp.Infinity,
     isEnabled: Boolean = true,
-    width: Int,
     @DrawableRes startDrawable: Int = 0,
     @DrawableRes endDrawable: Int = 0,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    fullWidth: Boolean = false
 ) {
     ComposablePrimaryButton(
         text = text,
         color = color.mapSecStyle(color),
         shape = shape,
         size = size,
+        minWidth = minWidth,
+        maxWidth = maxWidth,
         isEnabled = isEnabled,
         startDrawable = startDrawable,
         endDrawable = endDrawable,
         onClick = onClick,
-        width = width
+        fullWidth = fullWidth
     )
 }
 
@@ -242,7 +249,8 @@ internal fun ComposableTextButton(
     @DrawableRes endDrawable: Int = 0,
     onClick: () -> Unit = {}
 ) {
-    val textColor = if (isEnabled) color.mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
+    val textColor =
+        if (isEnabled) color.mapTertiaryStyle(color).textColor else IxiColor.Disabled.textColor
 
     TextButton(
         onClick = onClick,
@@ -394,7 +402,6 @@ private fun DrawComponents(
                     end.linkTo(imageEnd.start)
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
-                    width = Dimension.preferredWrapContent
                 },
 
             textStyle = size.typography,
@@ -426,9 +433,11 @@ fun Modifier.updateWidth(width: Int) = when (width) {
     -1 -> {
         this.fillMaxWidth()
     }
+
     -2 -> {
         this.wrapContentWidth()
     }
+
     else -> {
         this.width(Dp(width.toDp.toFloat()))
     }
@@ -438,9 +447,11 @@ fun Modifier.updateHeight(height: Int) = when (height) {
     -1 -> {
         this.fillMaxWidth()
     }
+
     -2 -> {
         this.wrapContentHeight()
     }
+
     else -> {
         this.height(Dp(height.toDp.toFloat()))
     }

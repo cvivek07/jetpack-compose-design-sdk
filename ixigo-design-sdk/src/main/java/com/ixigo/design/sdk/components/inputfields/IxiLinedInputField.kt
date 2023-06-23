@@ -19,6 +19,7 @@ class IxiLinedInputField @JvmOverloads constructor(
             drawableStart = state.value.drawableStart,
             actionText = state.value.actionText,
             helperText = state.value.helperText,
+            helperTextColor = state.value.helperTextColor,
             text = state.value.text,
             maxCharCount = state.value.maxCharCount,
             label = state.value.label,
@@ -30,7 +31,9 @@ class IxiLinedInputField @JvmOverloads constructor(
             onFocusChange = state.value.onFocusChange,
             colors = state.value.color,
             width = preferredWidth,
-            readOnly = state.value.readOnly
+            readOnly = state.value.readOnly,
+            keyboardType = state.value.keyboardType,
+            capitalization = state.value.capitalization
         )
 
     }

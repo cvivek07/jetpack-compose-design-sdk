@@ -81,16 +81,15 @@ class IxiPrimaryButton @JvmOverloads constructor(
     override fun Content() {
         with(state.value) {
             ComposablePrimaryButton(
-                Modifier,
-                text,
-                colors,
-                shapes,
-                sizes,
-                preferredWidth,
-                isEnabled,
-                startDrawableState.value,
-                endDrawableState.value,
-                onClick
+                modifier = Modifier,
+                text = text,
+                color = colors,
+                shape = shapes,
+                size = sizes,
+                isEnabled = isEnabled,
+                startDrawable = startDrawableState.value,
+                endDrawable = endDrawableState.value,
+                onClick = onClick
             )
         }
     }

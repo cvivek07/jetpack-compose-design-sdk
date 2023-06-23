@@ -12,6 +12,14 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <com.ixigo.design.sdk.components.text.IxiClickableText
+            android:id="@+id/clickable_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:textDisplayType = "body_small"
+            app:textWeight ="regular"
+            android:textColor= "@color/n800"/>
+
         <com.ixigo.design.sdk.components.text.IxiText
             android:id="@+id/test"
             android:layout_width="match_parent"

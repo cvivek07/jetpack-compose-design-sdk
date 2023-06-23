@@ -16,9 +16,13 @@ class IxiOutlinedInputField @JvmOverloads constructor(
         OutlinedInputField(
             actionImage = state.value.actionImage,
             drawableEnd = state.value.drawableEnd,
+            drawableStartText = state.value.drawableStartText,
+            drawableStartTextStyle = state.value.drawableStartTextStyle,
             drawableStart = state.value.drawableStart,
+            showLeadingDivider = state.value.showLeadingDivider,
             actionText = state.value.actionText,
             helperText = state.value.helperText,
+            helperTextColor = state.value.helperTextColor,
             text = state.value.text,
             maxCharCount = state.value.maxCharCount,
             label = state.value.label,
@@ -30,7 +34,11 @@ class IxiOutlinedInputField @JvmOverloads constructor(
             onFocusChange= state.value.onFocusChange,
             colors = state.value.color,
             width = preferredWidth,
-            readOnly = state.value.readOnly
+            readOnly = state.value.readOnly,
+            isActiveAlways = state.value.isActiveAlways,
+            enabled = state.value.enabled,
+            keyboardType = state.value.keyboardType,
+            capitalization = state.value.capitalization
         )
 
     }

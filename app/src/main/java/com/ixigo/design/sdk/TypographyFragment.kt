@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.IxiText
+import com.ixigo.design.sdk.components.text.composable.Highlight
 import com.ixigo.design.sdk.databinding.FragmentTypographyBinding
 
 class TypographyFragment : Fragment() {
@@ -30,10 +32,13 @@ class TypographyFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-//            test.setVerticalAlignment(Alignment.CenterVertically)
-//            test.setHorizontalAlignment(Alignment.End)
-//            test.setHorizontalTextAlignment(TextAlign.End)
-//            displayText900.setTextColor(ContextCompat.getColor(requireContext(),R.color.b300))
+            clickableText.setOriginalText(getString(R.string.disclaimer))
+            clickableText.setHighlightedText(listOf(Highlight("privacy policy", onClick = {
+                Toast.makeText(requireContext(), "privacy", Toast.LENGTH_SHORT).show()
+            }), Highlight("terms of use", onClick = {
+                Toast.makeText(requireContext(), "terms", Toast.LENGTH_SHORT).show()
+            })))
+            clickableText.setHighlightColor(R.color.b500)
             displayText900.setTypography(IxiTypography.Heading.DisplayLarge.bold)
             displayText900.setText("Display Text Bold")
             displayText900.setOnClickListener{

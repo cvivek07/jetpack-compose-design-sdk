@@ -24,23 +24,25 @@ object IxiTypography {
         }
 
         fun TextStyle.applyUnderLine(): TextStyle {
-            val prevDecoration = this.textDecoration
-            val currentDecoration = if (prevDecoration != null && prevDecoration != TextDecoration.Underline) {
-                TextDecoration.combine(listOf(prevDecoration, TextDecoration.Underline))
-            } else {
-                TextDecoration.Underline
-            }
-            return this.copy(textDecoration = currentDecoration)
+            val currentDecoration = setOfNotNull(this.textDecoration)
+            return this.copy(textDecoration = TextDecoration.combine(decorations = (currentDecoration + TextDecoration.Underline).toList()))
         }
 
         fun TextStyle.applyStrikeThrough(): TextStyle {
-            val prevDecoration = this.textDecoration
-            val currentDecoration = if (prevDecoration != null && prevDecoration != TextDecoration.LineThrough) {
-                TextDecoration.combine(listOf(prevDecoration, TextDecoration.LineThrough))
-            } else {
-                TextDecoration.LineThrough
-            }
-            return this.copy(textDecoration = currentDecoration)
+            val currentDecoration = setOfNotNull(this.textDecoration)
+            return this.copy(textDecoration = TextDecoration.combine(decorations = (currentDecoration + TextDecoration.LineThrough).toList()))
+        }
+
+        fun TextStyle.applyFontStyle(
+            underline: Boolean,
+            italics: Boolean,
+            strikeThrough: Boolean
+        ): TextStyle {
+            var textStyle = this
+            if (underline) textStyle = textStyle.applyUnderLine()
+            if (strikeThrough) textStyle = textStyle.applyStrikeThrough()
+            if (italics) textStyle = textStyle.applyItalics()
+            return textStyle
         }
     }
 
@@ -102,6 +104,7 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
             @Deprecated("Use DisplayLarge.medium instead")
             val semiBold = TextStyle(
                 fontSize = 54.sp,
@@ -302,6 +305,7 @@ object IxiTypography {
                 color = n800,
                 fontFamily = IxiFamily
             )
+
             @Deprecated("Use H3.medium instead")
             val semiBold = TextStyle(
                 fontSize = 30.sp,
@@ -561,8 +565,8 @@ object IxiTypography {
         object Large : TypographyType {
             override val regular = TextStyle(
                 fontSize = 18.sp,
-                lineHeight = 29.sp,
-                letterSpacing = 5.sp,
+                lineHeight = 25.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -570,8 +574,8 @@ object IxiTypography {
 
             override val medium = TextStyle(
                 fontSize = 18.sp,
-                lineHeight = 29.sp,
-                letterSpacing = 5.sp,
+                lineHeight = 25.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W500,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -579,8 +583,8 @@ object IxiTypography {
 
             override val bold = TextStyle(
                 fontSize = 18.sp,
-                lineHeight = 29.sp,
-                letterSpacing = 5.sp,
+                lineHeight = 25.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W700,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -588,8 +592,8 @@ object IxiTypography {
 
             override val italics = TextStyle(
                 fontSize = 18.sp,
-                lineHeight = 29.sp,
-                letterSpacing = 5.sp,
+                lineHeight = 25.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -598,8 +602,8 @@ object IxiTypography {
 
             override val underline = TextStyle(
                 fontSize = 18.sp,
-                lineHeight = 29.sp,
-                letterSpacing = 5.sp,
+                lineHeight = 25.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -608,8 +612,8 @@ object IxiTypography {
 
             override val strikeThrough = TextStyle(
                 fontSize = 18.sp,
-                lineHeight = 29.sp,
-                letterSpacing = 5.sp,
+                lineHeight = 25.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -620,7 +624,7 @@ object IxiTypography {
         object Medium : TypographyType {
             override val regular = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 26.sp,
+                lineHeight = 22.sp,
                 letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
@@ -629,8 +633,8 @@ object IxiTypography {
 
             override val medium = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 26.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W500,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -638,8 +642,8 @@ object IxiTypography {
 
             override val bold = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 26.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W700,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -647,8 +651,8 @@ object IxiTypography {
 
             override val italics = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 26.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -658,8 +662,8 @@ object IxiTypography {
 
             override val underline = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 26.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -668,8 +672,8 @@ object IxiTypography {
 
             override val strikeThrough = TextStyle(
                 fontSize = 16.sp,
-                lineHeight = 26.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 22.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -680,8 +684,8 @@ object IxiTypography {
         object Small : TypographyType {
             override val regular = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -689,8 +693,8 @@ object IxiTypography {
 
             override val medium = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W500,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -698,8 +702,8 @@ object IxiTypography {
 
             override val bold = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W700,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -707,8 +711,8 @@ object IxiTypography {
 
             override val italics = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -718,8 +722,8 @@ object IxiTypography {
 
             override val underline = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -728,8 +732,8 @@ object IxiTypography {
 
             override val strikeThrough = TextStyle(
                 fontSize = 14.sp,
-                lineHeight = 22.sp,
-                letterSpacing = 4.sp,
+                lineHeight = 20.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -740,8 +744,8 @@ object IxiTypography {
         object XSmall : TypographyType {
             override val regular = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 19.sp,
-                letterSpacing = 3.sp,
+                lineHeight = 17.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -749,8 +753,8 @@ object IxiTypography {
 
             override val medium = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 19.sp,
-                letterSpacing = 3.sp,
+                lineHeight = 17.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W500,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -758,8 +762,8 @@ object IxiTypography {
 
             override val bold = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 19.sp,
-                letterSpacing = 3.sp,
+                lineHeight = 17.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W700,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -767,8 +771,8 @@ object IxiTypography {
 
             override val italics = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 19.sp,
-                letterSpacing = 3.sp,
+                lineHeight = 17.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -778,8 +782,8 @@ object IxiTypography {
 
             override val underline = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 19.sp,
-                letterSpacing = 3.sp,
+                lineHeight = 17.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -788,8 +792,8 @@ object IxiTypography {
 
             override val strikeThrough = TextStyle(
                 fontSize = 12.sp,
-                lineHeight = 19.sp,
-                letterSpacing = 3.sp,
+                lineHeight = 17.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -797,11 +801,11 @@ object IxiTypography {
             )
         }
 
-        object XXSmall: TypographyType {
+        object XXSmall : TypographyType {
             override val regular = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
-                letterSpacing = 2.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -810,7 +814,7 @@ object IxiTypography {
             override val medium = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
-                letterSpacing = 2.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W500,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -819,7 +823,7 @@ object IxiTypography {
             override val bold = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
-                letterSpacing = 2.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W700,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -828,7 +832,7 @@ object IxiTypography {
             override val italics = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
-                letterSpacing = 2.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -838,7 +842,7 @@ object IxiTypography {
             override val underline = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
-                letterSpacing = 2.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
@@ -848,7 +852,7 @@ object IxiTypography {
             override val strikeThrough = TextStyle(
                 fontSize = 10.sp,
                 lineHeight = 11.sp,
-                letterSpacing = 2.sp,
+                letterSpacing = 0.sp,
                 fontWeight = W400,
                 color = n800,
                 fontFamily = IxiFamily,
