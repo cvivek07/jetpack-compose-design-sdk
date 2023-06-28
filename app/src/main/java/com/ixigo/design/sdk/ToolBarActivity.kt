@@ -17,6 +17,7 @@ import com.ixigo.design.sdk.components.topappbar.*
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenu
 import com.ixigo.design.sdk.components.topappbar.menu.IxiMenuProvider
 import com.ixigo.design.sdk.databinding.ActivityToolBarBinding
+import kotlin.random.Random
 
 class ToolBarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityToolBarBinding
@@ -178,14 +179,37 @@ class ToolBarActivity : AppCompatActivity() {
             setOnClearQueryListener {
                 Log.d(TAG, "autoCompleteTextField: ")
             }
+            setFocus()
+        }
+
+        val autoCompleteTextField2 =  IxiAutoCompleteTextField(context = this).apply {
+            setHint("Type your text here")
+            setFocusChangeListener {
+                Log.e("Tag", if (it) "Focussed" else "Unfocussed")
+            }
+            setTextChangeListener {
+                Log.d(TAG, "entered text: $it")
+            }
+            setOnClearQueryListener {
+                Log.d(TAG, "autoCompleteTextField: ")
+            }
         }
 
         binding.update.setOnClickListener {
-            autoCompleteTextField.setQuery("foo")
+            if(autoCompleteTextField.isFocused) {
+                autoCompleteTextField.setQuery(Random.nextInt(0,1000).toString())
+                autoCompleteTextField.clearFocus()
+                autoCompleteTextField2.setFocus()
+            } else if (autoCompleteTextField2.isFocused) {
+                autoCompleteTextField2.setQuery(Random.nextInt(0,1000).toString())
+                autoCompleteTextField2.clearFocus()
+                autoCompleteTextField.setFocus()
+            }
         }
 
         binding.appBar.removeAllViews()
         binding.appBar.addView(autoCompleteTextField)
+        binding.appBar.addView(autoCompleteTextField2)
         binding.appBar.elevation = 100F
     }
 

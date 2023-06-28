@@ -15,6 +15,7 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.LocalWindowInfo
+import androidx.compose.ui.platform.WindowInfo
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
 import com.ixigo.design.sdk.components.styles.IxiTypography
 import com.ixigo.design.sdk.components.text.composable.TypographyText
-import kotlinx.coroutines.launch
 
 @Composable
 fun SearchViewComposable(
@@ -42,15 +42,16 @@ fun SearchViewComposable(
     }
     var queryText by remember(query) { mutableStateOf(query) }
 
-    val scope = rememberCoroutineScope()
     val windowInfo = LocalWindowInfo.current
 
-    LaunchedEffect(requestFocus) {
-        snapshotFlow { windowInfo.isWindowFocused }.collect { isWindowFocused ->
-            if (isWindowFocused && requestFocus) {
-                focusRequester.requestFocus()
-            }
+    LaunchedEffect(windowInfo) {
+        snapshotFlow { windowInfo.isWindowFocused }.collect {
+            requestFocus(windowInfo, requestFocus, focusRequester)
         }
+    }
+
+    SideEffect {
+        requestFocus(windowInfo, requestFocus, focusRequester)
     }
 
     val trailingIconView = @Composable {
@@ -89,6 +90,14 @@ fun SearchViewComposable(
     )
 }
 
+private fun requestFocus(windowInfo: WindowInfo, requestFocus: Boolean, focusRequester: FocusRequester) {
+    val isWindowFocused = windowInfo.isWindowFocused
+
+    if (isWindowFocused && requestFocus) {
+        focusRequester.requestFocus()
+    }
+}
+
 @Composable
 private fun modifier(
     modifier: Modifier,
@@ -99,7 +108,7 @@ private fun modifier(
         .fillMaxWidth()
         .height(50.dp)
         .onFocusChanged {
-            onSearchFocusChange.invoke(it.isFocused)
+            onSearchFocusChange.invoke(it.hasFocus)
         }
         .focusRequester(focusRequester)
 }
