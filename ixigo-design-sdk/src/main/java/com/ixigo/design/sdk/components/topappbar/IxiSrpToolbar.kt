@@ -36,7 +36,8 @@ class IxiSrpToolbar @JvmOverloads constructor(
                 menuProvider = menuProvider,
                 title = srpTitle,
                 subTitle = subTitle,
-                onClick = state.value.onClick
+                onClick = state.value.onClick,
+                disabledIds = disabledIds
             )
         }
     }
