@@ -267,10 +267,6 @@ abstract class BaseInputField @JvmOverloads constructor(
         state.value = initState.copy(enabled = enabled)
     }
 
-    fun showMaxCharCount(showMaxCharCount: Boolean) {
-        state.value = state.value.copy(showMaxCharCount = showMaxCharCount)
-    }
-
     /**
      * Sets the text input to read only.
      *
@@ -335,8 +331,7 @@ data class InputFieldState(
     val isActiveAlways: Boolean,
     val enabled: Boolean,
     val keyboardType: KeyboardType,
-    val capitalization: KeyboardCapitalization,
-    val showMaxCharCount: Boolean = false
+    val capitalization: KeyboardCapitalization
 )
 
 

@@ -269,8 +269,6 @@ class ToolBarActivity : AppCompatActivity() {
                 }
             }
         })
-        toolbar.setItemEnable(0, false)
-
 
         binding.appBar.removeAllViews()
         binding.appBar.addView(toolbar)

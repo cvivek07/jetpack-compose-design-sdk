@@ -258,11 +258,7 @@ fun BasicToolbar(
 
             menuProvider.provideMenu().forEach {
                 if (it.icon != null) {
-                    IconButton(onClick = {
-                        if (!disabledIds.contains(it.id)) {
-                            menuProvider.onMenuItemClick(it.id)
-                        }
-                    }) {
+                    IconButton(onClick = { menuProvider.onMenuItemClick(it.id) }) {
                         Image(
                             painter = painterResource(id = it.icon),
                             contentDescription = "Image",

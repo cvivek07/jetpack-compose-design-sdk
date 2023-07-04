@@ -43,7 +43,6 @@ class InputFieldsFragment : Fragment() {
             setHelperText("This is helper Text")
             setStartImageDrawable(R.drawable.ic_baseline_cancel_24)
             setMaxCharCount(30)
-            showMaxCharCount(false)
             setColor(IxiColor.Error)
             setActionTextClickListener {
                 Log.e("Action", "ActionTextClick")
