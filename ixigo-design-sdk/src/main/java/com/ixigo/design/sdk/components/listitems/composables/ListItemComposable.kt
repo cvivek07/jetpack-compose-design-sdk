@@ -3,6 +3,7 @@ package com.ixigo.design.sdk.components.listitems.composables
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
@@ -41,11 +42,12 @@ private val avatarDefaultSize = 40.dp
 
 @Composable
 fun ListItemComposable(state: MutableState<ListItemDataState>) {
+    val interactionSource = remember { MutableInteractionSource() }
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .wrapContentHeight()
-            .clickable(onClick = state.value.onItemClick)
+            .clickable(onClick = state.value.onItemClick, interactionSource = interactionSource, indication = null)
             .background(color = colorResource(id = state.value.itemBackGroundColor))
             .padding(state.value.paddingValues),
         verticalAlignment = Alignment.CenterVertically

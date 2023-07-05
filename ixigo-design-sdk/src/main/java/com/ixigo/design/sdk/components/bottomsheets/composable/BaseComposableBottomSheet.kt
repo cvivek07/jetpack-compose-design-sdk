@@ -344,8 +344,8 @@ private fun BottomSheetButtons(
                             TypographyText(
                                 text = primaryButtonHelperText,
                                 textStyle = IxiTypography.Body.XSmall.regular,
-                                modifier = Modifier.align(Alignment.CenterHorizontally),
-                                color = colorResource(id = R.color.n600)
+                                modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 2.dp),
+                                color = colorResource(id = R.color.n600),
                             )
                         }
                     }
