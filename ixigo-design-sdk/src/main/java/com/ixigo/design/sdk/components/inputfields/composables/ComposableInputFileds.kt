@@ -54,7 +54,8 @@ fun OutlinedInputField(
     isActiveAlways: Boolean,
     enabled: Boolean,
     keyboardType: KeyboardType,
-    capitalization: KeyboardCapitalization
+    capitalization: KeyboardCapitalization,
+    showMaxCharCount: Boolean = false
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -112,7 +113,7 @@ fun OutlinedInputField(
             enabled = enabled,
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType, capitalization = capitalization),
         )
-        GetBottomText(helperText, helperTextColor, maxCharCount, textValue)
+        GetBottomText(helperText, helperTextColor, maxCharCount, showMaxCharCount,  textValue)
     }
 }
 
@@ -133,6 +134,7 @@ private fun GetBottomText(
     helperText: String,
     @ColorRes helperTextColor: Int,
     maxCharCount: Int,
+    showMaxCharCount: Boolean,
     textValue: String
 ) {
     Row(modifier = Modifier.padding(top = 2.dp)) {
@@ -148,7 +150,7 @@ private fun GetBottomText(
         if (helperText.isNotEmpty() || maxCharCountText.isNotEmpty()) {
             Spacer(modifier = Modifier.weight(1f))
         }
-        if (maxCharCountText.isNotEmpty() && maxCharCount != Int.MAX_VALUE) {
+        if (showMaxCharCount && maxCharCountText.isNotEmpty() && maxCharCount != Int.MAX_VALUE) {
             TypographyText(
                 text = "${textValue.length} / $maxCharCountText",
                 textStyle = IxiTypography.Body.XSmall.regular.copy(color = colorResource(id = R.color.n600))
@@ -311,7 +313,8 @@ fun LinedInputField(
     onActionIconClick: () -> Unit,
     onTextChange: ((String) -> Unit)?,
     onFocusChange: ((Boolean) -> Unit)?,
-    capitalization: KeyboardCapitalization
+    capitalization: KeyboardCapitalization,
+    showMaxCharCount: Boolean = false
 ) {
 
     val trailingIcons = getTrailingActions(
@@ -376,7 +379,7 @@ fun LinedInputField(
             keyboardOptions = KeyboardOptions(keyboardType = keyboardType, capitalization = capitalization)
         )
         Divider(color = colorResource(id = dividerColor), modifier = Modifier.padding(top = 0.dp))
-        GetBottomText(helperText, helperTextColor, maxCharCount, textValue)
+        GetBottomText(helperText, helperTextColor, maxCharCount, showMaxCharCount, textValue)
     }
 
 }
