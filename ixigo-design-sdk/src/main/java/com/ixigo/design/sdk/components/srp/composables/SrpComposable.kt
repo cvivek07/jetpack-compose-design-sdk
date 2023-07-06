@@ -39,7 +39,7 @@ fun SrpComposable(
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick.invoke()
             },
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Row(verticalAlignment = Alignment.CenterVertically,
@@ -59,7 +59,7 @@ fun SrpComposable(
                 text = subTitle,
                 textStyle = IxiTypography.Body.XSmall.regular,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.wrapContentHeight().padding(top = 2.dp),
+                modifier = Modifier.wrapContentHeight(),
                 color = colorResource(id = R.color.n600),
             )
         }
