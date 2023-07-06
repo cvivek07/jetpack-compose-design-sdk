@@ -244,7 +244,7 @@ class ToolBarActivity : AppCompatActivity() {
     fun srpToolbar() {
         val toolbar = IxiSrpToolbar(context = this)
 
-        toolbar.setSrpTitle(SrpTitle("DLI", R.drawable.right_arrow, "FBD 15 Dec 2022 1 Traveller"))
+        toolbar.setSrpTitle(SrpTitle("DLI", R.drawable.right_arrow, "FBD"))
         toolbar.setSrpSubTitle("14 Oct . 1 Traveller . Economy")
         toolbar.setOnClickListener {
             "Clicked".toToast(this)

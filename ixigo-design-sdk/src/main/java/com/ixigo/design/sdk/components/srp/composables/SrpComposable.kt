@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.R
@@ -38,11 +39,10 @@ fun SrpComposable(
             .clickable(interactionSource = interactionSource, indication = null) {
                 onClick.invoke()
             },
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterVertically),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Row( modifier = Modifier.weight(1f),
-            verticalAlignment = Alignment.CenterVertically,
+        Row(verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {
             TypographyText(text = title.startText, textStyle = IxiTypography.Body.Small.medium)
@@ -58,7 +58,8 @@ fun SrpComposable(
             TypographyText(
                 text = subTitle,
                 textStyle = IxiTypography.Body.XSmall.regular,
-                modifier = Modifier.align(Alignment.CenterHorizontally).weight(1f),
+                textAlign = TextAlign.Center,
+                modifier = Modifier.wrapContentHeight(),
                 color = colorResource(id = R.color.n600),
             )
         }
