@@ -16,27 +16,32 @@ fun ScrollBar(
     position: Int,
     minKnobWidth: Float
 ) {
-    BoxWithConstraints(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(shape = RoundedCornerShape(10.dp), color = colorResource(id = R.color.n80))
-    ) {
-        val calculatedKnobWidth = maxWidth / itemCount
-        val knobSize = minKnobWidth.coerceAtLeast(calculatedKnobWidth.value)
-        val knobPosition = position * calculatedKnobWidth.value
-        val offset = knobPosition.coerceIn(0f, (maxWidth - knobSize.dp).value).apply {
-            animateDpAsState(targetValue = this.dp)
-        }
-
-        Box(
+    if(itemCount > 0) {
+        BoxWithConstraints(
             modifier = Modifier
-                .width(knobSize.dp)
-                .fillMaxHeight()
-                .offset(x = offset.dp)
+                .fillMaxWidth()
                 .background(
                     shape = RoundedCornerShape(10.dp),
-                    color = colorResource(id = R.color.b500)
+                    color = colorResource(id = R.color.n80)
                 )
-        )
+        ) {
+            val calculatedKnobWidth = maxWidth / itemCount
+            val knobSize = minKnobWidth.coerceAtLeast(calculatedKnobWidth.value)
+            val knobPosition = position * calculatedKnobWidth.value
+            val offset = knobPosition.coerceIn(0f, (maxWidth - knobSize.dp).value).apply {
+                animateDpAsState(targetValue = this.dp)
+            }
+
+            Box(
+                modifier = Modifier
+                    .width(knobSize.dp)
+                    .fillMaxHeight()
+                    .offset(x = offset.dp)
+                    .background(
+                        shape = RoundedCornerShape(10.dp),
+                        color = colorResource(id = R.color.b500)
+                    )
+            )
+        }
     }
 }
