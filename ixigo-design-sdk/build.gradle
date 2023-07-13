@@ -10,7 +10,7 @@ plugins {
 }
 
 group = 'com.ixigo.sdk'
-version = '1.0.0-alpha22'
+version = '1.0.0-alpha23'
 
 android {
     compileSdkVersion 33
