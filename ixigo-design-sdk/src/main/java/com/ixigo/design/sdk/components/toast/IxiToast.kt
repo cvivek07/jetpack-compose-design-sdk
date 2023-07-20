@@ -116,7 +116,9 @@ class IxiToast private constructor(
 
     fun hide() {
         state.value = state.value.copy(show = false)
-        windowManager.removeView(this)
+        if(isAttachedToWindow) {
+            windowManager.removeView(this)
+        }
     }
 
     private fun startAutoDismissTimer() {
