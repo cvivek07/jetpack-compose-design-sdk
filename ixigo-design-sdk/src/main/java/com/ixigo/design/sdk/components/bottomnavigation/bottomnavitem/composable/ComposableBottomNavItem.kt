@@ -183,7 +183,7 @@ fun LargeBadge(
     content: String? = null,
     @ColorRes borderColor: Int = R.color.white
 ){
-    Box(modifier = modifier.offset(y = (-2).dp)) {
+    Box(modifier = modifier.offset(y = (-8).dp, x= 4.dp)) {
         Box(
             modifier = modifier
                 .clipToBounds()
@@ -202,7 +202,7 @@ fun LargeBadge(
                 TypographyText(
                     text = content,
                     modifier = Modifier
-                        .padding(horizontal = 11.dp, vertical = 4.dp)
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
                         .align(Alignment.Center),
                     textStyle = IxiTypography.Body.XSmall.regular.copy(
                         color = colorResource(id = R.color.white)

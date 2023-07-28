@@ -50,7 +50,7 @@ class BottomNavFragment : Fragment() {
                             icon = R.drawable.ic_iximoney,
                             selectedIcon = R.drawable.ic_iximoney_filled,
                             badgeType = BadgeType.LARGE,
-                            badgeContent = "999k"
+                            badgeContent = "R5K"
                         ),
                         IxiBottomNavBar.IxiBottomNavItemModel(
                             id = 2,
