@@ -2,6 +2,7 @@ package com.ixigo.design.sdk.components.text
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -11,6 +12,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -45,6 +47,11 @@ class IxiClickableText @JvmOverloads constructor(
 
     fun setOriginalText(text: String){
         state.value = state.value.copy(text = text)
+    }
+
+    fun setOriginalTextColor(@ColorInt color: Int) {
+        val style = state.value.textStyle.copy(color = Color(color))
+        state.value = state.value.copy(textStyle = style)
     }
 
     fun setHighlightedText(list: List<Highlight>) {
@@ -95,5 +102,5 @@ data class ClickableTextState(
     val textAlign: TextAlign,
     val onClick: (() -> Unit)?,
     val highlightTexts : List<Highlight>,
-    @ColorRes val highlightColor: Int = R.color.r500,
+    @ColorRes val highlightColor: Int = R.color.b500,
 )
