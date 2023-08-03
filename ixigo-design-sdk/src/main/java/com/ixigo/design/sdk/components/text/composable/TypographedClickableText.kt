@@ -28,7 +28,7 @@ fun ClickableTextComposable(
 
     ClickableText(
         text = annotatedString,
-        style = textStyle.copy(letterSpacing = 0.sp, textAlign = textAlign),
+        style = textStyle.copy(letterSpacing = 0.sp, textAlign = textAlign, color = textStyle.color),
         onClick = { offset ->
             textData.forEach { annotatedStringData ->
                 if (annotatedStringData.tag != null) {

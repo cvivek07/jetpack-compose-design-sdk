@@ -33,6 +33,7 @@ class TypographyFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
             clickableText.setOriginalText(getString(R.string.disclaimer))
+            clickableText.setOriginalTextColor(ContextCompat.getColor(requireContext(), R.color.y600))
             clickableText.setHighlightedText(listOf(Highlight("privacy policy", onClick = {
                 Toast.makeText(requireContext(), "privacy", Toast.LENGTH_SHORT).show()
             }), Highlight("terms of use", onClick = {
