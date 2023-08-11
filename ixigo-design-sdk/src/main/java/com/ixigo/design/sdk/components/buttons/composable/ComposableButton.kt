@@ -306,7 +306,7 @@ internal fun ComposableTextButton(
  * @since 1.0
  */
 @Composable
-internal fun ComposableOutlinedButton(
+fun ComposableOutlinedButton(
     text: String = "",
     color: IxiColor,
     shape: IxiShape,
