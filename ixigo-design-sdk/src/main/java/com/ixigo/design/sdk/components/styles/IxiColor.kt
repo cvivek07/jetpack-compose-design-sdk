@@ -169,7 +169,7 @@ open class IxiChipColor(
         unSelectedTextColor = R.color.n800,
         drawableTintColor = R.color.n0,
         strokeColor = R.color.n800,
-        unselectedStrokeColor = R.color.n800,
+        unselectedStrokeColor = R.color.n400,
         unselectedDrawableTintColor = R.color.n800
     )
 
