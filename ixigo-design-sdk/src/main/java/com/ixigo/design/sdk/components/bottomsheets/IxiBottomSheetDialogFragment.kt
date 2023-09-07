@@ -55,6 +55,7 @@ open class IxiBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     open fun createBottomSheetView(inflater: LayoutInflater, container: ViewGroup?, state: BottomSheetState) : View {
         state.view?.let { _binding.ixiBottomSheet.setView(view = it) }
+        state.content?.let { _binding.ixiBottomSheet.setContent(content = it) }
         _binding.ixiBottomSheet.setImage(state.image)
         _binding.ixiBottomSheet.setHeaderText(state.headerText)
         _binding.ixiBottomSheet.setImageBackgroundColor(state.imageBackgroundColor)

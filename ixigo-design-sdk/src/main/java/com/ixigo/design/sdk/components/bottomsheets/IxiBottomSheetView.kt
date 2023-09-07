@@ -33,6 +33,7 @@ class IxiBottomSheetView @JvmOverloads constructor(
                 closeActionListener = onClose,
                 iconSize = iconSize?.toInt()?:80,
                 view = view,
+                content = content,
                 enablePointer = !disableDragging,
                 inlineAlertText = inlineAlertText,
                 inlineAlertIxiColor = inlineAlertIxiColor,

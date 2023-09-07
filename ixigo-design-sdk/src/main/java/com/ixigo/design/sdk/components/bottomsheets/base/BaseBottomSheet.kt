@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.BaseComponent
@@ -169,6 +170,10 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         state.value = inState.copy(view = view)
     }
 
+    fun setContent(content: (@Composable () -> Unit)?){
+        state.value = state.value.copy(content = content)
+    }
+
     /**
      * Set the inline alert to be displayed below the content in the bottom sheet.
      *
@@ -226,6 +231,7 @@ data class BottomSheetState(
     val onClose: (() -> Unit)? = null,
     val iconSize:Float? = null,
     val view: View? = null,
+    val content: (@Composable () -> Unit)? = null,
     val disableDragging:Boolean = false,
     val inlineAlertText: String? = null,
     val inlineAlertIxiColor: IxiColor? = null,
