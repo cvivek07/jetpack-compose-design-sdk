@@ -1,5 +1,6 @@
 package com.ixigo.design.sdk.components.switchcomponent.composable
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -8,12 +9,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -30,15 +30,13 @@ private val textVerticalPadding = 4.dp
 @Composable
 fun SelectionSwitch(
     options: List<SwitchOption>,
+    selectedId: String,
     switchPaletteColor: Color,
     selectedSwitchColor: Color,
     selectedLabelTextColor: Color,
     unselectedLabelTextColor: Color,
     onSwitchChanged: (selectedOption: String) -> Unit
 ) {
-    val selectedOption = getSelectedOption(options)
-    val selectedState = remember { mutableStateOf(selectedOption) }
-
     Row(
         modifier = Modifier
             .padding(pillPadding)
@@ -46,24 +44,25 @@ fun SelectionSwitch(
             .background(switchPaletteColor)
     ) {
         options.forEach { option ->
-
+            val isOptionSelected = isOptionSelected(selectedId, option)
             val switchBackground =
-                if (selectedState.value == option) selectedSwitchColor else switchPaletteColor
+                if (isOptionSelected) selectedSwitchColor else switchPaletteColor
             val labelTextColor =
-                if (selectedState.value == option) selectedLabelTextColor else unselectedLabelTextColor
+                if (isOptionSelected) selectedLabelTextColor else unselectedLabelTextColor
 
             Box(
                 modifier = Modifier
                     .shadow(
-                        if (selectedState.value == option) selectedPillElevation else 0.dp,
+                        if (isOptionSelected) selectedPillElevation else 0.dp,
                         pillShape
                     )
                     .padding(pillPadding)
                     .clip(pillShape)
                     .background(switchBackground)
                     .clickableWithoutEffect {
-                        selectedState.value = option
-                        onSwitchChanged.invoke(option.title)
+                        if (!isOptionSelected) {
+                            onSwitchChanged.invoke(option.id)
+                        }
                     }
             ) {
                 TypographyText(
@@ -77,11 +76,8 @@ fun SelectionSwitch(
     }
 }
 
-private fun getSelectedOption(options: List<SwitchOption>): SwitchOption {
-    for (option in options) {
-        if (option.isSelected) return option
-    }
-    return options[0]
+private fun isOptionSelected(selectedId: String, option: SwitchOption): Boolean {
+    return selectedId == option.id
 }
 
 fun Modifier.clickableWithoutEffect(func: () -> Unit): Modifier {
@@ -94,6 +90,7 @@ fun Modifier.clickableWithoutEffect(func: () -> Unit): Modifier {
 }
 
 data class SwitchOption(
+    val id: String,
     val title: String,
     val isSelected: Boolean
 )
@@ -101,12 +98,23 @@ data class SwitchOption(
 @Preview
 @Composable
 fun Preview() {
+    val oneWaySwitch = SwitchOption("ONE_WAY", "One Way", true)
+    val roundTripSwitch = SwitchOption("ROUND_TRIP", "Round Trip", false)
+    val context = LocalContext.current
     SelectionSwitch(
-        options = listOf(SwitchOption("One Way", true), SwitchOption("Round Trip", false)),
+        options = listOf(oneWaySwitch, roundTripSwitch),
+        selectedId = oneWaySwitch.id,
         switchPaletteColor = colorResource(id = R.color.n60),
         selectedSwitchColor = colorResource(id = R.color.n0),
         selectedLabelTextColor = colorResource(id = R.color.n800),
         unselectedLabelTextColor = colorResource(id = R.color.n800),
-        onSwitchChanged = {}
+        onSwitchChanged = {
+            when(it) {
+                oneWaySwitch.title -> {
+                    Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+                }
+                roundTripSwitch.title -> Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+            }
+        }
     )
 }
