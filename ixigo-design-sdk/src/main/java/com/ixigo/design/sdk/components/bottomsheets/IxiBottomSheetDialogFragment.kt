@@ -23,14 +23,11 @@ import com.ixigo.design.sdk.databinding.IxiBottomSheetFragmentBinding
  * This class extends [BottomSheetDialogFragment] and implements UI customization
  * functionality
  *
- * @property state A data class [BottomSheetState] containing all the properties required to build the bottom sheet dialog fragment.
- *
  * @version 1.0
  * @since 2023-01-27
  */
 open class IxiBottomSheetDialogFragment : BottomSheetDialogFragment() {
     private lateinit var _binding: IxiBottomSheetFragmentBinding
-    private val state = mutableStateOf(BottomSheetState())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
