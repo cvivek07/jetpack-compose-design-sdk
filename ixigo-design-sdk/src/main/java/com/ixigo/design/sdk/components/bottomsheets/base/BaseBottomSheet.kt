@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.unit.Dp
 import com.ixigo.design.sdk.components.BaseComponent
@@ -158,15 +159,8 @@ abstract class BaseBottomSheet @JvmOverloads constructor(
         state.value = inState.copy(disableDragging = enabled)
     }
 
-    /**
-     * Set the custom view to be displayed in the bottom sheet.
-     * The view ovverrides the default view in BottomSheet
-     *
-     * @param view the view to be displayed.
-     */
-    fun setView(view: View){
-        val inState = state.value
-        state.value = inState.copy(view = view)
+    fun setContent(content: (@Composable () -> Unit)?){
+        state.value = state.value.copy(content = content)
     }
 
     /**
@@ -225,7 +219,7 @@ data class BottomSheetState(
     val secondaryActionListener: (()->Unit)? = null,
     val onClose: (() -> Unit)? = null,
     val iconSize:Float? = null,
-    val view: View? = null,
+    val content: (@Composable () -> Unit)? = null,
     val disableDragging:Boolean = false,
     val inlineAlertText: String? = null,
     val inlineAlertIxiColor: IxiColor? = null,

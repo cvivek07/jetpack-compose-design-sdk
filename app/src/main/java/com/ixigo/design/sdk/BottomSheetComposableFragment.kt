@@ -1,26 +1,19 @@
 package com.ixigo.design.sdk
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material.Divider
+import androidx.compose.material.Text
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.viewinterop.AndroidView
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragment
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
-import com.ixigo.design.sdk.databinding.FragmentBlankBottomSheetBinding
 
-class BottomSheetViewFragment : IxiBottomSheetDialogFragment() {
-
-    private lateinit var binding: FragmentBlankBottomSheetBinding
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentBlankBottomSheetBinding.inflate(inflater, container, false)
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
+class BottomSheetComposableFragment : IxiBottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,15 +30,22 @@ class BottomSheetViewFragment : IxiBottomSheetDialogFragment() {
             dismiss()
         }
         setContent {
-            AndroidView(factory = {binding.root},
-                modifier = Modifier.fillMaxWidth())
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth(),
+                contentPadding = PaddingValues(16.dp)
+            ) {
+                val items = (1..50).map { "Item $it" }
+                items(items.size) { item ->
+                    Text(text = item.toString(), modifier = Modifier.fillMaxWidth())
+                    Divider(color = Color.Gray, thickness = 1.dp)
+                }
+            }
         }
     }
 
     companion object {
-        fun newInstance(): BottomSheetViewFragment {
-            return BottomSheetViewFragment()
+        fun newInstance(): BottomSheetComposableFragment {
+            return BottomSheetComposableFragment()
         }
     }
-
 }

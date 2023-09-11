@@ -1,7 +1,6 @@
 package com.ixigo.design.sdk.components.bottomsheets.composable
 
 import android.text.SpannableString
-import android.text.Spanned
 import android.view.View
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
@@ -24,12 +23,12 @@ import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.clipToBounds
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -70,7 +69,7 @@ fun BaseBottomSheetComposable(
     iconSize: Int? = 80,
     secondaryActionListener: (() -> Unit)? = null,
     primaryActionListener: (() -> Unit)? = null,
-    view: View? = null,
+    content: (@Composable () -> Unit)? = null,
     enablePointer: Boolean = false,
     inlineAlertText: String? = null,
     inlineAlertIxiColor: IxiColor? = null,
@@ -124,26 +123,23 @@ fun BaseBottomSheetComposable(
             Box(modifier = Modifier
                 .weight(1f, false)
                 .padding(top = 20.dp, bottom = 20.dp)) {
-                if(view!=null){
-                    AndroidView(
-                        factory = {
-                            view
-                        }, modifier = Modifier
-                            .fillMaxWidth()
-                    )
-                } else {
-                    BottomSheetContent(
-                        modifier = Modifier.padding(horizontal = 20.dp),
-                        heading = { BottomSheetTextComposable(titleText, style = titleStyle) },
-                        subtitle = {
-                            BottomSheetTextComposable(
-                                text = bodyText,
-                                style = bodyStyle
-                            )
-                        },
-                        inlineAlertText = inlineAlertText,
-                        inlineAlertIxiColor = inlineAlertIxiColor ?: IxiColor.Neutral
-                    )
+                when {
+                    content != null -> content()
+
+                    else -> {
+                        BottomSheetContent(
+                            modifier = Modifier.padding(horizontal = 20.dp),
+                            heading = { BottomSheetTextComposable(titleText, style = titleStyle) },
+                            subtitle = {
+                                BottomSheetTextComposable(
+                                    text = bodyText,
+                                    style = bodyStyle
+                                )
+                            },
+                            inlineAlertText = inlineAlertText,
+                            inlineAlertIxiColor = inlineAlertIxiColor ?: IxiColor.Neutral
+                        )
+                    }
                 }
             }
             if (showBottomDivider) {
@@ -344,7 +340,9 @@ private fun BottomSheetButtons(
                             TypographyText(
                                 text = primaryButtonHelperText,
                                 textStyle = IxiTypography.Body.XSmall.regular,
-                                modifier = Modifier.align(Alignment.CenterHorizontally).padding(top = 2.dp),
+                                modifier = Modifier
+                                    .align(Alignment.CenterHorizontally)
+                                    .padding(top = 2.dp),
                                 color = colorResource(id = R.color.n600),
                             )
                         }
@@ -433,6 +431,7 @@ fun BottomSheetView() {
         buttonMinWidth = 150.dp,
         buttonMaxWidth = 300.dp,
         secondaryButtonText = "Hello",
-        secondaryButtonHelperText = "Hey!"
+        secondaryButtonHelperText = "Hey!",
+        content = {Text(text = "hello compose")}
     )
 }

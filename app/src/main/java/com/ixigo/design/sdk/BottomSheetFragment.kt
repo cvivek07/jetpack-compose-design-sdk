@@ -50,5 +50,11 @@ class BottomSheetFragment : Fragment() {
             val myBottomSheetFragment = BottomSheetViewFragment.newInstance()
             myBottomSheetFragment.show(childFragmentManager, "BOTTOM_SHEET")
         }
+
+        //variant 5 - composable content
+        binding.fifth.setClickListener {
+            val composableFragment = BottomSheetComposableFragment.newInstance()
+            composableFragment.show(childFragmentManager, "Composable Bottom Sheet")
+        }
     }
 }
