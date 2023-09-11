@@ -124,10 +124,6 @@ open class IxiBottomSheetDialogFragment : BottomSheetDialogFragment() {
         _binding.ixiBottomSheet.disableDragging(enabled)
     }
 
-    fun setView(view: View) {
-        _binding.ixiBottomSheet.setView(view)
-    }
-
     fun setContent(content: (@Composable () -> Unit)?) {
         _binding.ixiBottomSheet.setContent(content)
     }

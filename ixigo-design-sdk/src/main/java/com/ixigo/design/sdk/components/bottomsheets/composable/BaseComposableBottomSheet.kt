@@ -69,7 +69,6 @@ fun BaseBottomSheetComposable(
     iconSize: Int? = 80,
     secondaryActionListener: (() -> Unit)? = null,
     primaryActionListener: (() -> Unit)? = null,
-    view: View? = null,
     content: (@Composable () -> Unit)? = null,
     enablePointer: Boolean = false,
     inlineAlertText: String? = null,
@@ -125,13 +124,6 @@ fun BaseBottomSheetComposable(
                 .weight(1f, false)
                 .padding(top = 20.dp, bottom = 20.dp)) {
                 when {
-                    view != null -> {
-                        AndroidView(
-                            factory = { view },
-                            modifier = Modifier.fillMaxWidth()
-                        )
-                    }
-
                     content != null -> content()
 
                     else -> {

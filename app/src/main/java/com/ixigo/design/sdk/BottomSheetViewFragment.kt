@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.viewinterop.AndroidView
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetDialogFragment
 import com.ixigo.design.sdk.components.bottomsheets.IxiBottomSheetView
 import com.ixigo.design.sdk.databinding.FragmentBlankBottomSheetBinding
@@ -33,7 +36,10 @@ class BottomSheetViewFragment : IxiBottomSheetDialogFragment() {
         setCloseActionListener {
             dismiss()
         }
-        setView(binding.root)
+        setContent {
+            AndroidView(factory = {binding.root},
+                modifier = Modifier.fillMaxWidth())
+        }
     }
 
     companion object {
