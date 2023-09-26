@@ -1,3 +1,5 @@
+[[_TOC_]]
+
 # Installation
 
 Follow following Steps to Add this library into your project.
