@@ -106,7 +106,7 @@ IxiTypography.Body.XSmall.regular.copy(fontWeight = W500,)
 IxiTypography.Body.XSmall.regular.copy(fontFamily = IxiFamily)
 ```
 
-## Development
+# Development
 
 Most of the development should be done against Unit Tests and against our Sample App.
 
@@ -136,7 +136,7 @@ repositories {
 }
 ```
 
-## Available Components
+# Available Components
 
 This SDK provides the following components:
 
@@ -181,3 +181,12 @@ Sticky Alert is a special type of alert message that stays at a fixed position (
 
 ### Separator
 Separator is a line or space that visually divides content into sections.
+
+
+# Release a new version
+
+To release a new version:
+
+1. Push a commit with a higher version to the components branch.
+2. In the pipeline page, find the pipeline with the above commit.
+3. Click on ▶ in the `release` job to release the sdk
