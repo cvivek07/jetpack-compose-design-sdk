@@ -104,6 +104,36 @@ IxiTypography.Body.XSmall.regular.copy(fontWeight = W500,)
 IxiTypography.Body.XSmall.regular.copy(fontFamily = IxiFamily)
 ```
 
+## Development
+
+Most of the development should be done against Unit Tests and against our Sample App.
+
+### Development inside other Apps
+
+If you want to modify ixigo-design-sdk and test it quickly inside other Apps, we recommend publishing ixigo-design-sdk to your maven local repository and configure your app to read from maven local repository.
+
+To push to your local maven repository:
+
+**Release**
+```shell
+./gradlew ixigo-design-sdk:publishReleasePublicationToMavenLocal
+```
+
+**Snapshot**
+```shell
+./gradlew ixigo-design-sdk:publishSnapshotPublicationToMavenLocal
+```
+
+Once it is pushed in your local maven repository, configure your App to use `mavenLocal()` giving it a higher priority than `ixigo-design-sdk` repository
+
+```groovy
+repositories {
+  mavenLocal()
+  ...
+  // ixigo-design-sdk repository
+}
+```
+
 ## Available Components
 
 This SDK provides the following components:
