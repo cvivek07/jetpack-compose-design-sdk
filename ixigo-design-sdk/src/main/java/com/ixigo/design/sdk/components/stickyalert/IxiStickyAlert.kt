@@ -7,6 +7,10 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.stickyalert.base.BaseStickyAlert
 import com.ixigo.design.sdk.components.stickyalert.composable.ComposableStickyAlert
 
+/**
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=1173-214429&mode=design&t=UdbrnsPY7euxQxTu-0
+ */
+
 class IxiStickyAlert @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

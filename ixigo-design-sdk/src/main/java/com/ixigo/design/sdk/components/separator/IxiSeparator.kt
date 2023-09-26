@@ -11,7 +11,10 @@ import com.ixigo.design.sdk.R
  * Divider component.
  * Create background with provided height and width
  * Uses default background (R.color.n100) if no background is provided
-**/
+ *
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=1028-171569&mode=design&t=UdbrnsPY7euxQxTu-0
+ *
+ **/
 class IxiSeparator @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr) {

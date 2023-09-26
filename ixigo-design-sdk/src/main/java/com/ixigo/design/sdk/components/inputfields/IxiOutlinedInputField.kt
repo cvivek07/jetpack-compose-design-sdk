@@ -7,6 +7,10 @@ import androidx.compose.ui.platform.ViewCompositionStrategy
 import com.ixigo.design.sdk.components.inputfields.base.BaseInputField
 import com.ixigo.design.sdk.components.inputfields.composables.OutlinedInputField
 
+/**
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=1014-155849&mode=design&t=UdbrnsPY7euxQxTu-0
+ */
+
 class IxiOutlinedInputField @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : BaseInputField(context, attrs, defStyleAttr) {

@@ -11,6 +11,8 @@ import kotlinx.coroutines.launch
 
 /**
  * Special type of Horizontal Progress Step which has text inline with the icons
+ *
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=1028-171705&mode=design&t=UdbrnsPY7euxQxTu-0
  */
 class HorizontalInlineProgressStep @JvmOverloads constructor(
     context: Context,

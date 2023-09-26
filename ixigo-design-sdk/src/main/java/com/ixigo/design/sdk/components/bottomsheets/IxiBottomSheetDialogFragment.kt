@@ -23,6 +23,8 @@ import com.ixigo.design.sdk.databinding.IxiBottomSheetFragmentBinding
  * This class extends [BottomSheetDialogFragment] and implements UI customization
  * functionality
  *
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=2283-377454&mode=design&t=UdbrnsPY7euxQxTu-0
+ *
  * @version 1.0
  * @since 2023-01-27
  */

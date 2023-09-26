@@ -8,6 +8,10 @@ import com.ixigo.design.sdk.components.inlinealert.base.BaseInlineAlert
 import com.ixigo.design.sdk.components.inlinealert.composable.ComposableInlineAlert
 import com.ixigo.design.sdk.utils.Utils.mapLayoutAlignmentToComposeTextAlignment
 
+/**
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=1172-214222&mode=design&t=UdbrnsPY7euxQxTu-0
+ */
+
 class IxiInlineAlert @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

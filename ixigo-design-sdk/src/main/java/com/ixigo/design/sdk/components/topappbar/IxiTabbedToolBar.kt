@@ -10,6 +10,10 @@ import com.ixigo.design.sdk.components.tabs.TabType
 import com.ixigo.design.sdk.components.topappbar.base.BaseTopAppBar
 import com.ixigo.design.sdk.components.topappbar.composable.TabbedBar
 
+/**
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=956-59669&mode=design&t=UdbrnsPY7euxQxTu-0
+ */
+
 class IxiTabbedToolBar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
