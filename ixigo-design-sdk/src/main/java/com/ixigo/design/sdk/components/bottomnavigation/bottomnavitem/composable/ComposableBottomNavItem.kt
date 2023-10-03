@@ -42,6 +42,8 @@ import com.ixigo.design.sdk.components.text.composable.TypographyText
  * @param onClick A lambda function to be invoked when the item is clicked.
  * @param badgeType The type of badge to be displayed.
  * @param badgeContent The content of the badge.
+ *
+ * https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=1124-239705&mode=design&t=UdbrnsPY7euxQxTu-0
  */
 @Composable
 fun ComposableBottomNavItem(

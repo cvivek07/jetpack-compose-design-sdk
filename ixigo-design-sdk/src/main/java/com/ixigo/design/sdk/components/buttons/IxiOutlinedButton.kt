@@ -54,6 +54,8 @@ import com.ixigo.design.sdk.components.styles.IxiShape
  * user presses the IxiOutlinedButton.
  *
  *  @since 1.0
+ *
+ *  https://www.figma.com/file/WYm8OYDqRTjzIYjgVRfS2E/Components?type=design&node-id=703-4284&mode=design&t=UdbrnsPY7euxQxTu-0
  */
 class IxiOutlinedButton @JvmOverloads constructor(
     context: Context,
